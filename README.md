@@ -1,4 +1,4 @@
 lp-receiver
 ===========
 
-Parser web service exporing RDF and SQL from XML input
+Parser web service exporting enriched RDF and SQL from XML input
