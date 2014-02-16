@@ -1,0 +1,125 @@
+<?xml version="1.0" ?>
+<!--
+	 - Nuevo nodo <observations>, que contendrá todas las observaciones.
+	 - <slices> deja de tener nodos observación completos. Tiene nodos <observation-ref> que apuntan a un indentificador de observación
+	 - Los nodos <observation> dentro de <observations> vuelven a contener todos los datos (indicador, region, fecha).
+
+	 Los slices son agrupaciones de observaciones úitiles pero no necesarias, y cierta observación puede estar vinculada a más de un slice. Los slices pasan a ser usados como herramienta para respetar el esquema de datos original de las fuentes. Con estos cambios el xml final resultante será mayor debido a repetición de datos, pero encaja mejor conceptualmente con DataCube
+-->
+
+<!-- Common definitions -->
+<!DOCTYPE dataset [
+<!ENTITY base 			"http://landportal.info/ontology/" >
+<!ENTITY datasource		"&base;dataSource/" >
+<!ENTITY importProcess	"&base;importProcess/" >
+<!ENTITY user			"&base;user/" >
+<!ENTITY currency 		"&base;currency/" >
+<!ENTITY relation		"&base;relation/" >
+<!ENTITY indicator 		"&base;indicator/" >
+<!ENTITY country 		"&base;country/" >
+<!ENTITY time			"&base;time/" >
+<!ENTITY computation	"&base;computation/" >
+]>
+
+<dataset>
+	<importProcess
+		datasource="&datasource;OECD"
+		type="&importProcess;Excel"
+		time="2014-02-10T09:00:00"
+		user="&user;User23"
+		ip="156.35.80.50"
+	/>
+
+	<indicators>
+		<indicator
+			id="&indicator;donation"
+			name="Donation"
+			description="Lorem ipsum..."
+			measure_unit="&currency;Euro">
+			<license
+				name="Creative Commons Atribution"
+				description="Lorem ipsum..."
+				republish="true"
+				url="http://es.creativecommons.org/"
+			/>
+		</indicator>
+		<indicator
+			id="&indicator;receiver"
+			name="Receiver"
+			description="Lorem ipsum..."
+			measure_unit="&currency;Euro">
+			<license
+				name="Creative Commons Atribution"
+				description="Lorem ipsum..."
+				republish="true"
+				url="http://es.creativecommons.org/"
+			/>
+		</indicator>
+	</indicators>
+
+	<slices>
+		<slice id="sli1" time="1961" indicator="&indicator;donation">
+			<observation-ref id="obs1"/>
+			<observation-ref id="obs2"/>
+			<observation-ref id="obs5"/>
+		</slice>
+
+		<slice id="sli2" region="&country;FRA" indicator="&indicator;receiver">
+			<observation-ref id="obs3"/>
+		</slice>
+	</slices>
+
+	<observations>
+		<observation
+			id="obs1"
+			issued="01-02-2014T00:00:00"
+			value="1000"
+			computation="&computation;raw"
+			country="&country;FRA"
+			relatedObs="obs3"
+			relatedProperty="&relation;donation"
+			time="1961"
+			indicator="&indicator;donation"
+		/>
+		<observation
+			id="obs2"
+			issued="01-02-2014T00:00:00"
+			obs-status="available"
+			value="4000"
+			computation="&computation;raw"
+			country="&country;SPA"
+			time="1961"
+			indicator="&indicator;donation"
+		/>
+		<observation
+			id="obs5"
+			issued="01-02-2014T00:00:00"
+			obs-status="missing"
+			computation="&computation;raw"
+			country="&country;SPA"
+			time="1961"
+			indicator="&indicator;donation"
+		/>
+		<observation
+			id="obs3"
+			issued="01-02-2014T00:00:00"
+			value="1000"
+			computation="&computation;raw"
+			country="&country;FRA"
+			relatedObs="obs1"
+			relatedProperty="&relation;donation"
+			time="1961-1967"
+			indicator="&indicator;receiver"
+		/>
+		<observation
+			id="obs4"
+			issued="01-02-2014T00:00:00"
+			value="6000"
+			computation="&computation;raw"
+			country="&country;SPA"
+			time="1961-1967"
+			indicator="&indicator;receiver"
+		/>
+	</observations>
+
+</dataset>
