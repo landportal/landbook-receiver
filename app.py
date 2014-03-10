@@ -1,9 +1,8 @@
 __author__ = 'guillermo'
 
-from parser import parse_nodes_content
+from landparser import parse_nodes_content
 from sqlalchemy.orm import sessionmaker
 from models import engine, Observation, Indicator
-
 
 if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
