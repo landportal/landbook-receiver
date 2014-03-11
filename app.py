@@ -4,11 +4,14 @@ import landparser
 #from sqlalchemy.orm import sessionmaker
 import sqlalchemy
 import sqlalchemy.orm
-from models import engine, Observation, Indicator, MeasurementUnit
+from landportal_model.models import engine, License
 
 if __name__ == "__main__":
     Session = sqlalchemy.orm.sessionmaker(bind=engine)
     session = Session()
     instances = landparser.parse_nodes_content()
-    session.add_all(instances)
+    session.add(instances)
     session.commit()
+
+    for lic in session.query(License).all():
+        print lic.name
