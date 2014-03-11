@@ -5,9 +5,10 @@ try:
 except ImportError:
     import xml.etree.ElementTree as et
 
-from models import Observation, Indicator, Country
+from models import Indicator, MeasurementUnit
 
-with open('xml/sample.xml', 'rt') as f:
+#with open('xml/sample.xml', 'rt') as f:
+with open('xml/example_xml_ipfri_no_slices.xml', 'rt') as f:
     tree = et.parse(f)
 
 
@@ -17,27 +18,14 @@ def parse_nodes_content():
     xml node list
     :return observations, indicators
     """
-    observations = []
-    indicators = []
+    indicators = set()
     for node in tree.iter():
         if node.tag == 'indicator':
-            indicators.append(Indicator(id_source=node.get('id'),
-                                        name=node.find('ind_name').text,
-                                        description=node.find(
-                                            'ind_description').text,
-                                        measure_unit=node.find(
-                                            'measure_unit').text))
-        if node.tag == 'observation':
-            observations.append(Observation(id_source=node.get('id'),
-                                            issued=node.find('issued').text,
-                                            obs_status=node.find(
-                                                'obs-status').text,
-                                            indicator_ref=node.find(
-                                                'indicator-ref').
-                                            get('id'),
-                                            computation=node.find(
-                                                'computation').text,
-                                            country=Country(iso_code3=node.find(
-                                                'country').text),
-                                            time='timess'))
-    return indicators + observations
+            indicator = Indicator(id_source=node.get('id'),
+                                  name=node.find('ind_name').text,
+                                  description=node.find('ind_description').text)
+            measurement = MeasurementUnit(name=node.find('measure_unit').text)
+            indicator.measurement_unit = measurement
+            indicators.add(indicator)
+
+    return list(indicators)
