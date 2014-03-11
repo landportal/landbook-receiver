@@ -41,3 +41,6 @@ include
 local
 *.pyc
 .idea
+
+# Landportal Model
+landportal_model/
