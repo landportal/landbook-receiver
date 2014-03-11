@@ -10,7 +10,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from abc import abstractmethod
 
-engine = sqlalchemy.create_engine('sqlite://', echo=True)
+engine = sqlalchemy.create_engine('sqlite://', echo=False)
 Base = declarative_base()
 
 class User(Base):
@@ -19,16 +19,18 @@ class User(Base):
     """
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
+    id_source = Column(String(255))
     ip = Column(String(50))
     timestamp = Column(TIMESTAMP)
     organization_id = Column(Integer, ForeignKey('organizations.id'))
     organization = relationship("Organization", backref="users")
 
-    def __init__(self, id=None, ip=None, timestamp=None, organization_id=None):
+    def __init__(self, id=None, id_source=None, ip=None, timestamp=None, organization_id=None):
         """
         Constructor for user model object
         """
         self.id = id
+        self.id_source = id_source
         self.ip = ip
         self.timestamp = timestamp
         self.organization_id = organization_id
@@ -40,15 +42,17 @@ class Organization(Base):
     """
     __tablename__ = "organizations"
     id = Column(Integer, primary_key=True)
+    id_source = Column(String(255))
     name = Column(String(128))
     url = Column(String(255))
     is_part_of_id = Column(Integer, ForeignKey("organizations.id"))
     is_part_of = relationship("Organization", uselist=False, foreign_keys=is_part_of_id)
 
-    def __init__(self, name=None, url=None, is_part_of=None):
+    def __init__(self, id_source=None, name=None, url=None, is_part_of=None):
         """
         Constructor
         """
+        self.id_source = id_source
         self.name = name
         self.url = url
         self.is_part_of = is_part_of
@@ -59,20 +63,23 @@ class Organization(Base):
         data_source.organization = self
 
 
+
 class DataSource(Base):
     """
     classdocs
     """
     __tablename__ = "datasources"
     id = Column(Integer, primary_key=True)
+    id_source = Column(String(255))
     name = Column(String(128))
     organization_id = Column(Integer, ForeignKey("organizations.id"))
     organization = relationship("Organization", backref="sources")
 
-    def __init__(self, id=None, name=None, organization=None):
+    def __init__(self, id=None, id_source=None, name=None, organization=None):
         """
         Constructor
         """
+        self.id_source = id_source
         self.id = id
         self.name = name
         self.organization = organization
@@ -94,6 +101,7 @@ class Dataset(Base):
     """
     __tablename__ = 'datasets'
     id = Column(Integer, primary_key=True)
+    id_source = Column(String(255))
     name = Column(String(60))
     sdmx_frequency = Column(Integer)
     datasource_id = Column(Integer, ForeignKey("datasources.id"))
@@ -101,11 +109,12 @@ class Dataset(Base):
     license_id = Column(Integer, ForeignKey("licenses.id"))
     license = relationship("License")
 
-    def __init__(self, id=None, name=None, frequency=None, source=None):
+    def __init__(self, id=None, id_source=None, name=None, frequency=None, source=None):
         """
         Constructor
         """
         self.id = id
+        self.id_source = id_source
         self.name = name
         self.frequency = frequency
         self.source = source
@@ -122,6 +131,7 @@ class Slice(Base):
     """
     __tablename__ = "slices"
     id = Column(Integer, primary_key=True)
+    id_source = Column(String(255))
     indicator_id = Column(Integer, ForeignKey("indicators.id"))
     indicator = relationship("Indicator")
     dimension_id = Column(Integer, ForeignKey("dimensions.id"))
@@ -130,10 +140,11 @@ class Slice(Base):
     dataset = relationship("Dataset", backref="slices")
     observation = relationship("Observation")
 
-    def __init__(self, id=None, dimension=None, dataset=None, indicator=None):
+    def __init__(self, id=None, id_source=None, dimension=None, dataset=None, indicator=None):
         """
         Constructor
         """
+        self.id_source = id_source
         self.dataset = dataset
         self.indicator = indicator
         self.id = id
@@ -151,6 +162,7 @@ class Observation(Base):
     """
     __tablename__ = "observations"
     id = Column(Integer, primary_key=True)
+    id_source = Column(String(255))
     ref_time_id = Column(Integer, ForeignKey("times.id"))
     ref_time = relationship("Time", foreign_keys=ref_time_id, uselist=False)
     issued_id = Column(Integer, ForeignKey("instants.id"))
@@ -169,18 +181,25 @@ class Observation(Base):
     slice_id = Column(Integer, ForeignKey("slices.id"))
 
 
-    def __init__(self, id=None, ref_time=None, issued=None,
+    def __init__(self, id=None, id_source=None, ref_time=None, issued=None,
                  computation=None, value=None, indicator=None, provider=None):
         """
         Constructor
         """
         self.id = id
+        self.id_source = id_source
         self.ref_time = ref_time
         self.issued = issued
         self.computation = computation
         self.value = value
         self.indicator = indicator
         self.provider = provider
+
+    def __str__(self):
+        return "<Observation(id_source='%s', ref_time='%s', issued='%s', " \
+               "computation='%s', value='%s', indicator='%s', provider='%s')>" % \
+               (self.id_source, self.ref_time, self.issued, self.computation,
+                self.value, self.indicator, self.provider)
 
 
 class Indicator(Base):
@@ -189,12 +208,12 @@ class Indicator(Base):
     """
     __tablename__ = "indicators"
     id = Column(Integer, Sequence('indicator_id_seq'), primary_key=True)
-    id_source = Column(String(10))
+    id_source = Column(String(255))
     name = Column(String(50))
     description = Column(String(255))
     measurement_unit_id = Column(String(20), ForeignKey("measurementUnits.name"))
     measurement_unit = relationship("MeasurementUnit")
-    dataset_id = Column(Integer, ForeignKey("datasets.id"))
+    dataset_id = Column(Integer, ForeignKey('datasets.id'))
     dataset = relationship("Dataset", backref="indicators")
     #compound_indicator_id = Column(Integer, ForeignKey("compoundIndicators.id")) #circular dependency
     type = Column(String(50))
@@ -211,6 +230,21 @@ class Indicator(Base):
         self.measurement_unit_id = measurement_unit_id
         self.dataset_id = dataset_id
         self.compound_indicator_id = compound_indicator_id
+
+    def __str__(self):
+        return "<Indicator(id='%s', id_source='%s', name='%s', description='%s', " \
+               "measurement_unit_id='%s', dataset_id='%s', type='%s')>" % \
+               (self.id, self.id_source, self.name, self.description, self.measurement_unit_id,
+                self.dataset_id, self.type)
+
+    def __hash__(self):
+        return hash(self.id)
+
+    def __eq__(self, other):
+        if isinstance(other, Indicator):
+            return self.id == other.id
+        else:
+            return False
 
 
 class IndicatorGroup(Base):
@@ -238,6 +272,15 @@ class MeasurementUnit(Base):
         Constructor
         """
         self.name = name
+
+    def __hash__(self):
+        return hash(self.name)
+
+    def __eq__(self, other):
+        if isinstance(other, MeasurementUnit):
+            return self.name == other.name
+        else:
+            return False
 
 
 class License(Base):
