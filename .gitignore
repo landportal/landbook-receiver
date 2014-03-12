@@ -44,3 +44,6 @@ local
 
 # Landportal Model
 landportal_model/
+
+# Database files
+*.db
