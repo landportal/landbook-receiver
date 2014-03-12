@@ -43,7 +43,7 @@ local
 .idea
 
 # Landportal Model
-landportal_model/
+model/
 
 # Database files
 *.db
