@@ -4,7 +4,7 @@ import unittest
 import app
 from flask_testing import TestCase
 
-class ApiTest(TestCase):
+class ServiceTest(TestCase):
     """
     Generic class for all test concerning Flask on this API
     """
@@ -13,11 +13,19 @@ class ApiTest(TestCase):
         return app.app
 
 
-class TestCountry(ApiTest):
-    def test_item(self):
-        response = self.client.get("/receiver")
+class TestParser(ServiceTest):
+
+    def test_with_data(self):
+        xml = open('xml/example_xml_ipfri_with_slices.xml', 'r').read()
+        response = self.client.post("/receiver", data={'xml': xml})
         self.assert200(response)
-        print(response)
+
+
+    def test_with_no_data(self):
+        response = self.client.post('/receiver')
+        self.assert400(response)
+
+
 
 if __name__ == '__main__':
     unittest.main()
