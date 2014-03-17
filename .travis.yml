@@ -1,10 +1,20 @@
 language: python
+
 python:
-  - "2.6"
   - "2.7"
 
+
 install:
+  # Clone the model dependencies
+  - git clone https://github.com/weso/landportal_model model
+  # Install the rest of dependencies
   - "pip install --allow-all-external -r requirements.txt"
+
+
+before_script:
+  # Create the database
+  - "python create_db.py"
+
 
 script:
   - "python tests.py"
