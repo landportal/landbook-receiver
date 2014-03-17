@@ -1,8 +1,10 @@
-__author__ = 'Herminio'
-
 import unittest
 import app
 from flask_testing import TestCase
+
+if __name__ == '__main__':
+    unittest.main()
+
 
 class ServiceTest(TestCase):
     """
@@ -20,12 +22,6 @@ class TestParser(ServiceTest):
         response = self.client.post("/receiver", data={'xml': xml})
         self.assert200(response)
 
-
     def test_with_no_data(self):
         response = self.client.post('/receiver')
         self.assert400(response)
-
-
-
-if __name__ == '__main__':
-    unittest.main()
