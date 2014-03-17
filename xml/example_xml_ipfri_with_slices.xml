@@ -29705,6 +29705,13 @@
 			<ind_description>2013 Global Hunger Index</ind_description>
 			<measure_unit>http://landportal.info/ontology/country/currency/%</measure_unit>
 		</indicator>
+        <compound_indicator id="http://landportal.info/ontology/country/indicator/indicator_id5">
+            <ind_name>PRUEBA</ind_name>
+			<ind_description>OTRA PRUEBA</ind_description>
+			<measure_unit>metros</measure_unit>
+            <indicator-ref id="http://landportal.info/ontology/country/indicator/indicator_id4" />
+            <indicator-ref id="http://landportal.info/ontology/country/indicator/indicator_id2" />
+        </compound_indicator>
 	</indicators>
 	<indicator_groups />
 	<slices>
