@@ -23,19 +23,10 @@ class ParserService(object):
         dataset.datasource = datasource
         license = self._parse_license(node.find('license'))
         dataset.license = license
-        # Dataset indicators
-        # indicators = {}
-        # for item in node.find('indicators').findall('indicator'):
-        #     ind = self._parse_indicator(item, dataset)
-        #     indicators[ind.id_source] = ind
-        # Dataset compound indicators
-        #comp_indicators = []
-        #for item in node.find('indicators').findall('compound_indicator'):
-        #    comp_indicators.append(self._parse_compound_indicator(item, dataset, indicators))
-        #return dataset
+        indicators = self._parse_indicators(node.find('indicators'), dataset)
         # Dataset observations
-        #for item in node.find('observations').findall('observation'):
-        #    self._parse_observation(item, dataset, indicators)
+        for item in node.find('observations').findall('observation'):
+            self._parse_observation(item, dataset, indicators)
         return dataset
 
     def _parse_datasource(self, node):
@@ -51,7 +42,26 @@ class ParserService(object):
                                  url=node.find('lic_url').text)
         return license
 
-    def _parse_indicator(self, node, dataset):
+    def _parse_indicators(self, node, dataset):
+        """Parse all indicators and return a dictionary.
+
+        Parse all indicators, including simple and compound indicators and
+        return a dictionary in which the key will be the indicator.source_id
+        and the value will be the indicator object.
+        """
+        indicators = {}
+        # Single indicators
+        for item in node.findall('indicator'):
+            ind = self._parse_simple_indicator(item, dataset)
+            indicators[ind.id_source] = ind
+        # Compound indicators
+        for item in node.findall('compound_indicator'):
+            ind = self._parse_compound_indicator(item, dataset, indicators)
+            indicators[ind.id_source] = ind
+        return indicators
+
+
+    def _parse_simple_indicator(self, node, dataset):
         """Parse an indicator node and return an Indicator object."""
         id_source = node.get('id')
         name = node.find('ind_name').text
@@ -87,14 +97,13 @@ class ParserService(object):
         for rel in node.findall('indicator-ref'):
             # Buscar el indicador que sea en la coleccion de indicadores y
             # establecer en dicho indicador que esta relacionado con este
-            print rel.get('id')
             indicators[rel.get('id')].compound_indicator = indicator
         return indicator
 
     def _parse_observation(self, node, dataset, indicators):
         id_source = node.get('id')
         # TODO: parse issued
-        obs_status = node.find('obs_status').text
+        obs_status = node.find('obs-status').text
         # TODO: parse value
         # TODO: parse computation
         # TODO: parse country
@@ -102,10 +111,12 @@ class ParserService(object):
         # TODO: parse indicator group
         # TODO: parse region
         # TODO: parse slice
-        rel_indicator_id = node.find('indicator-ref').get('id')
+        rel_indicator_id = node.find('indicator-ref').get('indicator')
 
         # Meter los atributos que sean
         observation = models.Observation()
+        observation.id_source = id_source
+        observation.status = obs_status
         observation.indicator = indicators[rel_indicator_id]
         observation.dataset = dataset
 
