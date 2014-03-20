@@ -94,16 +94,19 @@ class ParserService(object):
                                              )
         indicator.measurement_unit = measurement
         indicator.dataset = dataset
-        for rel in node.findall('indicator-ref'):
+        #TODO: link with indicator when the relation is mapped by the model
+        #for rel in node.findall('indicator-ref'):
             # Buscar el indicador que sea en la coleccion de indicadores y
             # establecer en dicho indicador que esta relacionado con este
-            indicators[rel.get('id')].compound_indicator = indicator
+        #    indicators[rel.get('id')].compound_indicator = indicator
         return indicator
 
     def _parse_observation(self, node, dataset, indicators):
         id_source = node.get('id')
         # TODO: parse issued
         obs_status = node.find('obs-status').text
+        obs_value = node.find('value').text if node.find('value') is not None else None
+        value = models.Value(obs_status=obs_status, value=obs_value)
         # TODO: parse value
         # TODO: parse computation
         # TODO: parse country
@@ -116,10 +119,8 @@ class ParserService(object):
         # Meter los atributos que sean
         observation = models.Observation()
         observation.id_source = id_source
-        observation.status = obs_status
         observation.indicator = indicators[rel_indicator_id]
         observation.dataset = dataset
+        observation.value = value
 
         return observation
-
-
