@@ -102,25 +102,38 @@ class ParserService(object):
         return indicator
 
     def _parse_observation(self, node, dataset, indicators):
-        id_source = node.get('id')
-        # TODO: parse issued
-        obs_status = node.find('obs-status').text
-        obs_value = node.find('value').text if node.find('value') is not None else None
-        value = models.Value(obs_status=obs_status, value=obs_value)
-        # TODO: parse value
         # TODO: parse computation
         # TODO: parse country
-        # TODO: parse time (ref-time)
         # TODO: parse indicator group
         # TODO: parse region
         # TODO: parse slice
-        rel_indicator_id = node.find('indicator-ref').get('indicator')
-
-        # Meter los atributos que sean
         observation = models.Observation()
-        observation.id_source = id_source
+        observation.id_source = node.get('id')
+        rel_indicator_id = node.find('indicator-ref').get('indicator')
         observation.indicator = indicators[rel_indicator_id]
         observation.dataset = dataset
-        observation.value = value
-
+        observation.ref_time = self._parse_time(node.find('time'))
+        observation.issued = self._parse_issued(node.find('issued'))
+        observation.value = self._parse_obs_value(node.find('obs-status'), node.find('value'))
         return observation
+
+    def _parse_time(self, node):
+        is_interval = node.find('interval') is not None
+        if is_interval:
+            interval = node.find('interval')
+            beginning = interval.find('beginning').text
+            end = interval.find('end').text
+            return models.Interval(start_time=beginning, end_time=end)
+        else:
+            return models.YearInterval(year=node.text)
+
+    def _parse_issued(self, node):
+        import datetime
+        date = datetime.datetime.strptime(node.text, '%Y-%m-%dT%H:%M:%S')
+        return models.Instant(instant=date)
+
+    def _parse_obs_value(self, status_node, value_node):
+        value = models.Value(obs_status=status_node.text)
+        if value_node is not None:
+            value.value = value_node.text
+        return value
