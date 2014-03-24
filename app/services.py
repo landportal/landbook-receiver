@@ -1,10 +1,9 @@
-from app import db
 from model import models
 
 
 class ParserService(object):
 
-    def parse_nodes_content(self, content):
+    def parse_nodes_content(self, content, ip):
         """Parse a XML file and return the corresponding model.
 
         Parse a XML (the XML file must conform with the Landportal schema)
@@ -13,13 +12,13 @@ class ParserService(object):
         """
         import xml.etree.ElementTree as Et
         root_node = Et.fromstring(content)
-        dataset = self._parse_dataset(root_node)
+        dataset = self._parse_dataset(root_node, ip)
         return dataset
 
-    def _parse_dataset(self, node):
+    def _parse_dataset(self, node, ip):
         """Parse a dataset node and return a Dataset object."""
         dataset = models.Dataset()
-        datasource = self._parse_datasource(node.find('import_process').find('datasource'))
+        datasource = self._parse_import_process(node.find('import_process'), ip)
         dataset.datasource = datasource
         license = self._parse_license(node.find('license'))
         dataset.license = license
@@ -29,10 +28,27 @@ class ParserService(object):
             self._parse_observation(item, dataset, indicators)
         return dataset
 
+    def _parse_import_process(self, node, ip):
+        datasource = self._parse_datasource(node.find('datasource'))
+        user = self._parse_user(node.find('user'), ip)
+        organization = self._parse_organization(node.find('organization_name'), node.find('organization_url'))
+        user.organization = organization
+        datasource.organization = organization
+        return datasource
+
     def _parse_datasource(self, node):
         """Parse a datasource node and return a Datasource object."""
         datasource = models.DataSource(id_source=node.text)
         return datasource
+
+    def _parse_user(self, node, ip):
+        import datetime
+        user = models.User(id=node.text, ip=ip, timestamp=datetime.datetime.utcnow())
+        return user
+
+    def _parse_organization(self, name, url):
+        organization = models.Organization(name=name.text, id=url.text)
+        return organization
 
     def _parse_license(self, node):
         """Parse a license node and return a License object."""
