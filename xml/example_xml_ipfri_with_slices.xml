@@ -153,7 +153,7 @@
 			<obs-status>http://purl.org/linked-data/sdmx/2009/code#obsStatus-A</obs-status>
 			<value>22.4</value>
 			<computation>purl.org/weso/ontology/computex#raw</computation>
-			<country>http://landportal.info/ontology/country/BEN</country>
+			<country>http://landportal.info/ontology/country/ESP</country>
 			<time unit="years">
 				<interval>
 					<beginning>1990</beginning>
@@ -20927,7 +20927,7 @@
 			<obs-status>http://purl.org/linked-data/sdmx/2009/code#obsStatus-A</obs-status>
 			<value>2.8</value>
 			<computation>purl.org/weso/ontology/computex#raw</computation>
-			<country>http://landportal.info/ontology/country/JOR</country>
+			<country>http://landportal.info/ontology/country/ESP</country>
 			<time unit="years">2000</time>
 			<indicator-ref indicator="http://landportal.info/ontology/country/indicator/indicator_id3" />
 		</observation>
@@ -21124,7 +21124,7 @@
 			<issued>2014-03-11T09:54:30</issued>
 			<obs-status>http://purl.org/linked-data/sdmx/2009/code#obsStatus-M</obs-status>
 			<computation>purl.org/weso/ontology/computex#raw</computation>
-			<country>http://landportal.info/ontology/country/MNE</country>
+			<country>http://landportal.info/ontology/country/ESP</country>
 			<time unit="years">2000</time>
 			<indicator-ref indicator="http://landportal.info/ontology/country/indicator/indicator_id3" />
 		</observation>

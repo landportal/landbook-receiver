@@ -103,9 +103,7 @@ class ParserService(object):
 
     def _parse_observation(self, node, dataset, indicators):
         # TODO: parse computation
-        # TODO: parse country
         # TODO: parse indicator group
-        # TODO: parse region
         # TODO: parse slice
         observation = models.Observation()
         observation.id_source = node.get('id')
@@ -115,14 +113,20 @@ class ParserService(object):
         observation.ref_time = self._parse_time(node.find('time'))
         observation.issued = self._parse_issued(node.find('issued'))
         observation.value = self._parse_obs_value(node.find('obs-status'), node.find('value'))
+        observation.country_uri = node.find('country').text
+        observation.computation = self._parse_computation(node.find('computation'))
         return observation
 
     def _parse_time(self, node):
+        import datetime
         is_interval = node.find('interval') is not None
         if is_interval:
             interval = node.find('interval')
-            beginning = interval.find('beginning').text
-            end = interval.find('end').text
+            start_year = int(interval.find('beginning').text)
+            end_year = int(interval.find('end').text)
+
+            beginning = datetime.date(year=start_year, month=1, day=1)
+            end = datetime.date(year=end_year, month=1, day=1)
             return models.Interval(start_time=beginning, end_time=end)
         else:
             return models.YearInterval(year=node.text)
@@ -137,3 +141,7 @@ class ParserService(object):
         if value_node is not None:
             value.value = value_node.text
         return value
+
+    def _parse_computation(self, node):
+        computation = models.Computation(uri=node.text)
+        return computation
