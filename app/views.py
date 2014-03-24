@@ -16,9 +16,9 @@ class CountryListAPI(Resource):
         Returns a 200 response if everything went right or 400 if there
         is not any content to parse.
         """
+        user_ip = request.remote_addr
         if 'xml' in request.form:
-            file = request.form['xml']
-            nodes = service.parse_nodes_content(file)
+            nodes = service.parse_nodes_content(content=request.form['xml'], ip=user_ip)
             session = db.session
             session.merge(nodes)
             session.commit()
