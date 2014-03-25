@@ -4,20 +4,15 @@ Created on 10/02/2014
 @author: Herminio
 '''
 from app import db
-
-
+from countries import country_reader
 
 
 if __name__ == '__main__':
-    from model import models
     # Create DB Schema
     db.create_all()
     # Create list of the Landportal Countries
-    countries = [
-        models.Country(name='Spain', iso2='ES', iso3='ESP', fao_URI='http://landportal.info/ontology/country/ESP'),
-        models.Country(name='England', iso2='EN', iso3='ENG', fao_URI='http://landportal.info/ontology/country/ENG'),
-            ]
+    country_list = country_reader.CountryReader().get_countries()
     # Store countries in the DB
     session = db.session
-    session.add_all(countries)
+    session.add_all(country_list)
     session.commit()

@@ -3,7 +3,7 @@ from model import models
 
 class ParserService(object):
 
-    def parse_nodes_content(self, content, ip):
+    def parse_nodes_content(self, content, ip, countries):
         """Parse a XML file and return the corresponding model.
 
         Parse a XML (the XML file must conform with the Landportal schema)
@@ -12,10 +12,10 @@ class ParserService(object):
         """
         import xml.etree.ElementTree as Et
         root_node = Et.fromstring(content)
-        dataset = self._parse_dataset(root_node, ip)
+        dataset = self._parse_dataset(root_node, ip, countries)
         return dataset
 
-    def _parse_dataset(self, node, ip):
+    def _parse_dataset(self, node, ip, countries):
         """Parse a dataset node and return a Dataset object."""
         dataset = models.Dataset()
         datasource = self._parse_import_process(node.find('import_process'), ip)
@@ -25,7 +25,7 @@ class ParserService(object):
         indicators = self._parse_indicators(node.find('indicators'), dataset)
         # Dataset observations
         for item in node.find('observations').findall('observation'):
-            self._parse_observation(item, dataset, indicators)
+            self._parse_observation(item, dataset, indicators, countries)
         return dataset
 
     def _parse_import_process(self, node, ip):
@@ -117,8 +117,7 @@ class ParserService(object):
         #    indicators[rel.get('id')].compound_indicator = indicator
         return indicator
 
-    def _parse_observation(self, node, dataset, indicators):
-        # TODO: parse computation
+    def _parse_observation(self, node, dataset, indicators, countries):
         # TODO: parse indicator group
         # TODO: parse slice
         observation = models.Observation()
@@ -129,8 +128,10 @@ class ParserService(object):
         observation.ref_time = self._parse_time(node.find('time'))
         observation.issued = self._parse_issued(node.find('issued'))
         observation.value = self._parse_obs_value(node.find('obs-status'), node.find('value'))
-        observation.country_uri = node.find('country').text
         observation.computation = self._parse_computation(node.find('computation'))
+        # Set observation country
+        country_uri = node.find('country').text
+        observation.region_id = countries[country_uri].id if country_uri in countries else None
         return observation
 
     def _parse_time(self, node):

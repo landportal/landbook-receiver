@@ -18,12 +18,22 @@ class CountryListAPI(Resource):
         """
         user_ip = request.remote_addr
         if 'xml' in request.form:
-            nodes = service.parse_nodes_content(content=request.form['xml'], ip=user_ip)
             session = db.session
+            countries = self._get_countries()
+            nodes = service.parse_nodes_content(content=request.form['xml'], ip=user_ip, countries=countries)
             session.merge(nodes)
             session.commit()
         else:
             abort(400)
+
+    def _get_countries(self):
+        from model import models
+        session = db.session
+        countries = session.query(models.Country).all()
+        result = {}
+        for item in countries:
+            result[item.faoURI] = item
+        return result
 
 
 api.add_resource(CountryListAPI, '/receiver')
