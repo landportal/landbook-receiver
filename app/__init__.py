@@ -11,4 +11,4 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///foo.db'
 db = SQLAlchemy(app)
 
-#from app import views
+from app import views
