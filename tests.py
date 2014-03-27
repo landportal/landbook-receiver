@@ -18,7 +18,7 @@ class ServiceTest(TestCase):
 class TestParser(ServiceTest):
 
     def test_with_data(self):
-        xml = open('xml/example_xml_ipfri_with_slices.xml', 'r').read()
+        xml = open('xml/example_xml_ipfri.xml', 'r').read()
         response = self.client.post("/receiver", data={'xml': xml})
         self.assert200(response)
 

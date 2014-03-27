@@ -140,7 +140,6 @@ class ParserService(object):
 
     def _parse_observation(self, node, dataset, indicators, countries):
         # TODO: parse indicator group
-        # TODO: parse slice
         observation = models.Observation()
         observation.id = node.get('id')
         rel_indicator_id = node.find('indicator-ref').get('indicator')
