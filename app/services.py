@@ -1,4 +1,6 @@
 from model import models
+import datetime
+import xml.etree.ElementTree as Et
 
 
 class ParserService(object):
@@ -10,7 +12,6 @@ class ParserService(object):
         to create an object representation based on the Landportal-model.
         Returns the root of the model-tree (the Dataset).
         """
-        import xml.etree.ElementTree as Et
         root_node = Et.fromstring(content)
         dataset = self._parse_dataset(root_node, ip, countries)
         return dataset
@@ -24,9 +25,30 @@ class ParserService(object):
         dataset.license = license
         indicators = self._parse_indicators(node.find('indicators'), dataset)
         # Dataset observations
+        observations = {}
         for item in node.find('observations').findall('observation'):
-            self._parse_observation(item, dataset, indicators, countries)
+            obs = self._parse_observation(item, dataset, indicators, countries)
+            observations[obs.id] = obs
+        self._parse_slices(node.find('slices'), dataset, indicators, observations)
         return dataset
+
+    def _parse_slices(self, node, dataset, indicators, observations):
+        slices = {}
+        for item in node.findall('slice'):
+            slice = self._parse_slice(item, dataset, indicators, observations)
+            slices[slice.id] = slice
+        return slices
+
+    def _parse_slice(self, node, dataset, indicators, observations):
+        time = self._parse_time(node.find('sli_metadata').find('time'))
+        indicator_id = node.find('sli_metadata').find('indicator-ref').get('id')
+        indicator = indicators[indicator_id] if indicator_id in indicators else None
+        slice = models.Slice(id=node.get('id'), dimension=time, indicator=indicator)
+        dataset.add_slice(slice)
+        for obs in node.find('referred').findall('observation-ref'):
+            slice.add_observation(observations[obs.get('id')])
+        return slice
+
 
     def _parse_import_process(self, node, ip):
         datasource = self._parse_datasource(node.find('datasource'))
@@ -42,7 +64,6 @@ class ParserService(object):
         return datasource
 
     def _parse_user(self, node, ip):
-        import datetime
         user = models.User(id=node.text, ip=ip, timestamp=datetime.datetime.utcnow())
         return user
 
@@ -69,11 +90,11 @@ class ParserService(object):
         # Single indicators
         for item in node.findall('indicator'):
             ind = self._parse_simple_indicator(item, dataset)
-            indicators[ind.id_source] = ind
+            indicators[ind.id] = ind
         # Compound indicators
         for item in node.findall('compound_indicator'):
             ind = self._parse_compound_indicator(item, dataset, indicators)
-            indicators[ind.id_source] = ind
+            indicators[ind.id] = ind
         return indicators
 
 
@@ -84,7 +105,7 @@ class ParserService(object):
         description = node.find('ind_description').text
         measurement = self._parse_measurement(node.find('measure_unit'))
 
-        indicator = models.Indicator(id_source=id_source,
+        indicator = models.Indicator(id=id_source,
                                      name=name,
                                      description=description,
                                      )
@@ -104,7 +125,7 @@ class ParserService(object):
         description = node.find('ind_description').text
         measurement = self._parse_measurement(node.find('measure_unit'))
 
-        indicator = models.CompoundIndicator(id_source=id_source,
+        indicator = models.CompoundIndicator(id=id_source,
                                              name=name,
                                              description=description,
                                              )
@@ -121,7 +142,7 @@ class ParserService(object):
         # TODO: parse indicator group
         # TODO: parse slice
         observation = models.Observation()
-        observation.id_source = node.get('id')
+        observation.id = node.get('id')
         rel_indicator_id = node.find('indicator-ref').get('indicator')
         observation.indicator = indicators[rel_indicator_id]
         observation.dataset = dataset
@@ -135,7 +156,6 @@ class ParserService(object):
         return observation
 
     def _parse_time(self, node):
-        import datetime
         is_interval = node.find('interval') is not None
         if is_interval:
             interval = node.find('interval')
@@ -149,7 +169,6 @@ class ParserService(object):
             return models.YearInterval(year=node.text)
 
     def _parse_issued(self, node):
-        import datetime
         date = datetime.datetime.strptime(node.text, '%Y-%m-%dT%H:%M:%S')
         return models.Instant(instant=date)
 
