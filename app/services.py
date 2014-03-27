@@ -101,13 +101,13 @@ class ParserService(object):
     def _parse_simple_indicator(self, node, dataset):
         """Parse an indicator node and return an Indicator object."""
         id_source = node.get('id')
-        name = node.find('ind_name').text
-        description = node.find('ind_description').text
+        #name = node.find('ind_name').text
+        #description = node.find('ind_description').text
         measurement = self._parse_measurement(node.find('measure_unit'))
 
         indicator = models.Indicator(id=id_source,
-                                     name=name,
-                                     description=description,
+                                     name=None,
+                                     description=None,
                                      )
         indicator.measurement_unit = measurement
         indicator.dataset = dataset
@@ -121,13 +121,13 @@ class ParserService(object):
     def _parse_compound_indicator(self, node, dataset, indicators):
         """Parse a compound indicator node and return a CompoundIndicator object."""
         id_source = node.get('id')
-        name = node.find('ind_name').text
-        description = node.find('ind_description').text
+        #name = node.find('ind_name').text
+        #description = node.find('ind_description').text
         measurement = self._parse_measurement(node.find('measure_unit'))
 
         indicator = models.CompoundIndicator(id=id_source,
-                                             name=name,
-                                             description=description,
+                                             name=None,
+                                             description=None,
                                              )
         indicator.measurement_unit = measurement
         indicator.dataset = dataset
