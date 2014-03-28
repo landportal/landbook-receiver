@@ -7,7 +7,7 @@ api = Api(app)
 service = ParserService()
 
 
-class CountryListAPI(Resource):
+class Receiver(Resource):
 
     def post(self):
         """ Parse an XML and store the model mapping into the database.
@@ -36,4 +36,4 @@ class CountryListAPI(Resource):
         return result
 
 
-api.add_resource(CountryListAPI, '/receiver')
+api.add_resource(Receiver, '/receiver')
