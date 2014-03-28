@@ -32,21 +32,6 @@ class CountryReader(object):
         countries = self._get_all_countries(file_path)
         return countries
 
-    def get_country_names(self, file_path):
-        """Return a list of all country names in multiple languages.
-        """
-        country_names = self._get_all_country_names(file_path)
-        return country_names
-
-    def _get_all_country_names(self, path):
-        country_file = xlrd.open_workbook(path, encoding_override='latin-1').sheet_by_index(0)
-        country_names = []
-        for row in range(self.FIRST_ROW, self.LAST_ROW + 1):
-            country_names.append(self._parse_name_en(country_file.row(row)))
-            country_names.append(self._parse_name_es(country_file.row(row)))
-            country_names.append(self._parse_name_fr(country_file.row(row)))
-        return country_names
-
     def _get_all_countries(self, path):
         country_file = xlrd.open_workbook(path, encoding_override='latin-1').sheet_by_index(0)
         countries = []
@@ -57,10 +42,16 @@ class CountryReader(object):
     def _parse_country(self, country_data):
         iso2 = self._parse_iso2(country_data)
         iso3 = self._parse_iso3(country_data)
-        fao_URI = 'http://landportal.info/ontology/country/' + iso3
-
-        return models.Country(name='', iso2=iso2, iso3=iso3, fao_URI=fao_URI)
-
+        fao_uri = 'http://landportal.info/ontology/country/' + iso3
+        country = models.Country(name='', iso2=iso2, iso3=iso3, fao_URI=fao_uri)
+        #Parse country name translations
+        name_en = self._parse_name_en(country_data)
+        name_fr = self._parse_name_fr(country_data)
+        name_es = self._parse_name_es(country_data)
+        country.add_translation(models.CountryTranslation(lang_code='en', name=name_en))
+        country.add_translation(models.CountryTranslation(lang_code='fr', name=name_fr))
+        country.add_translation(models.CountryTranslation(lang_code='es', name=name_es))
+        return country
 
     def _parse_iso2(self, country_data):
         iso2_admin = country_data[self.ISO2_ADMIN].value
@@ -82,49 +73,43 @@ class CountryReader(object):
             return None
 
     def _parse_name_en(self, country_data):
-        """Parse english country name, return a Translation object
+        """Return english country name
         """
         name_en_fao_s = country_data[self.NAME_EN_FAO_S].value
         name_en_fao = country_data[self.NAME_EN_FAO].value
         name_en_admin = country_data[self.NAME_EN_ADMIN].value
         name_en_admin_long = country_data[self.NAME_EN_ADMIN_LONG].value
 
-        name = ''
         if not self._is_blank_value(name_en_fao_s):
-            name = name_en_fao_s
+            return name_en_fao_s
         elif not self._is_blank_value(name_en_fao):
-            name = name_en_fao
+            return name_en_fao
         elif not self._is_blank_value(name_en_admin):
-            name = name_en_admin
-        elif not self._is_blank_value(name_en_admin_long):
-            name = name_en_admin_long
-        return models.Translation(lang_code='en', item_id=self._parse_iso3(country_data), name=name)
+            return name_en_admin
+        else:
+            return name_en_admin_long
 
     def _parse_name_es(self, country_data):
-        """Parse spanish country name, return a Translation object
+        """Return spanish country name. It may be an empty string
         """
         name_es_fao_s = country_data[self.NAME_ES_FAO_S].value
         name_es_fao = country_data[self.NAME_ES_FAO].value
 
-        name = ''
         if not self._is_blank_value(name_es_fao_s):
-            name = name_es_fao_s
-        elif not self._is_blank_value(name_es_fao):
-            name = name_es_fao
-        return models.Translation(lang_code='es', item_id=self._parse_iso3(country_data), name=name)
+            return name_es_fao_s
+        else:
+            return name_es_fao
 
     def _parse_name_fr(self, country_data):
-        """Parse french country name, return a Translation object
+        """Return french country name. It may be an empty string
         """
         name_fr_fao_s = country_data[self.NAME_FR_FAO_S].value
         name_fr_fao = country_data[self.NAME_FR_FAO].value
 
-        name = ''
         if not self._is_blank_value(name_fr_fao_s):
-            name = name_fr_fao_s
-        elif not self._is_blank_value(name_fr_fao):
-            name = name_fr_fao
-        return models.Translation(lang_code='fr', item_id=self._parse_iso3(country_data), name=name)
+            return name_fr_fao_s
+        else:
+            return name_fr_fao
 
     @staticmethod
     def _is_blank_value(value):

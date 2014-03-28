@@ -69,6 +69,7 @@ class ParserService(object):
 
     def _parse_organization(self, name, url):
         organization = models.Organization(name=name.text, id=url.text)
+        organization.url = url.text
         return organization
 
     def _parse_license(self, node):
@@ -101,16 +102,31 @@ class ParserService(object):
     def _parse_simple_indicator(self, node, dataset):
         """Parse an indicator node and return an Indicator object."""
         id_source = node.get('id')
-        #name = node.find('ind_name').text
-        #description = node.find('ind_description').text
         measurement = self._parse_measurement(node.find('measure_unit'))
 
+
+        #TODO name and description should be removed from indicator to indicatorTranslation
         indicator = models.Indicator(id=id_source,
                                      name=None,
                                      description=None,
                                      )
         indicator.measurement_unit = measurement
         indicator.dataset = dataset
+        indicator.topic_id = node.find('topic-ref').text
+
+        #Indicator translations
+        indicator.add_translation(
+            models.IndicatorTranslation(lang_code='en',
+                                        name=node.find('ind_name_en').text,
+                                        description=node.find('ind_description_en').text))
+        indicator.add_translation(
+            models.IndicatorTranslation(lang_code='es',
+                                        name=node.find('ind_name_es').text,
+                                        description=node.find('ind_description_es').text))
+        indicator.add_translation(
+            models.IndicatorTranslation(lang_code='fr',
+                                        name=node.find('ind_name_fr').text,
+                                        description=node.find('ind_description_fr').text))
         return indicator
 
     def _parse_measurement(self, node):
