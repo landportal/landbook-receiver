@@ -3,9 +3,6 @@ import app
 import create_db
 from flask_testing import TestCase
 
-if __name__ == '__main__':
-    unittest.main()
-
 
 class ServiceTest(TestCase):
     """Generic base class for all Receiver tests.
@@ -153,3 +150,6 @@ class IndicatorParserTest(ReceiverParserTest):
         for ind in indicators:
             self.assertTrue(len(ind.translations) == 3)
 
+
+if __name__ == '__main__':
+    unittest.main()
