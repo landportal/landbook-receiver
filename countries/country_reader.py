@@ -25,33 +25,53 @@ class CountryReader(object):
     #NAME-FR
     NAME_FR_FAO_S = 10
     NAME_FR_FAO = 9
+    #REGIONS
+    REGION_EN = 39
 
-    def get_countries(self, file_path):
+    def get_countries(self, file_path, regions):
         """ Return a list of all Landportal countries
         """
-        countries = self._get_all_countries(file_path)
+        countries = self._get_all_countries(file_path, regions)
         return countries
 
-    def _get_all_countries(self, path):
-        country_file = xlrd.open_workbook(path, encoding_override='latin-1').sheet_by_index(0)
+    def _get_all_countries(self, path, regions):
+        country_file = xlrd.open_workbook(path,
+            encoding_override='latin-1').sheet_by_index(0)
         countries = []
         for row in range(self.FIRST_ROW, self.LAST_ROW + 1):
-            countries.append(self._parse_country(country_file.row(row)))
+            countries.append(self._parse_country(country_file.row(row), regions))
         return countries
 
-    def _parse_country(self, country_data):
+    def _parse_country(self, country_data, regions):
         iso2 = self._parse_iso2(country_data)
         iso3 = self._parse_iso3(country_data)
         fao_uri = 'http://landportal.info/ontology/country/' + iso3
-        country = models.Country(name='', iso2=iso2, iso3=iso3, fao_URI=fao_uri)
+        country = models.Country(iso2=iso2, iso3=iso3, fao_URI=fao_uri)
         #Parse country name translations
         name_en = self._parse_name_en(country_data)
         name_fr = self._parse_name_fr(country_data)
         name_es = self._parse_name_es(country_data)
-        country.add_translation(models.CountryTranslation(lang_code='en', name=name_en))
-        country.add_translation(models.CountryTranslation(lang_code='fr', name=name_fr))
-        country.add_translation(models.CountryTranslation(lang_code='es', name=name_es))
+        country.add_translation(
+            models.RegionTranslation(lang_code='en', name=name_en))
+        country.add_translation(
+            models.RegionTranslation(lang_code='fr', name=name_fr))
+        country.add_translation(
+            models.RegionTranslation(lang_code='es', name=name_es))
+        # Add region
+        reg_name = country_data[self.REGION_EN].value
+        country.is_part_of_id = self._get_region_id(reg_name)
         return country
+
+    @staticmethod
+    def _get_region_id(name):
+        """Returns the region_id associated to a region name or None.
+        The region name must be in english.
+        """
+        import app
+        session = app.db.session()
+        region = session.query(models.RegionTranslation). \
+            filter(models.RegionTranslation.name == name).first()
+        return region.region_id if region is not None else None
 
     def _parse_iso2(self, country_data):
         iso2_admin = country_data[self.ISO2_ADMIN].value
@@ -114,6 +134,7 @@ class CountryReader(object):
     @staticmethod
     def _is_blank_value(value):
         return value is None or value == '' or value == -99 or value == '-99'
+
 
 if __name__ == '__main__':
     CountryReader().get_countries('country_list.xlsx')
