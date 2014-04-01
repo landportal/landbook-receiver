@@ -1,14 +1,20 @@
 
 def create_database():
     from app import db
+    from model import models
+
     # Create DB Schema
     db.create_all()
     session = db.session
     # Create language list
     session.add_all(DatabasePopulator.get_languages())
     session.commit()
+    # Create region list
+    session.add_all(DatabasePopulator.get_regions())
+    session.commit()
     # Create country list
-    session.add_all(DatabasePopulator.get_countries())
+    regions = session.query(models.Region).all()
+    session.add_all(DatabasePopulator.get_countries(regions))
     session.commit()
     # Create topic list
     session.add_all(DatabasePopulator.get_topics())
@@ -28,9 +34,24 @@ class DatabasePopulator(object):
         return languages
 
     @staticmethod
-    def get_countries():
+    def get_countries(regions):
         from countries.country_reader import CountryReader
-        return CountryReader().get_countries('countries/country_list.xlsx')
+        return CountryReader().get_countries('countries/country_list.xlsx', regions)
+
+    @staticmethod
+    def get_regions():
+        from model import models
+        reg1 = models.Region()
+        reg1.add_translation(models.RegionTranslation(lang_code='en', name='Africa'))
+        reg2 = models.Region()
+        reg2.add_translation(models.RegionTranslation(lang_code='en', name='Americas'))
+        reg3 = models.Region()
+        reg3.add_translation(models.RegionTranslation(lang_code='en', name='Europe'))
+        reg4 = models.Region()
+        reg4.add_translation(models.RegionTranslation(lang_code='en', name='Oceania'))
+        reg5 = models.Region()
+        reg5.add_translation(models.RegionTranslation(lang_code='en', name='Asia'))
+        return [reg1, reg2, reg3, reg4, reg5]
 
     @staticmethod
     def get_topics():

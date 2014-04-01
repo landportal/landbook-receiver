@@ -63,9 +63,9 @@ class ReceiverParserTest(ServiceTest):
 
 
 class CountryParserTest(ReceiverParserTest):
-    """Country and CountryTranslations tests.
+    """Region and RegionTranslations tests.
     """
-    from model.models import Country
+    from model.models import Country, RegionTranslation, Region
 
     def test_countries_number(self):
         """Test if all countries are in the database.
@@ -94,6 +94,22 @@ class CountryParserTest(ReceiverParserTest):
         self.assertTrue(france is not None)
         #Check that the country names are well translated
         self.assertTrue(len(france.translations) == 3)
+
+    def test_region(self):
+        """Test if the country region is set correctly.
+        """
+        #Get Spain (as a region, because countries don't have
+        # is_part_of attribute)
+        spain = self.session.query(self.Region) \
+            .join(self.Country, self.Region.id == self.Country.id) \
+            .filter(self.Country.iso3 == 'ESP') \
+            .first()
+
+        region = self.session.query(self.RegionTranslation) \
+            .filter(self.RegionTranslation.region_id == spain.is_part_of_id) \
+            .filter(self.RegionTranslation.lang_code == 'en').first()
+
+        self.assertTrue(region.name == 'Europe')
 
 
 class TopicParserTest(ReceiverParserTest):
