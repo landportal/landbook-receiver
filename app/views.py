@@ -1,39 +1,24 @@
-
-from flask_restful import Resource, Api, request, abort
-from app import app, db
-from app.services import ParserService
-
-api = Api(app)
-service = ParserService()
+import flask_restful
+import app
+import app.services as services
 
 
-class Receiver(Resource):
+class Receiver(flask_restful.Resource):
 
-    def post(self):
+    @staticmethod
+    def post():
         """ Parse an XML and store the model mapping into the database.
 
         Receives an xml=... with the XML content to parse
         Returns a 200 response if everything went right or 400 if there
         is not any content to parse.
         """
-        user_ip = request.remote_addr
-        if 'xml' in request.form:
-            session = db.session
-            countries = self._get_countries()
-            nodes = service.parse_nodes_content(content=request.form['xml'], ip=user_ip, countries=countries)
-            session.merge(nodes)
-            session.commit()
+        user_ip = flask_restful.request.remote_addr
+        if 'xml' in flask_restful.request.form:
+            content = flask_restful.request.form['xml']
+            services.ReceiverSQLService(content).store_data(user_ip)
         else:
-            abort(400)
+            flask_restful.abort(400)
 
-    def _get_countries(self):
-        from model import models
-        session = db.session
-        countries = session.query(models.Country).all()
-        result = {}
-        for item in countries:
-            result[item.faoURI] = item
-        return result
-
-
+api = flask_restful.Api(app.app)
 api.add_resource(Receiver, '/receiver')
