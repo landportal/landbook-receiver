@@ -152,12 +152,25 @@ class Parser(object):
         return observation
 
     def _get_slice(self, sli):
-        time = self._parse_time(sli.find('sli_metadata').find('time'))
-        slice = model.Slice(id=sli.get('id'), dimension=time)
-        slice.indicator_id = sli.find('sli_metadata').find('indicator-ref').get('id')
+        slice = model.Slice(id=sli.get('id'))
+        slice.indicator_id = sli.find('sli_metadata')\
+            .find('indicator-ref').get('id')
+        # This field will not be persisted to the database, instead it will
+        # be used to link the slice with its regions from the services layer
+        slice.region_iso3 = None
+        # The slice observation may be an Region or a Time. If it is a Time we
+        # can create it here and link it with the slice. If it is a Region we
+        # must query the database to get the corresponding object, that's why
+        # we must link it from the services layer
+        time_element = sli.find('sli_metadata').find('time')
+        if time_element is not None:
+            slice.dimension = self._parse_time(sli.find('sli_metadata')
+                                               .find('time'))
+        else:
+            slice.region_iso3 = sli.find('sli_metadata').find('region').text
         # This list of Observation IDs will not be persisted to the database,
-        # instead it will be used by the services to link the slice with its
-        # observations, and it will find them using these IDs
+        # instead it will be used by the services layer to link the slice with
+        # its observations, and it will find them using these IDs
         slice.observation_ids = []
         for obs in sli.find('referred').findall('observation-ref'):
             slice.observation_ids.append(obs.get('id'))
