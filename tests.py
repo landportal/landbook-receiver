@@ -126,7 +126,6 @@ class TopicParserTest(ReceiverParserTest):
         #There should be 8 topics in the database
         self.assertTrue(topics == 8)
 
-    '''
     def test_topics_data(self):
         """Test if the topic data in the database is correct.
         """
@@ -139,9 +138,10 @@ class TopicParserTest(ReceiverParserTest):
         #Check that the topic name is correct
         self.assertTrue(topic99.name == 'TOPIC_TEMPORAL')
         #Check the topic indicators
-        self.assertTrue(len(topic99.indicators) == 4)
+        # Because one indicator has been left with a fake request to the
+        # API, the topic should have only 3 indicators (not 4)
+        self.assertTrue(len(topic99.indicators) == 3)
         self.assertTrue(len(topic1.indicators) == 0)
-    '''
 
     def test_topics_translations(self):
         """Test if the topics have the correct translations.
@@ -218,3 +218,4 @@ class SliceParserTest(ReceiverParserTest):
 
 if __name__ == '__main__':
     unittest.main()
+
