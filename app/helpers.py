@@ -155,6 +155,12 @@ class Parser(object):
         time = self._parse_time(sli.find('sli_metadata').find('time'))
         slice = model.Slice(id=sli.get('id'), dimension=time)
         slice.indicator_id = sli.find('sli_metadata').find('indicator-ref').get('id')
+        # This list of Observation IDs will not be persisted to the database,
+        # instead it will be used by the services to link the slice with its
+        # observations, and it will find them using these IDs
+        slice.observation_ids = []
+        for obs in sli.find('referred').findall('observation-ref'):
+            slice.observation_ids.append(obs.get('id'))
         return slice
 
     @staticmethod

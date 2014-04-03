@@ -213,8 +213,17 @@ class SliceParserTest(ReceiverParserTest):
     def test_slices_info(self):
         sli = self.session.query(model.Slice).filter(model.Slice.id == 'SLIIPFRI0').first()
         self.assertTrue(sli is not None)
+        # Check that the slice is linked to an indicator
         self.assertTrue(sli.indicator.id == 'INDIPFRI0')
 
+    def test_slices_observations(self):
+        sli = self.session.query(model.Slice).filter(model.Slice.id == 'SLIIPFRI0').first()
+        # Check that the slice has linked observations
+        self.assertTrue(sli.observations)
+        # Check for a concrete observation
+        observation = next((obs for obs in sli.observations
+                            if obs.id == 'OBSIPFRI0'), None)
+        self.assertTrue(observation is not None)
 
 if __name__ == '__main__':
     unittest.main()

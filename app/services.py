@@ -41,4 +41,10 @@ class ReceiverSQLService(object):
         session.add_all(slices)
         for sli in slices:
             sli.dataset_id = dataset.id
+            # The observation_ids list was created in the parser and WILL NOT be
+            # persisted. The list is only used here to link with the observatios
+            for obs_id in sli.observation_ids:
+                related_obs = next((obs for obs in observations
+                                    if obs.id == obs_id), None)
+                sli.observations.append(related_obs)
         session.commit()
