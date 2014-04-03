@@ -192,7 +192,9 @@ class ObservationParserTest(ReceiverParserTest):
 
 
 class MetadataParserTest(ReceiverParserTest):
-    def test_organization_info(self):
+    """Tests for metadata of the import process.
+    Includes tests for Organization, User, Dataset and Datasource"""
+    def test_organization(self):
         organizations = self.session.query(model.Organization).all()
         self.assertTrue(len(organizations) == 1)
         org = self.session.query(model.Organization) \
@@ -202,28 +204,56 @@ class MetadataParserTest(ReceiverParserTest):
         self.assertTrue('IFPRI' in org.name)
         self.assertTrue(org.users)
 
-    def test_user_info(self):
+    def test_user(self):
         users = self.session.query(model.User).all()
         self.assertTrue(len(users) == 1)
         user = users[0]
         self.assertTrue(user.id == 'USRIPFRIIMPORTER')
 
+    def test_datasource(self):
+        dsource = self.session.query(model.DataSource).first()
+        self.assertTrue('IFPRI' in dsource.name)
+        self.assertTrue(dsource.organization is not None)
+        self.assertTrue(dsource.datasets is not None)
+
+    def test_dataset(self):
+        dataset = self.session.query(model.Dataset).first()
+        self.assertTrue(dataset.datasource is not None)
+        self.assertTrue('IFPRI' in dataset.datasource.name)
+        self.assertTrue(dataset.license is not None)
+        # The license of this dataset allows republishing (this may not be
+        # applicable for other licenses)
+        self.assertTrue(dataset.license.republish)
+
 
 class SliceParserTest(ReceiverParserTest):
-    def test_slices_info(self):
-        sli = self.session.query(model.Slice).filter(model.Slice.id == 'SLIIPFRI0').first()
+    def test_info(self):
+        sli = self.session.query(model.Slice)\
+            .filter(model.Slice.id == 'SLIIPFRI0').first()
         self.assertTrue(sli is not None)
-        # Check that the slice is linked to an indicator
         self.assertTrue(sli.indicator.id == 'INDIPFRI0')
+        self.assertTrue(sli.dataset is not None)
 
-    def test_slices_observations(self):
-        sli = self.session.query(model.Slice).filter(model.Slice.id == 'SLIIPFRI0').first()
+    def test_observations(self):
+        sli = self.session.query(model.Slice)\
+            .filter(model.Slice.id == 'SLIIPFRI0').first()
         # Check that the slice has linked observations
         self.assertTrue(sli.observations)
         # Check for a concrete observation
         observation = next((obs for obs in sli.observations
                             if obs.id == 'OBSIPFRI0'), None)
         self.assertTrue(observation is not None)
+
+    def test_dimension(self):
+        # Dimension may be a Region...
+        sli = self.session.query(model.Slice)\
+            .filter(model.Slice.id == 'SLIIPFRI0').first()
+        self.assertTrue(sli.dimension.iso3 == 'ESP')
+        # ... or a Time
+        sli = self.session.query(model.Slice)\
+            .filter(model.Slice.id == 'SLIIPFRI1').first()
+        self.assertTrue(sli.dimension.start_time.year == 1994)
+        self.assertTrue(sli.dimension.end_time.year == 1996)
 
 if __name__ == '__main__':
     unittest.main()

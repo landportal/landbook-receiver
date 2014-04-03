@@ -1,6 +1,6 @@
 import helpers
 import app
-
+import model.models as model
 
 class ReceiverSQLService(object):
 
@@ -41,6 +41,12 @@ class ReceiverSQLService(object):
         session.add_all(slices)
         for sli in slices:
             sli.dataset_id = dataset.id
+            # The region_iso3 field was created in the parser and WILL NOT be
+            # peristed, it is only used to link with the corresponding region
+            if sli.region_iso3 is not None:
+                region = session.query(model.Country)\
+                    .filter(model.Country.iso3 == sli.region_iso3).first()
+                sli.dimension = region
             # The observation_ids list was created in the parser and WILL NOT be
             # persisted. The list is only used here to link with the observatios
             for obs_id in sli.observation_ids:
