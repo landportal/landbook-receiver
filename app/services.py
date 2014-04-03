@@ -2,14 +2,13 @@ import helpers
 import app
 import model.models as model
 
-class ReceiverSQLService(object):
 
+class ReceiverSQLService(object):
     def __init__(self, content):
-        parser = helpers.Parser(content)
-        self.metadata_serv = helpers.MetadataSQLService(parser)
-        self.indicator_serv = helpers.IndicatorSQLService(parser)
-        self.observation_serv = helpers.ObservationSQLService(parser)
-        self.slice_serv = helpers.SliceSQLService(parser)
+        self.metadata_serv = helpers.MetadataSQLService(content)
+        self.indicator_serv = helpers.IndicatorSQLService(content)
+        self.observation_serv = helpers.ObservationSQLService(content)
+        self.slice_serv = helpers.SliceSQLService(content)
 
     def store_data(self, user_ip):
         session = app.db.session
