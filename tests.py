@@ -189,6 +189,7 @@ class IndicatorParserTest(ReceiverParserTest):
             .filter(model.Indicator.id == 'INDIPFRI2')\
             .first()
         self.assertTrue(ind.preferable_tendency == 'decrease')
+        self.assertTrue(len(ind.datasets) == 1)
 
     def test_indicators_translations(self):
         """Test if the indicators have the correct translations.
@@ -250,6 +251,7 @@ class MetadataParserTest(ReceiverParserTest):
         # The license of this dataset allows republishing (this may not be
         # applicable for other licenses)
         self.assertTrue(dataset.license.republish)
+        self.assertTrue(len(dataset.indicators) == 3)
 
 
 class SliceParserTest(ReceiverParserTest):

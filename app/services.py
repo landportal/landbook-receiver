@@ -28,14 +28,8 @@ class ReceiverSQLService(object):
         # Store indicators
         indicators = self.indicator_serv.get_indicators()
         session.add_all(indicators)
-        """
-        #for ind in indicators:
-        #    ind.dataset_id = dataset.id
-        session.flush()
-        for id in self.indicator_serv.get_indicators_id():
-            ind = session.query(model.Indicator).filter(model.Indicator.id == id).first()
-            if ind is not None:
-        """
+        for ind in indicators:
+            dataset.add_indicator(ind)
         # Store observations
         observations = self.observation_serv.get_observations()
         session.add_all(observations)
