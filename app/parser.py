@@ -70,6 +70,13 @@ class Parser(object):
             model.IndicatorTranslation(lang_code='fr',
                                         name=ind.find('ind_name_fr').text,
                                         description=ind.find('ind_description_fr').text))
+        # The indicator may be related with others
+        # The attribute related_id WILL NOT be persisted to the database and
+        # it is only used to create the relationships objects in the services
+        indicator.related_id = []
+        if ind.find('relatedWith') is not None:
+            for rel in ind.find('relatedWith').findall('indicator-ref'):
+                indicator.related_id.append(rel.get('id'))
         return indicator
 
     def get_observations(self):
