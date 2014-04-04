@@ -97,7 +97,7 @@ class Parser(object):
             .find('indicator-ref').get('id')
         # This field will not be persisted to the database, instead it will
         # be used to link the slice with its regions from the services layer
-        slice.region_iso3 = None
+        slice.region_code = None
         # The slice observation may be an Region or a Time. If it is a Time we
         # can create it here and link it with the slice. If it is a Region we
         # must query the database to get the corresponding object, that's why
@@ -107,7 +107,7 @@ class Parser(object):
             slice.dimension = self._parse_time(sli.find('sli_metadata')
                                                .find('time'))
         else:
-            slice.region_iso3 = sli.find('sli_metadata').find('region').text
+            slice.region_code = int(sli.find('sli_metadata').find('region').text)
         # This list of Observation IDs will not be persisted to the database,
         # instead it will be used by the services layer to link the slice with
         # its observations, and it will find them using these IDs

@@ -29735,12 +29735,7 @@
 		<slice id="SLIIPFRI0">
 			<sli_metadata>
 				<indicator-ref id="INDIPFRI0"/>
-				<time unit="years">
-					<interval>
-						<beginning>1990</beginning>
-						<end>1992</end>
-					</interval>
-				</time>
+				<region>724</region>
 			</sli_metadata>
 			<referred>
 				<observation-ref id="OBSIPFRI0"/>

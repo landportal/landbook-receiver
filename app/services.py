@@ -48,9 +48,9 @@ class ReceiverSQLService(object):
             sli.dataset_id = dataset.id
             # The region_iso3 field was created in the parser and WILL NOT be
             # peristed, it is only used to link with the corresponding region
-            if sli.region_iso3 is not None:
-                region = session.query(model.Country)\
-                    .filter(model.Country.iso3 == sli.region_iso3).first()
+            if sli.region_code is not None:
+                region = session.query(model.Region)\
+                    .filter(model.Region.un_code == sli.region_code).first()
                 sli.dimension = region
             # The observation_ids list was created in the parser and WILL NOT be
             # persisted. The list is only used here to link with the observatios
