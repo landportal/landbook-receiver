@@ -25,6 +25,8 @@ class CountryReader(object):
     #NAME-FR
     NAME_FR_FAO_S = 10
     NAME_FR_FAO = 9
+    #UN_CODE
+    UN_CODE = 30
     #REGIONS
     REGION_EN = 39
 
@@ -46,7 +48,9 @@ class CountryReader(object):
         iso2 = self._parse_iso2(country_data)
         iso3 = self._parse_iso3(country_data)
         fao_uri = 'http://landportal.info/ontology/country/' + iso3
-        country = models.Country(iso2=iso2, iso3=iso3, fao_URI=fao_uri)
+        un_code = country_data[self.UN_CODE].value
+        country = models.Country(iso2=iso2, iso3=iso3, fao_URI=fao_uri,
+                                 un_code=un_code)
         #Parse country name translations
         name_en = self._parse_name_en(country_data)
         name_fr = self._parse_name_fr(country_data)

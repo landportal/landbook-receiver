@@ -41,16 +41,26 @@ class DatabasePopulator(object):
     @staticmethod
     def get_regions():
         from model import models
-        reg1 = models.Region()
+        reg1 = models.Region(un_code='002')
         reg1.add_translation(models.RegionTranslation(lang_code='en', name='Africa'))
-        reg2 = models.Region()
+        reg1.add_translation(models.RegionTranslation(lang_code='es', name='Africa'))
+        reg1.add_translation(models.RegionTranslation(lang_code='fr', name='Afrique'))
+        reg2 = models.Region(un_code='019')
         reg2.add_translation(models.RegionTranslation(lang_code='en', name='Americas'))
-        reg3 = models.Region()
+        reg2.add_translation(models.RegionTranslation(lang_code='es', name='America'))
+        reg2.add_translation(models.RegionTranslation(lang_code='fr', name='Amerique'))
+        reg3 = models.Region(un_code='150')
         reg3.add_translation(models.RegionTranslation(lang_code='en', name='Europe'))
-        reg4 = models.Region()
+        reg3.add_translation(models.RegionTranslation(lang_code='es', name='Europa'))
+        reg3.add_translation(models.RegionTranslation(lang_code='fr', name='Europe'))
+        reg4 = models.Region(un_code='009')
         reg4.add_translation(models.RegionTranslation(lang_code='en', name='Oceania'))
-        reg5 = models.Region()
+        reg4.add_translation(models.RegionTranslation(lang_code='es', name='Oceania'))
+        reg4.add_translation(models.RegionTranslation(lang_code='fr', name='Oceanie'))
+        reg5 = models.Region(un_code='142')
         reg5.add_translation(models.RegionTranslation(lang_code='en', name='Asia'))
+        reg5.add_translation(models.RegionTranslation(lang_code='es', name='Asia'))
+        reg5.add_translation(models.RegionTranslation(lang_code='fr', name='Asia'))
         return [reg1, reg2, reg3, reg4, reg5]
 
     @staticmethod

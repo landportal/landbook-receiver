@@ -14,6 +14,10 @@ class IndicatorSQLService(object):
         # Filter indicators that already exist
         return [ind for ind in indicators if not self._fake_api_query(ind)]
 
+    def get_indicators_id(self):
+        indicators = self._parser.get_indicators()
+        return [ind.id for ind in indicators]
+
     @staticmethod
     def _fake_api_query(indicator):
         """Simulates a query to the API to check if the indicator already exists
