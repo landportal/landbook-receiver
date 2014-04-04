@@ -200,8 +200,19 @@ class IndicatorParserTest(ReceiverParserTest):
 
     def test_indicators_excluded(self):
         indicators = self.session.query(model.Indicator).all()
-        should_be_none = next((ind for ind in indicators if ind.id == 'INDIPFRI3'), None)
+        should_be_none = next((ind for ind in indicators
+                               if ind.id == 'INDIPFRI3'), None)
         self.assertTrue(should_be_none is None)
+
+    def test_relathionships(self):
+        indipfri2 = self.session.query(model.Indicator)\
+            .filter(model.Indicator.id == 'INDIPFRI2').first()
+        rels = self.session.query(model.IndicatorRelationship)\
+            .filter(model.IndicatorRelationship.source_id == indipfri2.id).all()
+        self.assertTrue(len(rels) == 2)
+        targets = [ind.target_id for ind in rels]
+        self.assertTrue('INDIPFRI0' in targets)
+        self.assertTrue('INDIPFRI1' in targets)
 
 
 class ObservationParserTest(ReceiverParserTest):

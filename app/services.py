@@ -30,6 +30,16 @@ class ReceiverSQLService(object):
         session.add_all(indicators)
         for ind in indicators:
             dataset.add_indicator(ind)
+            # Each indicator may be related with others
+            # The related_id field was created in the parser and WILL NOT be
+            # persisted, it is only used to create the relationship objects
+            relationships = []
+            for rel_id in ind.related_id:
+                rel = model.IndicatorRelationship()
+                rel.source_id = ind.id
+                rel.target_id = rel_id
+                relationships.append(rel)
+            session.add_all(relationships)
         # Store observations
         observations = self.observation_serv.get_observations()
         session.add_all(observations)

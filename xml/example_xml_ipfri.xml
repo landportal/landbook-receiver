@@ -29695,6 +29695,10 @@
 			<topic-ref>TOP99</topic-ref>
 			<preferable_tendency>decrease</preferable_tendency>
 			<measure_unit>%</measure_unit>
+            <relatedWith>
+                <indicator-ref id="INDIPFRI0"/>
+                <indicator-ref id="INDIPFRI1"/>
+            </relatedWith>
 		</indicator>
 		<indicator id="INDIPFRI3">
 			<ind_name_en>2013 Global Hunger Index</ind_name_en>
