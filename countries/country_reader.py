@@ -48,7 +48,9 @@ class CountryReader(object):
         iso2 = self._parse_iso2(country_data)
         iso3 = self._parse_iso3(country_data)
         fao_uri = 'http://landportal.info/ontology/country/' + iso3
-        un_code = country_data[self.UN_CODE].value
+        un_code = None
+        if not self._is_blank_value(country_data[self.UN_CODE].value):
+            un_code = int(country_data[self.UN_CODE].value)
         country = models.Country(iso2=iso2, iso3=iso3, fao_URI=fao_uri,
                                  un_code=un_code)
         #Parse country name translations

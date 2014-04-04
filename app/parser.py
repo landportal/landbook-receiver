@@ -87,8 +87,10 @@ class Parser(object):
         observation.issued = self._parse_issued(obs.find('issued'))
         observation.value = self._parse_obs_value(obs.find('obs-status'), obs.find('value'))
         observation.computation = self._parse_computation(obs.find('computation'))
-        # TODO: Regions such as America should have an ISO3 code or equivalent to link directly
-        observation.region_id = 1
+        # This field will not be persisted to the database, instead it will
+        # be used to link the observation with is referred region in the
+        # services layer
+        observation.region_code = obs.find('region').text
         return observation
 
     def _get_slice(self, sli):
