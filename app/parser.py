@@ -57,6 +57,7 @@ class Parser(object):
                                      )
         indicator.measurement_unit = model.MeasurementUnit(name=ind.find('measure_unit').text)
         indicator.topic_id = ind.find('topic-ref').text
+        indicator.preferable_tendency = ind.find('preferable_tendency').text
         indicator.add_translation(
             model.IndicatorTranslation(lang_code='en',
                                         name=ind.find('ind_name_en').text,
