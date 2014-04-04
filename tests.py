@@ -124,7 +124,6 @@ class CountryParserTest(ReceiverParserTest):
         self.assertTrue(eur_name_es.name == 'Europa')
 
 
-
 class TopicParserTest(ReceiverParserTest):
     """Topic and TopicTranslation tests.
     """
@@ -174,6 +173,12 @@ class IndicatorParserTest(ReceiverParserTest):
         #There should be 3 indicators in the database
         # ONE INDICATOR HAS BEEN LEFT WITH A FAKE QUERY TO THE API
         self.assertTrue(indicators == 3)
+
+    def test_indicators_data(self):
+        ind = self.session.query(model.Indicator)\
+            .filter(model.Indicator.id == 'INDIPFRI2')\
+            .first()
+        self.assertTrue(ind.preferable_tendency == 'decrease')
 
     def test_indicators_translations(self):
         """Test if the indicators have the correct translations.
