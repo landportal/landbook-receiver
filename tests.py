@@ -87,6 +87,7 @@ class CountryParserTest(ReceiverParserTest):
         self.assertTrue(spain.iso2 == 'ES')
         #Check that the FAO_URI is well formed
         self.assertTrue(spain.faoURI == 'http://landportal.info/ontology/country/ESP')
+        self.assertTrue(spain.un_code == '724')
 
     def test_countries_translations(self):
         """Test if the country translations are in the database.
@@ -107,11 +108,21 @@ class CountryParserTest(ReceiverParserTest):
             .filter(self.Country.iso3 == 'ESP') \
             .first()
 
-        region = self.session.query(self.RegionTranslation) \
-            .filter(self.RegionTranslation.region_id == spain.is_part_of_id) \
-            .filter(self.RegionTranslation.lang_code == 'en').first()
+        europe = self.session.query(self.Region)\
+            .filter(self.Region.id == spain.is_part_of_id)\
+            .first()
+        self.assertTrue(europe.un_code == '150')
 
-        self.assertTrue(region.name == 'Europe')
+        eur_name_en = self.session.query(self.RegionTranslation) \
+            .filter(self.RegionTranslation.region_id == europe.id) \
+            .filter(self.RegionTranslation.lang_code == 'en').first()
+        eur_name_es = self.session.query(self.RegionTranslation) \
+            .filter(self.RegionTranslation.region_id == europe.id) \
+            .filter(self.RegionTranslation.lang_code == 'es').first()
+
+        self.assertTrue(eur_name_en.name == 'Europe')
+        self.assertTrue(eur_name_es.name == 'Europa')
+
 
 
 class TopicParserTest(ReceiverParserTest):
