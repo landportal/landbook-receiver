@@ -41,6 +41,13 @@ class ReceiverSQLService(object):
         session.add_all(observations)
         for obs in observations:
             obs.dataset_id = dataset.id
+            # The region_code field was created in the parser and WILL NOT be
+            # persisted, it is only used to link with the corresponding region
+            if obs.region_code is not None:
+                region = session.query(model.Region)\
+                    .filter(model.Region.un_code == obs.region_code).first()
+                if region is not None:
+                    obs.region_id = region.id
         # Store slices
         slices = self.slice_serv.get_slices()
         session.add_all(slices)
