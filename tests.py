@@ -220,8 +220,6 @@ class IndicatorParserTest(ReceiverParserTest):
         compound = self.session.query(model.CompoundIndicator)\
             .filter(model.CompoundIndicator.id == 'INDIPFRI4').first()
         self.assertTrue(len(compound.datasets) == 1)
-        for d in compound.datasets:
-            print d
         translations = self.session.query(model.IndicatorTranslation)\
             .filter(model.IndicatorTranslation.indicator_id == compound.id).all()
         self.assertTrue(len(translations) == 3)
