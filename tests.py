@@ -159,8 +159,8 @@ class TopicParserTest(ReceiverParserTest):
         self.assertTrue(topic99.name == 'TOPIC_TEMPORAL')
         #Check the topic indicators
         # Because one indicator has been left with a fake request to the
-        # API, the topic should have only 3 indicators (not 4)
-        self.assertTrue(len(topic99.indicators) == 3)
+        # API, the topic should have only 4 indicators (not 5)
+        self.assertTrue(len(topic99.indicators) == 4)
         self.assertTrue(len(topic1.indicators) == 0)
 
     def test_topics_translations(self):
@@ -177,14 +177,14 @@ class IndicatorParserTest(ReceiverParserTest):
     from model.models import Indicator
 
     def test_indicators_number(self):
-        """Test if all indicators are in the database.
-        """
+        """Test if all indicators are in the database."""
         indicators = self._test_model_number(self.Indicator)
-        #There should be 3 indicators in the database
-        # ONE INDICATOR HAS BEEN LEFT WITH A FAKE QUERY TO THE API
-        self.assertTrue(indicators == 3)
+        #There should be 4 indicators in the database (3 simple and 1 compound)
+        #One simple indicator has been left out with a fake request to the api
+        self.assertTrue(indicators == 4)
 
     def test_indicators_data(self):
+        """Test if the indicators have the correct data."""
         ind = self.session.query(model.Indicator)\
             .filter(model.Indicator.id == 'INDIPFRI2')\
             .first()
@@ -192,19 +192,20 @@ class IndicatorParserTest(ReceiverParserTest):
         self.assertTrue(len(ind.datasets) == 1)
 
     def test_indicators_translations(self):
-        """Test if the indicators have the correct translations.
-        """
+        """Test if the indicators have the correct translations."""
         indicators = self.session.query(self.Indicator).all()
         for ind in indicators:
             self.assertTrue(len(ind.translations) == 3)
 
     def test_indicators_excluded(self):
+        """Test if the repeated indicators have been excluded."""
         indicators = self.session.query(model.Indicator).all()
         should_be_none = next((ind for ind in indicators
                                if ind.id == 'INDIPFRI3'), None)
         self.assertTrue(should_be_none is None)
 
     def test_relathionships(self):
+        """Test the simple indicator relationships."""
         indipfri2 = self.session.query(model.Indicator)\
             .filter(model.Indicator.id == 'INDIPFRI2').first()
         rels = self.session.query(model.IndicatorRelationship)\
@@ -213,6 +214,21 @@ class IndicatorParserTest(ReceiverParserTest):
         targets = [ind.target_id for ind in rels]
         self.assertTrue('INDIPFRI0' in targets)
         self.assertTrue('INDIPFRI1' in targets)
+
+    def test_compounds(self):
+        """Test the compound indicators."""
+        compound = self.session.query(model.CompoundIndicator)\
+            .filter(model.CompoundIndicator.id == 'INDIPFRI4').first()
+        self.assertTrue(len(compound.datasets) == 1)
+        for d in compound.datasets:
+            print d
+        translations = self.session.query(model.IndicatorTranslation)\
+            .filter(model.IndicatorTranslation.indicator_id == compound.id).all()
+        self.assertTrue(len(translations) == 3)
+        self.assertTrue(len(compound.indicator_refs) == 2)
+        ref_ids = [ind.id for ind in compound.indicator_refs]
+        self.assertTrue("INDIPFRI0" in ref_ids)
+        self.assertTrue("INDIPFRI2" in ref_ids)
 
 
 class ObservationParserTest(ReceiverParserTest):
@@ -262,7 +278,7 @@ class MetadataParserTest(ReceiverParserTest):
         # The license of this dataset allows republishing (this may not be
         # applicable for other licenses)
         self.assertTrue(dataset.license.republish)
-        self.assertTrue(len(dataset.indicators) == 3)
+        self.assertTrue(len(dataset.indicators) == 4)
 
 
 class SliceParserTest(ReceiverParserTest):

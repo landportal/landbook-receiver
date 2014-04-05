@@ -9,14 +9,13 @@ class IndicatorSQLService(object):
     # get_new_indicators will return only the indicators to persist in the
     # database. get_all_indicators will return the 
 
-    def get_indicators(self):
-        indicators = self._parser.get_indicators()
+    def get_simple_indicators(self):
+        indicators = self._parser.get_simple_indicators()
         # Filter indicators that already exist
         return [ind for ind in indicators if not self._fake_api_query(ind)]
 
-    def get_indicators_id(self):
-        indicators = self._parser.get_indicators()
-        return [ind.id for ind in indicators]
+    def get_compound_indicators(self):
+        return self._parser.get_compound_indicators()
 
     @staticmethod
     def _fake_api_query(indicator):
