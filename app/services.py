@@ -26,7 +26,7 @@ class ReceiverSQLService(object):
         dataset.datasource_id = datasource.id
         user.organization_id = organization.id
         # Store indicators
-        indicators = self.indicator_serv.get_indicators()
+        indicators = self.indicator_serv.get_simple_indicators()
         session.add_all(indicators)
         for ind in indicators:
             dataset.add_indicator(ind)
@@ -40,6 +40,8 @@ class ReceiverSQLService(object):
                 rel.target_id = rel_id
                 relationships.append(rel)
             session.add_all(relationships)
+        session.flush()
+        self.store_compound_indicators(dataset, session)
         # Store observations
         observations = self.observation_serv.get_observations()
         session.add_all(observations)
@@ -70,3 +72,18 @@ class ReceiverSQLService(object):
                                     if obs.id == obs_id), None)
                 sli.observations.append(related_obs)
         session.commit()
+
+    def store_compound_indicators(self, dataset, session):
+        indicators = self.indicator_serv.get_compound_indicators()
+        session.add_all(indicators)
+        for ind in indicators:
+            dataset.add_indicator(ind)
+            # The related_id field was created in the parser and WILL NOT be
+            # persisted to the database. It is used to link the simple
+            # indicators with its compound indicator
+            for id in ind.related_id:
+                related = session.query(model.Indicator)\
+                    .filter(model.Indicator.id == id).first()
+                related.compound_indicator_id = ind.id
+                #print id
+

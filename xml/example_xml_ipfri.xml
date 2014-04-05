@@ -29733,6 +29733,19 @@
 			<preferable_tendency>decrease</preferable_tendency>
 			<measure_unit>%</measure_unit>
 		</indicator>
+        <compound_indicator id="INDIPFRI4">
+			<ind_name_en>Compound indicator name</ind_name_en>
+			<ind_name_es>Compound indicator name (ES)</ind_name_es>
+			<ind_name_fr>Compound indicator name (EN)</ind_name_fr>
+			<ind_description_en>Description</ind_description_en>
+			<ind_description_es>Description</ind_description_es>
+			<ind_description_fr>Description</ind_description_fr>
+			<topic-ref>TOP99</topic-ref>
+			<preferable_tendency>increase</preferable_tendency>
+			<measure_unit>%</measure_unit>
+            <indicator-ref id="INDIPFRI0"/>
+            <indicator-ref id="INDIPFRI2"/>
+		</compound_indicator>
 	</indicators>
 	<indicator_groups/>
 	<slices>

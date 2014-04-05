@@ -8,11 +8,19 @@ class Parser(object):
         self._content = content
         self._root = Et.fromstring(content)
 
-    def get_indicators(self):
+    def get_simple_indicators(self):
         """Return a list of indicators
         """
-        indicators = [self._get_indicator(item) for item in self._root.find('indicators').findall('indicator')]
-        return indicators
+        indicators = self._root.find('indicators').findall('indicator')
+        simple_indicators = [self._get_simple_indicator(item) for item
+                             in indicators]
+        return simple_indicators
+
+    def get_compound_indicators(self):
+        indicators = self._root.find('indicators').findall('compound_indicator')
+        compound_indicators = [self._get_compound_indicator(item) for item
+                               in indicators]
+        return compound_indicators
 
     def get_user(self):
         """Parse the user data from the XML.
@@ -50,7 +58,7 @@ class Parser(object):
                                  url=url
                                 )
 
-    def _get_indicator(self, ind):
+    def _get_simple_indicator(self, ind):
         indicator = model.Indicator(id=ind.get('id'),
                                      name=None,
                                      description=None,
@@ -77,6 +85,34 @@ class Parser(object):
         if ind.find('relatedWith') is not None:
             for rel in ind.find('relatedWith').findall('indicator-ref'):
                 indicator.related_id.append(rel.get('id'))
+        return indicator
+
+    def _get_compound_indicator(self, ind):
+        indicator = model.CompoundIndicator(id=ind.get('id'),
+                                     name=None,
+                                     description=None,
+                                     )
+        indicator.measurement_unit = model.MeasurementUnit(name=ind.find('measure_unit').text)
+        indicator.topic_id = ind.find('topic-ref').text
+        indicator.preferable_tendency = ind.find('preferable_tendency').text
+        indicator.add_translation(
+            model.IndicatorTranslation(lang_code='en',
+                                        name=ind.find('ind_name_en').text,
+                                        description=ind.find('ind_description_en').text))
+        indicator.add_translation(
+            model.IndicatorTranslation(lang_code='es',
+                                        name=ind.find('ind_name_es').text,
+                                        description=ind.find('ind_description_es').text))
+        indicator.add_translation(
+            model.IndicatorTranslation(lang_code='fr',
+                                        name=ind.find('ind_name_fr').text,
+                                        description=ind.find('ind_description_fr').text))
+        # The indicator may be related with others
+        # The attribute related_id WILL NOT be persisted to the database and
+        # it is only used to create the relationships objects in the services
+        indicator.related_id = []
+        for rel in ind.findall('indicator-ref'):
+            indicator.related_id.append(rel.get('id'))
         return indicator
 
     def get_observations(self):
