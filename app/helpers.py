@@ -17,6 +17,9 @@ class IndicatorSQLService(object):
     def get_compound_indicators(self):
         return self._parser.get_compound_indicators()
 
+    def get_indicator_groups(self):
+        return self._parser.get_indicator_groups()
+
     @staticmethod
     def _fake_api_query(indicator):
         """Simulates a query to the API to check if the indicator already exists

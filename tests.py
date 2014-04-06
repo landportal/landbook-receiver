@@ -220,6 +220,7 @@ class IndicatorParserTest(ReceiverParserTest):
         compound = self.session.query(model.CompoundIndicator)\
             .filter(model.CompoundIndicator.id == 'INDIPFRI4').first()
         self.assertTrue(len(compound.datasets) == 1)
+        self.assertTrue(compound.indicator_ref_group.id == "GINDIPFRI0")
         translations = self.session.query(model.IndicatorTranslation)\
             .filter(model.IndicatorTranslation.indicator_id == compound.id).all()
         self.assertTrue(len(translations) == 3)
@@ -227,6 +228,17 @@ class IndicatorParserTest(ReceiverParserTest):
         ref_ids = [ind.id for ind in compound.indicator_refs]
         self.assertTrue("INDIPFRI0" in ref_ids)
         self.assertTrue("INDIPFRI2" in ref_ids)
+
+    def test_groups(self):
+        """Test indicator groups"""
+        group = self.session.query(model.IndicatorGroup)\
+            .filter(model.IndicatorGroup.id == 'GINDIPFRI0')\
+            .first()
+        self.assertTrue(group.compound_indicator.id == "INDIPFRI4")
+        self.assertTrue(len(group.observations) == 2)
+        obs_ids = [obs.id for obs in group.observations]
+        self.assertTrue("OBSIPFRI2599" in obs_ids)
+        self.assertTrue("OBSIPFRI2598" in obs_ids)
 
 
 class ObservationParserTest(ReceiverParserTest):
@@ -241,6 +253,15 @@ class ObservationParserTest(ReceiverParserTest):
         value = obsipfri0.value
         self.assertTrue(value.value == '9.0')
         self.assertTrue(value.obs_status == 'http://purl.org/linked-data/sdmx/2009/code#obsStatus-A')
+
+    def test_group(self):
+        observations = self.session.query(model.Observation)\
+            .filter(model.Observation.indicator_group_id == "GINDIPFRI0")\
+            .all()
+        self.assertTrue(len(observations) == 2)
+        observation_ids = [obs.id for obs in observations]
+        self.assertTrue("OBSIPFRI2598" in observation_ids)
+        self.assertTrue("OBSIPFRI2599" in observation_ids)
 
 
 class MetadataParserTest(ReceiverParserTest):
