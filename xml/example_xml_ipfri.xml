@@ -29665,7 +29665,7 @@
 			<time unit="years">2013</time>
 			<indicator-ref indicator="INDIPFRI3"/>
 		</observation>
-		<observation id="OBSIPFRI2598">
+		<observation id="OBSIPFRI2598" group="GINDIPFRI0">
 			<issued>2014-04-04T11:50:18</issued>
 			<obs-status>http://purl.org/linked-data/sdmx/2009/code#obsStatus-A</obs-status>
 			<value>24.1</value>
@@ -29674,7 +29674,7 @@
 			<time unit="years">2013</time>
 			<indicator-ref indicator="INDIPFRI3"/>
 		</observation>
-		<observation id="OBSIPFRI2599">
+		<observation id="OBSIPFRI2599" group="GINDIPFRI0">
 			<issued>2014-04-04T11:50:18</issued>
 			<obs-status>http://purl.org/linked-data/sdmx/2009/code#obsStatus-A</obs-status>
 			<value>16.5</value>
@@ -29747,7 +29747,9 @@
             <indicator-ref id="INDIPFRI2"/>
 		</compound_indicator>
 	</indicators>
-	<indicator_groups/>
+	<indicator_groups>
+        <indicator_group id='GINDIPFRI0' indicator-ref="INDIPFRI4"/>
+    </indicator_groups>
 	<slices>
 		<slice id="SLIIPFRI0">
 			<sli_metadata>
