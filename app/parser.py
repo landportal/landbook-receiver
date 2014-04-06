@@ -22,6 +22,11 @@ class Parser(object):
                                in indicators]
         return compound_indicators
 
+    def get_indicator_groups(self):
+        groups_element = self._root.find('indicator_groups')\
+            .findall('indicator_group')
+        return [self._get_indicator_group(ind) for ind in groups_element]
+
     def get_user(self):
         """Parse the user data from the XML.
         """
@@ -115,6 +120,16 @@ class Parser(object):
             indicator.related_id.append(rel.get('id'))
         return indicator
 
+    def _get_indicator_group(self, group):
+        indicator = model.IndicatorGroup()
+        indicator.id = group.get('id')
+        #The indicator group is linked to a CompoundIndicator. The attribute
+        #indicator-ref will be used in the services layer to link the
+        #IndicatorGroup and the CompoundIndicator, and it will not be
+        #persisted to the database
+        indicator.indicator_ref = group.get('indicator-ref')
+        return indicator
+
     def get_observations(self):
         observations = [self._get_observation(item) for item in self._root.find('observations').findall('observation')]
         return observations
@@ -130,6 +145,7 @@ class Parser(object):
         observation.issued = self._parse_issued(obs.find('issued'))
         observation.value = self._parse_obs_value(obs.find('obs-status'), obs.find('value'))
         observation.computation = self._parse_computation(obs.find('computation'))
+        observation.indicator_group_id = obs.get('group')
         # This field will not be persisted to the database, instead it will
         # be used to link the observation with is referred region in the
         # services layer

@@ -42,6 +42,9 @@ class ReceiverSQLService(object):
             session.add_all(relationships)
         session.flush()
         self.store_compound_indicators(dataset, session)
+        session.flush()
+        self.store_indicator_groups(session)
+        session.flush()
         # Store observations
         observations = self.observation_serv.get_observations()
         session.add_all(observations)
@@ -85,5 +88,17 @@ class ReceiverSQLService(object):
                 related = session.query(model.Indicator)\
                     .filter(model.Indicator.id == id).first()
                 related.compound_indicator_id = ind.id
-                #print id
+        return indicators
+
+    def store_indicator_groups(self, session):
+        groups = self.indicator_serv.get_indicator_groups()
+        session.add_all(groups)
+        for group in groups:
+            indicator_ref = session.query(model.CompoundIndicator)\
+                .filter(model.CompoundIndicator.id == group.indicator_ref)\
+                .first()
+            indicator_ref.indicator_ref_group = group
+        return groups
+
+
 
