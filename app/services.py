@@ -12,6 +12,15 @@ class ReceiverSQLService(object):
 
     def store_data(self, user_ip):
         session = app.db.session
+        try:
+            self._store_data(user_ip, session)
+            session.commit()
+        except:
+            session.rollback()
+        finally:
+            session.close()
+
+    def _store_data(self, user_ip, session):
         # Store dataset metadata
         datasource = self.metadata_serv.get_datasource()
         dataset = self.metadata_serv.get_dataset()
@@ -74,7 +83,6 @@ class ReceiverSQLService(object):
                 related_obs = next((obs for obs in observations
                                     if obs.id == obs_id), None)
                 sli.observations.append(related_obs)
-        session.commit()
 
     def store_compound_indicators(self, dataset, session):
         indicators = self.indicator_serv.get_compound_indicators()
