@@ -254,6 +254,20 @@ class ObservationParserTest(ReceiverParserTest):
         self.assertTrue(value.value == '9.0')
         self.assertTrue(value.obs_status == 'http://purl.org/linked-data/sdmx/2009/code#obsStatus-A')
 
+    def test_time(self):
+        obs1 = self.session.query(model.Observation)\
+            .filter(model.Observation.id == "OBSIPFRI2599").first()
+        self.assertTrue(obs1.ref_time.start_time.month == 12)
+        self.assertTrue(obs1.ref_time.start_time.year == 2013)
+        self.assertTrue(obs1.ref_time.end_time.month == 1)
+        self.assertTrue(obs1.ref_time.end_time.year == 2014)
+        obs2 = self.session.query(model.Observation)\
+            .filter(model.Observation.id == "OBSIPFRI2598").first()
+        self.assertTrue(obs2.ref_time.start_time.month == 2)
+        self.assertTrue(obs2.ref_time.start_time.year == 2013)
+        self.assertTrue(obs2.ref_time.end_time.month == 3)
+        self.assertTrue(obs2.ref_time.end_time.year == 2013)
+
     def test_group(self):
         observations = self.session.query(model.Observation)\
             .filter(model.Observation.indicator_group_id == "GINDIPFRI0")\

@@ -29671,7 +29671,7 @@
 			<value>24.1</value>
 			<computation>purl.org/weso/ontology/computex#Raw</computation>
 			<region>894</region>
-			<time unit="years">2013</time>
+			<time unit="months">02/2013</time>
 			<indicator-ref indicator="INDIPFRI3"/>
 		</observation>
 		<observation id="OBSIPFRI2599" group="GINDIPFRI0">
@@ -29680,7 +29680,7 @@
 			<value>16.5</value>
 			<computation>purl.org/weso/ontology/computex#Raw</computation>
 			<region>716</region>
-			<time unit="years">2013</time>
+			<time unit="months">12/2013</time>
 			<indicator-ref indicator="INDIPFRI3"/>
 		</observation>
 	</observations>
