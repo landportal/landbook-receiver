@@ -179,17 +179,31 @@ class Parser(object):
 
     @staticmethod
     def _parse_time(node):
-        is_interval = node.find('interval') is not None
-        if is_interval:
-            interval = node.find('interval')
-            start_year = int(interval.find('beginning').text)
-            end_year = int(interval.find('end').text)
+        # An observation may refer to an arbitrary interval of time...
+        if node.get('unit') == 'years':
+            if node.find('interval') is not None:
+                interval = node.find('interval')
+                start_year = int(interval.find('beginning').text)
+                end_year = int(interval.find('end').text)
 
-            beginning = datetime.date(year=start_year, month=1, day=1)
-            end = datetime.date(year=end_year, month=1, day=1)
+                beginning = datetime.date(year=start_year, month=1, day=1)
+                end = datetime.date(year=end_year, month=1, day=1)
+                return model.Interval(start_time=beginning, end_time=end)
+            # ... It may also refer to a concrete year ...
+            else:
+                return model.YearInterval(year=node.text)
+        # ... Or a concrete month of a year
+        elif node.get('unit') == 'months':
+            # The information comes in the format MM/YYYY
+            month = int(node.text.split('/')[0])
+            year = int(node.text.split('/')[1])
+            beginning = datetime.date(year=year, month=month, day=1)
+            if month == 12:
+                end = datetime.date(year=year+1, month=1, day=1)
+            else:
+                end = datetime.date(year=year, month=month+1, day=1)
             return model.Interval(start_time=beginning, end_time=end)
-        else:
-            return model.YearInterval(year=node.text)
+
 
     @staticmethod
     def _parse_issued(node):

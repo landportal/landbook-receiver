@@ -17,6 +17,7 @@ class ReceiverSQLService(object):
             session.commit()
         except:
             session.rollback()
+            raise
         finally:
             session.close()
 
