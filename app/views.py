@@ -16,7 +16,7 @@ class Receiver(flask_restful.Resource):
         user_ip = flask_restful.request.remote_addr
         if 'xml' in flask_restful.request.form:
             content = flask_restful.request.form['xml']
-            services.ReceiverSQLService(content).store_data(user_ip)
+            services.ReceiverSQLService(content.encode('utf-8')).store_data(user_ip)
         else:
             flask_restful.abort(400)
 
