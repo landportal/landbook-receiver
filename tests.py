@@ -23,7 +23,7 @@ class ServiceTest(flask_testing.TestCase):
         """Send a request to the Receiver with the specified POST content.
          Returns the response gotten from the Receiver.
         """
-        return self.client.post("/receiver", data=content)
+        return self.client.post("/", data=content)
 
 
 class ReceiverInterfaceTest(ServiceTest):
@@ -34,7 +34,7 @@ class ReceiverInterfaceTest(ServiceTest):
         """Test that a correct request results in a 200 response.
         """
         xml = open('xml/example_xml_ipfri.xml', 'r').read()
-        response = self.send_request(content={'xml': xml})
+        response = self.send_request(content={'xml': unicode(xml).encode('UTF-8')})
         self.assert200(response)
 
     def test_with_no_data(self):
