@@ -21,4 +21,4 @@ class Receiver(flask_restful.Resource):
             flask_restful.abort(400)
 
 api = flask_restful.Api(app.app)
-api.add_resource(Receiver, '/receiver')
+api.add_resource(Receiver, '/')
