@@ -87,8 +87,8 @@ class Parser(object):
         # The attribute related_id WILL NOT be persisted to the database and
         # it is only used to create the relationships objects in the services
         indicator.related_id = []
-        if ind.find('relatedWith') is not None:
-            for rel in ind.find('relatedWith').findall('indicator-ref'):
+        if ind.find('splitsIn') is not None:
+            for rel in ind.find('splitsIn').findall('indicator-ref'):
                 indicator.related_id.append(rel.get('id'))
         return indicator
 
