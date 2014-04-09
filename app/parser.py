@@ -48,6 +48,7 @@ class Parser(object):
 
     def get_dataset(self):
         dataset = model.Dataset()
+        dataset.sdmx_frequency = self._root.find('import_process').find('sdmx_frequency').text
         dataset.license = self._get_license()
         return dataset
 
