@@ -312,6 +312,7 @@ class MetadataParserTest(ReceiverParserTest):
         # applicable for other licenses)
         self.assertTrue(dataset.license.republish)
         self.assertTrue(len(dataset.indicators) == 4)
+        self.assertTrue(dataset.sdmx_frequency == 'http://test_ontology.org/frequency')
 
 
 class SliceParserTest(ReceiverParserTest):
