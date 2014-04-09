@@ -10,6 +10,8 @@ class ServiceTest(flask_testing.TestCase):
     """
     def create_app(self):
         app.app.config['TESTING'] = True
+        # Use an SQLite instance for testing
+        app.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
         return app.app
 
     def setUp(self):
