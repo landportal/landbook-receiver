@@ -68,9 +68,9 @@ class ReceiverSQLService(object):
             # The observation_ids list was created in the parser and WILL NOT be
             # persisted. The list is only used here to link with the observatios
             for obs_id in sli.observation_ids:
-                #related_obs = next((obs for obs in observations
-                #                    if obs.id == obs_id), None)
-                related_obs = session.query(model.Observation).filter(model.Observation.id == obs_id).first()
+                related_obs = next((obs for obs in observations
+                                    if obs.id == obs_id), None)
+                #related_obs = session.query(model.Observation).filter(model.Observation.id == obs_id).first()
                 sli.observations.append(related_obs)
 
     def get_region_by_uncode(self, session, un_code):

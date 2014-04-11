@@ -13,8 +13,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:root@localh
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///foo.db'
 db = SQLAlchemy(app)
 if not app.debug:
-	file_handler = FileHandler(filename='receiver_log')
-	file_handler.setLevel(logging.WARNING)
-	app.logger.addHandler(file_handler)
+    file_handler = FileHandler(filename='receiver_log')
+    file_handler.setLevel(logging.WARNING)
+    app.logger.addHandler(file_handler)
 
 from app import views
