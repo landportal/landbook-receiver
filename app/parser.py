@@ -65,10 +65,7 @@ class Parser(object):
                                 )
 
     def _get_simple_indicator(self, ind):
-        indicator = model.Indicator(id=ind.get('id'),
-                                     name=None,
-                                     description=None,
-                                     )
+        indicator = model.Indicator(id=ind.get('id'))
         indicator.measurement_unit = model.MeasurementUnit(name=ind.find('measure_unit').text)
         indicator.topic_id = ind.find('topic-ref').text
         indicator.preferable_tendency = ind.find('preferable_tendency').text
@@ -94,10 +91,7 @@ class Parser(object):
         return indicator
 
     def _get_compound_indicator(self, ind):
-        indicator = model.CompoundIndicator(id=ind.get('id'),
-                                     name=None,
-                                     description=None,
-                                     )
+        indicator = model.CompoundIndicator(id=ind.get('id'))
         indicator.measurement_unit = model.MeasurementUnit(name=ind.find('measure_unit').text)
         indicator.topic_id = ind.find('topic-ref').text
         indicator.preferable_tendency = ind.find('preferable_tendency').text

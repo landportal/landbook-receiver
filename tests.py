@@ -157,8 +157,6 @@ class TopicParserTest(ReceiverParserTest):
         #Check that the topic exists
         self.assertTrue(topic99 is not None)
         self.assertTrue(topic1 is not None)
-        #Check that the topic name is correct
-        self.assertTrue(topic99.name == 'TOPIC_TEMPORAL')
         #Check the topic indicators
         # Because one indicator has been left with a fake request to the
         # API, the topic should have only 4 indicators (not 5)
