@@ -150,7 +150,8 @@ class Parser(object):
         # This field will not be persisted to the database, instead it will
         # be used to link the observation with is referred region in the
         # services layer
-        observation.region_code = obs.find('region').text
+        reg_code = obs.find('region').text
+        observation.region_code = reg_code if reg_code != 'None' else None
         return observation
 
     def _get_slice(self, sli):
