@@ -5,26 +5,14 @@ class IndicatorSQLService(object):
     def __init__(self, content):
         self._parser = parser.Parser(content)
 
-    #TODO: create two methods: get_all_indicators and get_new_indicators \
-    # get_new_indicators will return only the indicators to persist in the
-    # database. get_all_indicators will return the 
-
     def get_simple_indicators(self):
-        indicators = self._parser.get_simple_indicators()
-        # Filter indicators that already exist
-        return [ind for ind in indicators if not self._fake_api_query(ind)]
+        return self._parser.get_simple_indicators()
 
     def get_compound_indicators(self):
         return self._parser.get_compound_indicators()
 
     def get_indicator_groups(self):
         return self._parser.get_indicator_groups()
-
-    @staticmethod
-    def _fake_api_query(indicator):
-        """Simulates a query to the API to check if the indicator already exists
-        """
-        return indicator.id == 'INDIPFRI3'
 
 
 class ObservationSQLService(object):

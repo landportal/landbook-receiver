@@ -158,9 +158,7 @@ class TopicParserTest(ReceiverParserTest):
         self.assertTrue(topic99 is not None)
         self.assertTrue(topic1 is not None)
         #Check the topic indicators
-        # Because one indicator has been left with a fake request to the
-        # API, the topic should have only 4 indicators (not 5)
-        self.assertTrue(len(topic99.indicators) == 4)
+        self.assertTrue(len(topic99.indicators) == 5)
         self.assertTrue(len(topic1.indicators) == 0)
 
     def test_topics_translations(self):
@@ -181,7 +179,7 @@ class IndicatorParserTest(ReceiverParserTest):
         indicators = self._test_model_number(self.Indicator)
         #There should be 4 indicators in the database (3 simple and 1 compound)
         #One simple indicator has been left out with a fake request to the api
-        self.assertTrue(indicators == 4)
+        self.assertTrue(indicators == 5)
 
     def test_indicators_data(self):
         """Test if the indicators have the correct data."""
@@ -196,13 +194,6 @@ class IndicatorParserTest(ReceiverParserTest):
         indicators = self.session.query(self.Indicator).all()
         for ind in indicators:
             self.assertTrue(len(ind.translations) == 3)
-
-    def test_indicators_excluded(self):
-        """Test if the repeated indicators have been excluded."""
-        indicators = self.session.query(model.Indicator).all()
-        should_be_none = next((ind for ind in indicators
-                               if ind.id == 'INDIPFRI3'), None)
-        self.assertTrue(should_be_none is None)
 
     def test_relathionships(self):
         """Test the simple indicator relationships."""
@@ -311,7 +302,7 @@ class MetadataParserTest(ReceiverParserTest):
         # The license of this dataset allows republishing (this may not be
         # applicable for other licenses)
         self.assertTrue(dataset.license.republish)
-        self.assertTrue(len(dataset.indicators) == 4)
+        self.assertTrue(len(dataset.indicators) == 5)
         self.assertTrue(dataset.sdmx_frequency == 'http://test_ontology.org/frequency')
 
 
