@@ -30,26 +30,28 @@ class ReceiverSQLService(object):
         groups = self._store_indicator_groups(session, compounds)
         session.flush()
         # Store observations
-        observations = self._store_observations(dataset, indicators + compounds,
-            groups, session)
+        observations = self._store_observations(dataset, groups, session)
         session.flush()
         # Store slices
+        slices = self._store_slices(dataset, observations, session)
+        session.flush()
+
+    def _store_slices(self, dataset, observations, session):
         slices = self.slice_serv.get_slices()
-        session.add_all(slices)
         for sli in slices:
             sli.dataset_id = dataset.id
-            sli.indicator = session.query(model.Indicator).filter(model.Indicator.id == sli.indicator_id).first()
-            sli.indicator_id = None
             # The region_iso3 field was created in the parser and WILL NOT be
             # peristed, it is only used to link with the corresponding region
             if sli.region_code is not None:
                 region = self.get_region_by_uncode(session, sli.region_code)
                 sli.dimension = region
             # The observation_ids list was created in the parser and WILL NOT be
-            # persisted. The list is only used here to link with the observatios
+            # persisted. The list is only used here to link with the observations
             for rel_obs in [obs for obs in observations if obs.id 
                     in sli.observation_ids]:
                 sli.observations.append(rel_obs)
+        session.add_all(slices)
+        return slices
 
     def get_region_by_uncode(self, session, un_code):
         if un_code is not None:
@@ -111,7 +113,7 @@ class ReceiverSQLService(object):
         session.add(user)
         return dataset
 
-    def _store_observations(self, dataset, indicators, groups, session):
+    def _store_observations(self, dataset, groups, session):
         observations = self.observation_serv.get_observations()
         for obs in observations:
             obs.dataset_id = dataset.id
@@ -121,12 +123,5 @@ class ReceiverSQLService(object):
                 region = self.get_region_by_uncode(session, obs.region_code)
                 if region is not None:
                     obs.region_id = region.id
-            obs.indicator = next(ind for ind in indicators\
-                if ind.id == obs.indicator_id)
-            obs.indicator_id = None
-            # The indicator_group is optional and may be None
-            obs.indicator_group = next((gr for gr in groups\
-                if gr.id == obs.indicator_group_id), None)
-            obs.indicator_group_id = None
         session.add_all(observations)
         return observations
