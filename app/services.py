@@ -22,19 +22,8 @@ class ReceiverSQLService(object):
             session.close()
 
     def _store_data(self, user_ip, session):
-        # Store dataset metadata
-        datasource = self.metadata_serv.get_datasource()
-        dataset = self.metadata_serv.get_dataset()
-        organization = self.metadata_serv.get_organization()
-        user = self.metadata_serv.get_user(ip=user_ip)
-        session.add(datasource)
-        session.add(dataset)
-        session.add(organization)
-        session.add(user)
+        dataset = self._store_metadata(user_ip, session)
         session.flush()
-        datasource.organization_id = organization.id
-        dataset.datasource_id = datasource.id
-        user.organization_id = organization.id
         # Store indicators
         self.store_indicators(dataset, session)
         session.flush()
@@ -114,6 +103,22 @@ class ReceiverSQLService(object):
                 related = next((rel for rel in indicators if rel.id == id), None)
                 ind.indicator_refs.append(related)
         self.store_indicator_groups(session, compounds)
+    
+    def _store_metadata(self, user_ip, session):
+        datasource = self.metadata_serv.get_datasource()
+        dataset = self.metadata_serv.get_dataset()
+        organization = self.metadata_serv.get_organization()
+        user = self.metadata_serv.get_user(ip=user_ip)
+
+        user.organization = organization
+        datasource.organization = organization
+        dataset.datasource = datasource
+
+        session.add(datasource)
+        session.add(dataset)
+        session.add(organization)
+        session.add(user)
+        return dataset
 
 
 
