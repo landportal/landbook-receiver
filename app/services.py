@@ -30,20 +30,9 @@ class ReceiverSQLService(object):
         groups = self._store_indicator_groups(session, compounds)
         session.flush()
         # Store observations
-        observations = self.observation_serv.get_observations()
-        session.add_all(observations)
-        for obs in observations:
-            obs.dataset_id = dataset.id
-            # The region_code field was created in the parser and WILL NOT be
-            # persisted, it is only used to link with the corresponding region
-            if obs.region_code is not None:
-                region = self.get_region_by_uncode(session, obs.region_code)
-                if region is not None:
-                    obs.region_id = region.id
-            obs.indicator = session.query(model.Indicator).filter(model.Indicator.id == obs.indicator_id).first()
-            obs.indicator_id = None
-            obs.indicator_group = session.query(model.IndicatorGroup).filter(model.IndicatorGroup.id == obs.indicator_group_id).first()
-            obs.indicator_group_id = None
+        observations = self._store_observations(dataset, indicators + compounds,
+            groups, session)
+        session.flush()
         # Store slices
         slices = self.slice_serv.get_slices()
         session.add_all(slices)
@@ -73,7 +62,8 @@ class ReceiverSQLService(object):
         groups = self.indicator_serv.get_indicator_groups()
         session.add_all(groups)
         for group in groups:
-            indicator_ref = next((comp for comp in compounds if comp.id == group.indicator_ref), None)
+            indicator_ref = next((comp for comp in compounds \
+                if comp.id == group.indicator_ref), None)
             indicator_ref.indicator_ref_group = group
         return groups
 
@@ -112,16 +102,31 @@ class ReceiverSQLService(object):
         dataset = self.metadata_serv.get_dataset()
         organization = self.metadata_serv.get_organization()
         user = self.metadata_serv.get_user(ip=user_ip)
-
         user.organization = organization
         datasource.organization = organization
         dataset.datasource = datasource
-
         session.add(datasource)
         session.add(dataset)
         session.add(organization)
         session.add(user)
         return dataset
 
-
-
+    def _store_observations(self, dataset, indicators, groups, session):
+        observations = self.observation_serv.get_observations()
+        for obs in observations:
+            obs.dataset_id = dataset.id
+            # The region_code field was created in the parser and WILL NOT be
+            # persisted, it is only used to link with the corresponding region
+            if obs.region_code is not None:
+                region = self.get_region_by_uncode(session, obs.region_code)
+                if region is not None:
+                    obs.region_id = region.id
+            obs.indicator = next(ind for ind in indicators\
+                if ind.id == obs.indicator_id)
+            obs.indicator_id = None
+            # The indicator_group is optional and may be None
+            obs.indicator_group = next((gr for gr in groups\
+                if gr.id == obs.indicator_group_id), None)
+            obs.indicator_group_id = None
+        session.add_all(observations)
+        return observations
