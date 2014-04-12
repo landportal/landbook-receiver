@@ -25,7 +25,9 @@ class ReceiverSQLService(object):
         dataset = self._store_metadata(user_ip, session)
         session.flush()
         # Store indicators
-        self.store_indicators(dataset, session)
+        indicators = self._store_simple_indicators(dataset, session)
+        compounds = self._store_compound_indicators(dataset, indicators, session)
+        groups = self._store_indicator_groups(session, compounds)
         session.flush()
         # Store observations
         observations = self.observation_serv.get_observations()
@@ -67,7 +69,7 @@ class ReceiverSQLService(object):
         else:
             return None
 
-    def store_indicator_groups(self, session, compounds):
+    def _store_indicator_groups(self, session, compounds):
         groups = self.indicator_serv.get_indicator_groups()
         session.add_all(groups)
         for group in groups:
@@ -75,15 +77,10 @@ class ReceiverSQLService(object):
             indicator_ref.indicator_ref_group = group
         return groups
 
-    def store_indicators(self, dataset, session):
+    def _store_simple_indicators(self, dataset, session):
         indicators = self.indicator_serv.get_simple_indicators()
-        compounds = self.indicator_serv.get_compound_indicators()
-        session.add_all(indicators + compounds)
-
-        for ind in indicators + compounds:
-            dataset.add_indicator(ind)
-
         for ind in indicators:
+            dataset.add_indicator(ind)
             # Each indicator may be related with others
             # The related_id field was created in the parser and WILL NOT be
             # persisted, it is only used to create the relationship objects
@@ -94,16 +91,22 @@ class ReceiverSQLService(object):
                 rel.target_id = rel_id
                 relationships.append(rel)
             session.add_all(relationships)
+        session.add_all(indicators)
+        return indicators
 
+    def _store_compound_indicators(self, dataset, indicators, session):
+        compounds = self.indicator_serv.get_compound_indicators()
         for ind in compounds:
+            dataset.add_indicator(ind)
             # The related_id field was created in the parser and WILL NOT be
             # persisted to the database. It is used to link the simple
             # indicators with its compound indicator
             for id in ind.related_id:
-                related = next((rel for rel in indicators if rel.id == id), None)
+                related = next(rel for rel in indicators if rel.id == id)
                 ind.indicator_refs.append(related)
-        self.store_indicator_groups(session, compounds)
-    
+        session.add_all(compounds)
+        return compounds
+
     def _store_metadata(self, user_ip, session):
         datasource = self.metadata_serv.get_datasource()
         dataset = self.metadata_serv.get_dataset()
