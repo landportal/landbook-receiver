@@ -27,10 +27,11 @@ class ReceiverSQLService(object):
         # Store indicators
         indicators = self._store_simple_indicators(dataset, session)
         compounds = self._store_compound_indicators(dataset, indicators, session)
+        self._store_indicator_relationships(dataset, session)
         groups = self._store_indicator_groups(session, compounds)
         session.flush()
         # Store observations
-        observations = self._store_observations(dataset, groups, session)
+        observations = self._store_observations(dataset, session)
         session.flush()
         # Store slices
         slices = self._store_slices(dataset, observations, session)
@@ -49,7 +50,7 @@ class ReceiverSQLService(object):
             # persisted. The list is only used here to link with the observations
             for rel_obs in [obs for obs in observations if obs.id 
                     in sli.observation_ids]:
-                sli.observations.append(rel_obs)
+                rel_obs.slice_id = sli.id
         session.add_all(slices)
         return slices
 
@@ -62,17 +63,32 @@ class ReceiverSQLService(object):
 
     def _store_indicator_groups(self, session, compounds):
         groups = self.indicator_serv.get_indicator_groups()
-        session.add_all(groups)
+        result = []
         for group in groups:
             indicator_ref = next((comp for comp in compounds \
                 if comp.id == group.indicator_ref), None)
-            indicator_ref.indicator_ref_group = group
-        return groups
+            indicator_ref.indicator_ref_group_id = group.id
+            result.append(session.merge(group))
+        return result
 
     def _store_simple_indicators(self, dataset, session):
         indicators = self.indicator_serv.get_simple_indicators()
+        result = []
         for ind in indicators:
-            dataset.add_indicator(ind)
+            # The db_ind contains the indicator data merged with the database and
+            # will be used to link with all the other objects
+            db_ind = session.merge(ind)
+            session.flush()
+            # The indicator may already exist n the DB, so we have to check
+            # before the assignment
+            if not db_ind.id in [indicator.id for indicator in dataset.indicators]:
+                dataset.add_indicator(db_ind)
+            result.append(db_ind)
+        return result
+
+    def _store_indicator_relationships(self, dataset, session):
+        indicators = self.indicator_serv.get_simple_indicators()
+        for ind in indicators:
             # Each indicator may be related with others
             # The related_id field was created in the parser and WILL NOT be
             # persisted, it is only used to create the relationship objects
@@ -83,21 +99,24 @@ class ReceiverSQLService(object):
                 rel.target_id = rel_id
                 relationships.append(rel)
             session.add_all(relationships)
-        session.add_all(indicators)
-        return indicators
+
 
     def _store_compound_indicators(self, dataset, indicators, session):
         compounds = self.indicator_serv.get_compound_indicators()
+        result = []
         for ind in compounds:
-            dataset.add_indicator(ind)
+            db_ind = session.merge(ind)
+            session.flush()
             # The related_id field was created in the parser and WILL NOT be
             # persisted to the database. It is used to link the simple
             # indicators with its compound indicator
             for id in ind.related_id:
                 related = next(rel for rel in indicators if rel.id == id)
-                ind.indicator_refs.append(related)
-        session.add_all(compounds)
-        return compounds
+                related.compound_indicator_id = db_ind.id
+            if not db_ind.id in [indicator.id for indicator in dataset.indicators]:
+                dataset.add_indicator(db_ind)
+            result.append(db_ind)
+        return result
 
     def _store_metadata(self, user_ip, session):
         datasource = self.metadata_serv.get_datasource()
@@ -107,13 +126,9 @@ class ReceiverSQLService(object):
         user.organization = organization
         datasource.organization = organization
         dataset.datasource = datasource
-        session.add(datasource)
-        session.add(dataset)
-        session.add(organization)
-        session.add(user)
-        return dataset
+        return session.merge(dataset)
 
-    def _store_observations(self, dataset, groups, session):
+    def _store_observations(self, dataset, session):
         observations = self.observation_serv.get_observations()
         for obs in observations:
             obs.dataset_id = dataset.id
