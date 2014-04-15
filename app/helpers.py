@@ -1,5 +1,6 @@
 import parser
-
+import requests
+import model.models as model
 
 class IndicatorSQLService(object):
     def __init__(self, content):
@@ -41,8 +42,10 @@ class MetadataSQLService(object):
         return self._parser.get_organization()
 
     def get_datasource(self):
-        #TODO: check if the datasource already exists in the database
-        return self._parser.get_datasource()
+        datasource = self._parser.get_datasource()
+        # Check if the datasource already exists in the database
+        other = APIHelper().check_datasource(datasource.name)
+        return other if other is not None else datasource
 
     def get_dataset(self):
         return self._parser.get_dataset()
@@ -54,3 +57,26 @@ class SliceSQLService(object):
 
     def get_slices(self):
         return self._parser.get_slices()
+
+
+class APIHelper(object):
+    """ Comunicate with the API to check existing data in the database
+    """
+    def check_datasource(self, datasource_name):
+        r = requests.get('http://localhost:80/api/datasources')
+        # The data comes in JSON format
+        datasources = r.json()
+        # Find the JSON object with the required name
+        datasource = next((dat for dat in datasources if str(dat['name']) == datasource_name), None)
+        # Return the JSON object as a Datasource object
+        if datasource is None:
+            return None
+        else:
+            return self._make_datasource(datasource)
+
+    def _make_datasource(self, datasource_data):
+        datasource = model.DataSource()
+        datasource.name = str(datasource_data['name'])
+        datasource.id = int(datasource_data['id'])
+        datasource.organization_id = str(datasource_data['organization_id'])
+        return datasource

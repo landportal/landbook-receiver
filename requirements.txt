@@ -8,3 +8,4 @@ distribute==0.6.24
 wsgiref==0.1.2
 xlrd
 mysql-connector-python
+requests
