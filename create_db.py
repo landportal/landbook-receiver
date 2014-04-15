@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 
 def create_database():
     from app import db
@@ -43,11 +45,11 @@ class DatabasePopulator(object):
         from model import models
         reg1 = models.Region(un_code=2)
         reg1.add_translation(models.RegionTranslation(lang_code='en', name='Africa'))
-        reg1.add_translation(models.RegionTranslation(lang_code='es', name='Africa'))
+        reg1.add_translation(models.RegionTranslation(lang_code='es', name='África'))
         reg1.add_translation(models.RegionTranslation(lang_code='fr', name='Afrique'))
         reg2 = models.Region(un_code=19)
         reg2.add_translation(models.RegionTranslation(lang_code='en', name='Americas'))
-        reg2.add_translation(models.RegionTranslation(lang_code='es', name='America'))
+        reg2.add_translation(models.RegionTranslation(lang_code='es', name='América'))
         reg2.add_translation(models.RegionTranslation(lang_code='fr', name='Amerique'))
         reg3 = models.Region(un_code=150)
         reg3.add_translation(models.RegionTranslation(lang_code='en', name='Europe'))
@@ -55,7 +57,7 @@ class DatabasePopulator(object):
         reg3.add_translation(models.RegionTranslation(lang_code='fr', name='Europe'))
         reg4 = models.Region(un_code=9)
         reg4.add_translation(models.RegionTranslation(lang_code='en', name='Oceania'))
-        reg4.add_translation(models.RegionTranslation(lang_code='es', name='Oceania'))
+        reg4.add_translation(models.RegionTranslation(lang_code='es', name='Oceanía'))
         reg4.add_translation(models.RegionTranslation(lang_code='fr', name='Oceanie'))
         reg5 = models.Region(un_code=142)
         reg5.add_translation(models.RegionTranslation(lang_code='en', name='Asia'))
