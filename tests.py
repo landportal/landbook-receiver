@@ -3,6 +3,7 @@ import app
 import create_db
 import flask_testing
 import model.models as model
+import app.helpers
 
 
 class ServiceTest(flask_testing.TestCase):
@@ -15,6 +16,8 @@ class ServiceTest(flask_testing.TestCase):
         return app.app
 
     def setUp(self):
+        # Mock the APIHelper for the tests
+        app.helpers.APIHelper.check_datasource = classmethod(lambda cls, datasource: None)
         create_db.create_database()
 
     def tearDown(self):
@@ -51,6 +54,8 @@ class ReceiverParserTest(ServiceTest):
     """
 
     def setUp(self):
+        # Mock the APIHelper for the tests
+        app.helpers.APIHelper.check_datasource = classmethod(lambda cls, datasource: None)
         #Create the database as in ServiceTest
         super(ReceiverParserTest, self).setUp()
         #Send a request to the Receiver to populate the database
@@ -58,7 +63,6 @@ class ReceiverParserTest(ServiceTest):
             self.send_request(content={'xml': xml.read()})
         #Open a session that will be used in the tests
         self.session = app.db.session
-        #Import the models
 
     def _test_model_number(self, model):
         """Return the number of model objects in the database.
