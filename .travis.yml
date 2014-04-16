@@ -6,6 +6,9 @@ python:
 install:
   # Clone the model dependencies
   - git clone https://github.com/weso/landportal_model model
+  - cd model
+  - git checkout staged-changes
+  - cd ..
   # Install the rest of dependencies
   - "pip install --allow-all-external -r requirements.txt"
 
