@@ -252,6 +252,17 @@ class IndicatorParserTest(ReceiverParserTest):
                 .filter(model.Indicator.id == "INDIPFRI1").first()
         self.assertFalse(ind2.starred)
 
+    def test_last_update(self):
+        """Test Indicator and CompoundIndicator last_update.
+        All indicators included in the same receiver call will have the same
+        last_update date."""
+        indicators = self.session.query(model.Indicator).all()
+        for ind in indicators:
+            self.assertTrue(ind.last_update is not None)
+        ref_time = indicators[0].last_update
+        for ind in indicators:
+            self.assertTrue(ind.last_update == ref_time)
+
 
 class ObservationParserTest(ReceiverParserTest):
     def test_observations_info(self):

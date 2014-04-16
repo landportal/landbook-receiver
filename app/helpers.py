@@ -1,22 +1,27 @@
 import parser
 import requests
 import model.models as model
+import datetime
 
 class IndicatorSQLService(object):
     def __init__(self, content):
         self._parser = parser.Parser(content)
+        self._time = datetime.datetime.now()
 
     def get_simple_indicators(self):
         indicators = self._parser.get_simple_indicators()
         #Enrich the indicators data querying the API to get its starred state
+        #and setting the last_update field
         for ind in indicators:
             ind.starred = APIHelper().check_indicator_starred(ind.id)
+            ind.last_update = self._time
         return indicators
 
     def get_compound_indicators(self):
         compounds = self._parser.get_compound_indicators()
         for comp in compounds:
             comp.starred = APIHelper().check_indicator_starred(comp.id)
+            comp.last_update = self._time
         return compounds
 
     def get_indicator_groups(self):
