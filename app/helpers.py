@@ -7,10 +7,17 @@ class IndicatorSQLService(object):
         self._parser = parser.Parser(content)
 
     def get_simple_indicators(self):
-        return self._parser.get_simple_indicators()
+        indicators = self._parser.get_simple_indicators()
+        #Enrich the indicators data querying the API to get its starred state
+        for ind in indicators:
+            ind.starred = APIHelper().check_indicator_starred(ind.id)
+        return indicators
 
     def get_compound_indicators(self):
-        return self._parser.get_compound_indicators()
+        compounds = self._parser.get_compound_indicators()
+        for comp in compounds:
+            comp.starred = APIHelper().check_indicator_starred(comp.id)
+        return compounds
 
     def get_indicator_groups(self):
         return self._parser.get_indicator_groups()
@@ -62,12 +69,16 @@ class SliceSQLService(object):
 class APIHelper(object):
     """ Comunicate with the API to check existing data in the database
     """
+    def __init__(self):
+        self.api_url = "http://localhost:80/api"
+
     def check_datasource(self, datasource_name):
-        r = requests.get('http://localhost:80/api/datasources')
+        r = requests.get('{}/datasources'.format(self.api_url))
         # The data comes in JSON format
         datasources = r.json()
         # Find the JSON object with the required name
-        datasource = next((dat for dat in datasources if str(dat['name']) == datasource_name), None)
+        datasource = next((dat for dat in datasources\
+                if str(dat['name']) == datasource_name), None)
         # Return the JSON object as a Datasource object
         if datasource is None:
             return None
@@ -80,3 +91,15 @@ class APIHelper(object):
         datasource.id = int(datasource_data['id'])
         datasource.organization_id = str(datasource_data['organization_id'])
         return datasource
+
+    def check_indicator_starred(self, indicator_id):
+        """Check if an indicator is starred or not against the API"""
+        r = requests.get('{}/indicators/{}'.format(self.api_url, indicator_id))
+        #We may ask for an indicator that does not exist in the database, so
+        #if it exists we return its starred value, and if it does not exist
+        #(KeyError) we return False because it is being inserted in the DB for
+        #the first time
+        try:
+            return r.json()["starred"]
+        except KeyError:
+            return False
