@@ -6,6 +6,12 @@ import model.models as model
 import app.helpers
 
 
+def mockAPI():
+    """Mock the APIHelper for testing purposes."""
+    app.helpers.APIHelper.check_datasource = classmethod(lambda cls, datasource: None)
+    app.helpers.APIHelper.check_indicator_starred = classmethod(lambda cls, ind_id: ind_id == "INDIPFRI0")
+
+
 class ServiceTest(flask_testing.TestCase):
     """Generic base class for all Receiver tests.
     """
@@ -17,7 +23,7 @@ class ServiceTest(flask_testing.TestCase):
 
     def setUp(self):
         # Mock the APIHelper for the tests
-        app.helpers.APIHelper.check_datasource = classmethod(lambda cls, datasource: None)
+        mockAPI()
         create_db.create_database()
 
     def tearDown(self):
@@ -55,7 +61,7 @@ class ReceiverParserTest(ServiceTest):
 
     def setUp(self):
         # Mock the APIHelper for the tests
-        app.helpers.APIHelper.check_datasource = classmethod(lambda cls, datasource: None)
+        mockAPI()
         #Create the database as in ServiceTest
         super(ReceiverParserTest, self).setUp()
         #Send a request to the Receiver to populate the database
@@ -234,6 +240,17 @@ class IndicatorParserTest(ReceiverParserTest):
         obs_ids = [obs.id for obs in group.observations]
         self.assertTrue("OBSIPFRI2599" in obs_ids)
         self.assertTrue("OBSIPFRI2598" in obs_ids)
+
+    def test_starred(self):
+        """Test Indicator and CompoundIndicator starred state.
+        By default new indicators will not be starred. If an indicator is
+        already starred it will preserve its state."""
+        ind1 = self.session.query(model.Indicator)\
+                .filter(model.Indicator.id == "INDIPFRI0").first()
+        self.assertTrue(ind1.starred)
+        ind2 = self.session.query(model.Indicator)\
+                .filter(model.Indicator.id == "INDIPFRI1").first()
+        self.assertFalse(ind2.starred)
 
 
 class ObservationParserTest(ReceiverParserTest):
