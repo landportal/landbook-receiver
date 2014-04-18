@@ -145,6 +145,22 @@ class CountryParserTest(ReceiverParserTest):
                           if obs.id == 'OBSIPFRI0'), None)
         self.assertTrue(obsipfri0 is not None)
 
+    def test_global_region(self):
+        spain = self.session.query(self.Region)\
+                .join(self.Country, self.Region.id == self.Country.id)\
+                .filter(self.Country.iso3 == "ESP")\
+                .first()
+        #Spain is part of Europe, which UN_CODE is 150
+        europe = self.session.query(self.Region)\
+                .filter(self.Region.id == spain.is_part_of_id)\
+                .first()
+        self.assertTrue(europe.un_code == 150)
+        #Europe is part of Global, which UN_CODE is 1
+        global_reg = self.session.query(self.Region)\
+                .filter(self.Region.id == europe.is_part_of_id)\
+                .first()
+        self.assertTrue(global_reg.un_code == 1)
+
 
 class TopicParserTest(ReceiverParserTest):
     """Topic and TopicTranslation tests.
