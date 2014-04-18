@@ -12,7 +12,14 @@ def create_database():
     session.add_all(DatabasePopulator.get_languages())
     session.commit()
     # Create region list
-    session.add_all(DatabasePopulator.get_regions())
+    global_reg = DatabasePopulator.get_global_region()
+    session.add(global_reg)
+    session.flush()
+    regions = DatabasePopulator.get_regions()
+    #All the regions are part of the global region
+    for reg in regions:
+        reg.is_part_of_id = global_reg.id
+    session.add_all(regions)
     session.commit()
     # Create country list
     regions = session.query(models.Region).all()
@@ -39,6 +46,15 @@ class DatabasePopulator(object):
     def get_countries(regions):
         from countries.country_reader import CountryReader
         return CountryReader().get_countries('countries/country_list.xlsx', regions)
+
+    @staticmethod
+    def get_global_region():
+        from model import models
+        global_reg = models.Region(un_code=001)
+        global_reg.add_translation(models.RegionTranslation(lang_code='en', name=u'Global'))
+        global_reg.add_translation(models.RegionTranslation(lang_code='es', name=u'Global'))
+        global_reg.add_translation(models.RegionTranslation(lang_code='fr', name=u'Global'))
+        return global_reg
 
     @staticmethod
     def get_regions():
