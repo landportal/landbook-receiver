@@ -33,7 +33,14 @@ class ObservationSQLService(object):
         self._parser = parser.Parser(content)
 
     def get_observations(self):
-        return self._parser.get_observations()
+        observations = self._parser.get_observations()
+        # Enrich the observations linking them to its corresponding region.
+        for obs in observations:
+            if obs.region_code is not None:
+                obs.region_id = APIHelper().find_region_id(obs.region_code)
+            elif obs.country_code is not None:
+                obs.region_id = APIHelper().find_country_id(obs.country_code)
+        return observations
 
 
 class MetadataSQLService(object):
@@ -44,13 +51,11 @@ class MetadataSQLService(object):
 
     def get_user(self, ip):
         """Return the User object representing the dataset user"""
-        #TODO: check if the user already exists in the database
         user = self._parser.get_user()
         user.ip = ip
         return user
 
     def get_organization(self):
-        #TODO: check if the organization already exists in the database
         return self._parser.get_organization()
 
     def get_datasource(self):
@@ -108,3 +113,26 @@ class APIHelper(object):
             return r.json()["starred"]
         except KeyError:
             return False
+
+    def find_region_id(self, reg_code):
+        """Get the region ID using its UN_CODE"""
+        r = requests.get("{}/regions/{}".format(self.api_url, reg_code))
+        try:
+            return r.json()["id"]
+        except KeyError:
+            # The region does not exist on the database.
+            # This dataset has invalid data
+            raise Exception("The region with UN_CODE = {} does not exist in "\
+                    "the database".format(reg_code))
+        
+
+    def find_country_id(self, country_code):
+        """Get the region ID using its ISO3 (only for countries)"""
+        r = requests.get("{}/countries/{}".format(self.api_url, country_code))
+        try:
+            return r.json()["id"]
+        except KeyError:
+            # The country does not exist on the database.
+            # This dataset has invalid data
+            raise Exception("The country with ISO3 = {} does not exist in "\
+                    "the database".format(country_code))
