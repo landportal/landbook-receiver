@@ -8,8 +8,34 @@ import app.helpers
 
 def mockAPI():
     """Mock the APIHelper for testing purposes."""
-    app.helpers.APIHelper.check_datasource = classmethod(lambda cls, datasource: None)
-    app.helpers.APIHelper.check_indicator_starred = classmethod(lambda cls, ind_id: ind_id == "INDIPFRI0")
+    def find_region_mock(self, reg_code):
+        if reg_code is None or reg_code == "None":
+            return None
+        session = app.db.session
+        region = session.query(model.Region)\
+                .filter(model.Region.un_code == reg_code)\
+                .first()
+        return region.id
+
+    def find_country_mock(self, country_code):
+        if country_code is None or country_code == "None":
+            return None
+        session = app.db.session
+        country = session.query(model.Country)\
+                .filter(model.Country.iso3 == country_code)\
+                .first()
+        return country.id
+    
+    def check_datasource_mock(self, datasource):
+        return None
+
+    def check_indicator_starred_mock(self, ind_id):
+        return ind_id == "INDIPFRI0"
+
+    app.helpers.APIHelper.check_datasource = classmethod(check_datasource_mock)
+    app.helpers.APIHelper.check_indicator_starred = classmethod(check_indicator_starred_mock)
+    app.helpers.APIHelper.find_region_id = classmethod(find_region_mock)
+    app.helpers.APIHelper.find_country_id = classmethod(find_country_mock)
 
 
 class ServiceTest(flask_testing.TestCase):
