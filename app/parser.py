@@ -141,11 +141,14 @@ class Parser(object):
         observation.value = self._parse_obs_value(obs.find('obs-status'), obs.find('value'))
         observation.computation = self._parse_computation(obs.find('computation'))
         observation.indicator_group_id = obs.get('group')
-        # This field will not be persisted to the database, instead it will
-        # be used to link the observation with is referred region in the
-        # services layer
-        reg_code = obs.find('region').text
-        observation.region_code = reg_code if reg_code != 'None' else None
+        # An observation may refer to a country or to a whole region
+        # This fields will not be persisted to the database, instead it will
+        # be used to link the observation with is referred region or country in the
+        # services layer.
+        observation.region_code = obs.find("region").text\
+                if obs.find("region") is not None else None
+        observation.country_code = obs.find("country").text\
+                if obs.find("country") is not None else None
         return observation
 
     def _get_slice(self, sli):
