@@ -18,7 +18,7 @@
 			<issued>2014-04-04T11:50:18</issued>
 			<obs-status>http://purl.org/linked-data/sdmx/2009/code#obsStatus-M</obs-status>
 			<computation>purl.org/weso/ontology/computex#Raw</computation>
-			<region>4</region>
+			<country>ESP</country>
 			<time unit="years">
 				<interval>
 					<beginning>1990</beginning>

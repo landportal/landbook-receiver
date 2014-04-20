@@ -161,6 +161,7 @@ class CountryParserTest(ReceiverParserTest):
         self.assertTrue(eur_name_en.name == 'Europe')
         self.assertTrue(eur_name_es.name == 'Europa')
 
+    """
     def test_region_obs(self):
         region = self.session.query(model.Region)\
             .filter(model.Region.un_code == 4)\
@@ -170,6 +171,18 @@ class CountryParserTest(ReceiverParserTest):
         obsipfri0 = next((obs for obs in region.observations
                           if obs.id == 'OBSIPFRI0'), None)
         self.assertTrue(obsipfri0 is not None)
+    """
+    def test_region_obs(self):
+        region = self.session.query(model.Country)\
+                .filter(model.Country.iso3 == "ESP")\
+                .first()
+        #Check if the region has some associated observations
+        observations = region.observations
+        self.assertTrue(len(observations) > 0)
+        #Check that the observation OBSIPFRI0 is in the associated observations
+        #If the observation is not found, it will raise a StopIteration error
+        #and the test will fail
+        obsipfri0 = next(obs for obs in observations if obs.id == "OBSIPFRI0")
 
     def test_global_region(self):
         spain = self.session.query(self.Region)\
