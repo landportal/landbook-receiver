@@ -70,7 +70,7 @@ class ReceiverInterfaceTest(ServiceTest):
     def test_with_data(self):
         """Test that a correct request results in a 200 response.
         """
-        xml = open('xml/example_xml_ipfri.xml', 'r').read()
+        xml = open('xml/test_file.xml', 'r').read()
         response = self.send_request(content={'xml': unicode(xml).encode('UTF-8')})
         self.assert200(response)
 
@@ -91,7 +91,7 @@ class ReceiverParserTest(ServiceTest):
         #Create the database as in ServiceTest
         super(ReceiverParserTest, self).setUp()
         #Send a request to the Receiver to populate the database
-        with open('xml/example_xml_ipfri.xml') as xml:
+        with open('xml/test_file.xml') as xml:
             self.send_request(content={'xml': xml.read()})
         #Open a session that will be used in the tests
         self.session = app.db.session
@@ -161,17 +161,6 @@ class CountryParserTest(ReceiverParserTest):
         self.assertTrue(eur_name_en.name == 'Europe')
         self.assertTrue(eur_name_es.name == 'Europa')
 
-    """
-    def test_region_obs(self):
-        region = self.session.query(model.Region)\
-            .filter(model.Region.un_code == 4)\
-            .first()
-        self.assertTrue(region.observations)
-
-        obsipfri0 = next((obs for obs in region.observations
-                          if obs.id == 'OBSIPFRI0'), None)
-        self.assertTrue(obsipfri0 is not None)
-    """
     def test_region_obs(self):
         region = self.session.query(model.Country)\
                 .filter(model.Country.iso3 == "ESP")\
@@ -437,4 +426,3 @@ class SliceParserTest(ReceiverParserTest):
 
 if __name__ == '__main__':
     unittest.main()
-
