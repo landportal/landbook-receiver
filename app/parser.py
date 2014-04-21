@@ -145,12 +145,15 @@ class Parser(object):
         # This fields will not be persisted to the database, instead it will
         # be used to link the observation with is referred region or country in the
         # services layer.
+        observation.region_code, observation.country_code = self._parse_area(obs.find("area"))
+        """
         observation.region_code = obs.find("region").text\
                 if obs.find("region") is not None\
                 else None
         observation.country_code = obs.find("country").text\
                 if obs.find("country") is not None\
                 else None
+        """
         return observation
 
     def _get_slice(self, sli):
@@ -166,12 +169,15 @@ class Parser(object):
                 else None
         # Those fields will not be persisted to the database, instead it will
         # be used to link the slice with its regions from the helpers layer.
+        slice.region_code, slice.country_code = self._parse_area(metadata.find("area"))
+        """
         slice.region_code = metadata.find("region").text\
                 if metadata.find("region") is not None\
                 else None
         slice.country_code = metadata.find("country").text\
                 if metadata.find("country") is not None\
                 else None
+        """
         # This list of Observation IDs will not be persisted to the database,
         # instead it will be used by the services layer to link the slice with
         # its observations, and it will find them using these IDs
@@ -224,3 +230,15 @@ class Parser(object):
     def _parse_computation(node):
         computation = model.Computation(uri=node.text)
         return computation
+
+    @staticmethod
+    def _parse_area(node):
+        if node is None:
+            return None, None
+        region_code = node.find("region").text\
+                if node.find("region") is not None\
+                else None
+        country_code = node.find("country").text\
+                if node.find("country") is not None\
+                else None
+        return region_code, country_code
