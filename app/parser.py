@@ -146,28 +146,32 @@ class Parser(object):
         # be used to link the observation with is referred region or country in the
         # services layer.
         observation.region_code = obs.find("region").text\
-                if obs.find("region") is not None else None
+                if obs.find("region") is not None\
+                else None
         observation.country_code = obs.find("country").text\
-                if obs.find("country") is not None else None
+                if obs.find("country") is not None\
+                else None
         return observation
 
     def _get_slice(self, sli):
         slice = model.Slice(id=sli.get('id'))
         slice.indicator_id = sli.find('sli_metadata')\
             .find('indicator-ref').get('id')
-        # This field will not be persisted to the database, instead it will
-        # be used to link the slice with its regions from the services layer
-        slice.region_code = None
-        # The slice observation may be an Region or a Time. If it is a Time we
+        metadata = sli.find("sli_metadata")
+        # The slice's dimension may be a Region or a Time. If it is a Time we
         # can create it here and link it with the slice. If it is a Region we
-        # must query the database to get the corresponding object, that's why
-        # we must link it from the services layer
-        time_element = sli.find('sli_metadata').find('time')
-        if time_element is not None:
-            slice.dimension = self._parse_time(sli.find('sli_metadata')
-                                               .find('time'))
-        else:
-            slice.region_code = int(sli.find('sli_metadata').find('region').text)
+        # we must check the API using it's region code or iso3 code.
+        slice.dimension = self._parse_time(metadata.find("time"))\
+                if metadata.find("time") is not None\
+                else None
+        # Those fields will not be persisted to the database, instead it will
+        # be used to link the slice with its regions from the helpers layer.
+        slice.region_code = metadata.find("region").text\
+                if metadata.find("region") is not None\
+                else None
+        slice.country_code = metadata.find("country").text\
+                if metadata.find("country") is not None\
+                else None
         # This list of Observation IDs will not be persisted to the database,
         # instead it will be used by the services layer to link the slice with
         # its observations, and it will find them using these IDs
