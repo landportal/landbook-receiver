@@ -73,7 +73,16 @@ class SliceSQLService(object):
         self._parser = parser.Parser(content)
 
     def get_slices(self):
-        return self._parser.get_slices()
+        #return self._parser.get_slices()
+        # Enrich the slices linking the to its correspoding dimension. If the
+        # dimension is a Time, it comes already linked from the parser.
+        slices = self._parser.get_slices()
+        for sli in slices:
+            if sli.region_code is not None:
+                sli.dimension_id = APIHelper().find_region_id(sli.region_code)
+            elif sli.country_code is not None:
+                sli.dimension_id = APIHelper().find_country_id(sli.country_code)
+        return slices
 
 
 class APIHelper(object):
@@ -125,7 +134,6 @@ class APIHelper(object):
             raise Exception("The region with UN_CODE = {} does not exist in "\
                     "the database".format(reg_code))
         
-
     def find_country_id(self, country_code):
         """Get the region ID using its ISO3 (only for countries)"""
         r = requests.get("{}/countries/{}".format(self.api_url, country_code))

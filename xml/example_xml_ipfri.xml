@@ -29893,12 +29893,7 @@
 		<slice id="SLIIPFRI1">
 			<sli_metadata>
 				<indicator-ref id="INDIPFRI0"/>
-				<time unit="years">
-					<interval>
-						<beginning>1994</beginning>
-						<end>1996</end>
-					</interval>
-				</time>
+				<country>FRA</country>
 			</sli_metadata>
 			<referred>
 				<observation-ref id="OBSIPFRI130"/>
