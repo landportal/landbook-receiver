@@ -411,16 +411,29 @@ class SliceParserTest(ReceiverParserTest):
                             if obs.id == 'OBSIPFRI0'), None)
         self.assertTrue(observation is not None)
 
-    def test_dimension(self):
-        # Dimension may be a Region...
+    def test_dimension_time(self):
+        """A slice dimension may be a time."""
         sli = self.session.query(model.Slice)\
-            .filter(model.Slice.id == 'SLIIPFRI0').first()
+                .filter(model.Slice.id == "SLIIPFRI2")\
+                .first()
+        self.assertTrue(sli.dimension.start_time.year == 1999)
+        self.assertTrue(sli.dimension.end_time.year == 2001)
+
+    def test_dimension_region_uncode(self):
+        """A slice dimension may be a region. The region can be declared using
+        its UN_CODE."""
+        sli = self.session.query(model.Slice)\
+                .filter(model.Slice.id == 'SLIIPFRI0')\
+                .first()
         self.assertTrue(sli.dimension.iso3 == 'ESP')
-        # ... or a Time
+
+    def test_dimension_region_iso3(self):
+        """A slice dimension may be a region. The region can be declared using
+        its ISO3 code."""
         sli = self.session.query(model.Slice)\
-            .filter(model.Slice.id == 'SLIIPFRI1').first()
-        self.assertTrue(sli.dimension.start_time.year == 1994)
-        self.assertTrue(sli.dimension.end_time.year == 1996)
+                .filter(model.Slice.id == "SLIIPFRI1")\
+                .first()
+        self.assertTrue(sli.dimension.iso3 == "FRA")
 
 if __name__ == '__main__':
     unittest.main()
