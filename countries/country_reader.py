@@ -28,7 +28,7 @@ class CountryReader(object):
     #UN_CODE
     UN_CODE = 30
     #REGIONS
-    REGION_EN = 39
+    REGION_EN = 38
 
     def get_countries(self, file_path, regions):
         """ Return a list of all Landportal countries
