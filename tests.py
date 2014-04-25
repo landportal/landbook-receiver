@@ -7,24 +7,20 @@ import app.helpers
 
 
 class ServiceTest(flask_testing.TestCase):
-    """Generic base class for all Receiver tests.
-    """
+    """Base class for all tests. Sets up the testing environment"""
     def create_app(self):
-        app.app.config['TESTING'] = True
-        # Use an SQLite instance for testing
-        app.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
+        app.app.config["TESTING"] = True
+        app.app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite://'
         return app.app
 
     def setUp(self):
-        # Mock the APIHelper for the tests
-        #mockAPI()
         create_db.create_database()
 
     def tearDown(self):
         app.db.session.remove()
         app.db.drop_all()
 
-    def send_request(self, content=None):
+    def send_request(self, content):
         """Send a request to the Receiver with the specified POST content.
          Returns the response gotten from the Receiver.
         """
@@ -32,193 +28,158 @@ class ServiceTest(flask_testing.TestCase):
 
 
 class ReceiverInterfaceTest(ServiceTest):
-
-    """Class for testing of the Receiver HTTP interface.
-    """
-    def test_with_data(self):
-        """Test that a correct request results in a 200 response.
-        """
+    """Tests for the receiver interface"""
+    def test_request_with_data(self):
+        """Send a request with data to the Receiver"""
         xml = open('xml/test_file.xml', 'r').read()
-        response = self.send_request(content={'xml': unicode(xml).encode('UTF-8')})
+        content = unicode(xml).encode("UTF-8")
+        response = self.send_request(content={'xml': content})
         self.assert200(response)
 
-    def test_with_no_data(self):
-        """Test that an incorrect request results in a 400 response.
-        """
-        response = self.send_request()
+    def test_request_with_no_data(self):
+        """Send an empty request to the Receiver"""
+        response = self.send_request(content=None)
         self.assert400(response)
 
 
 class ReceiverParserTest(ServiceTest):
-    """Base class for tesing the Receiver parsing service.
-    """
-
+    """Base class for testing the Receiver parsing"""
     def setUp(self):
-        # Mock the APIHelper for the tests
-        #mockAPI()
-        #Create the database as in ServiceTest
         super(ReceiverParserTest, self).setUp()
-        #Send a request to the Receiver to populate the database
         with open('xml/test_file.xml') as xml:
             self.send_request(content={'xml': xml.read()})
-        #Open a session that will be used in the tests
         self.session = app.db.session
 
-    def _test_model_number(self, model):
-        """Return the number of model objects in the database.
-        """
-        return len(self.session.query(model).all())
+
+class CountriesTest(ReceiverParserTest):
+    """Country tests"""
+    def test_country_number(self):
+        countries = self.session.query(model.Country).all()
+        self.assertTrue(len(countries) == 248)
+
+    def test_country_iso2(self):
+        country = self.session.query(model.Country)\
+            .filter(model.Country.iso3 == "ESP")\
+            .first()
+        self.assertTrue(country.iso2 == "ES")
+
+    def test_country_faouri(self):
+        country = self.session.query(model.Country)\
+            .filter(model.Country.iso3 == "ESP")\
+            .first()
+        expected_faouri = "http://landportal.info/ontology/country/ESP"
+        self.assertTrue(country.faoURI == expected_faouri)
+
+    def test_country_uncode(self):
+        country = self.session.query(model.Country)\
+            .filter(model.Country.iso3 == "ESP")\
+            .first()
+        self.assertTrue(country.un_code == 724)
+
+    def test_country_translations(self):
+        country = self.session.query(model.Country)\
+            .filter(model.Country.iso3 == "FRA")\
+            .first()
+        translation_en = self.session.query(model.RegionTranslation)\
+            .filter(model.RegionTranslation.region_id == country.id)\
+            .filter(model.RegionTranslation.lang_code == "en")\
+            .first()
+        self.assertTrue(translation_en.name == "France")
+        translation_es = self.session.query(model.RegionTranslation)\
+            .filter(model.RegionTranslation.region_id == country.id)\
+            .filter(model.RegionTranslation.lang_code == "es")\
+            .first()
+        self.assertTrue(translation_es.name == "Francia")
 
 
-class CountryParserTest(ReceiverParserTest):
-    """Region and RegionTranslations tests.
-    """
-    from model.models import Country, RegionTranslation, Region
-
-    def test_countries_number(self):
-        """Test if all countries are in the database.
-        """
-        countries = self._test_model_number(self.Country)
-        #There should be 248 countries in the database
-        self.assertTrue(countries == 248)
-
-    def test_countries_data(self):
-        """Test if the country data in the database is correct.
-        """
-        #Fetch a country from the database
-        spain = self.session.query(self.Country).filter(self.Country.iso3 == 'ESP').first()
-        # Check that the country exists
-        self.assertTrue(spain is not None)
-        #Check that the ISO2 code is correct
-        self.assertTrue(spain.iso2 == 'ES')
-        #Check that the FAO_URI is well formed
-        self.assertTrue(spain.faoURI == 'http://landportal.info/ontology/country/ESP')
-        self.assertTrue(spain.un_code == 724)
-
-    def test_countries_translations(self):
-        """Test if the country translations are in the database.
-        """
-        france = self.session.query(self.Country).filter(self.Country.iso3 == 'FRA').first()
-        # Check that the country exists
-        self.assertTrue(france is not None)
-        #Check that the country names are well translated
-        self.assertTrue(len(france.translations) == 3)
-
+class RegionsTest(ReceiverParserTest):
+    """Regions tests"""
     def test_region(self):
-        """Test if the country region is set correctly.
-        """
-        #Get Spain (as a region, because countries don't have
-        # is_part_of attribute)
-        spain = self.session.query(self.Region) \
-            .join(self.Country, self.Region.id == self.Country.id) \
-            .filter(self.Country.iso3 == 'ESP') \
+        country = self.session.query(model.Region)\
+            .join(model.Country, model.Region.id == model.Country.id)\
+            .filter(model.Country.iso3 == 'ESP')\
             .first()
-
-        europe = self.session.query(self.Region)\
-            .filter(self.Region.id == spain.is_part_of_id)\
+        region = self.session.query(model.Region)\
+            .filter(model.Region.id == country.is_part_of_id)\
             .first()
-        self.assertTrue(europe.un_code == 150)
+        self.assertTrue(region.un_code == 150)
+        region_name_en = self.session.query(model.RegionTranslation)\
+            .filter(model.RegionTranslation.region_id == region.id)\
+            .filter(model.RegionTranslation.lang_code == 'en')\
+            .first()
+        self.assertTrue(region_name_en.name == "Europe")
+        region_name_es = self.session.query(model.RegionTranslation)\
+            .filter(model.RegionTranslation.region_id == region.id)\
+            .filter(model.RegionTranslation.lang_code == 'es')\
+            .first()
+        self.assertTrue(region_name_es.name == "Europa")
 
-        eur_name_en = self.session.query(self.RegionTranslation) \
-            .filter(self.RegionTranslation.region_id == europe.id) \
-            .filter(self.RegionTranslation.lang_code == 'en').first()
-        eur_name_es = self.session.query(self.RegionTranslation) \
-            .filter(self.RegionTranslation.region_id == europe.id) \
-            .filter(self.RegionTranslation.lang_code == 'es').first()
-
-        self.assertTrue(eur_name_en.name == 'Europe')
-        self.assertTrue(eur_name_es.name == 'Europa')
-
-    def test_region_obs(self):
+    def test_region_observations(self):
         region = self.session.query(model.Country)\
-                .filter(model.Country.iso3 == "ESP")\
-                .first()
-        #Check if the region has some associated observations
-        observations = region.observations
-        self.assertTrue(len(observations) > 0)
-        #Check that the observation OBSIPFRI0 is in the associated observations
-        #If the observation is not found, it will raise a StopIteration error
-        #and the test will fail
-        obsipfri0 = next(obs for obs in observations if obs.id == "OBSIPFRI0")
+            .filter(model.Country.iso3 == "ESP")\
+            .first()
+        obs_ids = [obs.id for obs in region.observations]
+        self.assertTrue("OBSIPFRI0" in obs_ids)
 
     def test_global_region(self):
-        spain = self.session.query(self.Region)\
-                .join(self.Country, self.Region.id == self.Country.id)\
-                .filter(self.Country.iso3 == "ESP")\
-                .first()
+        spain = self.session.query(model.Region)\
+            .join(model.Country, model.Region.id == model.Country.id)\
+            .filter(model.Country.iso3 == "ESP")\
+            .first()
         #Spain is part of Europe, which UN_CODE is 150
-        europe = self.session.query(self.Region)\
-                .filter(self.Region.id == spain.is_part_of_id)\
-                .first()
+        europe = self.session.query(model.Region)\
+            .filter(model.Region.id == spain.is_part_of_id)\
+            .first()
         self.assertTrue(europe.un_code == 150)
         #Europe is part of Global, which UN_CODE is 1
-        global_reg = self.session.query(self.Region)\
-                .filter(self.Region.id == europe.is_part_of_id)\
-                .first()
+        global_reg = self.session.query(model.Region)\
+            .filter(model.Region.id == europe.is_part_of_id)\
+            .first()
         self.assertTrue(global_reg.un_code == 1)
 
 
-class TopicParserTest(ReceiverParserTest):
-    """Topic and TopicTranslation tests.
-    """
-    from model.models import Topic
+class TopicsTest(ReceiverParserTest):
+    """Topic and TopicTranslation tests"""
+    def test_number(self):
+        topics = self.session.query(model.Topic).all()
+        self.assertTrue(len(topics) == 8)
 
-    def test_topics_number(self):
-        """Test if all topics are in the database.
-        """
-        topics = self._test_model_number(self.Topic)
-        #There should be 8 topics in the database
-        self.assertTrue(topics == 8)
+    def test_indicators(self):
+        topic = self.session.query(model.Topic)\
+            .filter(model.Topic.id == 'TOP99')\
+            .first()
+        self.assertTrue(len(topic.indicators) == 4)
 
-    def test_topics_data(self):
-        """Test if the topic data in the database is correct.
-        """
-        #Fetch a topic from the database
-        topic99 = self.session.query(self.Topic).filter(self.Topic.id == 'TOP99').first()
-        topic1 = self.session.query(self.Topic).filter(self.Topic.id == 'TOP1').first()
-        #Check that the topic exists
-        self.assertTrue(topic99 is not None)
-        self.assertTrue(topic1 is not None)
-        #Check the topic indicators
-        self.assertTrue(len(topic99.indicators) == 4)
-        self.assertTrue(len(topic1.indicators) == 0)
-
-    def test_topics_translations(self):
-        """Test if the topics have the correct translations.
-        """
-        topics = self.session.query(self.Topic).all()
+    def test_translations(self):
+        topics = self.session.query(model.Topic).all()
         for topic in topics:
             self.assertTrue(len(topic.translations) == 1)
 
 
-class IndicatorParserTest(ReceiverParserTest):
-    """Indicator and IndicatorTranslation tests.
-    """
-    from model.models import Indicator
+class IndicatorsTest(ReceiverParserTest):
+    """Indicator and IndicatorTranslation tests"""
+    def test_number(self):
+        indicators = self.session.query(model.Indicator).all()
+        self.assertTrue(len(indicators) == 4)
 
-    def test_indicators_number(self):
-        """Test if all indicators are in the database."""
-        indicators = self._test_model_number(self.Indicator)
-        #There should be 4 indicators in the database (3 simple and 1 compound)
-        #One simple indicator has been left out with a fake request to the api
-        self.assertTrue(indicators == 4)
-
-    def test_indicators_data(self):
-        """Test if the indicators have the correct data."""
+    def test_preferable_tendency(self):
         ind = self.session.query(model.Indicator)\
-            .filter(model.Indicator.id == 'INDIPFRI2')\
+            .filter(model.Indicator.id == "INDIPFRI2")\
             .first()
-        self.assertTrue(ind.preferable_tendency == 'decrease')
+        self.assertTrue(ind.preferable_tendency == "decrease")
+
+    def test_dataset(self):
+        ind = self.session.query(model.Indicator)\
+            .filter(model.Indicator.id == "INDIPFRI0")\
+            .first()
         self.assertTrue(len(ind.datasets) == 1)
 
-    def test_indicators_translations(self):
-        """Test if the indicators have the correct translations."""
-        indicators = self.session.query(self.Indicator).all()
+    def test_translations(self):
+        indicators = self.session.query(model.Indicator).all()
         for ind in indicators:
             self.assertTrue(len(ind.translations) == 3)
 
     def test_relathionships(self):
-        """Test the simple indicator relationships."""
         indipfri2 = self.session.query(model.Indicator)\
             .filter(model.Indicator.id == 'INDIPFRI2').first()
         rels = self.session.query(model.IndicatorRelationship)\
@@ -228,43 +189,13 @@ class IndicatorParserTest(ReceiverParserTest):
         self.assertTrue('INDIPFRI0' in targets)
         self.assertTrue('INDIPFRI1' in targets)
 
-    def test_compounds(self):
-        """Test the compound indicators."""
-        compound = self.session.query(model.CompoundIndicator)\
-            .filter(model.CompoundIndicator.id == 'INDIPFRI3').first()
-        self.assertTrue(len(compound.datasets) == 1)
-        self.assertTrue(compound.indicator_ref_group.id == "GINDIPFRI0")
-        translations = self.session.query(model.IndicatorTranslation)\
-            .filter(model.IndicatorTranslation.indicator_id == compound.id).all()
-        self.assertTrue(len(translations) == 3)
-        self.assertTrue(len(compound.indicator_refs) == 2)
-        ref_ids = [ind.id for ind in compound.indicator_refs]
-        self.assertTrue("INDIPFRI0" in ref_ids)
-        self.assertTrue("INDIPFRI2" in ref_ids)
-
-    def test_groups(self):
-        """Test indicator groups"""
-        group = self.session.query(model.IndicatorGroup)\
-            .filter(model.IndicatorGroup.id == 'GINDIPFRI0')\
-            .first()
-        self.assertTrue(group.compound_indicator.id == "INDIPFRI3")
-        self.assertTrue(len(group.observations) == 2)
-        obs_ids = [obs.id for obs in group.observations]
-        self.assertTrue("OBSIPFRI2599" in obs_ids)
-        self.assertTrue("OBSIPFRI2598" in obs_ids)
-
     def test_starred(self):
-        """Test Indicator and CompoundIndicator starred state.
-        By default new indicators will not be starred. If an indicator is
-        already starred it will preserve its state."""
-        ind2 = self.session.query(model.Indicator)\
-                .filter(model.Indicator.id == "INDIPFRI1").first()
-        self.assertFalse(ind2.starred)
+        ind = self.session.query(model.Indicator)\
+            .filter(model.Indicator.id == "INDIPFRI1")\
+            .first()
+        self.assertTrue(ind.starred is False)
 
     def test_last_update(self):
-        """Test Indicator and CompoundIndicator last_update.
-        All indicators included in the same receiver call will have the same
-        last_update date."""
         indicators = self.session.query(model.Indicator).all()
         for ind in indicators:
             self.assertTrue(ind.last_update is not None)
@@ -273,23 +204,89 @@ class IndicatorParserTest(ReceiverParserTest):
             self.assertTrue(ind.last_update == ref_time)
 
 
-class ObservationParserTest(ReceiverParserTest):
-    def test_observations_info(self):
-        obsipfri0 = self.session.query(model.Observation) \
-            .filter(model.Observation.id == 'OBSIPFRI1').first()
-        self.assertTrue(obsipfri0 is not None)
-        indicator = obsipfri0.indicator
-        self.assertTrue(indicator.id == 'INDIPFRI1')
-        computation = obsipfri0.computation
-        self.assertTrue(computation.uri == 'purl.org/weso/ontology/computex#Raw')
-        value = obsipfri0.value
-        self.assertTrue(value.value == '9.0')
-        self.assertTrue(value.obs_status == 'http://purl.org/linked-data/sdmx/2009/code#obsStatus-A')
+class CompoundIndicatorsTest(ReceiverParserTest):
+    """CompoundIndicator tests"""
+    def test_dataset(self):
+        compound = self.session.query(model.CompoundIndicator)\
+            .filter(model.CompoundIndicator.id == "INDIPFRI3")\
+            .first()
+        self.assertTrue(len(compound.datasets) == 1)
+
+    def test_group(self):
+        compound = self.session.query(model.CompoundIndicator)\
+            .filter(model.CompoundIndicator.id == "INDIPFRI3")\
+            .first()
+        self.assertTrue(compound.indicator_ref_group.id == "GINDIPFRI0")
+
+    def test_translations(self):
+        translations = self.session.query(model.IndicatorTranslation)\
+            .filter(model.IndicatorTranslation.indicator_id == "INDIPFRI3")\
+            .all()
+        self.assertTrue(len(translations) == 3)
+
+    def test_references(self):
+        compound = self.session.query(model.CompoundIndicator)\
+            .filter(model.CompoundIndicator.id == "INDIPFRI3")\
+            .first()
+        self.assertTrue(len(compound.indicator_refs) == 2)
+        ref_ids = [ind.id for ind in compound.indicator_refs]
+        self.assertTrue("INDIPFRI0" in ref_ids)
+        self.assertTrue("INDIPFRI2" in ref_ids)
+
+
+class IndicatorGroupsTest(ReceiverParserTest):
+    """IndicatorGroup tests"""
+    def test_compound_indicator(self):
+        group = self.session.query(model.IndicatorGroup)\
+            .filter(model.IndicatorGroup.id == 'GINDIPFRI0')\
+            .first()
+        self.assertTrue(group.compound_indicator.id == "INDIPFRI3")
+
+    def test_observations(self):
+        group = self.session.query(model.IndicatorGroup)\
+            .filter(model.IndicatorGroup.id == 'GINDIPFRI0')\
+            .first()
+        self.assertTrue(len(group.observations) == 2)
+        obs_ids = [obs.id for obs in group.observations]
+        self.assertTrue("OBSIPFRI2599" in obs_ids)
+        self.assertTrue("OBSIPFRI2598" in obs_ids)
+
+
+class ObservationsTest(ReceiverParserTest):
+    """Observation tests"""
+    def test_indicator(self):
+        obs = self.session.query(model.Observation) \
+            .filter(model.Observation.id == 'OBSIPFRI1')\
+            .first()
+        self.assertTrue(obs.indicator.id == 'INDIPFRI1')
+
+    def test_computation(self):
+        obs = self.session.query(model.Observation)\
+            .filter(model.Observation.id == "OBSIPFRI1")\
+            .first()
+        computation = obs.computation.uri
+        self.assertTrue(computation == "purl.org/weso/ontology/computex#Raw")
+
+    def test_value(self):
+        obs = self.session.query(model.Observation)\
+            .filter(model.Observation.id == "OBSIPFRI2597")\
+            .first()
+        self.assertTrue(obs.value.value == "26.5")
+        self.assertTrue(obs.value.obs_status ==\
+            "http://purl.org/linked-data/sdmx/2009/code#obsStatus-A")
+
+    def test_missing_value(self):
+        obs = self.session.query(model.Observation)\
+            .filter(model.Observation.id == "OBSIPFRI0")\
+            .first()
+        self.assertTrue(obs.value.obs_status ==\
+            "http://purl.org/linked-data/sdmx/2009/code#obsStatus-M")
+        self.assertTrue(obs.value.value is None)
 
     def test_month_interval(self):
         obs1 = self.session.query(model.Observation)\
-                .filter(model.Observation.id == "OBSIPFRI2599")\
-                .first()
+            .filter(model.Observation.id == "OBSIPFRI2599")\
+            .first()
         self.assertTrue(obs1.ref_time.type == "monthIntervals")
         self.assertTrue(obs1.ref_time.month == 12)
         self.assertTrue(obs1.ref_time.year == 2013)
@@ -298,8 +295,8 @@ class ObservationParserTest(ReceiverParserTest):
 
     def test_year(self):
         obs = self.session.query(model.Observation)\
-                .filter(model.Observation.id == "OBSIPFRI2597")\
-                .first()
+            .filter(model.Observation.id == "OBSIPFRI2597")\
+            .first()
         self.assertTrue(obs.ref_time.type == "yearIntervals")
         self.assertTrue(obs.ref_time.year == 2013)
         self.assertTrue(str(obs.ref_time.start_time) == "2013-01-01")
@@ -307,8 +304,8 @@ class ObservationParserTest(ReceiverParserTest):
 
     def test_interval(self):
         obs = self.session.query(model.Observation)\
-                .filter(model.Observation.id == "OBSIPFRI0")\
-                .first()
+            .filter(model.Observation.id == "OBSIPFRI0")\
+            .first()
         self.assertTrue(obs.ref_time.type == "intervals")
         self.assertTrue(str(obs.ref_time.start_time) == "1990-01-01")
         self.assertTrue(str(obs.ref_time.end_time) == "1993-01-01")
@@ -323,66 +320,119 @@ class ObservationParserTest(ReceiverParserTest):
         self.assertTrue("OBSIPFRI2599" in observation_ids)
 
 
-class MetadataParserTest(ReceiverParserTest):
-    """Tests for metadata of the import process.
-    Includes tests for Organization, User, Dataset and Datasource"""
-    def test_organization(self):
+class OrganizationsTest(ReceiverParserTest):
+    """Observation tests"""
+    def test_number(self):
         organizations = self.session.query(model.Organization).all()
         self.assertTrue(len(organizations) == 1)
+
+    def test_organization_name(self):
         org = self.session.query(model.Organization) \
             .filter(model.Organization.id == 'http://www.ifpri.org/') \
             .first()
-        self.assertTrue(org is not None)
         self.assertTrue('IFPRI' in org.name)
+
+    def test_organization_users(self):
+        org = self.session.query(model.Organization) \
+            .filter(model.Organization.id == "http://www.ifpri.org/") \
+            .first()
         self.assertTrue(org.users)
 
-    def test_user(self):
+
+class UsersTest(ReceiverParserTest):
+    """User tests"""
+    def test_number(self):
         users = self.session.query(model.User).all()
         self.assertTrue(len(users) == 1)
-        user = users[0]
-        self.assertTrue(user.id == 'USRIPFRIIMPORTER')
 
-    def test_datasource(self):
+    def test_user_name(self):
+        user = self.session.query(model.User)\
+            .filter(model.User.id == "USRIPFRIIMPORTER")\
+            .first()
+        self.assertTrue(user is not None)
+        self.assertTrue(user.timestamp is not None)
+
+    def test_organization(self):
+        user = self.session.query(model.User)\
+            .filter(model.User.id == "USRIPFRIIMPORTER")\
+            .first()
+        self.assertTrue(user.organization.id == "http://www.ifpri.org/")
+
+
+class DataSourceTests(ReceiverParserTest):
+    """DataSource tests"""
+    def test_number(self):
+        datasources = self.session.query(model.DataSource).all()
+        self.assertTrue(len(datasources) == 1)
+
+    def test_name(self):
         dsource = self.session.query(model.DataSource).first()
         self.assertTrue('IFPRI' in dsource.name)
-        self.assertTrue(dsource.organization is not None)
-        self.assertTrue(dsource.datasets is not None)
 
-    def test_dataset(self):
+    def test_organization(self):
+        dsource = self.session.query(model.DataSource).first()
+        self.assertTrue(dsource.organization.id == "http://www.ifpri.org/")
+
+    def test_datasets(self):
+        dsource = self.session.query(model.DataSource).first()
+        self.assertTrue(len(dsource.datasets) == 1)
+
+
+class DatasetTests(ReceiverParserTest):
+    """Dataset tests"""
+    def test_number(self):
+        datasets = self.session.query(model.Dataset).all()
+        self.assertTrue(len(datasets) == 1)
+
+    def test_datasource(self):
         dataset = self.session.query(model.Dataset).first()
-        self.assertTrue(dataset.datasource is not None)
         self.assertTrue('IFPRI' in dataset.datasource.name)
-        self.assertTrue(dataset.license is not None)
-        # The license of this dataset allows republishing (this may not be
-        # applicable for other licenses)
+
+    def test_license(self):
+        dataset = self.session.query(model.Dataset).first()
         self.assertTrue(dataset.license.republish)
+
+    def test_indicators(self):
+        dataset = self.session.query(model.Dataset).first()
         self.assertTrue(len(dataset.indicators) == 4)
-        self.assertTrue(dataset.sdmx_frequency == 'http://test_ontology.org/frequency')
+
+    def test_frequency(self):
+        dataset = self.session.query(model.Dataset).first()
+        self.assertTrue(dataset.sdmx_frequency ==\
+            'http://test_ontology.org/frequency')
 
 
 class SliceParserTest(ReceiverParserTest):
-    def test_info(self):
+    """Slice tests"""
+    def test_numbrer(self):
+        slices = self.session.query(model.Slice).all()
+        self.assertTrue(len(slices) == 3)
+
+    def test_indicator(self):
         sli = self.session.query(model.Slice)\
-            .filter(model.Slice.id == 'SLIIPFRI0').first()
+            .filter(model.Slice.id == 'SLIIPFRI0')\
+            .first()
         self.assertTrue(sli is not None)
         self.assertTrue(sli.indicator.id == 'INDIPFRI0')
+
+    def test_dataset(self):
+        sli = self.session.query(model.Slice)\
+            .filter(model.Slice.id == 'SLIIPFRI0')\
+            .first()
         self.assertTrue(sli.dataset is not None)
 
     def test_observations(self):
         sli = self.session.query(model.Slice)\
             .filter(model.Slice.id == 'SLIIPFRI0').first()
-        # Check that the slice has linked observations
         self.assertTrue(sli.observations)
-        # Check for a concrete observation
-        observation = next((obs for obs in sli.observations
-                            if obs.id == 'OBSIPFRI0'), None)
-        self.assertTrue(observation is not None)
+        obs_ids = [obs.id for obs in sli.observations]
+        self.assertTrue("OBSIPFRI0" in obs_ids)
 
     def test_dimension_time(self):
         """A slice dimension may be a time."""
         sli = self.session.query(model.Slice)\
-                .filter(model.Slice.id == "SLIIPFRI2")\
-                .first()
+            .filter(model.Slice.id == "SLIIPFRI2")\
+            .first()
         self.assertTrue(str(sli.dimension.start_time) == "1999-01-01")
         self.assertTrue(str(sli.dimension.end_time) == "2002-01-01")
 
@@ -390,16 +440,16 @@ class SliceParserTest(ReceiverParserTest):
         """A slice dimension may be a region. The region can be declared using
         its UN_CODE."""
         sli = self.session.query(model.Slice)\
-                .filter(model.Slice.id == 'SLIIPFRI0')\
-                .first()
+            .filter(model.Slice.id == 'SLIIPFRI0')\
+            .first()
         self.assertTrue(sli.dimension.iso3 == 'ESP')
 
     def test_dimension_region_iso3(self):
         """A slice dimension may be a region. The region can be declared using
         its ISO3 code."""
         sli = self.session.query(model.Slice)\
-                .filter(model.Slice.id == "SLIIPFRI1")\
-                .first()
+            .filter(model.Slice.id == "SLIIPFRI1")\
+            .first()
         self.assertTrue(sli.dimension.iso3 == "FRA")
 
 if __name__ == '__main__':
