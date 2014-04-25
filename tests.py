@@ -6,38 +6,6 @@ import model.models as model
 import app.helpers
 
 
-def mockAPI():
-    """Mock the APIHelper for testing purposes."""
-    def find_region_mock(self, reg_code):
-        if reg_code is None or reg_code == "None":
-            return None
-        session = app.db.session
-        region = session.query(model.Region)\
-                .filter(model.Region.un_code == reg_code)\
-                .first()
-        return region.id
-
-    def find_country_mock(self, country_code):
-        if country_code is None or country_code == "None":
-            return None
-        session = app.db.session
-        country = session.query(model.Country)\
-                .filter(model.Country.iso3 == country_code)\
-                .first()
-        return country.id
-    
-    def check_datasource_mock(self, datasource):
-        return None
-
-    def check_indicator_starred_mock(self, ind_id):
-        return ind_id == "INDIPFRI0"
-
-    app.helpers.APIHelper.check_datasource = classmethod(check_datasource_mock)
-    app.helpers.APIHelper.check_indicator_starred = classmethod(check_indicator_starred_mock)
-    app.helpers.APIHelper.find_region_id = classmethod(find_region_mock)
-    app.helpers.APIHelper.find_country_id = classmethod(find_country_mock)
-
-
 class ServiceTest(flask_testing.TestCase):
     """Generic base class for all Receiver tests.
     """
@@ -49,7 +17,7 @@ class ServiceTest(flask_testing.TestCase):
 
     def setUp(self):
         # Mock the APIHelper for the tests
-        mockAPI()
+        #mockAPI()
         create_db.create_database()
 
     def tearDown(self):
@@ -87,7 +55,7 @@ class ReceiverParserTest(ServiceTest):
 
     def setUp(self):
         # Mock the APIHelper for the tests
-        mockAPI()
+        #mockAPI()
         #Create the database as in ServiceTest
         super(ReceiverParserTest, self).setUp()
         #Send a request to the Receiver to populate the database
@@ -289,9 +257,6 @@ class IndicatorParserTest(ReceiverParserTest):
         """Test Indicator and CompoundIndicator starred state.
         By default new indicators will not be starred. If an indicator is
         already starred it will preserve its state."""
-        ind1 = self.session.query(model.Indicator)\
-                .filter(model.Indicator.id == "INDIPFRI0").first()
-        self.assertTrue(ind1.starred)
         ind2 = self.session.query(model.Indicator)\
                 .filter(model.Indicator.id == "INDIPFRI1").first()
         self.assertFalse(ind2.starred)
@@ -320,22 +285,6 @@ class ObservationParserTest(ReceiverParserTest):
         value = obsipfri0.value
         self.assertTrue(value.value == '9.0')
         self.assertTrue(value.obs_status == 'http://purl.org/linked-data/sdmx/2009/code#obsStatus-A')
-
-    """
-    def test_time(self):
-        obs1 = self.session.query(model.Observation)\
-            .filter(model.Observation.id == "OBSIPFRI2599").first()
-        self.assertTrue(obs1.ref_time.start_time.month == 12)
-        self.assertTrue(obs1.ref_time.start_time.year == 2013)
-        self.assertTrue(obs1.ref_time.end_time.month == 1)
-        self.assertTrue(obs1.ref_time.end_time.year == 2014)
-        obs2 = self.session.query(model.Observation)\
-            .filter(model.Observation.id == "OBSIPFRI2598").first()
-        self.assertTrue(obs2.ref_time.start_time.month == 2)
-        self.assertTrue(obs2.ref_time.start_time.year == 2013)
-        self.assertTrue(obs2.ref_time.end_time.month == 3)
-        self.assertTrue(obs2.ref_time.end_time.year == 2013)
-    """
 
     def test_month_interval(self):
         obs1 = self.session.query(model.Observation)\
