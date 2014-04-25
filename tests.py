@@ -321,6 +321,7 @@ class ObservationParserTest(ReceiverParserTest):
         self.assertTrue(value.value == '9.0')
         self.assertTrue(value.obs_status == 'http://purl.org/linked-data/sdmx/2009/code#obsStatus-A')
 
+    """
     def test_time(self):
         obs1 = self.session.query(model.Observation)\
             .filter(model.Observation.id == "OBSIPFRI2599").first()
@@ -334,6 +335,34 @@ class ObservationParserTest(ReceiverParserTest):
         self.assertTrue(obs2.ref_time.start_time.year == 2013)
         self.assertTrue(obs2.ref_time.end_time.month == 3)
         self.assertTrue(obs2.ref_time.end_time.year == 2013)
+    """
+
+    def test_month_interval(self):
+        obs1 = self.session.query(model.Observation)\
+                .filter(model.Observation.id == "OBSIPFRI2599")\
+                .first()
+        self.assertTrue(obs1.ref_time.type == "monthIntervals")
+        self.assertTrue(obs1.ref_time.month == 12)
+        self.assertTrue(obs1.ref_time.year == 2013)
+        self.assertTrue(str(obs1.ref_time.start_time) == "2013-12-01")
+        self.assertTrue(str(obs1.ref_time.end_time) == "2014-01-01")
+
+    def test_year(self):
+        obs = self.session.query(model.Observation)\
+                .filter(model.Observation.id == "OBSIPFRI2597")\
+                .first()
+        self.assertTrue(obs.ref_time.type == "yearIntervals")
+        self.assertTrue(obs.ref_time.year == 2013)
+        self.assertTrue(str(obs.ref_time.start_time) == "2013-01-01")
+        self.assertTrue(str(obs.ref_time.end_time) == "2014-01-01")
+
+    def test_interval(self):
+        obs = self.session.query(model.Observation)\
+                .filter(model.Observation.id == "OBSIPFRI1203")\
+                .first()
+        self.assertTrue(obs.ref_time.type == "intervals")
+        self.assertTrue(str(obs.ref_time.start_time) == "2008-01-01")
+        self.assertTrue(str(obs.ref_time.end_time) == "2013-01-01")
 
     def test_group(self):
         observations = self.session.query(model.Observation)\
@@ -405,8 +434,8 @@ class SliceParserTest(ReceiverParserTest):
         sli = self.session.query(model.Slice)\
                 .filter(model.Slice.id == "SLIIPFRI2")\
                 .first()
-        self.assertTrue(sli.dimension.start_time.year == 1999)
-        self.assertTrue(sli.dimension.end_time.year == 2001)
+        self.assertTrue(str(sli.dimension.start_time) == "1999-01-01")
+        self.assertTrue(str(sli.dimension.end_time) == "2002-01-01")
 
     def test_dimension_region_uncode(self):
         """A slice dimension may be a region. The region can be declared using
