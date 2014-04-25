@@ -1,5 +1,4 @@
 import parser
-import requests
 import model.models as model
 import datetime
 import app
@@ -142,61 +141,3 @@ class DBHelper(object):
             raise Exception("The country with ISO3 = {} does not exist in the database".format(country_code))
         else:
             return country.id
-
-
-"""
-class APIHelper(object):
-    def __init__(self):
-        self.api_url = "http://localhost:80/api"
-
-    def check_datasource(self, datasource_name):
-        r = requests.get('{}/datasources'.format(self.api_url))
-        # The data comes in JSON format
-        datasources = r.json()
-        # Find the JSON object with the required name
-        datasource = next((dat for dat in datasources\
-                if str(dat['name']) == datasource_name), None)
-        # Return the JSON object as a Datasource object
-        if datasource is None:
-            return None
-        else:
-            return self._make_datasource(datasource)
-
-    def _make_datasource(self, datasource_data):
-        datasource = model.DataSource()
-        datasource.name = str(datasource_data['name'])
-        datasource.id = int(datasource_data['id'])
-        datasource.organization_id = str(datasource_data['organization_id'])
-        return datasource
-
-    def check_indicator_starred(self, indicator_id):
-        r = requests.get('{}/indicators/{}'.format(self.api_url, indicator_id))
-        #We may ask for an indicator that does not exist in the database, so
-        #if it exists we return its starred value, and if it does not exist
-        #(KeyError) we return False because it is being inserted in the DB for
-        #the first time
-        try:
-            return r.json()["starred"]
-        except KeyError:
-            return False
-
-    def find_region_id(self, reg_code):
-        r = requests.get("{}/regions/{}".format(self.api_url, reg_code))
-        try:
-            return r.json()["id"]
-        except KeyError:
-            # The region does not exist on the database.
-            # This dataset has invalid data
-            raise Exception("The region with UN_CODE = {} does not exist in "\
-                    "the database".format(reg_code))
-        
-    def find_country_id(self, country_code):
-        r = requests.get("{}/countries/{}".format(self.api_url, country_code))
-        try:
-            return r.json()["id"]
-        except KeyError:
-            # The country does not exist on the database.
-            # This dataset has invalid data
-            raise Exception("The country with ISO3 = {} does not exist in "\
-                    "the database".format(country_code))
-"""
