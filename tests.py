@@ -180,7 +180,7 @@ class TopicParserTest(ReceiverParserTest):
         self.assertTrue(topic99 is not None)
         self.assertTrue(topic1 is not None)
         #Check the topic indicators
-        self.assertTrue(len(topic99.indicators) == 5)
+        self.assertTrue(len(topic99.indicators) == 4)
         self.assertTrue(len(topic1.indicators) == 0)
 
     def test_topics_translations(self):
@@ -201,7 +201,7 @@ class IndicatorParserTest(ReceiverParserTest):
         indicators = self._test_model_number(self.Indicator)
         #There should be 4 indicators in the database (3 simple and 1 compound)
         #One simple indicator has been left out with a fake request to the api
-        self.assertTrue(indicators == 5)
+        self.assertTrue(indicators == 4)
 
     def test_indicators_data(self):
         """Test if the indicators have the correct data."""
@@ -231,7 +231,7 @@ class IndicatorParserTest(ReceiverParserTest):
     def test_compounds(self):
         """Test the compound indicators."""
         compound = self.session.query(model.CompoundIndicator)\
-            .filter(model.CompoundIndicator.id == 'INDIPFRI4').first()
+            .filter(model.CompoundIndicator.id == 'INDIPFRI3').first()
         self.assertTrue(len(compound.datasets) == 1)
         self.assertTrue(compound.indicator_ref_group.id == "GINDIPFRI0")
         translations = self.session.query(model.IndicatorTranslation)\
@@ -247,7 +247,7 @@ class IndicatorParserTest(ReceiverParserTest):
         group = self.session.query(model.IndicatorGroup)\
             .filter(model.IndicatorGroup.id == 'GINDIPFRI0')\
             .first()
-        self.assertTrue(group.compound_indicator.id == "INDIPFRI4")
+        self.assertTrue(group.compound_indicator.id == "INDIPFRI3")
         self.assertTrue(len(group.observations) == 2)
         obs_ids = [obs.id for obs in group.observations]
         self.assertTrue("OBSIPFRI2599" in obs_ids)
@@ -279,7 +279,7 @@ class ObservationParserTest(ReceiverParserTest):
             .filter(model.Observation.id == 'OBSIPFRI1').first()
         self.assertTrue(obsipfri0 is not None)
         indicator = obsipfri0.indicator
-        self.assertTrue(indicator.id == 'INDIPFRI0')
+        self.assertTrue(indicator.id == 'INDIPFRI1')
         computation = obsipfri0.computation
         self.assertTrue(computation.uri == 'purl.org/weso/ontology/computex#Raw')
         value = obsipfri0.value
@@ -307,11 +307,11 @@ class ObservationParserTest(ReceiverParserTest):
 
     def test_interval(self):
         obs = self.session.query(model.Observation)\
-                .filter(model.Observation.id == "OBSIPFRI1203")\
+                .filter(model.Observation.id == "OBSIPFRI0")\
                 .first()
         self.assertTrue(obs.ref_time.type == "intervals")
-        self.assertTrue(str(obs.ref_time.start_time) == "2008-01-01")
-        self.assertTrue(str(obs.ref_time.end_time) == "2013-01-01")
+        self.assertTrue(str(obs.ref_time.start_time) == "1990-01-01")
+        self.assertTrue(str(obs.ref_time.end_time) == "1993-01-01")
 
     def test_group(self):
         observations = self.session.query(model.Observation)\
@@ -356,7 +356,7 @@ class MetadataParserTest(ReceiverParserTest):
         # The license of this dataset allows republishing (this may not be
         # applicable for other licenses)
         self.assertTrue(dataset.license.republish)
-        self.assertTrue(len(dataset.indicators) == 5)
+        self.assertTrue(len(dataset.indicators) == 4)
         self.assertTrue(dataset.sdmx_frequency == 'http://test_ontology.org/frequency')
 
 
