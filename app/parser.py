@@ -182,6 +182,7 @@ class Parser(object):
 
     @staticmethod
     def _parse_time(node):
+        """
         # An observation may refer to an arbitrary interval of time...
         if node.get('unit') == 'years':
             if node.find('interval') is not None:
@@ -206,6 +207,23 @@ class Parser(object):
             else:
                 end = datetime.date(year=year, month=month+1, day=1)
             return model.Interval(start_time=beginning, end_time=end)
+        """
+        if node.get("unit") == "years":
+            interval = node.find("interval")
+            if interval is not None:
+                start_year = int(interval.find("beginning").text)
+                end_year = int(interval.find("end").text)
+
+                beginning = datetime.date(year=start_year, month=1, day=1)
+                end = datetime.date(year=end_year+1, month=1, day=1)
+                return model.Interval(beginning, end)
+            else:
+                return model.YearInterval(int(node.text))
+        elif node.get("unit") == "months":
+            #The information comes in the format MM/YYYY
+            month = int(node.text.split("/")[0])
+            year = int(node.text.split("/")[1])
+            return model.MonthInterval(month, year)
 
 
     @staticmethod
