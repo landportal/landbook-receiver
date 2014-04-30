@@ -1,6 +1,7 @@
 import helpers
 import app
 import model.models as model
+#from memory_profiler import profile
 
 
 class ReceiverSQLService(object):
@@ -21,6 +22,7 @@ class ReceiverSQLService(object):
         finally:
             session.close()
 
+    #@profile
     def _store_data(self, user_ip, session):
         dataset = self._store_metadata(user_ip, session)
         session.flush()
@@ -30,36 +32,25 @@ class ReceiverSQLService(object):
         self._store_indicator_relationships(dataset, session)
         groups = self._store_indicator_groups(session, compounds)
         session.flush()
+        session.expunge_all()
         # Store observations
-        observations = self._store_observations(dataset, session)
+        self._store_observations(dataset, session)
         session.flush()
+        session.expunge_all()
         # Store slices
-        slices = self._store_slices(dataset, observations, session)
+        self._store_slices(dataset, session)
         session.flush()
 
-    def _store_slices(self, dataset, observations, session):
-        slices = self.slice_serv.get_slices()
-        for sli in slices:
+    #@profile
+    def _store_slices(self, dataset, session):
+        # The observation_ids list was created in the parser and WILL NOT be
+        # persisted. The list is only used here to link with the observations
+        for sli in self.slice_serv.get_slices():
             sli.dataset_id = dataset.id
-            # The region_iso3 field was created in the parser and WILL NOT be
-            # peristed, it is only used to link with the corresponding region
-            if sli.region_code is not None:
-                region = self.get_region_by_uncode(session, sli.region_code)
-                sli.dimension = region
-            # The observation_ids list was created in the parser and WILL NOT be
-            # persisted. The list is only used here to link with the observations
-            for rel_obs in [obs for obs in observations if obs.id 
-                    in sli.observation_ids]:
+            for rel_obs in session.query(model.Observation)\
+                    .filter(model.Observation.id.in_(sli.observation_ids)).all():
                 rel_obs.slice_id = sli.id
-        session.add_all(slices)
-        return slices
-
-    def get_region_by_uncode(self, session, un_code):
-        if un_code is not None:
-            return session.query(model.Region)\
-                    .filter(model.Region.un_code == un_code).first()
-        else:
-            return None
+            session.add(sli)
 
     def _store_indicator_groups(self, session, compounds):
         groups = self.indicator_serv.get_indicator_groups()
@@ -100,7 +91,6 @@ class ReceiverSQLService(object):
                 relationships.append(rel)
             session.add_all(relationships)
 
-
     def _store_compound_indicators(self, dataset, indicators, session):
         compounds = self.indicator_serv.get_compound_indicators()
         result = []
@@ -128,15 +118,8 @@ class ReceiverSQLService(object):
         dataset.datasource = datasource
         return session.merge(dataset)
 
+    #@profile
     def _store_observations(self, dataset, session):
-        observations = self.observation_serv.get_observations()
-        for obs in observations:
+        for obs in self.observation_serv.get_observations():
             obs.dataset_id = dataset.id
-            # The region_code field was created in the parser and WILL NOT be
-            # persisted, it is only used to link with the corresponding region
-            if obs.region_code is not None:
-                region = self.get_region_by_uncode(session, obs.region_code)
-                if region is not None:
-                    obs.region_id = region.id
-        session.add_all(observations)
-        return observations
+            session.add(obs)

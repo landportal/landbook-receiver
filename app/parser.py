@@ -126,11 +126,12 @@ class Parser(object):
         return indicator
 
     def get_observations(self):
-        observations = [self._get_observation(item) for item in self._root.find('observations').findall('observation')]
-        return observations
+        obs_root = self._root.find("observations")
+        return (self._get_observation(obs) for obs in obs_root.findall("observation"))
 
     def get_slices(self):
-        return [self._get_slice(sli) for sli in self._root.find('slices').findall('slice')]
+        sli_root = self._root.find('slices')
+        return (self._get_slice(sli) for sli in sli_root.findall('slice'))
 
     def _get_observation(self, obs):
         observation = model.Observation()

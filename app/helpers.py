@@ -36,14 +36,15 @@ class ObservationSQLService(object):
         self._dbhelper = DBHelper()
 
     def get_observations(self):
-        observations = self._parser.get_observations()
-        # Enrich the observations linking them to its corresponding region.
-        for obs in observations:
-            if obs.region_code is not None:
-                obs.region_id = self._dbhelper.find_region_id(obs.region_code)
-            elif obs.country_code is not None:
-                obs.region_id = self._dbhelper.find_country_id(obs.country_code)
-        return observations
+        return (self._enrich_observation(obs) for obs
+                in self._parser.get_observations())
+
+    def _enrich_observation(self, obs):
+        if obs.region_code is not None:
+            obs.region_id = self._dbhelper.find_region_id(obs.region_code)
+        elif obs.country_code is not None:
+            obs.region_id = self._dbhelper.find_country_id(obs.country_code)
+        return obs
 
 
 class MetadataSQLService(object):
@@ -79,15 +80,14 @@ class SliceSQLService(object):
     def get_slices(self):
         # Enrich the slices linking the to its correspoding dimension. If the
         # dimension is a Time, it comes already linked from the parser.
-        slices = self._parser.get_slices()
-        for sli in slices:
-            if sli.region_code is not None:
-                sli.dimension_id = self._dbhelper\
-                    .find_region_id(sli.region_code)
-            elif sli.country_code is not None:
-                sli.dimension_id = self._dbhelper\
-                    .find_country_id(sli.country_code)
-        return slices
+        return (self._enrich_slice(sli) for sli in self._parser.get_slices())
+
+    def _enrich_slice(self, sli):
+        if sli.region_code is not None:
+            sli.dimension_id = self._dbhelper.find_region_id(sli.region_code)
+        elif sli.country_code is not None:
+            sli.dimension_id = self._dbhelper.find_country_id(sli.country_code)
+        return sli
 
 
 class DBHelper(object):
