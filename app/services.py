@@ -27,8 +27,8 @@ class ReceiverSQLService(object):
         dataset = self._store_metadata(user_ip, session)
         session.flush()
         # Store indicators
-        indicators = self._store_simple_indicators(dataset, session)
-        compounds = self._store_compound_indicators(dataset, indicators, session)
+        self._store_simple_indicators(dataset, session)
+        compounds = self._store_compound_indicators(dataset, session)
         self._store_indicator_relationships(dataset, session)
         groups = self._store_indicator_groups(session, compounds)
         session.flush()
@@ -63,19 +63,9 @@ class ReceiverSQLService(object):
         return result
 
     def _store_simple_indicators(self, dataset, session):
-        indicators = self.indicator_serv.get_simple_indicators()
-        result = []
-        for ind in indicators:
-            # The db_ind contains the indicator data merged with the database and
-            # will be used to link with all the other objects
-            db_ind = session.merge(ind)
-            session.flush()
-            # The indicator may already exist n the DB, so we have to check
-            # before the assignment
-            if not db_ind.id in [indicator.id for indicator in dataset.indicators]:
-                dataset.add_indicator(db_ind)
-            result.append(db_ind)
-        return result
+        for item in self.indicator_serv.get_simple_indicators():
+            ind = session.merge(item)
+            dataset.add_indicator(ind)
 
     def _store_indicator_relationships(self, dataset, session):
         indicators = self.indicator_serv.get_simple_indicators()
@@ -91,7 +81,7 @@ class ReceiverSQLService(object):
                 relationships.append(rel)
             session.add_all(relationships)
 
-    def _store_compound_indicators(self, dataset, indicators, session):
+    def _store_compound_indicators(self, dataset, session):
         compounds = self.indicator_serv.get_compound_indicators()
         result = []
         for ind in compounds:
@@ -101,7 +91,7 @@ class ReceiverSQLService(object):
             # persisted to the database. It is used to link the simple
             # indicators with its compound indicator
             for id in ind.related_id:
-                related = next(rel for rel in indicators if rel.id == id)
+                related = session.query(model.Indicator).filter(model.Indicator.id == id).first()
                 related.compound_indicator_id = db_ind.id
             if not db_ind.id in [indicator.id for indicator in dataset.indicators]:
                 dataset.add_indicator(db_ind)

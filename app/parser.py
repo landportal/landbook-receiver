@@ -11,10 +11,12 @@ class Parser(object):
     def get_simple_indicators(self):
         """Return a list of indicators
         """
-        indicators = self._root.find('indicators').findall('indicator')
-        simple_indicators = [self._get_simple_indicator(item) for item
-                             in indicators]
-        return simple_indicators
+        #indicators = self._root.find('indicators').findall('indicator')
+        #simple_indicators = [self._get_simple_indicator(item) for item
+        #                     in indicators]
+        ind_root = self._root.find("indicators")
+        return (self._get_simple_indicator(ind) for ind
+                in ind_root.findall("indicator"))
 
     def get_compound_indicators(self):
         indicators = self._root.find('indicators').findall('compound_indicator')

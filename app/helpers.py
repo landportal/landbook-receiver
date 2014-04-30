@@ -11,13 +11,16 @@ class IndicatorSQLService(object):
         self._dbhelper = DBHelper()
 
     def get_simple_indicators(self):
-        indicators = self._parser.get_simple_indicators()
+        #indicators = self._parser.get_simple_indicators()
         #Enrich the indicators data querying the API to get its starred state
         #and setting the last_update field
-        for ind in indicators:
-            ind.starred = self._dbhelper.check_indicator_starred(ind.id)
-            ind.last_update = self._time
-        return indicators
+        return (self._enrich_indicator(ind) for ind
+                in self._parser.get_simple_indicators())
+
+    def _enrich_indicator(self, ind):
+        ind.starred = self._dbhelper.check_indicator_starred(ind.id)
+        ind.last_update = self._time
+        return ind
 
     def get_compound_indicators(self):
         compounds = self._parser.get_compound_indicators()
