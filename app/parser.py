@@ -1,26 +1,37 @@
 import model.models as model
-import xml.etree.ElementTree as Et
+try:
+    import xml.etree.cElementTree as Et
+except ImportError:
+    import xml.etree.ElementTree as Et
 import datetime
+#from memory_profiler import profile
 
 
 class Parser(object):
+    #@profile
     def __init__(self, content):
         self._content = content
         self._root = Et.fromstring(content)
+        #self._iter = Et.iterparse(StringIO.StringIO(content))
 
     def get_simple_indicators(self):
         """Return a list of indicators
         """
-        indicators = self._root.find('indicators').findall('indicator')
-        simple_indicators = [self._get_simple_indicator(item) for item
-                             in indicators]
-        return simple_indicators
+        #indicators = self._root.find('indicators').findall('indicator')
+        #simple_indicators = [self._get_simple_indicator(item) for item
+        #                     in indicators]
+        ind_root = self._root.find("indicators")
+        return (self._get_simple_indicator(ind) for ind
+                in ind_root.findall("indicator"))
 
     def get_compound_indicators(self):
-        indicators = self._root.find('indicators').findall('compound_indicator')
-        compound_indicators = [self._get_compound_indicator(item) for item
-                               in indicators]
-        return compound_indicators
+        #indicators = self._root.find('indicators').findall('compound_indicator')
+        #compound_indicators = [self._get_compound_indicator(item) for item
+        #                       in indicators]
+        #return compound_indicators
+        ind_root = self._root.find("indicators")
+        return (self._get_compound_indicator(ind) for ind
+                in ind_root.findall("compound_indicator"))
 
     def get_indicator_groups(self):
         groups_element = self._root.find('indicator_groups')\
@@ -125,12 +136,14 @@ class Parser(object):
         indicator.indicator_ref = group.get('indicator-ref')
         return indicator
 
+    #@profile
     def get_observations(self):
-        observations = [self._get_observation(item) for item in self._root.find('observations').findall('observation')]
-        return observations
+        obs_root = self._root.find("observations")
+        return (self._get_observation(obs) for obs in obs_root.findall("observation"))
 
     def get_slices(self):
-        return [self._get_slice(sli) for sli in self._root.find('slices').findall('slice')]
+        sli_root = self._root.find('slices')
+        return (self._get_slice(sli) for sli in sli_root.findall('slice'))
 
     def _get_observation(self, obs):
         observation = model.Observation()
@@ -182,32 +195,6 @@ class Parser(object):
 
     @staticmethod
     def _parse_time(node):
-        """
-        # An observation may refer to an arbitrary interval of time...
-        if node.get('unit') == 'years':
-            if node.find('interval') is not None:
-                interval = node.find('interval')
-                start_year = int(interval.find('beginning').text)
-                end_year = int(interval.find('end').text)
-
-                beginning = datetime.date(year=start_year, month=1, day=1)
-                end = datetime.date(year=end_year, month=1, day=1)
-                return model.Interval(start_time=beginning, end_time=end)
-            # ... It may also refer to a concrete year ...
-            else:
-                return model.YearInterval(year=node.text)
-        # ... Or a concrete month of a year
-        elif node.get('unit') == 'months':
-            # The information comes in the format MM/YYYY
-            month = int(node.text.split('/')[0])
-            year = int(node.text.split('/')[1])
-            beginning = datetime.date(year=year, month=month, day=1)
-            if month == 12:
-                end = datetime.date(year=year+1, month=1, day=1)
-            else:
-                end = datetime.date(year=year, month=month+1, day=1)
-            return model.Interval(start_time=beginning, end_time=end)
-        """
         if node.get("unit") == "years":
             interval = node.find("interval")
             if interval is not None:

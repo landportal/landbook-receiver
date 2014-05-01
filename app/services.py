@@ -1,6 +1,7 @@
 import helpers
 import app
 import model.models as model
+#from memory_profiler import profile
 
 
 class ReceiverSQLService(object):
@@ -21,72 +22,53 @@ class ReceiverSQLService(object):
         finally:
             session.close()
 
+    #@profile
     def _store_data(self, user_ip, session):
         dataset = self._store_metadata(user_ip, session)
         session.flush()
         # Store indicators
-        indicators = self._store_simple_indicators(dataset, session)
-        compounds = self._store_compound_indicators(dataset, indicators, session)
-        self._store_indicator_relationships(dataset, session)
-        groups = self._store_indicator_groups(session, compounds)
+        self._store_simple_indicators(dataset, session)
         session.flush()
+        self._store_compound_indicators(dataset, session)
+        session.flush()
+        self._store_indicator_relationships(session)
+        session.flush()
+        self._store_indicator_groups(session)
+        session.flush()
+        session.expunge_all()
         # Store observations
-        observations = self._store_observations(dataset, session)
+        self._store_observations(dataset, session)
         session.flush()
+        session.expunge_all()
         # Store slices
-        slices = self._store_slices(dataset, observations, session)
+        self._store_slices(dataset, session)
         session.flush()
 
-    def _store_slices(self, dataset, observations, session):
-        slices = self.slice_serv.get_slices()
-        for sli in slices:
+    def _store_slices(self, dataset, session):
+        # The observation_ids list was created in the parser and WILL NOT be
+        # persisted. The list is only used here to link with the observations
+        for sli in self.slice_serv.get_slices():
             sli.dataset_id = dataset.id
-            # The region_iso3 field was created in the parser and WILL NOT be
-            # peristed, it is only used to link with the corresponding region
-            if sli.region_code is not None:
-                region = self.get_region_by_uncode(session, sli.region_code)
-                sli.dimension = region
-            # The observation_ids list was created in the parser and WILL NOT be
-            # persisted. The list is only used here to link with the observations
-            for rel_obs in [obs for obs in observations if obs.id 
-                    in sli.observation_ids]:
+            for rel_obs in session.query(model.Observation)\
+                    .filter(model.Observation.id.in_(sli.observation_ids)).all():
                 rel_obs.slice_id = sli.id
-        session.add_all(slices)
-        return slices
+            session.add(sli)
 
-    def get_region_by_uncode(self, session, un_code):
-        if un_code is not None:
-            return session.query(model.Region)\
-                    .filter(model.Region.un_code == un_code).first()
-        else:
-            return None
-
-    def _store_indicator_groups(self, session, compounds):
+    def _store_indicator_groups(self, session):
         groups = self.indicator_serv.get_indicator_groups()
-        result = []
         for group in groups:
-            indicator_ref = next((comp for comp in compounds \
-                if comp.id == group.indicator_ref), None)
+            indicator_ref = session.query(model.CompoundIndicator)\
+                .filter(model.CompoundIndicator.id == group.indicator_ref)\
+                .first()
             indicator_ref.indicator_ref_group_id = group.id
-            result.append(session.merge(group))
-        return result
+            session.merge(group)
 
     def _store_simple_indicators(self, dataset, session):
-        indicators = self.indicator_serv.get_simple_indicators()
-        result = []
-        for ind in indicators:
-            # The db_ind contains the indicator data merged with the database and
-            # will be used to link with all the other objects
-            db_ind = session.merge(ind)
-            session.flush()
-            # The indicator may already exist n the DB, so we have to check
-            # before the assignment
-            if not db_ind.id in [indicator.id for indicator in dataset.indicators]:
-                dataset.add_indicator(db_ind)
-            result.append(db_ind)
-        return result
+        for item in self.indicator_serv.get_simple_indicators():
+            ind = session.merge(item)
+            dataset.add_indicator(ind)
 
-    def _store_indicator_relationships(self, dataset, session):
+    def _store_indicator_relationships(self, session):
         indicators = self.indicator_serv.get_simple_indicators()
         for ind in indicators:
             # Each indicator may be related with others
@@ -100,23 +82,13 @@ class ReceiverSQLService(object):
                 relationships.append(rel)
             session.add_all(relationships)
 
-
-    def _store_compound_indicators(self, dataset, indicators, session):
-        compounds = self.indicator_serv.get_compound_indicators()
-        result = []
-        for ind in compounds:
-            db_ind = session.merge(ind)
-            session.flush()
-            # The related_id field was created in the parser and WILL NOT be
-            # persisted to the database. It is used to link the simple
-            # indicators with its compound indicator
-            for id in ind.related_id:
-                related = next(rel for rel in indicators if rel.id == id)
-                related.compound_indicator_id = db_ind.id
-            if not db_ind.id in [indicator.id for indicator in dataset.indicators]:
-                dataset.add_indicator(db_ind)
-            result.append(db_ind)
-        return result
+    def _store_compound_indicators(self, dataset, session):
+        for item in self.indicator_serv.get_compound_indicators():
+            ind = session.merge(item)
+            dataset.add_indicator(ind)
+            for related in session.query(model.Indicator)\
+                    .filter(model.Indicator.id.in_(item.related_id)).all():
+                related.compound_indicator_id = ind.id
 
     def _store_metadata(self, user_ip, session):
         datasource = self.metadata_serv.get_datasource()
@@ -128,15 +100,8 @@ class ReceiverSQLService(object):
         dataset.datasource = datasource
         return session.merge(dataset)
 
+    #@profile
     def _store_observations(self, dataset, session):
-        observations = self.observation_serv.get_observations()
-        for obs in observations:
+        for obs in self.observation_serv.get_observations():
             obs.dataset_id = dataset.id
-            # The region_code field was created in the parser and WILL NOT be
-            # persisted, it is only used to link with the corresponding region
-            if obs.region_code is not None:
-                region = self.get_region_by_uncode(session, obs.region_code)
-                if region is not None:
-                    obs.region_id = region.id
-        session.add_all(observations)
-        return observations
+            session.add(obs)
