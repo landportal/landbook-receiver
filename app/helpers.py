@@ -2,6 +2,7 @@ import parser
 import model.models as model
 import datetime
 import app
+#from memory_profiler import profile
 
 
 class IndicatorSQLService(object):
@@ -23,11 +24,8 @@ class IndicatorSQLService(object):
         return ind
 
     def get_compound_indicators(self):
-        compounds = self._parser.get_compound_indicators()
-        for comp in compounds:
-            comp.starred = self._dbhelper.check_indicator_starred(comp.id)
-            comp.last_update = self._time
-        return compounds
+        return (self._enrich_indicator(ind) for ind
+                in self._parser.get_compound_indicators())
 
     def get_indicator_groups(self):
         return self._parser.get_indicator_groups()
@@ -38,6 +36,7 @@ class ObservationSQLService(object):
         self._parser = parser.Parser(content)
         self._dbhelper = DBHelper()
 
+    #@profile
     def get_observations(self):
         return (self._enrich_observation(obs) for obs
                 in self._parser.get_observations())

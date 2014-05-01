@@ -1,12 +1,18 @@
 import model.models as model
-import xml.etree.ElementTree as Et
+try:
+    import xml.etree.cElementTree as Et
+except ImportError:
+    import xml.etree.ElementTree as Et
 import datetime
+#from memory_profiler import profile
 
 
 class Parser(object):
+    #@profile
     def __init__(self, content):
         self._content = content
         self._root = Et.fromstring(content)
+        #self._iter = Et.iterparse(StringIO.StringIO(content))
 
     def get_simple_indicators(self):
         """Return a list of indicators
@@ -19,10 +25,13 @@ class Parser(object):
                 in ind_root.findall("indicator"))
 
     def get_compound_indicators(self):
-        indicators = self._root.find('indicators').findall('compound_indicator')
-        compound_indicators = [self._get_compound_indicator(item) for item
-                               in indicators]
-        return compound_indicators
+        #indicators = self._root.find('indicators').findall('compound_indicator')
+        #compound_indicators = [self._get_compound_indicator(item) for item
+        #                       in indicators]
+        #return compound_indicators
+        ind_root = self._root.find("indicators")
+        return (self._get_compound_indicator(ind) for ind
+                in ind_root.findall("compound_indicator"))
 
     def get_indicator_groups(self):
         groups_element = self._root.find('indicator_groups')\
@@ -127,6 +136,7 @@ class Parser(object):
         indicator.indicator_ref = group.get('indicator-ref')
         return indicator
 
+    #@profile
     def get_observations(self):
         obs_root = self._root.find("observations")
         return (self._get_observation(obs) for obs in obs_root.findall("observation"))

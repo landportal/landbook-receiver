@@ -28,9 +28,12 @@ class ReceiverSQLService(object):
         session.flush()
         # Store indicators
         self._store_simple_indicators(dataset, session)
-        compounds = self._store_compound_indicators(dataset, session)
-        self._store_indicator_relationships(dataset, session)
-        groups = self._store_indicator_groups(session, compounds)
+        session.flush()
+        self._store_compound_indicators(dataset, session)
+        session.flush()
+        self._store_indicator_relationships(session)
+        session.flush()
+        self._store_indicator_groups(session)
         session.flush()
         session.expunge_all()
         # Store observations
@@ -41,7 +44,6 @@ class ReceiverSQLService(object):
         self._store_slices(dataset, session)
         session.flush()
 
-    #@profile
     def _store_slices(self, dataset, session):
         # The observation_ids list was created in the parser and WILL NOT be
         # persisted. The list is only used here to link with the observations
@@ -52,22 +54,21 @@ class ReceiverSQLService(object):
                 rel_obs.slice_id = sli.id
             session.add(sli)
 
-    def _store_indicator_groups(self, session, compounds):
+    def _store_indicator_groups(self, session):
         groups = self.indicator_serv.get_indicator_groups()
-        result = []
         for group in groups:
-            indicator_ref = next((comp for comp in compounds \
-                if comp.id == group.indicator_ref), None)
+            indicator_ref = session.query(model.CompoundIndicator)\
+                .filter(model.CompoundIndicator.id == group.indicator_ref)\
+                .first()
             indicator_ref.indicator_ref_group_id = group.id
-            result.append(session.merge(group))
-        return result
+            session.merge(group)
 
     def _store_simple_indicators(self, dataset, session):
         for item in self.indicator_serv.get_simple_indicators():
             ind = session.merge(item)
             dataset.add_indicator(ind)
 
-    def _store_indicator_relationships(self, dataset, session):
+    def _store_indicator_relationships(self, session):
         indicators = self.indicator_serv.get_simple_indicators()
         for ind in indicators:
             # Each indicator may be related with others
@@ -82,21 +83,12 @@ class ReceiverSQLService(object):
             session.add_all(relationships)
 
     def _store_compound_indicators(self, dataset, session):
-        compounds = self.indicator_serv.get_compound_indicators()
-        result = []
-        for ind in compounds:
-            db_ind = session.merge(ind)
-            session.flush()
-            # The related_id field was created in the parser and WILL NOT be
-            # persisted to the database. It is used to link the simple
-            # indicators with its compound indicator
-            for id in ind.related_id:
-                related = session.query(model.Indicator).filter(model.Indicator.id == id).first()
-                related.compound_indicator_id = db_ind.id
-            if not db_ind.id in [indicator.id for indicator in dataset.indicators]:
-                dataset.add_indicator(db_ind)
-            result.append(db_ind)
-        return result
+        for item in self.indicator_serv.get_compound_indicators():
+            ind = session.merge(item)
+            dataset.add_indicator(ind)
+            for related in session.query(model.Indicator)\
+                    .filter(model.Indicator.id.in_(item.related_id)).all():
+                related.compound_indicator_id = ind.id
 
     def _store_metadata(self, user_ip, session):
         datasource = self.metadata_serv.get_datasource()
