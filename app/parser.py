@@ -4,11 +4,11 @@ try:
 except ImportError:
     import xml.etree.ElementTree as Et
 import datetime
-#from memory_profiler import profile
+from memory_profiler import profile
 
 
 class Parser(object):
-    #@profile
+    @profile
     def __init__(self, content):
         self._content = content
         self._root = Et.fromstring(content)
