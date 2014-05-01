@@ -1,10 +1,9 @@
 import flask_restful
 import app
-import app.services as services
+from app.services import ReceiverSQLService
 
 
 class Receiver(flask_restful.Resource):
-
     @staticmethod
     def post():
         """ Parse an XML and store the model mapping into the database.
@@ -16,7 +15,7 @@ class Receiver(flask_restful.Resource):
         user_ip = flask_restful.request.remote_addr
         if 'xml' in flask_restful.request.form:
             content = flask_restful.request.form['xml']
-            services.ReceiverSQLService(content.encode('utf-8')).store_data(user_ip)
+            ReceiverSQLService(content.encode('utf-8')).store_data(user_ip)
         else:
             flask_restful.abort(400)
 

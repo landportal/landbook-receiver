@@ -3,7 +3,6 @@ import app
 import create_db
 import flask_testing
 import model.models as model
-import app.helpers
 
 
 class ServiceTest(flask_testing.TestCase):
