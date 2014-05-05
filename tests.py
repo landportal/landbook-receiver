@@ -202,6 +202,13 @@ class IndicatorsTest(ReceiverParserTest):
         for ind in indicators:
             self.assertTrue(ind.last_update == ref_time)
 
+    def test_measurement_unit(self):
+        ind = self.session.query(model.Indicator).filter(model.Indicator.id == "INDIPFRI2").first()
+        measurement = ind.measurement_unit
+        self.assertTrue(measurement.name == "%")
+        self.assertTrue(measurement.convertible_to == "porcentaje")
+        self.assertTrue(measurement.factor == 1)
+
 
 class CompoundIndicatorsTest(ReceiverParserTest):
     """CompoundIndicator tests"""
@@ -232,6 +239,12 @@ class CompoundIndicatorsTest(ReceiverParserTest):
         self.assertTrue("INDIPFRI0" in ref_ids)
         self.assertTrue("INDIPFRI2" in ref_ids)
 
+    def test_measurement_unit(self):
+        ind = self.session.query(model.Indicator).filter(model.Indicator.id == "INDIPFRI3").first()
+        measurement = ind.measurement_unit
+        self.assertTrue(measurement.name == "meters")
+        self.assertTrue(measurement.convertible_to == "kilometers")
+        self.assertTrue(measurement.factor == 1000)
 
 class IndicatorGroupsTest(ReceiverParserTest):
     """IndicatorGroup tests"""
