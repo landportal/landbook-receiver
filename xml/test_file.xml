@@ -79,7 +79,7 @@
 			<ind_description_fr>Inconnu</ind_description_fr>
 			<topic-ref>TOP99</topic-ref>
 			<preferable_tendency>decrease</preferable_tendency>
-			<measure_unit>%</measure_unit>
+			<measure_unit convertible_to="porcentaje" factor="1">%</measure_unit>
             <splitsIn>
                 <indicator-ref id="INDIPFRI0"/>
                 <indicator-ref id="INDIPFRI1"/>
@@ -94,7 +94,7 @@
 			<ind_description_fr>Inconnu</ind_description_fr>
 			<topic-ref>TOP99</topic-ref>
 			<preferable_tendency>decrease</preferable_tendency>
-			<measure_unit>%</measure_unit>
+			<measure_unit convertible_to="porcentaje" factor="1">%</measure_unit>
 		</indicator>
 		<indicator id="INDIPFRI1">
 			<ind_name_en>Prevalence of underweight in children under five years  (%)</ind_name_en>
@@ -105,7 +105,7 @@
 			<ind_description_fr>Inconnu</ind_description_fr>
 			<topic-ref>TOP99</topic-ref>
 			<preferable_tendency>decrease</preferable_tendency>
-			<measure_unit>%</measure_unit>
+			<measure_unit convertible_to="porcentaje" factor="1">%</measure_unit>
 		</indicator>
         <compound_indicator id="INDIPFRI3">
 			<ind_name_en>Compound indicator name</ind_name_en>
@@ -116,7 +116,7 @@
 			<ind_description_fr>Description</ind_description_fr>
 			<topic-ref>TOP99</topic-ref>
 			<preferable_tendency>increase</preferable_tendency>
-			<measure_unit>%</measure_unit>
+            <measure_unit convertible_to="kilometers" factor="1000">meters</measure_unit>
             <indicator-ref id="INDIPFRI0"/>
             <indicator-ref id="INDIPFRI2"/>
 		</compound_indicator>
