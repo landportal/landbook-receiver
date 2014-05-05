@@ -104,20 +104,30 @@ class ReceiverRDFService(object):
 
         return graph
 
-    # def add_users_triples(self, graph):
-    #     for usr in self.parser.get_user():
-    #         graph.add((prefix_.term(usr.user_id), RDF.type,
-    #                FOAF.Person))
-    #         graph.add((prefix_.term(usr.user_id), RDFS.label,
-    #                Literal(usr.user_id, lang='en')))
-    #         graph.add((prefix_.term(usr.user_id), FOAF.name,
-    #                Literal(usr.user_id)))
-    #         graph.add((prefix_.term(usr.user_id), FOAF.account,
-    #                Literal(usr.user_id)))
-    #         graph.add((prefix_.term(usr.user_id), org.term("memberOf"),
-    #                prefix_.term(str(usr.organization))))
-    #
-    #     return graph
+    def add_users_triples(self, graph):
+        usr = self.parser.get_user()
+        graph.add((prefix_.term(usr.id), RDF.type,
+               FOAF.Person))
+        graph.add((prefix_.term(usr.id), RDFS.label,
+               Literal(usr.id, lang='en')))
+        graph.add((prefix_.term(usr.id), FOAF.name,
+               Literal(usr.id)))
+        graph.add((prefix_.term(usr.id), FOAF.account,
+               Literal(usr.id)))
+        graph.add((prefix_.term(usr.id), org.term("memberOf"),
+               prefix_.term(str(usr.organization_id))))
+
+        return graph
+
+    def add_organizations_triples(self, graph):
+        organization = self.parser.get_organization()
+        graph.add((prefix_.term(organization.id), RDF.type,
+               org.term("Organization")))
+        graph.add((prefix_.term(organization.id), RDFS.label,
+               Literal(organization.name, lang='en')))
+        graph.add((prefix_.term(organization.id), FOAF.homepage,
+               Literal(organization.url)))
+        return graph
 
     # def add_topics_triples(self, graph):
     #     for topic in self.parser.get:
@@ -126,15 +136,32 @@ class ReceiverRDFService(object):
     #         g.add((prefix_.term(topic.topic), RDFS.label,
     #                Literal(topic.topic, lang='en')))
 
+    def add_licenses_triples(self, graph):
+        # TODO: Review get_licence public scope
+        lic = self.parser._get_license()
+        graph.add((prefix_.term(lic.id), RDF.type,
+                   lb.term("License")))
+
+        graph.add((prefix_.term(lic.id), lb.term("name"),
+                   Literal(lic.name)))
+
+        graph.add((prefix_.term(lic.id), lb.term("description"),
+                   Literal(lic.description)))
+
+        graph.add((prefix_.term(lic.id), lb.term("url"),
+                   Literal(lic.url)))
+
+        graph.add((prefix_.term(lic.id), lb.term("republish"),
+                   Literal(lic.republish)))
+
+        return graph
+
     def serialize_rdf_xml(self, graph):
         serialized = graph.serialize(format='application/rdf+xml')
         with open('../datasets/dataset.rdf', 'w') as dataset:
             dataset.write(serialized)
 
-
     def serialize_turtle(self, graph):
         serialized = graph.serialize(format='turtle')
         with open('../datasets/dataset.ttl', 'w') as dataset:
             dataset.write(serialized)
-
-

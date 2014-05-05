@@ -18,7 +18,12 @@ def feed_rdf():
     rdf_service.add_observations_triples(graph)
     rdf_service.add_indicators_triples(graph)
     rdf_service.add_slices_triples(graph)
+    rdf_service.add_users_triples(graph)
+    rdf_service.add_organizations_triples(graph)
+    rdf_service.add_licenses_triples(graph)
+
     bind_namespaces(graph)
+
     rdf_service.serialize_turtle(graph)
     rdf_service.serialize_rdf_xml(graph)
 

@@ -44,7 +44,7 @@
     rdfs:comment "Longer description of Under-five Mortality rate  (%)"@en .
 
 :OBSIPFRI0 a qb:Observation ;
-    dcterms:issued "<model.models.Instant object at 0x208e710>"^^xsd:dateTime ;
+    dcterms:issued "<model.models.Instant object at 0x1c797d0>"^^xsd:dateTime ;
     qb:dataSet :None ;
     qb:slice :None ;
     cex:computation cex:None ;
@@ -54,7 +54,7 @@
     cex:value "None"^^xsd:double .
 
 :OBSIPFRI1 a qb:Observation ;
-    dcterms:issued "<model.models.Instant object at 0x1f7c510>"^^xsd:dateTime ;
+    dcterms:issued "<model.models.Instant object at 0x1b7bd10>"^^xsd:dateTime ;
     qb:dataSet :None ;
     qb:slice :None ;
     cex:computation cex:None ;
@@ -64,7 +64,7 @@
     cex:value "None"^^xsd:double .
 
 :OBSIPFRI2597 a qb:Observation ;
-    dcterms:issued "<model.models.Instant object at 0x1f55350>"^^xsd:dateTime ;
+    dcterms:issued "<model.models.Instant object at 0x1b553d0>"^^xsd:dateTime ;
     qb:dataSet :None ;
     qb:slice :None ;
     cex:computation cex:None ;
@@ -74,7 +74,7 @@
     cex:value "None"^^xsd:double .
 
 :OBSIPFRI2598 a qb:Observation ;
-    dcterms:issued "<model.models.Instant object at 0x206dc50>"^^xsd:dateTime ;
+    dcterms:issued "<model.models.Instant object at 0x1b79850>"^^xsd:dateTime ;
     qb:dataSet :None ;
     qb:slice :None ;
     cex:computation cex:None ;
@@ -84,7 +84,7 @@
     cex:value "None"^^xsd:double .
 
 :OBSIPFRI2599 a qb:Observation ;
-    dcterms:issued "<model.models.Instant object at 0x2078710>"^^xsd:dateTime ;
+    dcterms:issued "<model.models.Instant object at 0x1c6f090>"^^xsd:dateTime ;
     qb:dataSet :None ;
     qb:slice :None ;
     cex:computation cex:None ;
@@ -111,5 +111,20 @@
     cex:indicator :None ;
     lb:dimension : .
 
-: a cex:Area .
+:USRIPFRIIMPORTER a foaf:Person ;
+    rdfs:label "USRIPFRIIMPORTER"@en ;
+    org:memberOf :None ;
+    foaf:account "USRIPFRIIMPORTER" ;
+    foaf:name "USRIPFRIIMPORTER" .
+
+<http://example.org/http://www.ifpri.org/> a org:Organization ;
+    rdfs:label "IFPRI - International Food Policy Research Institute"@en ;
+    foaf:homepage "http://www.ifpri.org/" .
+
+: a cex:Area,
+        lb:License ;
+    lb:description "Attribution, no modification and non commercial without permission." ;
+    lb:name "IPFRI Copyright" ;
+    lb:republish true ;
+    lb:url "http://www.ifpri.org/copyright" .
 
