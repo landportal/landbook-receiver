@@ -1,0 +1,115 @@
+@prefix : <http://example.org/> .
+@prefix cex: <http://purl.org/weso/computex/ontology#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix lb: <http://purl.org/weso/landbook/ontology#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sdmx-code: <http://purl.org/linked-data/sdmx/2009/code#> .
+@prefix sdmx-concept: <http://purl.org/linked-data/sdmx/2009/concept#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:INDIPFRI0 a cex:Indicator ;
+    rdfs:label "Prevalence of undernourishment in the population  (%)"@en ;
+    lb:indicatorType cex:indicators ;
+    lb:last_update "None"^^xsd:dateTime ;
+    lb:measurement cex: ;
+    lb:preferable_tendency cex:decrease ;
+    lb:starred "false"^^xsd:Boolean ;
+    lb:topic cex:TOP99 ;
+    rdfs:comment "Longer description of Prevalence of undernourishment in the population  (%)"@en .
+
+:INDIPFRI1 a cex:Indicator ;
+    rdfs:label "Prevalence of underweight in children under five years  (%)"@en ;
+    lb:indicatorType cex:indicators ;
+    lb:last_update "None"^^xsd:dateTime ;
+    lb:measurement cex: ;
+    lb:preferable_tendency cex:decrease ;
+    lb:starred "false"^^xsd:Boolean ;
+    lb:topic cex:TOP99 ;
+    rdfs:comment "Longer description of Prevalence of underweight in children under five years  (%)"@en .
+
+:INDIPFRI2 a cex:Indicator ;
+    rdfs:label "Under-five Mortality rate  (%)"@en ;
+    lb:indicatorType cex:indicators ;
+    lb:last_update "None"^^xsd:dateTime ;
+    lb:measurement cex: ;
+    lb:preferable_tendency cex:decrease ;
+    lb:starred "false"^^xsd:Boolean ;
+    lb:topic cex:TOP99 ;
+    rdfs:comment "Longer description of Under-five Mortality rate  (%)"@en .
+
+:OBSIPFRI0 a qb:Observation ;
+    dcterms:issued "<model.models.Instant object at 0x208e710>"^^xsd:dateTime ;
+    qb:dataSet :None ;
+    qb:slice :None ;
+    cex:computation cex:None ;
+    cex:ref-area : ;
+    cex:ref-indicator :None ;
+    cex:ref-time : ;
+    cex:value "None"^^xsd:double .
+
+:OBSIPFRI1 a qb:Observation ;
+    dcterms:issued "<model.models.Instant object at 0x1f7c510>"^^xsd:dateTime ;
+    qb:dataSet :None ;
+    qb:slice :None ;
+    cex:computation cex:None ;
+    cex:ref-area : ;
+    cex:ref-indicator :None ;
+    cex:ref-time : ;
+    cex:value "None"^^xsd:double .
+
+:OBSIPFRI2597 a qb:Observation ;
+    dcterms:issued "<model.models.Instant object at 0x1f55350>"^^xsd:dateTime ;
+    qb:dataSet :None ;
+    qb:slice :None ;
+    cex:computation cex:None ;
+    cex:ref-area : ;
+    cex:ref-indicator :None ;
+    cex:ref-time : ;
+    cex:value "None"^^xsd:double .
+
+:OBSIPFRI2598 a qb:Observation ;
+    dcterms:issued "<model.models.Instant object at 0x206dc50>"^^xsd:dateTime ;
+    qb:dataSet :None ;
+    qb:slice :None ;
+    cex:computation cex:None ;
+    cex:ref-area : ;
+    cex:ref-indicator :None ;
+    cex:ref-time : ;
+    cex:value "None"^^xsd:double .
+
+:OBSIPFRI2599 a qb:Observation ;
+    dcterms:issued "<model.models.Instant object at 0x2078710>"^^xsd:dateTime ;
+    qb:dataSet :None ;
+    qb:slice :None ;
+    cex:computation cex:None ;
+    cex:ref-area : ;
+    cex:ref-indicator :None ;
+    cex:ref-time : ;
+    cex:value "None"^^xsd:double .
+
+:SLIIPFRI0 a qb:Slice ;
+    qb:dataSet :None ;
+    qb:observation :Obs ;
+    cex:indicator :None ;
+    lb:dimension : .
+
+:SLIIPFRI1 a qb:Slice ;
+    qb:dataSet :None ;
+    qb:observation :Obs ;
+    cex:indicator :None ;
+    lb:dimension : .
+
+:SLIIPFRI2 a qb:Slice ;
+    qb:dataSet :None ;
+    qb:observation :Obs ;
+    cex:indicator :None ;
+    lb:dimension : .
+
+: a cex:Area .
+

@@ -1,6 +1,6 @@
 import flask_restful
 import app
-from app.services import ReceiverSQLService
+from app.sql_service import ReceiverSQLService
 
 
 class Receiver(flask_restful.Resource):
