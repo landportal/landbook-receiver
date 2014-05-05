@@ -5,3 +5,12 @@
 ALLOWED_IPS = [
     "127.0.0.1",
 ]
+
+# Those are the database configuration parameters.  Change them
+# according to your configuration.  You may need to restart the
+# receiver
+MYSQL_URL = "localhost"
+MYSQL_PORT = "3306"
+MYSQL_DATABASE = "landportal"
+MYSQL_USER = "root"
+MYSQL_PASSWORD = "root"
