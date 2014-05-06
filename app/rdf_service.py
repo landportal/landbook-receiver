@@ -2,13 +2,15 @@ __author__ = 'guillermo'
 
 from parser import Parser
 from rdf_utils.namespaces_handler import *
-from rdflib import Literal, XSD
+from rdflib import Literal, XSD, URIRef
 from rdflib.namespace import RDF, RDFS, FOAF
+import datetime
 
 
 class ReceiverRDFService(object):
     def __init__(self, content):
         self.parser = Parser(content)
+        self.time = datetime.datetime.now()
 
     def add_observations_triples(self, graph):
         for obs in self.parser.get_observations():
@@ -16,28 +18,28 @@ class ReceiverRDFService(object):
                        qb.term("Observation")))
 
             graph.add((prefix_.term(obs.id), cex.term("ref-time"),
-                       prefix_.term(obs.ref_time)))
+                       prefix_.term(obs.ref_time.value)))
 
             graph.add((prefix_.term(obs.id), cex.term("ref-area"),
-                       prefix_.term(obs.region_id)))
+                       prefix_.term(obs.region_code)))
 
             graph.add((prefix_.term(obs.id), cex.term("ref-indicator"),
-                       prefix_.term(str(obs.indicator))))
+                       prefix_.term(obs.indicator_id)))
 
             graph.add((prefix_.term(obs.id), cex.term("value"),
-                       Literal(obs.value_id, datatype=XSD.double)))
+                       Literal(str(obs.value.value), datatype=XSD.double)))
 
             graph.add((prefix_.term(obs.id), cex.term("computation"),
-                       cex.term(str(obs.computation.id))))
+                       cex.term(obs.computation.uri)))
 
             graph.add((prefix_.term(obs.id), dcterms.term("issued"),
-                       Literal(obs.issued, datatype=XSD.dateTime)))
+                       Literal(obs.issued.timestamp, datatype=XSD.dateTime)))
 
             graph.add((prefix_.term(obs.id), qb.term("dataSet"),
-                       prefix_.term(str(obs.dataset))))
+                       prefix_.term(obs.dataset_id)))
 
             graph.add((prefix_.term(obs.id), qb.term("slice"),
-                       prefix_.term(str(obs.slice_id))))
+                       prefix_.term(obs.slice_id)))
 
             # graph.add((prefix_.term(obs.id), RDFS.label,
             #        Literal(obs.description, lang='en')))
@@ -52,7 +54,6 @@ class ReceiverRDFService(object):
                        cex.term("Area")))
         return graph
 
-
     def add_indicators_triples(self, graph):
         for ind in self.parser.get_simple_indicators():
             graph.add((prefix_.term(ind.id), RDF.type,
@@ -62,10 +63,10 @@ class ReceiverRDFService(object):
                    cex.term(ind.preferable_tendency)))
 
             graph.add((prefix_.term(ind.id), lb.term("measurement"),
-                   cex.term(ind.measurement_unit)))
+                   cex.term(ind.measurement_unit.name)))
 
             graph.add((prefix_.term(ind.id), lb.term("last_update"),
-                   Literal(ind.last_update, datatype=XSD.dateTime)))
+                   Literal(self.time, datatype=XSD.dateTime)))
 
             graph.add((prefix_.term(ind.id), lb.term("starred"),
                    Literal(ind.starred, datatype=XSD.Boolean)))
@@ -91,13 +92,20 @@ class ReceiverRDFService(object):
                    qb.term("Slice")))
 
             graph.add((prefix_.term(slc.id), cex.term("indicator"),
-                   prefix_.term(str(slc.indicator))))
+                   prefix_.term(str(slc.indicator_id))))
 
             graph.add((prefix_.term(slc.id), qb.term("observation"),
-                   prefix_.term("Obs")))
+                   prefix_.term(slc.observation_ids[0])))
+
+            if slc.region_code is not None:
+                dimension = slc.region_code
+            elif slc.country_code is not None:
+                dimension = slc.country_code
+            else:
+                dimension = slc.dimension.value
 
             graph.add((prefix_.term(slc.id), lb.term("dimension"),
-                   prefix_.term(slc.dimension)))
+                   prefix_.term(dimension)))
 
             graph.add((prefix_.term(slc.id), qb.term("dataSet"),
                    prefix_.term(str(slc.dataset))))
@@ -121,11 +129,11 @@ class ReceiverRDFService(object):
 
     def add_organizations_triples(self, graph):
         organization = self.parser.get_organization()
-        graph.add((prefix_.term(organization.id), RDF.type,
+        graph.add((URIRef(organization.id), RDF.type,
                org.term("Organization")))
-        graph.add((prefix_.term(organization.id), RDFS.label,
+        graph.add((URIRef(organization.id), RDFS.label,
                Literal(organization.name, lang='en')))
-        graph.add((prefix_.term(organization.id), FOAF.homepage,
+        graph.add((URIRef(organization.id), FOAF.homepage,
                Literal(organization.url)))
         return graph
 
@@ -137,21 +145,20 @@ class ReceiverRDFService(object):
     #                Literal(topic.topic, lang='en')))
 
     def add_licenses_triples(self, graph):
-        # TODO: Review get_licence public scope
-        lic = self.parser._get_license()
-        graph.add((prefix_.term(lic.id), RDF.type,
+        lic = self.parser.get_license()
+        graph.add((URIRef(lic.url), RDF.type,
                    lb.term("License")))
 
-        graph.add((prefix_.term(lic.id), lb.term("name"),
+        graph.add((URIRef(lic.url), lb.term("name"),
                    Literal(lic.name)))
 
-        graph.add((prefix_.term(lic.id), lb.term("description"),
+        graph.add((URIRef(lic.url), lb.term("description"),
                    Literal(lic.description)))
 
-        graph.add((prefix_.term(lic.id), lb.term("url"),
+        graph.add((URIRef(lic.url), lb.term("url"),
                    Literal(lic.url)))
 
-        graph.add((prefix_.term(lic.id), lb.term("republish"),
+        graph.add((URIRef(lic.url), lb.term("republish"),
                    Literal(lic.republish)))
 
         return graph

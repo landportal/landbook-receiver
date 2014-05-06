@@ -50,10 +50,10 @@ class Parser(object):
     def get_dataset(self):
         dataset = model.Dataset()
         dataset.sdmx_frequency = self._root.find('import_process').find('sdmx_frequency').text
-        dataset.license = self._get_license()
+        dataset.license = self.get_license()
         return dataset
 
-    def _get_license(self):
+    def get_license(self):
         """Parse a license node and return a License object."""
         name = self._root.find('license').find('lic_name').text
         description = self._root.find('license').find('lic_description').text
@@ -67,7 +67,7 @@ class Parser(object):
 
     def _get_simple_indicator(self, ind):
         indicator = model.Indicator(id=ind.get('id'))
-        indicator.measurement_unit = model.MeasurementUnit(name=ind.find('measure_unit').text)
+        indicator.measurement_unit = self._parse_measurement_unit(ind.find("measure_unit"))
         indicator.topic_id = ind.find('topic-ref').text
         indicator.preferable_tendency = ind.find('preferable_tendency').text
         indicator.add_translation(
@@ -93,7 +93,7 @@ class Parser(object):
 
     def _get_compound_indicator(self, ind):
         indicator = model.CompoundIndicator(id=ind.get('id'))
-        indicator.measurement_unit = model.MeasurementUnit(name=ind.find('measure_unit').text)
+        indicator.measurement_unit = self._parse_measurement_unit(ind.find("measure_unit"))
         indicator.topic_id = ind.find('topic-ref').text
         indicator.preferable_tendency = ind.find('preferable_tendency').text
         indicator.add_translation(
@@ -219,3 +219,14 @@ class Parser(object):
     def _parse_computation(node):
         computation = model.Computation(uri=node.text)
         return computation
+
+    @staticmethod
+    def _parse_measurement_unit(node):
+        """ Returns a MeasurementUnit.
+         @param node -> the XML node containing the measurement information
+        """
+        return model.MeasurementUnit(
+            name=node.text,
+            convertible_to=node.get("convertible_to"),
+            factor=int(node.get("factor"))
+        )

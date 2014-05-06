@@ -21,8 +21,10 @@ class ReceiverSQLService(object):
             session.close()
 
     def _store_data(self, user_ip, session):
-        dataset = self._store_metadata(user_ip, session)
-        session.flush()
+        organization = self._store_organization(session)
+        self._store_user(session, organization, user_ip)
+        datasource = self._store_datasource(session, organization)
+        dataset = self._store_dataset(session, datasource)
         # Store indicators
         self._store_simple_indicators(dataset, session)
         self._store_compound_indicators(dataset, session)
@@ -79,16 +81,46 @@ class ReceiverSQLService(object):
             session.add_all(relationships)
         session.flush()
 
-    def _store_metadata(self, user_ip, session):
-        datasource = self.parser.get_datasource()
+    def _store_dataset(self, session, datasource):
         dataset = self.parser.get_dataset()
-        organization = self.parser.get_organization()
-        user = self.parser.get_user()
-        user.ip = user_ip
-        user.organization = organization
-        datasource.organization = organization
-        dataset.datasource = datasource
-        return session.merge(dataset)
+        dataset.datasource_id = datasource.id
+        session.add(dataset)
+        session.flush()
+        return dataset
+
+    def _store_datasource(self, session, organization):
+        xml_datasource = self.parser.get_datasource()
+        db_datasource = DBHelper.check_datasource(session, xml_datasource.name)
+        # The datasource may exist in the database.
+        if db_datasource is not None:
+            return db_datasource
+        else:
+            xml_datasource.organization_id = organization.id
+            session.add(xml_datasource)
+            session.flush()
+            return xml_datasource
+
+    def _store_organization(self, session):
+        xml_organization = self.parser.get_organization()
+        db_organization = DBHelper.check_organization(session, xml_organization.url)
+        if db_organization is not None:
+            return db_organization
+        else:
+            session.add(xml_organization)
+            session.flush()
+            return xml_organization
+
+    def _store_user(self, session, organization, user_ip):
+        xml_user = self.parser.get_user()
+        db_user = DBHelper.check_user(session, xml_user.id)
+        if db_user is not None:
+            return db_user
+        else:
+            xml_user.organization_id = organization.id
+            xml_user.ip = user_ip
+            session.add(xml_user)
+            session.flush()
+            return xml_user
 
     def _store_observations(self, dataset, session):
         def enrich_observation(obs):
@@ -129,6 +161,19 @@ class DBHelper(object):
             .filter(model.DataSource.name == datasource_name)\
             .first()
         return datasource
+
+    @staticmethod
+    def check_organization(session, organization_url):
+        organization = session.query(model.Organization)\
+            .filter(model.Organization.url == organization_url)\
+            .first()
+        return organization
+
+    @staticmethod
+    def check_user(session, user_id):
+        user = session.query(model.User).filter(model.User.id == user_id)\
+            .first()
+        return user
 
     @staticmethod
     def check_indicator_starred(session, indicator_id):

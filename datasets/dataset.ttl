@@ -13,21 +13,65 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-:INDIPFRI0 a cex:Indicator ;
-    rdfs:label "Prevalence of undernourishment in the population  (%)"@en ;
-    lb:indicatorType cex:indicators ;
-    lb:last_update "None"^^xsd:dateTime ;
-    lb:measurement cex: ;
-    lb:preferable_tendency cex:decrease ;
-    lb:starred "false"^^xsd:Boolean ;
-    lb:topic cex:TOP99 ;
-    rdfs:comment "Longer description of Prevalence of undernourishment in the population  (%)"@en .
+:OBSIPFRI1 a qb:Observation ;
+    dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice : ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area <http://example.org/8> ;
+    cex:ref-indicator :INDIPFRI1 ;
+    cex:ref-time <http://example.org/1990-1993> ;
+    cex:value 9e+00 .
+
+:OBSIPFRI2599 a qb:Observation ;
+    dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice : ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area <http://example.org/716> ;
+    cex:ref-indicator :INDIPFRI3 ;
+    cex:ref-time <http://example.org/2013-12> ;
+    cex:value 1.65e+01 .
+
+:SLIIPFRI0 a qb:Slice ;
+    qb:dataSet :None ;
+    qb:observation :OBSIPFRI0 ;
+    cex:indicator :INDIPFRI0 ;
+    lb:dimension <http://example.org/724> .
+
+:SLIIPFRI1 a qb:Slice ;
+    qb:dataSet :None ;
+    qb:observation :OBSIPFRI2597 ;
+    cex:indicator :INDIPFRI0 ;
+    lb:dimension :FRA .
+
+:SLIIPFRI2 a qb:Slice ;
+    qb:dataSet :None ;
+    qb:observation :OBSIPFRI2598 ;
+    cex:indicator :INDIPFRI0 ;
+    lb:dimension <http://example.org/1999-2002> .
+
+:USRIPFRIIMPORTER a foaf:Person ;
+    rdfs:label "USRIPFRIIMPORTER"@en ;
+    org:memberOf :None ;
+    foaf:account "USRIPFRIIMPORTER" ;
+    foaf:name "USRIPFRIIMPORTER" .
+
+<http://www.ifpri.org/> a org:Organization ;
+    rdfs:label "IFPRI - International Food Policy Research Institute"@en ;
+    foaf:homepage "http://www.ifpri.org/" .
+
+<http://www.ifpri.org/copyright> a lb:License ;
+    lb:description "Attribution, no modification and non commercial without permission." ;
+    lb:name "IPFRI Copyright" ;
+    lb:republish true ;
+    lb:url "http://www.ifpri.org/copyright" .
 
 :INDIPFRI1 a cex:Indicator ;
     rdfs:label "Prevalence of underweight in children under five years  (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "None"^^xsd:dateTime ;
-    lb:measurement cex: ;
+    lb:last_update "2014-05-06T13:14:28.731770"^^xsd:dateTime ;
+    lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
     lb:topic cex:TOP99 ;
@@ -36,95 +80,52 @@
 :INDIPFRI2 a cex:Indicator ;
     rdfs:label "Under-five Mortality rate  (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "None"^^xsd:dateTime ;
-    lb:measurement cex: ;
+    lb:last_update "2014-05-06T13:14:28.731770"^^xsd:dateTime ;
+    lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
     lb:topic cex:TOP99 ;
     rdfs:comment "Longer description of Under-five Mortality rate  (%)"@en .
 
 :OBSIPFRI0 a qb:Observation ;
-    dcterms:issued "<model.models.Instant object at 0x1c797d0>"^^xsd:dateTime ;
-    qb:dataSet :None ;
-    qb:slice :None ;
-    cex:computation cex:None ;
+    dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice : ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
     cex:ref-area : ;
-    cex:ref-indicator :None ;
-    cex:ref-time : ;
-    cex:value "None"^^xsd:double .
-
-:OBSIPFRI1 a qb:Observation ;
-    dcterms:issued "<model.models.Instant object at 0x1b7bd10>"^^xsd:dateTime ;
-    qb:dataSet :None ;
-    qb:slice :None ;
-    cex:computation cex:None ;
-    cex:ref-area : ;
-    cex:ref-indicator :None ;
-    cex:ref-time : ;
+    cex:ref-indicator :INDIPFRI0 ;
+    cex:ref-time <http://example.org/1990-1993> ;
     cex:value "None"^^xsd:double .
 
 :OBSIPFRI2597 a qb:Observation ;
-    dcterms:issued "<model.models.Instant object at 0x1b553d0>"^^xsd:dateTime ;
-    qb:dataSet :None ;
-    qb:slice :None ;
-    cex:computation cex:None ;
-    cex:ref-area : ;
-    cex:ref-indicator :None ;
-    cex:ref-time : ;
-    cex:value "None"^^xsd:double .
+    dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice : ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area <http://example.org/887> ;
+    cex:ref-indicator :INDIPFRI2 ;
+    cex:ref-time <http://example.org/2013> ;
+    cex:value 2.65e+01 .
 
 :OBSIPFRI2598 a qb:Observation ;
-    dcterms:issued "<model.models.Instant object at 0x1b79850>"^^xsd:dateTime ;
-    qb:dataSet :None ;
-    qb:slice :None ;
-    cex:computation cex:None ;
-    cex:ref-area : ;
-    cex:ref-indicator :None ;
-    cex:ref-time : ;
-    cex:value "None"^^xsd:double .
+    dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice : ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area <http://example.org/894> ;
+    cex:ref-indicator :INDIPFRI3 ;
+    cex:ref-time <http://example.org/2013-2> ;
+    cex:value 2.41e+01 .
 
-:OBSIPFRI2599 a qb:Observation ;
-    dcterms:issued "<model.models.Instant object at 0x1c6f090>"^^xsd:dateTime ;
-    qb:dataSet :None ;
-    qb:slice :None ;
-    cex:computation cex:None ;
-    cex:ref-area : ;
-    cex:ref-indicator :None ;
-    cex:ref-time : ;
-    cex:value "None"^^xsd:double .
+:INDIPFRI0 a cex:Indicator ;
+    rdfs:label "Prevalence of undernourishment in the population  (%)"@en ;
+    lb:indicatorType cex:indicators ;
+    lb:last_update "2014-05-06T13:14:28.731770"^^xsd:dateTime ;
+    lb:measurement <http://purl.org/weso/computex/ontology#%> ;
+    lb:preferable_tendency cex:decrease ;
+    lb:starred "false"^^xsd:Boolean ;
+    lb:topic cex:TOP99 ;
+    rdfs:comment "Longer description of Prevalence of undernourishment in the population  (%)"@en .
 
-:SLIIPFRI0 a qb:Slice ;
-    qb:dataSet :None ;
-    qb:observation :Obs ;
-    cex:indicator :None ;
-    lb:dimension : .
-
-:SLIIPFRI1 a qb:Slice ;
-    qb:dataSet :None ;
-    qb:observation :Obs ;
-    cex:indicator :None ;
-    lb:dimension : .
-
-:SLIIPFRI2 a qb:Slice ;
-    qb:dataSet :None ;
-    qb:observation :Obs ;
-    cex:indicator :None ;
-    lb:dimension : .
-
-:USRIPFRIIMPORTER a foaf:Person ;
-    rdfs:label "USRIPFRIIMPORTER"@en ;
-    org:memberOf :None ;
-    foaf:account "USRIPFRIIMPORTER" ;
-    foaf:name "USRIPFRIIMPORTER" .
-
-<http://example.org/http://www.ifpri.org/> a org:Organization ;
-    rdfs:label "IFPRI - International Food Policy Research Institute"@en ;
-    foaf:homepage "http://www.ifpri.org/" .
-
-: a cex:Area,
-        lb:License ;
-    lb:description "Attribution, no modification and non commercial without permission." ;
-    lb:name "IPFRI Copyright" ;
-    lb:republish true ;
-    lb:url "http://www.ifpri.org/copyright" .
+: a cex:Area .
 
