@@ -149,13 +149,21 @@ class TopicsTest(ReceiverParserTest):
     """Topic and TopicTranslation tests"""
     def test_number(self):
         topics = self.session.query(model.Topic).all()
-        self.assertTrue(len(topics) == 8)
+        self.assertTrue(len(topics) == 7)
 
     def test_indicators(self):
         topic = self.session.query(model.Topic)\
-            .filter(model.Topic.id == 'TOP99')\
+            .filter(model.Topic.id == 'TEMP_TOPIC')\
             .first()
-        self.assertTrue(len(topic.indicators) == 4)
+        self.assertTrue(len(topic.indicators) == 1)
+        topic2 = self.session.query(model.Topic)\
+            .filter(model.Topic.id == 'LAND_TENURE')\
+            .first()
+        self.assertTrue(len(topic2.indicators) == 2)
+        topic3 = self.session.query(model.Topic)\
+            .filter(model.Topic.id == 'FSECURITY_HUNGER')\
+            .first()
+        self.assertTrue(len(topic3.indicators) == 0)
 
     def test_translations(self):
         topics = self.session.query(model.Topic).all()
