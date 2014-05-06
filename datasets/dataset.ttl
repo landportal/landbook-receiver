@@ -70,7 +70,7 @@
 :INDIPFRI1 a cex:Indicator ;
     rdfs:label "Prevalence of underweight in children under five years  (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-06T13:14:28.731770"^^xsd:dateTime ;
+    lb:last_update "2014-05-06T15:10:51.794383"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
@@ -80,7 +80,7 @@
 :INDIPFRI2 a cex:Indicator ;
     rdfs:label "Under-five Mortality rate  (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-06T13:14:28.731770"^^xsd:dateTime ;
+    lb:last_update "2014-05-06T15:10:51.794383"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
@@ -120,7 +120,7 @@
 :INDIPFRI0 a cex:Indicator ;
     rdfs:label "Prevalence of undernourishment in the population  (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-06T13:14:28.731770"^^xsd:dateTime ;
+    lb:last_update "2014-05-06T15:10:51.794383"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
