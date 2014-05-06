@@ -85,12 +85,19 @@ class DatabasePopulator(object):
     def get_topics():
         from model import models
         top1 = models.Topic(id='CLIMATE_CHANGE')
+        top1.add_translation(models.TopicTranslation(lang_code='en', name='Climate change'))
         top2 = models.Topic(id='GEOGRAPH_SOCIO')
+        top2.add_translation(models.TopicTranslation(lang_code='en', name='Geograph Socio'))
         top3 = models.Topic(id='LAND_USE')
+        top3.add_translation(models.TopicTranslation(lang_code='en', name='Land Use'))
         top4 = models.Topic(id='LAND_GENDER')
-        top5 = models.Topic(id='LAND_TERNURE')
-        top6 = models.Topic(id='FSECURITY_HUNGE')
+        top4.add_translation(models.TopicTranslation(lang_code='en', name='Land Gender'))
+        top5 = models.Topic(id='LAND_TENURE')
+        top5.add_translation(models.TopicTranslation(lang_code='en', name='Land Tenure'))
+        top6 = models.Topic(id='FSECURITY_HUNGER')
+        top6.add_translation(models.TopicTranslation(lang_code='en', name='F Security Hunger'))
         top7 = models.Topic(id='TEMP_TOPIC')
+        top7.add_translation(models.TopicTranslation(lang_code='en', name='Temp Topic'))
 
         topics = [top1, top2, top3, top4, top5, top6, top7]
         return topics
