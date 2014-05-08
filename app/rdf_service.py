@@ -139,12 +139,43 @@ class ReceiverRDFService(object):
                Literal(organization.url)))
         return graph
 
-    # def add_topics_triples(self, graph):
-    #     for topic in self.parser.get:
-    #         g.add((prefix_.term(topic.topic), RDF.type,
-    #                lb.term("Topic")))
-    #         g.add((prefix_.term(topic.topic), RDFS.label,
-    #                Literal(topic.topic, lang='en')))
+    def add_topics_triples(self, graph):
+        for ind in self.parser.get_simple_indicators():
+            graph.add((prefix_.term(ind.topic_id), RDF.type,
+                   lb.term("Topic")))
+            graph.add((prefix_.term(ind.topic_id), RDFS.label,
+                   Literal(ind.topic_id, lang='en')))
+        return graph
+
+    def add_regions_triples(self, graph):
+        for obs in self.parser.get_observations():
+            region = None
+            if obs.country_code is not None:
+                region = obs.country_code
+            elif obs.region_code is not None:
+                region = obs.region_code
+
+            graph.add((prefix_.term(region), RDF.type,
+                          cex.term("Area")))
+
+            # graph.add((prefix_.term(obs.region_code), lb.term("UNCode"),
+            #        Literal("EU")))
+        return graph
+
+    def add_country_triples(self, graph):
+        for obs in self.parser.get_observations():
+            if obs.country_code is not None:
+                country = obs.country_code
+
+                graph.add((prefix_.term(country), RDF.type,
+                          cex.term("Area")))
+
+                graph.add((prefix_.term(country), RDFS.label,
+                  Literal(country, lang='en')))
+            #
+            # graph.add((prefix_.term(obs.region_code), lb.term("UNCode"),
+            #        Literal("EU")))
+        return graph
 
     def add_licenses_triples(self, graph):
         lic = self.parser.get_license()
@@ -161,9 +192,11 @@ class ReceiverRDFService(object):
                    Literal(lic.url)))
 
         graph.add((URIRef(lic.url), lb.term("republish"),
-                   Literal(lic.republish)))
+                   Literal(lic.republish, datatype=XSD.Boolean)))
 
         return graph
+
+
 
     def serialize_rdf_xml(self, graph):
         serialized = graph.serialize(format='application/rdf+xml')

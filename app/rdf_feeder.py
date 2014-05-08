@@ -21,6 +21,9 @@ def feed_rdf():
     rdf_service.add_users_triples(graph)
     rdf_service.add_organizations_triples(graph)
     rdf_service.add_licenses_triples(graph)
+    rdf_service.add_topics_triples(graph)
+    rdf_service.add_regions_triples(graph)
+    rdf_service.add_country_triples(graph)
 
     bind_namespaces(graph)
 
