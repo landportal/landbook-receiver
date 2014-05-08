@@ -30,10 +30,10 @@ class ReceiverSQLService(object):
         self._store_compound_indicators(dataset, session)
         self._store_indicator_relationships(session)
         self._store_indicator_groups(session)
-        # Store observations
-        self._store_observations(dataset, session)
         # Store slices
         self._store_slices(dataset, session)
+        # Store observations
+        self._store_observations(dataset, session)
 
     def _store_simple_indicators(self, dataset, session):
         def enrich_indicator(ind):
@@ -131,24 +131,37 @@ class ReceiverSQLService(object):
                 obs.region_id = DBHelper.find_country_id(session, obs.country_code)
             return obs
 
+        #We need to make the flush after a certain number of elements in order to control
+        #that not too many inserts are made at the same time, which results in a DataBase
+        #crash.
+        number_inserted = 0
         for observation in self.parser.get_observations():
             session.add(enrich_observation(observation))
+            number_inserted += 1
+            if number_inserted == 10000:
+                session.flush()
+                session.expunge_all()
+                number_inserted = 0
         session.flush()
         session.expunge_all()
 
     def _store_slices(self, dataset, session):
         def enrich_slice(sli):
             sli.dataset_id = dataset.id
-            for rel_obs in DBHelper.find_observations(session, sli.observation_ids):
-                rel_obs.slice_id = sli.id
             if sli.region_code is not None:
                 sli.dimension_id = DBHelper.find_region_id(session, sli.region_code)
             elif sli.country_code is not None:
                 sli.dimension_id = DBHelper.find_country_id(session, sli.country_code)
             return sli
 
+        number_inserted = 0
         for slice in self.parser.get_slices():
             session.add(enrich_slice(slice))
+            number_inserted += 1
+            if number_inserted == 5000:
+                number_inserted = 0
+                session.flush()
+                session.expunge_all()
         session.flush()
         session.expunge_all()
 
