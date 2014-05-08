@@ -10,6 +10,20 @@ class Parser(object):
     def __init__(self, content):
         self._content = content
         self._root = Et.fromstring(content)
+        self._observations_slices = self._get_observations_slices()
+
+    def _get_observations_slices(self):
+        """Creates an inverse index of observations and slices.
+
+        Returns a map in which the key is the observation ID and the
+        value is its corresponding slice ID."""
+        obs_map = {}
+        slices = self._root.findall(".//slice")
+        for sli in slices:
+            observations = sli.findall("./referred/observation-ref")
+            for obs in observations:
+                obs_map[obs.get("id")] = sli.get("id")
+        return obs_map
 
     def get_simple_indicators(self):
         """Return a list of indicators
@@ -136,6 +150,12 @@ class Parser(object):
         return (self._get_slice(sli) for sli in sli_root.findall('slice'))
 
     def _get_observation(self, obs):
+        def get_slice_id(obs_id):
+            try:
+                return self._observations_slices[obs_id]
+            except KeyError:
+                return None
+
         observation = model.Observation()
         observation.id = obs.get('id')
         observation.indicator_id = obs.find('indicator-ref').get('indicator')
@@ -144,6 +164,7 @@ class Parser(object):
         observation.value = self._parse_obs_value(obs.find('obs-status'), obs.find('value'))
         observation.computation = self._parse_computation(obs.find('computation'))
         observation.indicator_group_id = obs.get('group')
+        observation.slice_id = get_slice_id(observation.id)
         # An observation may refer to a country or to a whole region
         # This fields will not be persisted to the database, instead it will
         # be used to link the observation with is referred region or country in the
@@ -175,12 +196,6 @@ class Parser(object):
         slice.country_code = metadata.find("country").text\
                 if metadata.find("country") is not None\
                 else None
-        # This list of Observation IDs will not be persisted to the database,
-        # instead it will be used by the services layer to link the slice with
-        # its observations, and it will find them using these IDs
-        slice.observation_ids = []
-        for obs in sli.find('referred').findall('observation-ref'):
-            slice.observation_ids.append(obs.get('id'))
         return slice
 
     @staticmethod
