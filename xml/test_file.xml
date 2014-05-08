@@ -79,7 +79,7 @@
 			<ind_description_fr>Inconnu</ind_description_fr>
 			<topic-ref>LAND_TENURE</topic-ref>
 			<preferable_tendency>decrease</preferable_tendency>
-			<measure_unit convertible_to="porcentaje" factor="1">%</measure_unit>
+			<measure_unit convertible_to="porcentaje" factor="0.001">%</measure_unit>
             <splitsIn>
                 <indicator-ref id="INDIPFRI0"/>
                 <indicator-ref id="INDIPFRI1"/>
@@ -94,7 +94,7 @@
 			<ind_description_fr>Inconnu</ind_description_fr>
 			<topic-ref>LAND_GENDER</topic-ref>
 			<preferable_tendency>decrease</preferable_tendency>
-			<measure_unit convertible_to="porcentaje" factor="1">%</measure_unit>
+			<measure_unit convertible_to="porcentaje" factor="100.4">%</measure_unit>
 		</indicator>
 		<indicator id="INDIPFRI1">
 			<ind_name_en>Prevalence of underweight in children under five years  (%)</ind_name_en>
