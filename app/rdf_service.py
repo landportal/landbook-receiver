@@ -41,17 +41,20 @@ class ReceiverRDFService(object):
             graph.add((prefix_.term(obs.id), qb.term("slice"),
                        prefix_.term(obs.slice_id)))
 
-            # graph.add((prefix_.term(obs.id), RDFS.label,
-            #        Literal(obs.description, lang='en')))
+            graph.add((prefix_.term(obs.id), RDFS.label,
+                   Literal("Observation of region " + str(obs.region_code) + " in "
+                           + str(obs.ref_time.value) + " for indicator "
+                           + str(obs.indicator_id), lang='en')))
 
-            # graph.add((prefix_.term(obs.id),
-            #        sdmx_concept.term("obsStatus"), sdmx_code.term(obs.status)))
+            graph.add((prefix_.term(obs.id),
+                       sdmx_concept.term("obsStatus"),
+                       sdmx_code.term(obs.value.obs_status)))
 
             # graph.add((prefix_.term(obs.id),
             #        lb.term("source"), prefix_.term(obs.source)))
 
-            graph.add((prefix_.term(obs.region_id), RDF.type,
-                       cex.term("Area")))
+            # graph.add((prefix_.term(obs.region_code), RDF.type,
+            #            cex.term("Area")))
         return graph
 
     def add_indicators_triples(self, graph):
@@ -78,11 +81,10 @@ class ReceiverRDFService(object):
                    cex.term(ind.type)))
 
             graph.add((prefix_.term(ind.id), RDFS.label,
-                   Literal(ind.translations[0].description, lang='en')))
+                   Literal(ind.translations[0].name, lang='en')))
 
             graph.add((prefix_.term(ind.id), RDFS.comment,
-                       Literal("Longer description of " +
-                               ind.translations[0].description, lang='en')))
+                       Literal(ind.translations[0].description, lang='en')))
 
         return graph
 

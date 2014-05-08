@@ -14,9 +14,11 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 :OBSIPFRI1 a qb:Observation ;
+    rdfs:label "Observation of region 8 in 1990-1993 for indicator INDIPFRI1"@en ;
     dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
     qb:dataSet : ;
     qb:slice : ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
     cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
     cex:ref-area <http://example.org/8> ;
     cex:ref-indicator :INDIPFRI1 ;
@@ -24,9 +26,11 @@
     cex:value 9e+00 .
 
 :OBSIPFRI2599 a qb:Observation ;
+    rdfs:label "Observation of region 716 in 2013-12 for indicator INDIPFRI3"@en ;
     dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
     qb:dataSet : ;
     qb:slice : ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
     cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
     cex:ref-area <http://example.org/716> ;
     cex:ref-indicator :INDIPFRI3 ;
@@ -68,29 +72,31 @@
     lb:url "http://www.ifpri.org/copyright" .
 
 :INDIPFRI1 a cex:Indicator ;
-    rdfs:label "Prevalence of underweight in children under five years  (%)"@en ;
+    rdfs:label "Prevalence of underweight in children under five years (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-06T15:10:51.794383"^^xsd:dateTime ;
+    lb:last_update "2014-05-08T11:24:41.570838"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
     lb:topic cex:TOP99 ;
-    rdfs:comment "Longer description of Prevalence of underweight in children under five years  (%)"@en .
+    rdfs:comment "Description of Prevalence of underweight in children under five years (%)"@en .
 
 :INDIPFRI2 a cex:Indicator ;
     rdfs:label "Under-five Mortality rate  (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-06T15:10:51.794383"^^xsd:dateTime ;
+    lb:last_update "2014-05-08T11:24:41.570838"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
     lb:topic cex:TOP99 ;
-    rdfs:comment "Longer description of Under-five Mortality rate  (%)"@en .
+    rdfs:comment "Under-five Mortality rate  (%)"@en .
 
 :OBSIPFRI0 a qb:Observation ;
+    rdfs:label "Observation of region None in 1990-1993 for indicator INDIPFRI0"@en ;
     dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
     qb:dataSet : ;
     qb:slice : ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-M> ;
     cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
     cex:ref-area : ;
     cex:ref-indicator :INDIPFRI0 ;
@@ -98,9 +104,11 @@
     cex:value "None"^^xsd:double .
 
 :OBSIPFRI2597 a qb:Observation ;
+    rdfs:label "Observation of region 887 in 2013 for indicator INDIPFRI2"@en ;
     dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
     qb:dataSet : ;
     qb:slice : ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
     cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
     cex:ref-area <http://example.org/887> ;
     cex:ref-indicator :INDIPFRI2 ;
@@ -108,9 +116,11 @@
     cex:value 2.65e+01 .
 
 :OBSIPFRI2598 a qb:Observation ;
+    rdfs:label "Observation of region 894 in 2013-2 for indicator INDIPFRI3"@en ;
     dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
     qb:dataSet : ;
     qb:slice : ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
     cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
     cex:ref-area <http://example.org/894> ;
     cex:ref-indicator :INDIPFRI3 ;
@@ -120,12 +130,10 @@
 :INDIPFRI0 a cex:Indicator ;
     rdfs:label "Prevalence of undernourishment in the population  (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-06T15:10:51.794383"^^xsd:dateTime ;
+    lb:last_update "2014-05-08T11:24:41.570838"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
     lb:topic cex:TOP99 ;
-    rdfs:comment "Longer description of Prevalence of undernourishment in the population  (%)"@en .
-
-: a cex:Area .
+    rdfs:comment "Prevalence of undernourishment in the population  (%)"@en .
 

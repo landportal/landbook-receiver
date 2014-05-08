@@ -97,10 +97,10 @@
 			<measure_unit convertible_to="porcentaje" factor="1">%</measure_unit>
 		</indicator>
 		<indicator id="INDIPFRI1">
-			<ind_name_en>Prevalence of underweight in children under five years  (%)</ind_name_en>
+			<ind_name_en>Prevalence of underweight in children under five years (%)</ind_name_en>
 			<ind_name_es>Desconocido</ind_name_es>
 			<ind_name_fr>Inconnu</ind_name_fr>
-			<ind_description_en>Prevalence of underweight in children under five years  (%)</ind_description_en>
+			<ind_description_en>Description of Prevalence of underweight in children under five years (%)</ind_description_en>
 			<ind_description_es>Desconocido</ind_description_es>
 			<ind_description_fr>Inconnu</ind_description_fr>
 			<topic-ref>TOP99</topic-ref>
