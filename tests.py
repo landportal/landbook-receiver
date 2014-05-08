@@ -149,13 +149,21 @@ class TopicsTest(ReceiverParserTest):
     """Topic and TopicTranslation tests"""
     def test_number(self):
         topics = self.session.query(model.Topic).all()
-        self.assertTrue(len(topics) == 8)
+        self.assertTrue(len(topics) == 7)
 
     def test_indicators(self):
         topic = self.session.query(model.Topic)\
-            .filter(model.Topic.id == 'TOP99')\
+            .filter(model.Topic.id == 'TEMP_TOPIC')\
             .first()
-        self.assertTrue(len(topic.indicators) == 4)
+        self.assertTrue(len(topic.indicators) == 1)
+        topic2 = self.session.query(model.Topic)\
+            .filter(model.Topic.id == 'LAND_TENURE')\
+            .first()
+        self.assertTrue(len(topic2.indicators) == 2)
+        topic3 = self.session.query(model.Topic)\
+            .filter(model.Topic.id == 'FSECURITY_HUNGER')\
+            .first()
+        self.assertTrue(len(topic3.indicators) == 0)
 
     def test_translations(self):
         topics = self.session.query(model.Topic).all()
@@ -210,12 +218,19 @@ class IndicatorsTest(ReceiverParserTest):
         for ind in indicators:
             self.assertTrue(ind.last_update == ref_time)
 
-    def test_measurement_unit(self):
+    def test_measurement_unit_smaller(self):
         ind = self.session.query(model.Indicator).filter(model.Indicator.id == "INDIPFRI2").first()
         measurement = ind.measurement_unit
         self.assertTrue(measurement.name == "%")
         self.assertTrue(measurement.convertible_to == "porcentaje")
-        self.assertTrue(measurement.factor == 1)
+        self.assertTrue(measurement.factor == 0.001)
+
+    def test_measurement_unit_bigger(self):
+        ind = self.session.query(model.Indicator).filter(model.Indicator.id == "INDIPFRI0").first()
+        measurement = ind.measurement_unit
+        self.assertTrue(measurement.name == "%")
+        self.assertTrue(measurement.convertible_to == "porcentaje")
+        self.assertTrue(measurement.factor == 100.4)
 
 
 class CompoundIndicatorsTest(ReceiverParserTest):

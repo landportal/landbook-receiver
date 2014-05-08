@@ -84,24 +84,22 @@ class DatabasePopulator(object):
     @staticmethod
     def get_topics():
         from model import models
-        top1 = models.Topic(id='TOP1')
+        top1 = models.Topic(id='CLIMATE_CHANGE')
         top1.add_translation(models.TopicTranslation(lang_code='en', name='Climate change'))
-        top2 = models.Topic(id='TOP2')
-        top2.add_translation(models.TopicTranslation(lang_code='en', name='Country data'))
-        top3 = models.Topic(id='TOP3')
-        top3.add_translation(models.TopicTranslation(lang_code='en', name='Food security and hunger'))
-        top4 = models.Topic(id='TOP4')
-        top4.add_translation(models.TopicTranslation(lang_code='en', name='Land and gender'))
-        top5 = models.Topic(id='TOP5')
-        top5.add_translation(models.TopicTranslation(lang_code='en', name='Land ternure'))
-        top6 = models.Topic(id='TOP6')
-        top6.add_translation(models.TopicTranslation(lang_code='en', name='Socio economic and poverty'))
-        top7 = models.Topic(id='TOP7')
-        top7.add_translation(models.TopicTranslation(lang_code='en', name='Usage and investment'))
-        top99 = models.Topic(id='TOP99')
-        top99.add_translation(models.TopicTranslation(lang_code='en', name='Temporal'))
+        top2 = models.Topic(id='GEOGRAPH_SOCIO')
+        top2.add_translation(models.TopicTranslation(lang_code='en', name='Geograph Socio'))
+        top3 = models.Topic(id='LAND_USE')
+        top3.add_translation(models.TopicTranslation(lang_code='en', name='Land Use'))
+        top4 = models.Topic(id='LAND_GENDER')
+        top4.add_translation(models.TopicTranslation(lang_code='en', name='Land Gender'))
+        top5 = models.Topic(id='LAND_TENURE')
+        top5.add_translation(models.TopicTranslation(lang_code='en', name='Land Tenure'))
+        top6 = models.Topic(id='FSECURITY_HUNGER')
+        top6.add_translation(models.TopicTranslation(lang_code='en', name='F Security Hunger'))
+        top7 = models.Topic(id='TEMP_TOPIC')
+        top7.add_translation(models.TopicTranslation(lang_code='en', name='Temp Topic'))
 
-        topics = [top1, top2, top3, top4, top5, top6, top7, top99]
+        topics = [top1, top2, top3, top4, top5, top6, top7]
         return topics
 
 if __name__ == '__main__':
