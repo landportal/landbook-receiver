@@ -91,20 +91,22 @@ class ReceiverRDFService(object):
     def add_slices_triples(self, graph):
         for slc in self.parser.get_slices():
             graph.add((prefix_.term(slc.id), RDF.type,
-                   qb.term("Slice")))
+                       qb.term("Slice")))
 
             graph.add((prefix_.term(slc.id), cex.term("indicator"),
-                   prefix_.term(str(slc.indicator_id))))
+                      prefix_.term(str(slc.indicator_id))))
 
-            graph.add((prefix_.term(slc.id), qb.term("observation"),
-                   prefix_.term(slc.observation_ids[0])))
+            for obs in self.parser.get_observations():
+                if obs.slice_id == slc.id:
+                    graph.add((prefix_.term(slc.id), qb.term("observation"),
+                               prefix_.term(str(obs.id))))
 
             if slc.region_code is not None:
-                dimension = slc.region_code
+                dimension = "Area"
             elif slc.country_code is not None:
-                dimension = slc.country_code
+                dimension = "Area"
             else:
-                dimension = slc.dimension.value
+                dimension = "Time"
 
             graph.add((prefix_.term(slc.id), lb.term("dimension"),
                    prefix_.term(dimension)))
