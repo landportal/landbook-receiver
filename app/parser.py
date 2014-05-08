@@ -64,10 +64,10 @@ class Parser(object):
     def get_dataset(self):
         dataset = model.Dataset()
         dataset.sdmx_frequency = self._root.find('import_process').find('sdmx_frequency').text
-        dataset.license = self._get_license()
+        dataset.license = self.get_license()
         return dataset
 
-    def _get_license(self):
+    def get_license(self):
         """Parse a license node and return a License object."""
         name = self._root.find('license').find('lic_name').text
         description = self._root.find('license').find('lic_description').text

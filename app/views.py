@@ -1,8 +1,7 @@
 import flask_restful
 import app
-from app.services import ReceiverSQLService
+from app.sql_service import ReceiverSQLService
 import config
-
 
 class Receiver(flask_restful.Resource):
     @staticmethod
