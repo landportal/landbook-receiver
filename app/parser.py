@@ -228,5 +228,5 @@ class Parser(object):
         return model.MeasurementUnit(
             name=node.text,
             convertible_to=node.get("convertible_to"),
-            factor=int(node.get("factor"))
+            factor=node.get("factor")
         )
