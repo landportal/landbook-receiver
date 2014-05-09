@@ -42,7 +42,7 @@ class ReceiverRDFService(object):
                        prefix_.term(obs.slice_id)))
 
             graph.add((prefix_.term(obs.id), RDFS.label,
-                   Literal("Observation of region " + str(obs.region_code) + " in "
+                   Literal("Observation of region " + str(obs.country_code) + " in "
                            + str(obs.ref_time.value) + " for indicator "
                            + str(obs.indicator_id), lang='en')))
 

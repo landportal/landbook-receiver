@@ -52,7 +52,7 @@
 :INDIPFRI1 a cex:Indicator ;
     rdfs:label "Prevalence of underweight in children under five years (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-08T17:14:09.326801"^^xsd:dateTime ;
+    lb:last_update "2014-05-09T09:34:00.906929"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
@@ -62,7 +62,7 @@
 :INDIPFRI2 a cex:Indicator ;
     rdfs:label "Under-five Mortality rate  (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-08T17:14:09.326801"^^xsd:dateTime ;
+    lb:last_update "2014-05-09T09:34:00.906929"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
@@ -70,7 +70,7 @@
     rdfs:comment "Under-five Mortality rate  (%)"@en .
 
 :OBSIPFRI0 a qb:Observation ;
-    rdfs:label "Observation of region None in 1990-1993 for indicator INDIPFRI0"@en ;
+    rdfs:label "Observation of region ESP in 1990-1993 for indicator INDIPFRI0"@en ;
     dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
     qb:dataSet : ;
     qb:slice :SLIIPFRI0 ;
@@ -82,7 +82,7 @@
     cex:value "None"^^xsd:double .
 
 :OBSIPFRI1 a qb:Observation ;
-    rdfs:label "Observation of region 8 in 1990-1993 for indicator INDIPFRI1"@en ;
+    rdfs:label "Observation of region None in 1990-1993 for indicator INDIPFRI1"@en ;
     dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
     qb:dataSet : ;
     qb:slice :SLIIPFRI0 ;
@@ -94,7 +94,7 @@
     cex:value 9e+00 .
 
 :OBSIPFRI2597 a qb:Observation ;
-    rdfs:label "Observation of region 887 in 2013 for indicator INDIPFRI2"@en ;
+    rdfs:label "Observation of region None in 2013 for indicator INDIPFRI2"@en ;
     dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
     qb:dataSet : ;
     qb:slice :SLIIPFRI1 ;
@@ -106,7 +106,7 @@
     cex:value 2.65e+01 .
 
 :OBSIPFRI2598 a qb:Observation ;
-    rdfs:label "Observation of region 894 in 2013-2 for indicator INDIPFRI3"@en ;
+    rdfs:label "Observation of region None in 2013-2 for indicator INDIPFRI3"@en ;
     dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
     qb:dataSet : ;
     qb:slice :SLIIPFRI2 ;
@@ -118,7 +118,7 @@
     cex:value 2.41e+01 .
 
 :OBSIPFRI2599 a qb:Observation ;
-    rdfs:label "Observation of region 716 in 2013-12 for indicator INDIPFRI3"@en ;
+    rdfs:label "Observation of region None in 2013-12 for indicator INDIPFRI3"@en ;
     dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
     qb:dataSet : ;
     qb:slice :SLIIPFRI2 ;
@@ -152,7 +152,7 @@
 :INDIPFRI0 a cex:Indicator ;
     rdfs:label "Prevalence of undernourishment in the population  (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-08T17:14:09.326801"^^xsd:dateTime ;
+    lb:last_update "2014-05-09T09:34:00.906929"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
