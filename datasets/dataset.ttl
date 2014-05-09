@@ -40,6 +40,8 @@
 
 <http://example.org/716> a cex:Area .
 
+<http://example.org/724> a cex:Area .
+
 <http://example.org/8> a cex:Area .
 
 <http://example.org/887> a cex:Area .
@@ -47,12 +49,17 @@
 <http://example.org/894> a cex:Area .
 
 :ESP a cex:Area ;
-    rdfs:label "ESP"@en .
+    rdfs:label "ESP" ;
+    lb:iso3 "ESP" .
+
+:FRA a cex:Area ;
+    rdfs:label "FRA" ;
+    lb:iso3 "FRA" .
 
 :INDIPFRI1 a cex:Indicator ;
     rdfs:label "Prevalence of underweight in children under five years (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-09T11:31:31.170354"^^xsd:dateTime ;
+    lb:last_update "2014-05-09T20:24:07.236291"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
@@ -62,7 +69,7 @@
 :INDIPFRI2 a cex:Indicator ;
     rdfs:label "Under-five Mortality rate  (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-09T11:31:31.170354"^^xsd:dateTime ;
+    lb:last_update "2014-05-09T20:24:07.236291"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
@@ -133,26 +140,26 @@
     qb:dataSet :None ;
     qb:observation :OBSIPFRI2597 ;
     cex:indicator :INDIPFRI0 ;
-    lb:dimension :Area .
+    lb:dimension :FRA .
 
 :SLIIPFRI0 a qb:Slice ;
     qb:dataSet :None ;
     qb:observation :OBSIPFRI0,
         :OBSIPFRI1 ;
     cex:indicator :INDIPFRI0 ;
-    lb:dimension :Area .
+    lb:dimension <http://example.org/724> .
 
 :SLIIPFRI2 a qb:Slice ;
     qb:dataSet :None ;
     qb:observation :OBSIPFRI2598,
         :OBSIPFRI2599 ;
     cex:indicator :INDIPFRI0 ;
-    lb:dimension :Time .
+    lb:dimension <http://example.org/1999-2002> .
 
 :INDIPFRI0 a cex:Indicator ;
     rdfs:label "Prevalence of undernourishment in the population  (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-09T11:31:31.170354"^^xsd:dateTime ;
+    lb:last_update "2014-05-09T20:24:07.236291"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;

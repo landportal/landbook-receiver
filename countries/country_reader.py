@@ -41,10 +41,10 @@ class CountryReader(object):
             encoding_override='latin-1').sheet_by_index(0)
         countries = []
         for row in range(self.FIRST_ROW, self.LAST_ROW + 1):
-            countries.append(self._parse_country(country_file.row(row), regions))
+            countries.append(self.parse_country(country_file.row(row), regions))
         return countries
 
-    def _parse_country(self, country_data, regions):
+    def parse_country(self, country_data, regions):
         iso2 = self._parse_iso2(country_data)
         iso3 = self._parse_iso3(country_data)
         fao_uri = 'http://landportal.info/ontology/country/' + iso3
