@@ -14,6 +14,8 @@ class ReceiverRDFService(object):
 
     def add_observations_triples(self, graph):
         for obs in self.parser.get_observations():
+            region = self._get_region_code(obs)
+
             graph.add((prefix_.term(obs.id), RDF.type,
                        qb.term("Observation")))
 
@@ -21,7 +23,7 @@ class ReceiverRDFService(object):
                        prefix_.term(obs.ref_time.value)))
 
             graph.add((prefix_.term(obs.id), cex.term("ref-area"),
-                       prefix_.term(obs.region_code)))
+                       prefix_.term(region)))
 
             graph.add((prefix_.term(obs.id), cex.term("ref-indicator"),
                        prefix_.term(obs.indicator_id)))
@@ -42,9 +44,9 @@ class ReceiverRDFService(object):
                        prefix_.term(obs.slice_id)))
 
             graph.add((prefix_.term(obs.id), RDFS.label,
-                   Literal("Observation of region " + str(obs.country_code) + " in "
-                           + str(obs.ref_time.value) + " for indicator "
-                           + str(obs.indicator_id), lang='en')))
+                       Literal("Observation of area " + str(region) +
+                               " within the period of " + str(obs.ref_time.value) +
+                               " for indicator " + str(obs.indicator_id), lang='en')))
 
             graph.add((prefix_.term(obs.id),
                        sdmx_concept.term("obsStatus"),
@@ -151,18 +153,21 @@ class ReceiverRDFService(object):
 
     def add_regions_triples(self, graph):
         for obs in self.parser.get_observations():
-            region = None
-            if obs.country_code is not None:
-                region = obs.country_code
-            elif obs.region_code is not None:
-                region = obs.region_code
-
-            graph.add((prefix_.term(region), RDF.type,
+            graph.add((prefix_.term(self._get_region_code(obs)), RDF.type,
                           cex.term("Area")))
 
             # graph.add((prefix_.term(obs.region_code), lb.term("UNCode"),
             #        Literal("EU")))
         return graph
+
+    @staticmethod
+    def _get_region_code(arg):
+        region = None
+        if arg.country_code is not None:
+            region = arg.country_code
+        elif arg.region_code is not None:
+            region = arg.region_code
+        return region
 
     def add_country_triples(self, graph):
         for obs in self.parser.get_observations():
