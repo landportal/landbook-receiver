@@ -6,7 +6,6 @@ from rdflib import Literal, XSD, URIRef
 from rdflib.namespace import RDF, RDFS, FOAF
 import datetime
 from countries.country_reader import CountryReader
-from create_db import DatabasePopulator
 
 
 class ReceiverRDFService(object):
@@ -147,11 +146,23 @@ class ReceiverRDFService(object):
 
     def add_topics_triples(self, graph):
         for ind in self.parser.get_simple_indicators():
-            graph.add((prefix_.term(ind.topic_id), RDF.type,
-                      lb.term("Topic")))
-            graph.add((prefix_.term(ind.topic_id), RDFS.label,
-                       Literal(ind.topic_id, lang='en')))
+            self._add_topic(graph, ind)
         return graph
+
+    @staticmethod
+    def _add_topic(graph, indicator):
+        from create_db import MetadataPopulator
+        topic_id = indicator.topic_id
+        topic_label = ""
+        for tp in MetadataPopulator.get_topics():
+            if topic_id == tp.id:
+                topic_label = tp.translations[0].name
+
+        graph.add((prefix_.term(topic_id), RDF.type,
+                   lb.term("Topic")))
+        graph.add((prefix_.term(topic_id), RDFS.label,
+                   Literal(topic_label, lang='en')))
+        return topic_id
 
     def add_area_triples_from_slices(self, graph):
         slices = self.parser.get_slices()
