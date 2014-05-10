@@ -5,6 +5,7 @@ from rdf_utils.namespaces_handler import *
 from rdflib import Literal, XSD, URIRef
 from rdflib.namespace import RDF, RDFS, FOAF
 import datetime
+from countries.country_reader import CountryReader
 from create_db import DatabasePopulator
 
 
@@ -172,14 +173,32 @@ class ReceiverRDFService(object):
 
     @staticmethod
     def _add_country(graph, arg):
-        country = arg.country_code
-        graph.add((prefix_.term(country), RDF.type,
-                    cex.term("Area")))
-        graph.add((prefix_.term(country), RDFS.label,
-                              Literal(country)))
-        graph.add((prefix_.term(country), lb.term("iso3"),
-                                  Literal(country)))
-        return country
+        code = arg.country_code
+        country_list_file = '../countries/country_list.xlsx'
+        country_name = ""
+        iso2 = ""
+        fao_uri = ""
+        region = ""
+        for country in CountryReader().get_countries(country_list_file, None):
+            if code == country.iso3:
+                country_name = country.translations[0].name
+                iso2 = country.iso2
+                fao_uri = country.faoURI
+                region = country.is_part_of
+
+        graph.add((prefix_.term(country_name), RDF.type,
+                   cex.term("Area")))
+        graph.add((prefix_.term(country_name), RDFS.label,
+                   Literal(country_name)))
+        graph.add((prefix_.term(country_name), lb.term("iso3"),
+                   Literal(code)))
+        graph.add((prefix_.term(country_name), lb.term("iso2"),
+                   Literal(iso2)))
+        graph.add((prefix_.term(country_name), lb.term("faoURI"),
+                   URIRef(fao_uri)))
+        graph.add((prefix_.term(country_name), lb.term("is_part_of"),
+                   Literal(region)))
+        return code
 
     @staticmethod
     def _add_region(graph, arg):
@@ -227,9 +246,3 @@ class ReceiverRDFService(object):
         serialized = graph.serialize(format='turtle')
         with open('../datasets/dataset.ttl', 'w') as dataset:
             dataset.write(serialized)
-
-#for rg in DatabasePopulator.get_regions():
-#            print rg.translations[0]
-
-for country in DatabasePopulator.get_countries(DatabasePopulator.get_regions()):
-    print country

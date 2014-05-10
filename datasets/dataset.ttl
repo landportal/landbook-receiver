@@ -13,11 +13,25 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+:France a cex:Area ;
+    rdfs:label "France" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=FRA> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "FR" ;
+    lb:iso3 "FRA" .
+
 :LAND_GENDER a lb:Topic ;
     rdfs:label "LAND_GENDER"@en .
 
 :LAND_TENURE a lb:Topic ;
     rdfs:label "LAND_TENURE"@en .
+
+:Spain a cex:Area ;
+    rdfs:label "Spain" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=ESP> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "ES" ;
+    lb:iso3 "ESP" .
 
 :TEMP_TOPIC a lb:Topic ;
     rdfs:label "TEMP_TOPIC"@en .
@@ -48,18 +62,10 @@
 
 <http://example.org/894> a cex:Area .
 
-:ESP a cex:Area ;
-    rdfs:label "ESP" ;
-    lb:iso3 "ESP" .
-
-:FRA a cex:Area ;
-    rdfs:label "FRA" ;
-    lb:iso3 "FRA" .
-
 :INDIPFRI1 a cex:Indicator ;
     rdfs:label "Prevalence of underweight in children under five years (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-09T20:24:07.236291"^^xsd:dateTime ;
+    lb:last_update "2014-05-10T16:45:31.335181"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
@@ -69,7 +75,7 @@
 :INDIPFRI2 a cex:Indicator ;
     rdfs:label "Under-five Mortality rate  (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-09T20:24:07.236291"^^xsd:dateTime ;
+    lb:last_update "2014-05-10T16:45:31.335181"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
@@ -159,7 +165,7 @@
 :INDIPFRI0 a cex:Indicator ;
     rdfs:label "Prevalence of undernourishment in the population  (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-09T20:24:07.236291"^^xsd:dateTime ;
+    lb:last_update "2014-05-10T16:45:31.335181"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
