@@ -5,6 +5,8 @@ from rdf_utils.namespaces_handler import *
 from rdflib import Literal, XSD, URIRef
 from rdflib.namespace import RDF, RDFS, FOAF
 import datetime
+from countries.country_reader import CountryReader
+from create_db import DatabasePopulator
 
 
 class ReceiverRDFService(object):
@@ -14,7 +16,7 @@ class ReceiverRDFService(object):
 
     def add_observations_triples(self, graph):
         for obs in self.parser.get_observations():
-            region = self._get_region_code(obs)
+            region = self._get_area_code(obs)
 
             graph.add((prefix_.term(obs.id), RDF.type,
                        qb.term("Observation")))
@@ -104,11 +106,11 @@ class ReceiverRDFService(object):
                                prefix_.term(str(obs.id))))
 
             if slc.region_code is not None:
-                dimension = "Area"
+                dimension = slc.region_code
             elif slc.country_code is not None:
-                dimension = "Area"
+                dimension = slc.country_code
             else:
-                dimension = "Time"
+                dimension = slc.dimension.value
 
             graph.add((prefix_.term(slc.id), lb.term("dimension"),
                    prefix_.term(dimension)))
@@ -146,43 +148,73 @@ class ReceiverRDFService(object):
     def add_topics_triples(self, graph):
         for ind in self.parser.get_simple_indicators():
             graph.add((prefix_.term(ind.topic_id), RDF.type,
-                   lb.term("Topic")))
+                      lb.term("Topic")))
             graph.add((prefix_.term(ind.topic_id), RDFS.label,
-                   Literal(ind.topic_id, lang='en')))
+                       Literal(ind.topic_id, lang='en')))
         return graph
 
-    def add_regions_triples(self, graph):
-        for obs in self.parser.get_observations():
-            graph.add((prefix_.term(self._get_region_code(obs)), RDF.type,
-                          cex.term("Area")))
+    def add_area_triples_from_slices(self, graph):
+        slices = self.parser.get_slices()
+        for slc in slices:
+            if slc.country_code:
+                self._add_country(graph, slc)
+            elif slc.region_code:
+                self._add_region(graph, slc)
+        return graph
 
-            # graph.add((prefix_.term(obs.region_code), lb.term("UNCode"),
-            #        Literal("EU")))
+    def add_area_triples_from_observations(self, graph):
+        observations = self.parser.get_observations()
+        for obs in observations:
+            if obs.country_code:
+                self._add_country(graph, obs)
+            elif obs.region_code:
+                self._add_region(graph, obs)
         return graph
 
     @staticmethod
-    def _get_region_code(arg):
-        region = None
-        if arg.country_code is not None:
-            region = arg.country_code
-        elif arg.region_code is not None:
-            region = arg.region_code
-        return region
+    def _add_country(graph, arg):
+        code = arg.country_code
+        country_list_file = '../countries/country_list.xlsx'
+        country_name = ""
+        iso2 = ""
+        fao_uri = ""
+        region = ""
+        for country in CountryReader().get_countries(country_list_file, None):
+            if code == country.iso3:
+                country_name = country.translations[0].name
+                iso2 = country.iso2
+                fao_uri = country.faoURI
+                region = country.is_part_of
 
-    def add_country_triples(self, graph):
-        for obs in self.parser.get_observations():
-            if obs.country_code is not None:
-                country = obs.country_code
+        graph.add((prefix_.term(country_name), RDF.type,
+                   cex.term("Area")))
+        graph.add((prefix_.term(country_name), RDFS.label,
+                   Literal(country_name)))
+        graph.add((prefix_.term(country_name), lb.term("iso3"),
+                   Literal(code)))
+        graph.add((prefix_.term(country_name), lb.term("iso2"),
+                   Literal(iso2)))
+        graph.add((prefix_.term(country_name), lb.term("faoURI"),
+                   URIRef(fao_uri)))
+        graph.add((prefix_.term(country_name), lb.term("is_part_of"),
+                   Literal(region)))
+        return code
 
-                graph.add((prefix_.term(country), RDF.type,
-                          cex.term("Area")))
+    @staticmethod
+    def _add_region(graph, arg):
+        region = arg.region_code
+        graph.add((prefix_.term(region), RDF.type,
+                    cex.term("Area")))
 
-                graph.add((prefix_.term(country), RDFS.label,
-                  Literal(country, lang='en')))
-            #
-            # graph.add((prefix_.term(obs.region_code), lb.term("UNCode"),
-            #        Literal("EU")))
-        return graph
+
+    @staticmethod
+    def _get_area_code(arg):
+        area = None
+        if arg.country_code:
+            area = arg.country_code
+        elif arg.region_code:
+            area = arg.region_code
+        return area
 
     def add_licenses_triples(self, graph):
         lic = self.parser.get_license()

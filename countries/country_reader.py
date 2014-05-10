@@ -41,13 +41,13 @@ class CountryReader(object):
             encoding_override='latin-1').sheet_by_index(0)
         countries = []
         for row in range(self.FIRST_ROW, self.LAST_ROW + 1):
-            countries.append(self._parse_country(country_file.row(row), regions))
+            countries.append(self.parse_country(country_file.row(row), regions))
         return countries
 
-    def _parse_country(self, country_data, regions):
+    def parse_country(self, country_data, regions):
         iso2 = self._parse_iso2(country_data)
         iso3 = self._parse_iso3(country_data)
-        fao_uri = 'http://landportal.info/ontology/country/' + iso3
+        fao_uri = 'http://www.fao.org/countryprofiles/index/en/?iso3=' + iso3
         un_code = None
         if not self._is_blank_value(country_data[self.UN_CODE].value):
             un_code = int(country_data[self.UN_CODE].value)
@@ -65,7 +65,7 @@ class CountryReader(object):
             models.RegionTranslation(lang_code='es', name=name_es))
         # Add region
         reg_name = country_data[self.REGION_EN].value
-        country.is_part_of_id = self._get_region_id(reg_name)
+        country.is_part_of_id = reg_name
         return country
 
     @staticmethod
