@@ -21,10 +21,10 @@
     lb:iso3 "FRA" .
 
 :LAND_GENDER a lb:Topic ;
-    rdfs:label "LAND_GENDER"@en .
+    rdfs:label "Land Gender"@en .
 
 :LAND_TENURE a lb:Topic ;
-    rdfs:label "LAND_TENURE"@en .
+    rdfs:label "Land Tenure"@en .
 
 :Spain a cex:Area ;
     rdfs:label "Spain" ;
@@ -34,7 +34,7 @@
     lb:iso3 "ESP" .
 
 :TEMP_TOPIC a lb:Topic ;
-    rdfs:label "TEMP_TOPIC"@en .
+    rdfs:label "Temp Topic"@en .
 
 :USRIPFRIIMPORTER a foaf:Person ;
     rdfs:label "USRIPFRIIMPORTER"@en ;
@@ -65,7 +65,7 @@
 :INDIPFRI1 a cex:Indicator ;
     rdfs:label "Prevalence of underweight in children under five years (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-10T16:45:31.335181"^^xsd:dateTime ;
+    lb:last_update "2014-05-10T18:47:09.063652"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
@@ -75,7 +75,7 @@
 :INDIPFRI2 a cex:Indicator ;
     rdfs:label "Under-five Mortality rate  (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-10T16:45:31.335181"^^xsd:dateTime ;
+    lb:last_update "2014-05-10T18:47:09.063652"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
@@ -165,7 +165,7 @@
 :INDIPFRI0 a cex:Indicator ;
     rdfs:label "Prevalence of undernourishment in the population  (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-10T16:45:31.335181"^^xsd:dateTime ;
+    lb:last_update "2014-05-10T18:47:09.063652"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;

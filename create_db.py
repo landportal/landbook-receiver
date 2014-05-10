@@ -9,13 +9,13 @@ def create_database():
     db.create_all()
     session = db.session
     # Create language list
-    session.add_all(DatabasePopulator.get_languages())
+    session.add_all(MetadataPopulator.get_languages())
     session.commit()
     # Create region list
-    global_reg = DatabasePopulator.get_global_region()
+    global_reg = MetadataPopulator.get_global_region()
     session.add(global_reg)
     session.flush()
-    regions = DatabasePopulator.get_regions()
+    regions = MetadataPopulator.get_regions()
     #All the regions are part of the global region
     for reg in regions:
         reg.is_part_of_id = global_reg.id
@@ -23,14 +23,14 @@ def create_database():
     session.commit()
     # Create country list
     regions = session.query(models.Region).all()
-    session.add_all(DatabasePopulator.get_countries(regions))
+    session.add_all(MetadataPopulator.get_countries(regions))
     session.commit()
     # Create topic list
-    session.add_all(DatabasePopulator.get_topics())
+    session.add_all(MetadataPopulator.get_topics())
     session.commit()
 
 
-class DatabasePopulator(object):
+class MetadataPopulator(object):
 
     @staticmethod
     def get_languages():
