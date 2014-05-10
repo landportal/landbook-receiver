@@ -6,7 +6,7 @@ from rdflib import Graph
 import logging
 from rdf_utils.namespaces_handler import bind_namespaces
 
-with codecs.open('../xml/test_file.xml', encoding='utf-8') as xml:
+with codecs.open(unicode('../xml/DATFAOGENDER_0_1_0.xml', encoding='utf-8')) as xml:
         content = xml.read()
 
 graph = Graph()
@@ -24,6 +24,7 @@ def feed_rdf():
     rdf_service.add_topics_triples(graph)
     rdf_service.add_area_triples_from_slices(graph)
     rdf_service.add_area_triples_from_observations(graph)
+    rdf_service.add_computation_triples(graph)
 
     bind_namespaces(graph)
 

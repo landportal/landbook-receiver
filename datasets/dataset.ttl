@@ -13,6 +13,139 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+:Algeria a cex:Area ;
+    rdfs:label "Algeria" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=DZA> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "DZ" ;
+    lb:iso3 "DZA" .
+
+:Argentina a cex:Area ;
+    rdfs:label "Argentina" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=ARG> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "AR" ;
+    lb:iso3 "ARG" .
+
+:Azerbaijan a cex:Area ;
+    rdfs:label "Azerbaijan" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=AZE> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "AZ" ;
+    lb:iso3 "AZE" .
+
+:Bangladesh a cex:Area ;
+    rdfs:label "Bangladesh" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=BGD> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "BD" ;
+    lb:iso3 "BGD" .
+
+:Botswana a cex:Area ;
+    rdfs:label "Botswana" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=BWA> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "BW" ;
+    lb:iso3 "BWA" .
+
+:Brazil a cex:Area ;
+    rdfs:label "Brazil" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=BRA> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "BR" ;
+    lb:iso3 "BRA" .
+
+:BurkinaFaso a cex:Area ;
+    rdfs:label "BurkinaFaso" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=BFA> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "BF" ;
+    lb:iso3 "BFA" .
+
+:CapeVerde a cex:Area ;
+    rdfs:label "CapeVerde" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=CPV> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "CV" ;
+    lb:iso3 "CPV" .
+
+:Chile a cex:Area ;
+    rdfs:label "Chile" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=CHL> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "CL" ;
+    lb:iso3 "CHL" .
+
+:China a cex:Area ;
+    rdfs:label "China" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=CHN> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "CN" ;
+    lb:iso3 "CHN" .
+
+:Colombia a cex:Area ;
+    rdfs:label "Colombia" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=COL> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "CO" ;
+    lb:iso3 "COL" .
+
+:Congo a cex:Area ;
+    rdfs:label "Congo" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=COG> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "CG" ;
+    lb:iso3 "COG" .
+
+:CostaRica a cex:Area ;
+    rdfs:label "CostaRica" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=CRI> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "CR" ;
+    lb:iso3 "CRI" .
+
+<http://example.org/Côted'Ivoire> a cex:Area ;
+    rdfs:label "Côted'Ivoire" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=CIV> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "CI" ;
+    lb:iso3 "CIV" .
+
+:DominicanRepublic a cex:Area ;
+    rdfs:label "DominicanRepublic" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=DOM> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "DO" ;
+    lb:iso3 "DOM" .
+
+:Ecuador a cex:Area ;
+    rdfs:label "Ecuador" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=ECU> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "EC" ;
+    lb:iso3 "ECU" .
+
+:Egypt a cex:Area ;
+    rdfs:label "Egypt" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=EGY> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "EG" ;
+    lb:iso3 "EGY" .
+
+:ElSalvador a cex:Area ;
+    rdfs:label "ElSalvador" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=SLV> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "SV" ;
+    lb:iso3 "SLV" .
+
+:Ethiopia a cex:Area ;
+    rdfs:label "Ethiopia" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=ETH> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "ET" ;
+    lb:iso3 "ETH" .
+
 :France a cex:Area ;
     rdfs:label "France" ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=FRA> ;
@@ -20,11 +153,1626 @@
     lb:iso2 "FR" ;
     lb:iso3 "FRA" .
 
+:Gambia a cex:Area ;
+    rdfs:label "Gambia" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=GMB> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "GM" ;
+    lb:iso3 "GMB" .
+
+:Guatemala a cex:Area ;
+    rdfs:label "Guatemala" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=GTM> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "GT" ;
+    lb:iso3 "GTM" .
+
+:India a cex:Area ;
+    rdfs:label "India" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=IND> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "IN" ;
+    lb:iso3 "IND" .
+
+:Indonesia a cex:Area ;
+    rdfs:label "Indonesia" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=IDN> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "ID" ;
+    lb:iso3 "IDN" .
+
+:Italy a cex:Area ;
+    rdfs:label "Italy" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=ITA> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "IT" ;
+    lb:iso3 "ITA" .
+
+:Jamaica a cex:Area ;
+    rdfs:label "Jamaica" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=JAM> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "JM" ;
+    lb:iso3 "JAM" .
+
+:Kyrgyzstan a cex:Area ;
+    rdfs:label "Kyrgyzstan" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=KGZ> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "KG" ;
+    lb:iso3 "KGZ" .
+
 :LAND_GENDER a lb:Topic ;
     rdfs:label "Land Gender"@en .
 
 :LAND_TENURE a lb:Topic ;
     rdfs:label "Land Tenure"@en .
+
+:Lao a cex:Area ;
+    rdfs:label "Lao" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=LAO> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "LA" ;
+    lb:iso3 "LAO" .
+
+:Lesotho a cex:Area ;
+    rdfs:label "Lesotho" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=LSO> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "LS" ;
+    lb:iso3 "LSO" .
+
+:Madagascar a cex:Area ;
+    rdfs:label "Madagascar" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=MDG> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "MG" ;
+    lb:iso3 "MDG" .
+
+:Malawi a cex:Area ;
+    rdfs:label "Malawi" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=MWI> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "MW" ;
+    lb:iso3 "MWI" .
+
+:Malaysia a cex:Area ;
+    rdfs:label "Malaysia" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=MYS> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "MY" ;
+    lb:iso3 "MYS" .
+
+:Mali a cex:Area ;
+    rdfs:label "Mali" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=MLI> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "ML" ;
+    lb:iso3 "MLI" .
+
+:Mexico a cex:Area ;
+    rdfs:label "Mexico" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=MEX> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "MX" ;
+    lb:iso3 "MEX" .
+
+:Morocco a cex:Area ;
+    rdfs:label "Morocco" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=MAR> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "MA" ;
+    lb:iso3 "MAR" .
+
+:Mozambique a cex:Area ;
+    rdfs:label "Mozambique" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=MOZ> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "MZ" ;
+    lb:iso3 "MOZ" .
+
+:Namibia a cex:Area ;
+    rdfs:label "Namibia" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=NAM> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "NA" ;
+    lb:iso3 "NAM" .
+
+:Nepal a cex:Area ;
+    rdfs:label "Nepal" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=NPL> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "NP" ;
+    lb:iso3 "NPL" .
+
+:Nicaragua a cex:Area ;
+    rdfs:label "Nicaragua" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=NIC> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "NI" ;
+    lb:iso3 "NIC" .
+
+:OBSFAOGENDER0 a qb:Observation ;
+    rdfs:label "Observation of ARG within the period of 2002 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :ARG ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2002> ;
+    cex:value 2.02423e+05 .
+
+:OBSFAOGENDER1 a qb:Observation ;
+    rdfs:label "Observation of ARG within the period of 2002 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :ARG ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2002> ;
+    cex:value 3.6846e+04 .
+
+:OBSFAOGENDER10 a qb:Observation ;
+    rdfs:label "Observation of BWA within the period of 2004 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :BWA ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2004> ;
+    cex:value 5.069e+04 .
+
+:OBSFAOGENDER100 a qb:Observation ;
+    rdfs:label "Observation of THA within the period of 2003 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :THA ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2003> ;
+    cex:value 5.787774e+06 .
+
+:OBSFAOGENDER101 a qb:Observation ;
+    rdfs:label "Observation of THA within the period of 2003 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :THA ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2003> ;
+    cex:value 1.58585e+06 .
+
+:OBSFAOGENDER102 a qb:Observation ;
+    rdfs:label "Observation of THA within the period of 1988 for indicator INDFAOGENDER1"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :THA ;
+    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-time <http://example.org/1988> ;
+    cex:value 8.933e+03 .
+
+:OBSFAOGENDER103 a qb:Observation ;
+    rdfs:label "Observation of TTO within the period of 2004 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :TTO ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2004> ;
+    cex:value 1.9051e+04 .
+
+:OBSFAOGENDER104 a qb:Observation ;
+    rdfs:label "Observation of TTO within the period of 2004 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :TTO ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2004> ;
+    cex:value 2.802e+03 .
+
+:OBSFAOGENDER105 a qb:Observation ;
+    rdfs:label "Observation of TTO within the period of 2004 for indicator INDFAOGENDER1"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :TTO ;
+    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-time <http://example.org/2004> ;
+    cex:value 4.6e+02 .
+
+:OBSFAOGENDER106 a qb:Observation ;
+    rdfs:label "Observation of TTO within the period of 2000 for indicator INDFAOGENDER0"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :TTO ;
+    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-time <http://example.org/2000> ;
+    cex:value 3.03871e+05 .
+
+:OBSFAOGENDER107 a qb:Observation ;
+    rdfs:label "Observation of TZA within the period of 2002-2004 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :TZA ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2002-2004> ;
+    cex:value 4.901837e+06 .
+
+:OBSFAOGENDER108 a qb:Observation ;
+    rdfs:label "Observation of TZA within the period of 2002-2004 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :TZA ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2002-2004> ;
+    cex:value 9.66076e+05 .
+
+:OBSFAOGENDER109 a qb:Observation ;
+    rdfs:label "Observation of UGA within the period of 1991 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :UGA ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/1991> ;
+    cex:value 1.704721e+06 .
+
+:OBSFAOGENDER11 a qb:Observation ;
+    rdfs:label "Observation of BWA within the period of 2004 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :BWA ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2004> ;
+    cex:value 1.7576e+04 .
+
+:OBSFAOGENDER110 a qb:Observation ;
+    rdfs:label "Observation of UGA within the period of 1991 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :UGA ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/1991> ;
+    cex:value 2.77693e+05 .
+
+:OBSFAOGENDER111 a qb:Observation ;
+    rdfs:label "Observation of URY within the period of 2000 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :URY ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2000> ;
+    cex:value 4.9302e+04 .
+
+:OBSFAOGENDER112 a qb:Observation ;
+    rdfs:label "Observation of URY within the period of 2000 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :URY ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2000> ;
+    cex:value 8.922e+03 .
+
+:OBSFAOGENDER113 a qb:Observation ;
+    rdfs:label "Observation of URY within the period of 2000 for indicator INDFAOGENDER1"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :URY ;
+    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-time <http://example.org/2000> ;
+    cex:value 1.6639e+04 .
+
+:OBSFAOGENDER114 a qb:Observation ;
+    rdfs:label "Observation of VEN within the period of 1997-1999 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :VEN ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/1997-1999> ;
+    cex:value 6.6976e+04 .
+
+:OBSFAOGENDER115 a qb:Observation ;
+    rdfs:label "Observation of VEN within the period of 2004 for indicator INDFAOGENDER0"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :VEN ;
+    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-time <http://example.org/2004> ;
+    cex:value 1.9e+06 .
+
+:OBSFAOGENDER116 a qb:Observation ;
+    rdfs:label "Observation of VNM within the period of 2001 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :VNM ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2001> ;
+    cex:value 6.1017e+04 .
+
+:OBSFAOGENDER117 a qb:Observation ;
+    rdfs:label "Observation of VNM within the period of 2001 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :VNM ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2001> ;
+    cex:value 5.382e+03 .
+
+:OBSFAOGENDER118 a qb:Observation ;
+    rdfs:label "Observation of ZMB within the period of 2000 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :ZMB ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2000> ;
+    cex:value 1.305783e+06 .
+
+:OBSFAOGENDER119 a qb:Observation ;
+    rdfs:label "Observation of ZMB within the period of 2000 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :ZMB ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2000> ;
+    cex:value 2.5071e+05 .
+
+:OBSFAOGENDER12 a qb:Observation ;
+    rdfs:label "Observation of BWA within the period of 2006 for indicator INDFAOGENDER0"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :BWA ;
+    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-time <http://example.org/2006> ;
+    cex:value 2.02669e+05 .
+
+:OBSFAOGENDER13 a qb:Observation ;
+    rdfs:label "Observation of CHL within the period of 2007 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :CHL ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2007> ;
+    cex:value 2.68787e+05 .
+
+:OBSFAOGENDER14 a qb:Observation ;
+    rdfs:label "Observation of CHL within the period of 2007 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :CHL ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2007> ;
+    cex:value 8.0255e+04 .
+
+:OBSFAOGENDER15 a qb:Observation ;
+    rdfs:label "Observation of CHL within the period of 2004 for indicator INDFAOGENDER0"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :CHL ;
+    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-time <http://example.org/2004> ;
+    cex:value 1.325257e+06 .
+
+:OBSFAOGENDER16 a qb:Observation ;
+    rdfs:label "Observation of CHN within the period of 1997 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :CHN ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/1997> ;
+    cex:value 1.93088e+08 .
+
+:OBSFAOGENDER17 a qb:Observation ;
+    rdfs:label "Observation of CHN within the period of 1997 for indicator INDFAOGENDER1"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :CHN ;
+    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-time <http://example.org/1997> ;
+    cex:value 5.97e+04 .
+
+:OBSFAOGENDER18 a qb:Observation ;
+    rdfs:label "Observation of CIV within the period of 2001 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :CIV ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2001> ;
+    cex:value 1.117667e+06 .
+
+:OBSFAOGENDER19 a qb:Observation ;
+    rdfs:label "Observation of CIV within the period of 2001 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :CIV ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2001> ;
+    cex:value 1.13312e+05 .
+
+:OBSFAOGENDER2 a qb:Observation ;
+    rdfs:label "Observation of ARG within the period of 2002 for indicator INDFAOGENDER1"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :ARG ;
+    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-time <http://example.org/2002> ;
+    cex:value 2.4e+02 .
+
+:OBSFAOGENDER20 a qb:Observation ;
+    rdfs:label "Observation of COG within the period of 1990 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :COG ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/1990> ;
+    cex:value 4.4796e+06 .
+
+:OBSFAOGENDER21 a qb:Observation ;
+    rdfs:label "Observation of COG within the period of 1990 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :COG ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/1990> ;
+    cex:value 3.984e+05 .
+
+:OBSFAOGENDER22 a qb:Observation ;
+    rdfs:label "Observation of COL within the period of 2008 for indicator INDFAOGENDER0"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :COL ;
+    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-time <http://example.org/2008> ;
+    cex:value 4.84762e+05 .
+
+:OBSFAOGENDER23 a qb:Observation ;
+    rdfs:label "Observation of CPV within the period of 2004 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :CPV ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2004> ;
+    cex:value 4.445e+04 .
+
+:OBSFAOGENDER24 a qb:Observation ;
+    rdfs:label "Observation of CPV within the period of 2004 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :CPV ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2004> ;
+    cex:value 2.2461e+04 .
+
+:OBSFAOGENDER25 a qb:Observation ;
+    rdfs:label "Observation of CRI within the period of 2000 for indicator INDFAOGENDER0"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :CRI ;
+    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-time <http://example.org/2000> ;
+    cex:value 1.644e+05 .
+
+:OBSFAOGENDER26 a qb:Observation ;
+    rdfs:label "Observation of DOM within the period of 1998 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :DOM ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/1998> ;
+    cex:value 2.43104e+05 .
+
+:OBSFAOGENDER27 a qb:Observation ;
+    rdfs:label "Observation of DOM within the period of 1998 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :DOM ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/1998> ;
+    cex:value 2.4772e+04 .
+
+:OBSFAOGENDER28 a qb:Observation ;
+    rdfs:label "Observation of DOM within the period of 2002 for indicator INDFAOGENDER0"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :DOM ;
+    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-time <http://example.org/2002> ;
+    cex:value 7.74161e+05 .
+
+:OBSFAOGENDER29 a qb:Observation ;
+    rdfs:label "Observation of DZA within the period of 2001 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :DZA ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2001> ;
+    cex:value 1.023799e+06 .
+
+:OBSFAOGENDER3 a qb:Observation ;
+    rdfs:label "Observation of ARG within the period of 2001 for indicator INDFAOGENDER0"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :ARG ;
+    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-time <http://example.org/2001> ;
+    cex:value 2.787961e+06 .
+
+:OBSFAOGENDER30 a qb:Observation ;
+    rdfs:label "Observation of DZA within the period of 2001 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :DZA ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2001> ;
+    cex:value 4.1793e+04 .
+
+:OBSFAOGENDER31 a qb:Observation ;
+    rdfs:label "Observation of ECU within the period of 2000 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :ECU ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2000> ;
+    cex:value 8.42882e+05 .
+
+:OBSFAOGENDER32 a qb:Observation ;
+    rdfs:label "Observation of ECU within the period of 2000 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :ECU ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2000> ;
+    cex:value 2.13731e+05 .
+
+:OBSFAOGENDER33 a qb:Observation ;
+    rdfs:label "Observation of EGY within the period of 1999-2001 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :EGY ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/1999-2001> ;
+    cex:value 4.537319e+06 .
+
+:OBSFAOGENDER34 a qb:Observation ;
+    rdfs:label "Observation of EGY within the period of 1999-2001 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :EGY ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/1999-2001> ;
+    cex:value 2.36632e+05 .
+
+:OBSFAOGENDER35 a qb:Observation ;
+    rdfs:label "Observation of ESP within the period of 2007 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :ESP ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2007> ;
+    cex:value 9.8806e+05 .
+
+:OBSFAOGENDER36 a qb:Observation ;
+    rdfs:label "Observation of ESP within the period of 2007 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :ESP ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2007> ;
+    cex:value 2.8462e+05 .
+
+:OBSFAOGENDER37 a qb:Observation ;
+    rdfs:label "Observation of ETH within the period of 2006-2008 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :ETH ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2006-2008> ;
+    cex:value 1.394338e+07 .
+
+:OBSFAOGENDER38 a qb:Observation ;
+    rdfs:label "Observation of ETH within the period of 2001-2003 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :ETH ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2001-2003> ;
+    cex:value 2.149675e+06 .
+
+:OBSFAOGENDER39 a qb:Observation ;
+    rdfs:label "Observation of FRA within the period of 2007 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :FRA ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2007> ;
+    cex:value 4.2763e+05 .
+
+:OBSFAOGENDER4 a qb:Observation ;
+    rdfs:label "Observation of AZE within the period of 2004 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :AZE ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2004> ;
+    cex:value 6.2324e+05 .
+
+:OBSFAOGENDER40 a qb:Observation ;
+    rdfs:label "Observation of FRA within the period of 2007 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :FRA ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2007> ;
+    cex:value 9.884e+04 .
+
+:OBSFAOGENDER41 a qb:Observation ;
+    rdfs:label "Observation of GBR within the period of 2007 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :GBR ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2007> ;
+    cex:value 2.8339e+05 .
+
+:OBSFAOGENDER42 a qb:Observation ;
+    rdfs:label "Observation of GBR within the period of 2007 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :GBR ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2007> ;
+    cex:value 5.332e+04 .
+
+:OBSFAOGENDER43 a qb:Observation ;
+    rdfs:label "Observation of GMB within the period of 2001-2003 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :GMB ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2001-2003> ;
+    cex:value 6.914e+04 .
+
+:OBSFAOGENDER44 a qb:Observation ;
+    rdfs:label "Observation of GMB within the period of 2001-2003 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :GMB ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2001-2003> ;
+    cex:value 5.731e+03 .
+
+:OBSFAOGENDER45 a qb:Observation ;
+    rdfs:label "Observation of GTM within the period of 2003 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :GTM ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2003> ;
+    cex:value 8.19162e+05 .
+
+:OBSFAOGENDER46 a qb:Observation ;
+    rdfs:label "Observation of GTM within the period of 2003 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :GTM ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2003> ;
+    cex:value 6.3627e+04 .
+
+:OBSFAOGENDER47 a qb:Observation ;
+    rdfs:label "Observation of IDN within the period of 1993 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :IDN ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/1993> ;
+    cex:value 2.033175e+07 .
+
+:OBSFAOGENDER48 a qb:Observation ;
+    rdfs:label "Observation of IDN within the period of 1993 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :IDN ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/1993> ;
+    cex:value 1.790741e+06 .
+
+:OBSFAOGENDER49 a qb:Observation ;
+    rdfs:label "Observation of IND within the period of 2000-2002 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :IND ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2000-2002> ;
+    cex:value 1.19621e+08 .
+
+:OBSFAOGENDER5 a qb:Observation ;
+    rdfs:label "Observation of BFA within the period of 1993 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :BFA ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/1993> ;
+    cex:value 8.86638e+05 .
+
+:OBSFAOGENDER50 a qb:Observation ;
+    rdfs:label "Observation of IND within the period of 2000-2002 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :IND ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2000-2002> ;
+    cex:value 1.2987e+07 .
+
+:OBSFAOGENDER51 a qb:Observation ;
+    rdfs:label "Observation of ITA within the period of 2007 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :ITA ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2007> ;
+    cex:value 1.66351e+06 .
+
+:OBSFAOGENDER52 a qb:Observation ;
+    rdfs:label "Observation of ITA within the period of 2007 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :ITA ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2007> ;
+    cex:value 5.3562e+05 .
+
+:OBSFAOGENDER53 a qb:Observation ;
+    rdfs:label "Observation of ITA within the period of 2000 for indicator INDFAOGENDER1"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :ITA ;
+    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-time <http://example.org/2000> ;
+    cex:value 4.5778e+04 .
+
+:OBSFAOGENDER54 a qb:Observation ;
+    rdfs:label "Observation of ITA within the period of 2003 for indicator INDFAOGENDER0"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :ITA ;
+    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-time <http://example.org/2003> ;
+    cex:value 1.684e+06 .
+
+:OBSFAOGENDER55 a qb:Observation ;
+    rdfs:label "Observation of JAM within the period of 1978-1980 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :JAM ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/1978-1980> ;
+    cex:value 1.82169e+05 .
+
+:OBSFAOGENDER56 a qb:Observation ;
+    rdfs:label "Observation of JAM within the period of 1978-1980 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :JAM ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/1978-1980> ;
+    cex:value 3.5185e+04 .
+
+:OBSFAOGENDER57 a qb:Observation ;
+    rdfs:label "Observation of KGZ within the period of 2002 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :KGZ ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2002> ;
+    cex:value 2.44404e+05 .
+
+:OBSFAOGENDER58 a qb:Observation ;
+    rdfs:label "Observation of KGZ within the period of 2002 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :KGZ ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2002> ;
+    cex:value 3.0254e+04 .
+
+:OBSFAOGENDER59 a qb:Observation ;
+    rdfs:label "Observation of KOR within the period of 1990 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :KOR ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/1990> ;
+    cex:value 1.767033e+06 .
+
+:OBSFAOGENDER6 a qb:Observation ;
+    rdfs:label "Observation of BFA within the period of 1993 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :BFA ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/1993> ;
+    cex:value 7.4559e+04 .
+
+:OBSFAOGENDER60 a qb:Observation ;
+    rdfs:label "Observation of LAO within the period of 1998-2000 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :LAO ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/1998-2000> ;
+    cex:value 6.679e+05 .
+
+:OBSFAOGENDER61 a qb:Observation ;
+    rdfs:label "Observation of LAO within the period of 1998-2000 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :LAO ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/1998-2000> ;
+    cex:value 6.06e+04 .
+
+:OBSFAOGENDER62 a qb:Observation ;
+    rdfs:label "Observation of LKA within the period of 2002 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :LKA ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2002> ;
+    cex:value 1.748341e+06 .
+
+:OBSFAOGENDER63 a qb:Observation ;
+    rdfs:label "Observation of LKA within the period of 2002 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :LKA ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2002> ;
+    cex:value 2.85214e+05 .
+
+:OBSFAOGENDER64 a qb:Observation ;
+    rdfs:label "Observation of LSO within the period of 1999-2001 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :LSO ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/1999-2001> ;
+    cex:value 3.37795e+05 .
+
+:OBSFAOGENDER65 a qb:Observation ;
+    rdfs:label "Observation of LSO within the period of 1999-2001 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :LSO ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/1999-2001> ;
+    cex:value 1.03878e+05 .
+
+:OBSFAOGENDER66 a qb:Observation ;
+    rdfs:label "Observation of MAR within the period of 1996 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :MAR ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/1996> ;
+    cex:value 1.492844e+06 .
+
+:OBSFAOGENDER67 a qb:Observation ;
+    rdfs:label "Observation of MAR within the period of 1996 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :MAR ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/1996> ;
+    cex:value 6.6395e+04 .
+
+:OBSFAOGENDER68 a qb:Observation ;
+    rdfs:label "Observation of MDG within the period of 2004-2006 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :MDG ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2004-2006> ;
+    cex:value 2.428492e+06 .
+
+:OBSFAOGENDER69 a qb:Observation ;
+    rdfs:label "Observation of MDG within the period of 2004-2006 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :MDG ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2004-2006> ;
+    cex:value 3.71158e+05 .
+
+:OBSFAOGENDER7 a qb:Observation ;
+    rdfs:label "Observation of BGD within the period of 2005 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :BGD ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2005> ;
+    cex:value 2.81657e+07 .
+
+:OBSFAOGENDER70 a qb:Observation ;
+    rdfs:label "Observation of MEX within the period of 2005 for indicator INDFAOGENDER0"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :MEX ;
+    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-time <http://example.org/2005> ;
+    cex:value 1.017124e+06 .
+
+:OBSFAOGENDER71 a qb:Observation ;
+    rdfs:label "Observation of MLI within the period of 2004-2006 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :MLI ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2004-2006> ;
+    cex:value 8.05194e+05 .
+
+:OBSFAOGENDER72 a qb:Observation ;
+    rdfs:label "Observation of MLI within the period of 2004-2006 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :MLI ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2004-2006> ;
+    cex:value 2.4636e+04 .
+
+:OBSFAOGENDER73 a qb:Observation ;
+    rdfs:label "Observation of MOZ within the period of 1999-2001 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :MOZ ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/1999-2001> ;
+    cex:value 3.064195e+06 .
+
+:OBSFAOGENDER74 a qb:Observation ;
+    rdfs:label "Observation of MOZ within the period of 1999-2001 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :MOZ ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/1999-2001> ;
+    cex:value 7.08353e+05 .
+
+:OBSFAOGENDER75 a qb:Observation ;
+    rdfs:label "Observation of MWI within the period of 1993 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :MWI ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/1993> ;
+    cex:value 1.561416e+06 .
+
+:OBSFAOGENDER76 a qb:Observation ;
+    rdfs:label "Observation of MWI within the period of 1993 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :MWI ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/1993> ;
+    cex:value 5.01919e+05 .
+
+:OBSFAOGENDER77 a qb:Observation ;
+    rdfs:label "Observation of MYS within the period of 2005 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :MYS ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2005> ;
+    cex:value 5.26265e+05 .
+
+:OBSFAOGENDER78 a qb:Observation ;
+    rdfs:label "Observation of MYS within the period of 2005 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :MYS ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2005> ;
+    cex:value 9.4906e+04 .
+
+:OBSFAOGENDER79 a qb:Observation ;
+    rdfs:label "Observation of MYS within the period of 2005 for indicator INDFAOGENDER1"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :MYS ;
+    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-time <http://example.org/2005> ;
+    cex:value 3.3026e+04 .
+
+:OBSFAOGENDER8 a qb:Observation ;
+    rdfs:label "Observation of BGD within the period of 2005 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :BGD ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2005> ;
+    cex:value 7.97378e+05 .
+
+:OBSFAOGENDER80 a qb:Observation ;
+    rdfs:label "Observation of NAM within the period of 2002-2004 for indicator INDFAOGENDER0"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :NAM ;
+    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-time <http://example.org/2002-2004> ;
+    cex:value 3.935e+04 .
+
+:OBSFAOGENDER81 a qb:Observation ;
+    rdfs:label "Observation of NIC within the period of 2001 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :NIC ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2001> ;
+    cex:value 1.96909e+05 .
+
+:OBSFAOGENDER82 a qb:Observation ;
+    rdfs:label "Observation of NIC within the period of 2001 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :NIC ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2001> ;
+    cex:value 3.5586e+04 .
+
+:OBSFAOGENDER83 a qb:Observation ;
+    rdfs:label "Observation of NIC within the period of 2001 for indicator INDFAOGENDER1"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :NIC ;
+    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-time <http://example.org/2001> ;
+    cex:value 1.642e+03 .
+
+:OBSFAOGENDER84 a qb:Observation ;
+    rdfs:label "Observation of NIC within the period of 2005 for indicator INDFAOGENDER0"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :NIC ;
+    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-time <http://example.org/2005> ;
+    cex:value 8.1581e+04 .
+
+:OBSFAOGENDER85 a qb:Observation ;
+    rdfs:label "Observation of NPL within the period of 2002 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :NPL ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2002> ;
+    cex:value 3.364139e+06 .
+
+:OBSFAOGENDER86 a qb:Observation ;
+    rdfs:label "Observation of NPL within the period of 2002 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :NPL ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2002> ;
+    cex:value 2.71507e+05 .
+
+:OBSFAOGENDER87 a qb:Observation ;
+    rdfs:label "Observation of PAN within the period of 2001 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :PAN ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2001> ;
+    cex:value 2.32464e+05 .
+
+:OBSFAOGENDER88 a qb:Observation ;
+    rdfs:label "Observation of PAN within the period of 2001 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :PAN ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2001> ;
+    cex:value 6.8152e+04 .
+
+:OBSFAOGENDER89 a qb:Observation ;
+    rdfs:label "Observation of PAN within the period of 2000 for indicator INDFAOGENDER0"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :PAN ;
+    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-time <http://example.org/2000> ;
+    cex:value 1.1821e+05 .
+
+:OBSFAOGENDER9 a qb:Observation ;
+    rdfs:label "Observation of BRA within the period of 2000 for indicator INDFAOGENDER0"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :BRA ;
+    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-time <http://example.org/2000> ;
+    cex:value 9.54724e+05 .
+
+:OBSFAOGENDER90 a qb:Observation ;
+    rdfs:label "Observation of PER within the period of 1994 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :PER ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/1994> ;
+    cex:value 1.75064e+06 .
+
+:OBSFAOGENDER91 a qb:Observation ;
+    rdfs:label "Observation of PER within the period of 1994 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :PER ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/1994> ;
+    cex:value 3.57176e+05 .
+
+:OBSFAOGENDER92 a qb:Observation ;
+    rdfs:label "Observation of PHL within the period of 2002 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :PHL ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/2002> ;
+    cex:value 4.822739e+06 .
+
+:OBSFAOGENDER93 a qb:Observation ;
+    rdfs:label "Observation of PHL within the period of 2002 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :PHL ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/2002> ;
+    cex:value 5.16572e+05 .
+
+:OBSFAOGENDER94 a qb:Observation ;
+    rdfs:label "Observation of PHL within the period of 2002 for indicator INDFAOGENDER1"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :PHL ;
+    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-time <http://example.org/2002> ;
+    cex:value 1.3629e+04 .
+
+:OBSFAOGENDER95 a qb:Observation ;
+    rdfs:label "Observation of PRY within the period of 2002 for indicator INDFAOGENDER0"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :PRY ;
+    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-time <http://example.org/2002> ;
+    cex:value 9.4036e+04 .
+
+:OBSFAOGENDER96 a qb:Observation ;
+    rdfs:label "Observation of SEN within the period of 1998-2000 for indicator INDFAOGENDER3"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :SEN ;
+    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-time <http://example.org/1998-2000> ;
+    cex:value 4.37036e+05 .
+
+:OBSFAOGENDER97 a qb:Observation ;
+    rdfs:label "Observation of SEN within the period of 1998-2000 for indicator INDFAOGENDER2"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :SEN ;
+    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-time <http://example.org/1998-2000> ;
+    cex:value 3.9597e+04 .
+
+:OBSFAOGENDER98 a qb:Observation ;
+    rdfs:label "Observation of SLV within the period of 1994 for indicator INDFAOGENDER1"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :SLV ;
+    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-time <http://example.org/1994> ;
+    cex:value 3.46e+02 .
+
+:OBSFAOGENDER99 a qb:Observation ;
+    rdfs:label "Observation of SLV within the period of 2007 for indicator INDFAOGENDER0"@en ;
+    dcterms:issued "2014-05-06T11:50:37"^^xsd:dateTime ;
+    qb:dataSet : ;
+    qb:slice :None ;
+    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
+    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
+    cex:ref-area :SLV ;
+    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-time <http://example.org/2007> ;
+    cex:value 6.11301e+05 .
+
+:Panama a cex:Area ;
+    rdfs:label "Panama" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=PAN> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "PA" ;
+    lb:iso3 "PAN" .
+
+:Paraguay a cex:Area ;
+    rdfs:label "Paraguay" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=PRY> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "PY" ;
+    lb:iso3 "PRY" .
+
+:Peru a cex:Area ;
+    rdfs:label "Peru" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=PER> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "PE" ;
+    lb:iso3 "PER" .
+
+:Philippines a cex:Area ;
+    rdfs:label "Philippines" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=PHL> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "PH" ;
+    lb:iso3 "PHL" .
+
+:RepublicofKorea a cex:Area ;
+    rdfs:label "RepublicofKorea" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=KOR> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "KR" ;
+    lb:iso3 "KOR" .
+
+:Senegal a cex:Area ;
+    rdfs:label "Senegal" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=SEN> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "SN" ;
+    lb:iso3 "SEN" .
 
 :Spain a cex:Area ;
     rdfs:label "Spain" ;
@@ -33,142 +1781,133 @@
     lb:iso2 "ES" ;
     lb:iso3 "ESP" .
 
-:TEMP_TOPIC a lb:Topic ;
-    rdfs:label "Temp Topic"@en .
+:SriLanka a cex:Area ;
+    rdfs:label "SriLanka" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=LKA> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "LK" ;
+    lb:iso3 "LKA" .
 
-:USRIPFRIIMPORTER a foaf:Person ;
-    rdfs:label "USRIPFRIIMPORTER"@en ;
+:Thailand a cex:Area ;
+    rdfs:label "Thailand" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=THA> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "TH" ;
+    lb:iso3 "THA" .
+
+:TrinidadandTobago a cex:Area ;
+    rdfs:label "TrinidadandTobago" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=TTO> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "TT" ;
+    lb:iso3 "TTO" .
+
+:USRFAOGENDERIMPORTER a foaf:Person ;
+    rdfs:label "USRFAOGENDERIMPORTER"@en ;
     org:memberOf :None ;
-    foaf:account "USRIPFRIIMPORTER" ;
-    foaf:name "USRIPFRIIMPORTER" .
+    foaf:account "USRFAOGENDERIMPORTER" ;
+    foaf:name "USRFAOGENDERIMPORTER" .
 
-<http://www.ifpri.org/> a org:Organization ;
-    rdfs:label "IFPRI - International Food Policy Research Institute"@en ;
-    foaf:homepage "http://www.ifpri.org/" .
+:Uganda a cex:Area ;
+    rdfs:label "Uganda" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=UGA> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "UG" ;
+    lb:iso3 "UGA" .
 
-<http://www.ifpri.org/copyright> a lb:License ;
-    lb:description "Attribution, no modification and non commercial without permission." ;
-    lb:name "IPFRI Copyright" ;
+:UnitedKingdom a cex:Area ;
+    rdfs:label "UnitedKingdom" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=GBR> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "GB" ;
+    lb:iso3 "GBR" .
+
+:UnitedRepublicofTanzania a cex:Area ;
+    rdfs:label "UnitedRepublicofTanzania" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=TZA> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "TZ" ;
+    lb:iso3 "TZA" .
+
+:Uruguay a cex:Area ;
+    rdfs:label "Uruguay" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=URY> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "UY" ;
+    lb:iso3 "URY" .
+
+:Venezuela a cex:Area ;
+    rdfs:label "Venezuela" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=VEN> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "VE" ;
+    lb:iso3 "VEN" .
+
+:VietNam a cex:Area ;
+    rdfs:label "VietNam" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=VNM> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "VN" ;
+    lb:iso3 "VNM" .
+
+:Zambia a cex:Area ;
+    rdfs:label "Zambia" ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=ZMB> ;
+    lb:is_part_of "None" ;
+    lb:iso2 "ZM" ;
+    lb:iso3 "ZMB" .
+
+<http://example.org/purl.org/weso/ontology/computex#Raw> rdfs:label "Raw values obtained directly from source"@en .
+
+<http://www.fao.org/> a org:Organization ;
+    rdfs:label "FAO: Food and Agriculture Organization of the United Nations"@en ;
+    foaf:homepage "http://www.fao.org/" .
+
+<http://www.fao.org/contact-us/terms/en/> a lb:License ;
+    lb:description "Attribution and need permission for commercial use" ;
+    lb:name "Copyright Fao" ;
     lb:republish "true"^^xsd:Boolean ;
-    lb:url "http://www.ifpri.org/copyright" .
+    lb:url "http://www.fao.org/contact-us/terms/en/" .
 
-<http://example.org/716> a cex:Area .
-
-<http://example.org/724> a cex:Area .
-
-<http://example.org/8> a cex:Area .
-
-<http://example.org/887> a cex:Area .
-
-<http://example.org/894> a cex:Area .
-
-:INDIPFRI1 a cex:Indicator ;
-    rdfs:label "Prevalence of underweight in children under five years (%)"@en ;
+:INDFAOGENDER1 a cex:Indicator ;
+    rdfs:label "Number of holdings under co-ownership"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-10T18:47:09.063652"^^xsd:dateTime ;
-    lb:measurement <http://purl.org/weso/computex/ontology#%> ;
-    lb:preferable_tendency cex:decrease ;
-    lb:starred "false"^^xsd:Boolean ;
-    lb:topic cex:TEMP_TOPIC ;
-    rdfs:comment "Description of Prevalence of underweight in children under five years (%)"@en .
-
-:INDIPFRI2 a cex:Indicator ;
-    rdfs:label "Under-five Mortality rate  (%)"@en ;
-    lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-10T18:47:09.063652"^^xsd:dateTime ;
-    lb:measurement <http://purl.org/weso/computex/ontology#%> ;
-    lb:preferable_tendency cex:decrease ;
+    lb:last_update "2014-05-10T20:01:45.895140"^^xsd:dateTime ;
+    lb:measurement cex:Units ;
+    lb:preferable_tendency cex:increase ;
     lb:starred "false"^^xsd:Boolean ;
     lb:topic cex:LAND_TENURE ;
-    rdfs:comment "Under-five Mortality rate  (%)"@en .
+    rdfs:comment "Number of holdings under co-ownership"@en .
 
-:OBSIPFRI0 a qb:Observation ;
-    rdfs:label "Observation of area ESP within the period of 1990-1993 for indicator INDIPFRI0"@en ;
-    dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
-    qb:dataSet : ;
-    qb:slice :SLIIPFRI0 ;
-    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-M> ;
-    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
-    cex:ref-area :ESP ;
-    cex:ref-indicator :INDIPFRI0 ;
-    cex:ref-time <http://example.org/1990-1993> ;
-    cex:value "None"^^xsd:double .
-
-:OBSIPFRI1 a qb:Observation ;
-    rdfs:label "Observation of area 8 within the period of 1990-1993 for indicator INDIPFRI1"@en ;
-    dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
-    qb:dataSet : ;
-    qb:slice :SLIIPFRI0 ;
-    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
-    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
-    cex:ref-area <http://example.org/8> ;
-    cex:ref-indicator :INDIPFRI1 ;
-    cex:ref-time <http://example.org/1990-1993> ;
-    cex:value 9e+00 .
-
-:OBSIPFRI2597 a qb:Observation ;
-    rdfs:label "Observation of area 887 within the period of 2013 for indicator INDIPFRI2"@en ;
-    dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
-    qb:dataSet : ;
-    qb:slice :SLIIPFRI1 ;
-    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
-    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
-    cex:ref-area <http://example.org/887> ;
-    cex:ref-indicator :INDIPFRI2 ;
-    cex:ref-time <http://example.org/2013> ;
-    cex:value 2.65e+01 .
-
-:OBSIPFRI2598 a qb:Observation ;
-    rdfs:label "Observation of area 894 within the period of 2013-2 for indicator INDIPFRI3"@en ;
-    dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
-    qb:dataSet : ;
-    qb:slice :SLIIPFRI2 ;
-    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
-    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
-    cex:ref-area <http://example.org/894> ;
-    cex:ref-indicator :INDIPFRI3 ;
-    cex:ref-time <http://example.org/2013-2> ;
-    cex:value 2.41e+01 .
-
-:OBSIPFRI2599 a qb:Observation ;
-    rdfs:label "Observation of area 716 within the period of 2013-12 for indicator INDIPFRI3"@en ;
-    dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
-    qb:dataSet : ;
-    qb:slice :SLIIPFRI2 ;
-    sdmx-concept:obsStatus <http://purl.org/linked-data/sdmx/2009/code#http://purl.org/linked-data/sdmx/2009/code#obsStatus-A> ;
-    cex:computation <http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> ;
-    cex:ref-area <http://example.org/716> ;
-    cex:ref-indicator :INDIPFRI3 ;
-    cex:ref-time <http://example.org/2013-12> ;
-    cex:value 1.65e+01 .
-
-:SLIIPFRI1 a qb:Slice ;
-    qb:dataSet :None ;
-    qb:observation :OBSIPFRI2597 ;
-    cex:indicator :INDIPFRI0 ;
-    lb:dimension :FRA .
-
-:SLIIPFRI0 a qb:Slice ;
-    qb:dataSet :None ;
-    qb:observation :OBSIPFRI0,
-        :OBSIPFRI1 ;
-    cex:indicator :INDIPFRI0 ;
-    lb:dimension <http://example.org/724> .
-
-:SLIIPFRI2 a qb:Slice ;
-    qb:dataSet :None ;
-    qb:observation :OBSIPFRI2598,
-        :OBSIPFRI2599 ;
-    cex:indicator :INDIPFRI0 ;
-    lb:dimension <http://example.org/1999-2002> .
-
-:INDIPFRI0 a cex:Indicator ;
-    rdfs:label "Prevalence of undernourishment in the population  (%)"@en ;
+:INDFAOGENDER0 a cex:Indicator ;
+    rdfs:label "Number of rural households headed by women"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-10T18:47:09.063652"^^xsd:dateTime ;
-    lb:measurement <http://purl.org/weso/computex/ontology#%> ;
-    lb:preferable_tendency cex:decrease ;
+    lb:last_update "2014-05-10T20:01:45.895140"^^xsd:dateTime ;
+    lb:measurement cex:Units ;
+    lb:preferable_tendency cex:increase ;
     lb:starred "false"^^xsd:Boolean ;
     lb:topic cex:LAND_GENDER ;
-    rdfs:comment "Prevalence of undernourishment in the population  (%)"@en .
+    rdfs:comment "Number of rural households headed by women"@en .
+
+:INDFAOGENDER2 a cex:Indicator ;
+    rdfs:label "Women holders"@en ;
+    lb:indicatorType cex:indicators ;
+    lb:last_update "2014-05-10T20:01:45.895140"^^xsd:dateTime ;
+    lb:measurement cex:Units ;
+    lb:preferable_tendency cex:increase ;
+    lb:starred "false"^^xsd:Boolean ;
+    lb:topic cex:LAND_GENDER ;
+    rdfs:comment "Women holders"@en .
+
+:INDFAOGENDER3 a cex:Indicator ;
+    rdfs:label "Total number of holders"@en ;
+    lb:indicatorType cex:indicators ;
+    lb:last_update "2014-05-10T20:01:45.895140"^^xsd:dateTime ;
+    lb:measurement cex:Units ;
+    lb:preferable_tendency cex:increase ;
+    lb:starred "false"^^xsd:Boolean ;
+    lb:topic cex:LAND_TENURE ;
+    rdfs:comment "Total number of holders"@en .
+
+<http://purl.org/weso/computex/ontology#purl.org/weso/ontology/computex#Raw> a cex:Computation .
 

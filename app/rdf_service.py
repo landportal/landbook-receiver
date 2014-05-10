@@ -42,10 +42,10 @@ class ReceiverRDFService(object):
                        prefix_.term(obs.dataset_id)))
 
             graph.add((prefix_.term(obs.id), qb.term("slice"),
-                       prefix_.term(obs.slice_id)))
+                       prefix_.term(str(obs.slice_id))))
 
             graph.add((prefix_.term(obs.id), RDFS.label,
-                       Literal("Observation of area " + str(region) +
+                       Literal("Observation of " + str(region) +
                                " within the period of " + str(obs.ref_time.value) +
                                " for indicator " + str(obs.indicator_id), lang='en')))
 
@@ -192,7 +192,7 @@ class ReceiverRDFService(object):
         region = ""
         for country in CountryReader().get_countries(country_list_file, None):
             if code == country.iso3:
-                country_name = country.translations[0].name
+                country_name = country.translations[0].name.replace(" ", "")
                 iso2 = country.iso2
                 fao_uri = country.faoURI
                 region = country.is_part_of
@@ -231,22 +231,22 @@ class ReceiverRDFService(object):
         lic = self.parser.get_license()
         graph.add((URIRef(lic.url), RDF.type,
                    lb.term("License")))
-
         graph.add((URIRef(lic.url), lb.term("name"),
                    Literal(lic.name)))
-
         graph.add((URIRef(lic.url), lb.term("description"),
                    Literal(lic.description)))
-
         graph.add((URIRef(lic.url), lb.term("url"),
                    Literal(lic.url)))
-
         graph.add((URIRef(lic.url), lb.term("republish"),
                    Literal(lic.republish, datatype=XSD.Boolean)))
-
         return graph
 
-
+    def add_computation_triples(self, graph):
+        for obs in self.parser.get_observations():
+            graph.add((cex.term(obs.computation.uri), RDF.type, cex.term(Literal("Computation"))))
+            graph.add((prefix_.term(obs.computation.uri), RDFS.label,
+                       Literal("Raw values obtained directly from source", lang='en')))
+        return graph
 
     def serialize_rdf_xml(self, graph):
         serialized = graph.serialize(format='application/rdf+xml')
