@@ -190,17 +190,17 @@ class ReceiverRDFService(object):
         iso2 = ""
         fao_uri = ""
         region = ""
-        for country in CountryReader().get_countries(country_list_file, None):
+        for country in CountryReader().get_countries(country_list_file):
             if code == country.iso3:
                 country_name = country.translations[0].name.replace(" ", "")
                 iso2 = country.iso2
                 fao_uri = country.faoURI
-                region = country.is_part_of
+                region = country.is_part_of_id
 
         graph.add((prefix_.term(country_name), RDF.type,
                    cex.term("Area")))
         graph.add((prefix_.term(country_name), RDFS.label,
-                   Literal(country_name)))
+                   Literal(country_name, lang="en")))
         graph.add((prefix_.term(country_name), lb.term("iso3"),
                    Literal(code)))
         graph.add((prefix_.term(country_name), lb.term("iso2"),
@@ -211,11 +211,34 @@ class ReceiverRDFService(object):
                    Literal(region)))
         return code
 
+    def add_region_triples(self, graph):
+        self._add_region(graph, None)
+
     @staticmethod
     def _add_region(graph, arg):
-        region = arg.region_code
-        graph.add((prefix_.term(region), RDF.type,
-                    cex.term("Area")))
+#        region = arg.region_code
+        country_list_file = '../countries/country_list.xlsx'
+        for region in CountryReader().get_countries(country_list_file):
+            region_id = region.is_part_of_id
+            graph.add((prefix_.term(region_id), RDF.type,
+                       cex.term("Area")))
+            graph.add((prefix_.term(region_id), RDFS.label,
+                      Literal(region_id, lang="en")))
+            un_code = ""
+            if region_id == "Americas":
+                    un_code = "AM"
+            elif region_id == "Europe":
+                un_code = "EU"
+            elif region_id == "Oceania":
+                un_code = "OC"
+            elif region_id == "Africa":
+                un_code = "AF"
+            elif region_id == "Asia":
+                un_code = "AS"
+            elif region_id == "Antarctica":
+                un_code = "AN"
+            graph.add((prefix_.term(region.is_part_of_id), lb.term("UNCode"),
+                       Literal(un_code)))
 
 
     @staticmethod

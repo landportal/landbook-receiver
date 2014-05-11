@@ -30,21 +30,21 @@ class CountryReader(object):
     #REGIONS
     REGION_EN = 38
 
-    def get_countries(self, file_path, regions):
+    def get_countries(self, file_path):
         """ Return a list of all Landportal countries
         """
-        countries = self._get_all_countries(file_path, regions)
+        countries = self._get_all_countries(file_path)
         return countries
 
-    def _get_all_countries(self, path, regions):
+    def _get_all_countries(self, path):
         country_file = xlrd.open_workbook(path,
             encoding_override='latin-1').sheet_by_index(0)
         countries = []
         for row in range(self.FIRST_ROW, self.LAST_ROW + 1):
-            countries.append(self.parse_country(country_file.row(row), regions))
+            countries.append(self.parse_country(country_file.row(row)))
         return countries
 
-    def parse_country(self, country_data, regions):
+    def parse_country(self, country_data):
         iso2 = self._parse_iso2(country_data)
         iso3 = self._parse_iso3(country_data)
         fao_uri = 'http://www.fao.org/countryprofiles/index/en/?iso3=' + iso3
@@ -144,3 +144,4 @@ class CountryReader(object):
 
 if __name__ == '__main__':
     CountryReader().get_countries('country_list.xlsx')
+
