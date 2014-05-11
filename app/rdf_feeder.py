@@ -25,6 +25,7 @@ def feed_rdf():
     rdf_service.add_area_triples_from_slices(graph)
     rdf_service.add_area_triples_from_observations(graph)
     rdf_service.add_computation_triples(graph)
+    rdf_service.add_region_triples(graph)
 
     bind_namespaces(graph)
 
