@@ -7,6 +7,7 @@ import logging
 from rdf_utils.namespaces_handler import bind_namespaces
 import datetime as dt
 
+# test data
 with codecs.open(unicode('../xml/DATIPFRI_0_1_0_no_urls.xml', encoding='utf-8')) as xml:
         content = xml.read()
 
