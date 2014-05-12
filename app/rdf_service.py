@@ -56,8 +56,6 @@ class ReceiverRDFService(object):
             # graph.add((prefix_.term(obs.id),
             #        lb.term("source"), prefix_.term(obs.source)))
 
-            # graph.add((prefix_.term(obs.region_code), RDF.type,
-            #            cex.term("Area")))
         return graph
 
     def add_indicators_triples(self, graph):
@@ -115,7 +113,7 @@ class ReceiverRDFService(object):
                    prefix_.term(dimension)))
 
             graph.add((prefix_.term(slc.id), qb.term("dataSet"),
-                   prefix_.term(str(slc.dataset))))
+                   prefix_.term(slc.dataset_id)))
 
         return graph
 
@@ -186,28 +184,30 @@ class ReceiverRDFService(object):
     def _add_country(graph, arg):
         code = arg.country_code
         country_list_file = '../countries/country_list.xlsx'
+        country_id = ""
         country_name = ""
         iso2 = ""
         fao_uri = ""
         region = ""
         for country in CountryReader().get_countries(country_list_file):
             if code == country.iso3:
-                country_name = country.translations[0].name.replace(" ", "")
+                country_id = country.iso3
+                country_name = country.translations[0].name
                 iso2 = country.iso2
                 fao_uri = country.faoURI
                 region = country.is_part_of_id
 
-        graph.add((prefix_.term(country_name), RDF.type,
+        graph.add((prefix_.term(country_id), RDF.type,
                    cex.term("Area")))
-        graph.add((prefix_.term(country_name), RDFS.label,
+        graph.add((prefix_.term(country_id), RDFS.label,
                    Literal(country_name, lang="en")))
-        graph.add((prefix_.term(country_name), lb.term("iso3"),
+        graph.add((prefix_.term(country_id), lb.term("iso3"),
                    Literal(code)))
-        graph.add((prefix_.term(country_name), lb.term("iso2"),
+        graph.add((prefix_.term(country_id), lb.term("iso2"),
                    Literal(iso2)))
-        graph.add((prefix_.term(country_name), lb.term("faoURI"),
+        graph.add((prefix_.term(country_id), lb.term("faoURI"),
                    URIRef(fao_uri)))
-        graph.add((prefix_.term(country_name), lb.term("is_part_of"),
+        graph.add((prefix_.term(country_id), lb.term("is_part_of"),
                    Literal(region)))
         return code
 
@@ -224,22 +224,19 @@ class ReceiverRDFService(object):
                        cex.term("Area")))
             graph.add((prefix_.term(region_id), RDFS.label,
                       Literal(region_id, lang="en")))
-            un_code = ""
+            un_code = None
             if region_id == "Americas":
-                    un_code = "AM"
+                    un_code = 19
             elif region_id == "Europe":
-                un_code = "EU"
+                un_code = 150
             elif region_id == "Oceania":
-                un_code = "OC"
+                un_code = 9
             elif region_id == "Africa":
-                un_code = "AF"
+                un_code = 2
             elif region_id == "Asia":
-                un_code = "AS"
-            elif region_id == "Antarctica":
-                un_code = "AN"
+                un_code = 142
             graph.add((prefix_.term(region.is_part_of_id), lb.term("UNCode"),
                        Literal(un_code)))
-
 
     @staticmethod
     def _get_area_code(arg):

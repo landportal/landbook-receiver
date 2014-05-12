@@ -63,7 +63,9 @@ class Parser(object):
 
     def get_dataset(self):
         dataset = model.Dataset()
-        dataset.sdmx_frequency = self._root.find('import_process').find('sdmx_frequency').text
+        dataset.id = self._root.get('id')
+        dataset.sdmx_frequency = self._root.find('import_process').\
+            find('sdmx_frequency').text
         dataset.license = self.get_license()
         return dataset
 
@@ -165,6 +167,7 @@ class Parser(object):
         observation.computation = self._parse_computation(obs.find('computation'))
         observation.indicator_group_id = obs.get('group')
         observation.slice_id = get_slice_id(observation.id)
+        observation.dataset_id = self.get_dataset().id
         # An observation may refer to a country or to a whole region
         # This fields will not be persisted to the database, instead it will
         # be used to link the observation with is referred region or country in the
@@ -182,6 +185,7 @@ class Parser(object):
         slice.indicator_id = sli.find('sli_metadata')\
             .find('indicator-ref').get('id')
         metadata = sli.find("sli_metadata")
+        slice.dataset_id = self.get_dataset().id
         # The slice's dimension may be a Region or a Time. If it is a Time we
         # can create it here and link it with the slice. If it is a Region we
         # we must check the API using it's region code or iso3 code.

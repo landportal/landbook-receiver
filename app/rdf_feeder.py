@@ -5,8 +5,9 @@ from app.rdf_service import ReceiverRDFService
 from rdflib import Graph
 import logging
 from rdf_utils.namespaces_handler import bind_namespaces
+import datetime as dt
 
-with codecs.open(unicode('../xml/DATFAOGENDER_0_1_0.xml', encoding='utf-8')) as xml:
+with codecs.open(unicode('../xml/DATIPFRI_0_1_0_no_urls.xml', encoding='utf-8')) as xml:
         content = xml.read()
 
 graph = Graph()
@@ -33,4 +34,7 @@ def feed_rdf():
     rdf_service.serialize_rdf_xml(graph)
 
 if __name__ == "__main__":
+    start = dt.datetime.now()
     feed_rdf()
+    end = dt.datetime.now()
+    print end - start
