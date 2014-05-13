@@ -16,3 +16,9 @@ MYSQL_USER = "root"
 MYSQL_PASSWORD = "root"
 DBA_USER = "dba"
 DBA_PASSWORD = "root"
+TRIPLE_STORE_HOST = "http://localhost:1300/"
+TRIPLE_STORE_API = "sparql-graph-crud-auth?"
+GRAPH_URI = "graph-uri=http://www.landportal.info"
+COUNTRY_LIST_FILE = 'countries/country_list.xlsx'
+RDF_DATA_SET = 'datasets/dataset.rdf'
+TURTLE_DATA_SET = 'datasets/dataset.ttl'

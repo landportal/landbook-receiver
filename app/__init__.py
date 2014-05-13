@@ -9,4 +9,4 @@ app = Flask(__name__)
 app.config['DEBUG'] = True
 db = SQLAlchemy(app)
 
-#from app import views
+from app import views

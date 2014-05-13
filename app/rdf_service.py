@@ -7,7 +7,7 @@ from rdflib.namespace import RDF, RDFS, FOAF
 import datetime
 from countries.country_reader import CountryReader
 import datetime as dt
-import sh
+import sh, os
 import config
 
 
@@ -16,7 +16,8 @@ class ReceiverRDFService(object):
         self.parser = Parser(content)
         self.time = datetime.datetime.now()
 
-    def run_service(self, graph, host, api, graph_uri):
+    def run_service(self, graph, host, api, graph_uri, user_ip):
+        bind_namespaces(graph)
         self._add_observations_triples(graph)
         self._add_indicators_triples(graph)
         self._add_area_triples_from_observations(graph)
@@ -28,12 +29,13 @@ class ReceiverRDFService(object):
         self._add_organizations_triples(graph)
         self._add_region_triples(graph)
         self._add_slices_triples(graph)
-        self._add_upload_triples(graph)
+        self._add_upload_triples(graph, user_ip)
         self._add_users_triples(graph)
         self._add_topics_triples(graph)
         self._serialize_rdf_xml(graph)
         self._serialize_turtle(graph)
-        self._load_data_set(graph, host, api, graph_uri)
+        self._load_data_set(graph_uri=graph_uri, host=host, api=api)
+        self._remove_data_sets()
         return graph
 
     def _add_observations_triples(self, graph):
@@ -64,8 +66,6 @@ class ReceiverRDFService(object):
             graph.add((prefix_.term(obs.id),
                        sdmx_concept.term("obsStatus"),
                        sdmx_code.term(obs.value.obs_status)))
-            # graph.add((prefix_.term(obs.id),
-            #        lb.term("source"), prefix_.term(obs.source)))
         return graph
 
     def _add_indicators_triples(self, graph):
@@ -178,7 +178,7 @@ class ReceiverRDFService(object):
     @staticmethod
     def _add_country(graph, arg):
         code = arg.country_code
-        country_list_file = '../countries/country_list.xlsx'
+        country_list_file = config.COUNTRY_LIST_FILE
         country_id = ""
         country_name = ""
         iso2 = ""
@@ -210,7 +210,7 @@ class ReceiverRDFService(object):
 
     @staticmethod
     def _add_region(graph, arg):
-        country_list_file = '../countries/country_list.xlsx'
+        country_list_file = config.COUNTRY_LIST_FILE
         for region in CountryReader().get_countries(country_list_file):
             region_id = region.is_part_of_id
             graph.add((prefix_.term(region_id), RDF.type,
@@ -290,7 +290,7 @@ class ReceiverRDFService(object):
                    Literal(user.id)))
         return graph
 
-    def _add_upload_triples(self, graph):
+    def _add_upload_triples(self, graph, ip):
         upload = "upload" + str(dt.datetime.now().
                                 strftime("%y%m%d%H%M"))
         user = self.parser.get_user()
@@ -302,9 +302,8 @@ class ReceiverRDFService(object):
                    lb.term(user.id)))
         graph.add((prefix_.term(upload), lb.term("timestamp"),
                    Literal(dt.datetime.now(), datatype=XSD.dateTime)))
-        #TODO get ip from the http request
         graph.add((prefix_.term(upload), lb.term("ip"),
-                   Literal("156.35.82.103")))
+                   Literal(ip)))
         for obs in observations:
             graph.add((prefix_.term(upload), lb.term("observation"),
                        prefix_.term(obs.id)))
@@ -316,17 +315,22 @@ class ReceiverRDFService(object):
     @staticmethod
     def _serialize_rdf_xml(graph):
         serialized = graph.serialize(format='application/rdf+xml')
-        with open('../datasets/dataset.rdf', 'w') as dataset:
+        with open(config.RDF_DATA_SET, 'w') as dataset:
             dataset.write(serialized)
 
     @staticmethod
     def _serialize_turtle(graph):
         serialized = graph.serialize(format='turtle')
-        with open('../datasets/dataset.ttl', 'w') as dataset:
+        with open(config.TURTLE_DATA_SET, 'w') as dataset:
             dataset.write(serialized)
 
     @staticmethod
     def _load_data_set(host, api, graph_uri):
         sh.curl(host + api + graph_uri,
                 digest=True, u=config.DBA_USER + ":" + config.DBA_PASSWORD,
-                verbose=True, X="POST", T="../datasets/dataset.ttl")
+                verbose=True, X="POST", T=config.RDF_DATA_SET)
+
+    @staticmethod
+    def _remove_data_sets():
+        os.remove(config.RDF_DATA_SET)
+        os.remove(config.TURTLE_DATA_SET)
