@@ -10,206 +10,211 @@
    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
    xmlns:sdmx-concept="http://purl.org/linked-data/sdmx/2009/concept#"
 >
-  <rdf:Description rdf:about="http://example.org/ESP">
-    <lb:iso2>ES</lb:iso2>
-    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Area"/>
-    <lb:iso3>ESP</lb:iso3>
-    <lb:is_part_of>Europe</lb:is_part_of>
-    <rdfs:label xml:lang="en">Spain</rdfs:label>
-    <lb:faoURI rdf:resource="http://www.fao.org/countryprofiles/index/en/?iso3=ESP"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/INDIPFRI2">
-    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Indicator"/>
-    <lb:topic rdf:resource="http://purl.org/weso/computex/ontology#LAND_TENURE"/>
-    <lb:indicatorType rdf:resource="http://purl.org/weso/computex/ontology#indicators"/>
-    <lb:last_update rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-05-13T10:55:44.260193</lb:last_update>
-    <rdfs:label xml:lang="en">Under-five Mortality rate  (%)</rdfs:label>
-    <rdfs:comment xml:lang="en">Under-five Mortality rate  (%)</rdfs:comment>
-    <lb:measurement rdf:resource="http://purl.org/weso/computex/ontology#%"/>
-    <lb:starred rdf:datatype="http://www.w3.org/2001/XMLSchema#Boolean">false</lb:starred>
-    <lb:preferable_tendency rdf:resource="http://purl.org/weso/computex/ontology#decrease"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/OBSIPFRI2599">
-    <cex:value rdf:datatype="http://www.w3.org/2001/XMLSchema#double">16.5</cex:value>
-    <cex:ref-time rdf:resource="http://example.org/2013-12"/>
-    <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-04-04T11:50:18</dcterms:issued>
-    <cex:ref-area rdf:resource="http://example.org/716"/>
-    <qb:dataSet rdf:resource="http://example.org/TEST_ID"/>
-    <qb:slice rdf:resource="http://example.org/SLIIPFRI2"/>
-    <cex:computation rdf:resource="http://purl.org/weso/computex/ontology#Raw"/>
-    <rdfs:label xml:lang="en">Observation of 716 within the period of 2013-12 for indicator INDIPFRI3</rdfs:label>
-    <cex:ref-indicator rdf:resource="http://example.org/INDIPFRI3"/>
-    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
-    <sdmx-concept:obsStatus rdf:resource="http://purl.org/linked-data/sdmx/2009/code#obsStatus-A"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/OBSIPFRI2597">
-    <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-04-04T11:50:18</dcterms:issued>
-    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
-    <rdfs:label xml:lang="en">Observation of 887 within the period of 2013 for indicator INDIPFRI2</rdfs:label>
-    <qb:dataSet rdf:resource="http://example.org/TEST_ID"/>
-    <cex:ref-time rdf:resource="http://example.org/2013"/>
-    <cex:ref-area rdf:resource="http://example.org/887"/>
-    <cex:computation rdf:resource="http://purl.org/weso/computex/ontology#Raw"/>
-    <qb:slice rdf:resource="http://example.org/SLIIPFRI1"/>
-    <sdmx-concept:obsStatus rdf:resource="http://purl.org/linked-data/sdmx/2009/code#obsStatus-A"/>
-    <cex:value rdf:datatype="http://www.w3.org/2001/XMLSchema#double">26.5</cex:value>
-    <cex:ref-indicator rdf:resource="http://example.org/INDIPFRI2"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/OBSIPFRI0">
-    <cex:value rdf:datatype="http://www.w3.org/2001/XMLSchema#double">None</cex:value>
-    <cex:computation rdf:resource="http://purl.org/weso/computex/ontology#Raw"/>
-    <cex:ref-area rdf:resource="http://example.org/ESP"/>
-    <rdfs:label xml:lang="en">Observation of ESP within the period of 1990-1993 for indicator INDIPFRI0</rdfs:label>
-    <cex:ref-time rdf:resource="http://example.org/1990-1993"/>
-    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
-    <cex:ref-indicator rdf:resource="http://example.org/INDIPFRI0"/>
-    <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-04-04T11:50:18</dcterms:issued>
-    <qb:slice rdf:resource="http://example.org/SLIIPFRI0"/>
-    <qb:dataSet rdf:resource="http://example.org/TEST_ID"/>
-    <sdmx-concept:obsStatus rdf:resource="http://purl.org/linked-data/sdmx/2009/code#obsStatus-M"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/SLIIPFRI1">
-    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Slice"/>
-    <cex:indicator rdf:resource="http://example.org/INDIPFRI0"/>
-    <lb:dimension rdf:resource="http://purl.org/weso/landbook/ontology#FRA"/>
-    <qb:observation rdf:resource="http://example.org/OBSIPFRI2597"/>
-    <qb:dataSet rdf:resource="http://example.org/TEST_ID"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://example.org/USRIPFRIIMPORTER">
-    <rdfs:label xml:lang="en">USRIPFRIIMPORTER</rdfs:label>
     <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-    <org:memberOf rdf:resource="http://example.org/None"/>
-    <foaf:account>USRIPFRIIMPORTER</foaf:account>
+    <rdfs:label xml:lang="en">USRIPFRIIMPORTER</rdfs:label>
     <foaf:name>USRIPFRIIMPORTER</foaf:name>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.ifpri.org/copyright">
-    <lb:name>IPFRI Copyright</lb:name>
-    <lb:url>http://www.ifpri.org/copyright</lb:url>
-    <rdf:type rdf:resource="http://purl.org/weso/landbook/ontology#License"/>
-    <lb:description>Attribution, no modification and non commercial without permission.</lb:description>
-    <lb:republish rdf:datatype="http://www.w3.org/2001/XMLSchema#Boolean">true</lb:republish>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/Americas">
-    <lb:UNCode rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">19</lb:UNCode>
-    <rdfs:label xml:lang="en">Americas</rdfs:label>
-    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Area"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/OBSIPFRI1">
-    <sdmx-concept:obsStatus rdf:resource="http://purl.org/linked-data/sdmx/2009/code#obsStatus-A"/>
-    <cex:value rdf:datatype="http://www.w3.org/2001/XMLSchema#double">9.0</cex:value>
-    <rdfs:label xml:lang="en">Observation of 8 within the period of 1990-1993 for indicator INDIPFRI1</rdfs:label>
-    <cex:ref-indicator rdf:resource="http://example.org/INDIPFRI1"/>
-    <cex:ref-area rdf:resource="http://example.org/8"/>
-    <qb:slice rdf:resource="http://example.org/SLIIPFRI0"/>
-    <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-04-04T11:50:18</dcterms:issued>
-    <qb:dataSet rdf:resource="http://example.org/TEST_ID"/>
-    <cex:computation rdf:resource="http://purl.org/weso/computex/ontology#Raw"/>
-    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
-    <cex:ref-time rdf:resource="http://example.org/1990-1993"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/OBSIPFRI2598">
-    <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-04-04T11:50:18</dcterms:issued>
-    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
-    <cex:computation rdf:resource="http://purl.org/weso/computex/ontology#Raw"/>
-    <cex:value rdf:datatype="http://www.w3.org/2001/XMLSchema#double">24.1</cex:value>
-    <rdfs:label xml:lang="en">Observation of 894 within the period of 2013-2 for indicator INDIPFRI3</rdfs:label>
-    <qb:slice rdf:resource="http://example.org/SLIIPFRI2"/>
-    <sdmx-concept:obsStatus rdf:resource="http://purl.org/linked-data/sdmx/2009/code#obsStatus-A"/>
-    <cex:ref-time rdf:resource="http://example.org/2013-2"/>
-    <cex:ref-indicator rdf:resource="http://example.org/INDIPFRI3"/>
-    <qb:dataSet rdf:resource="http://example.org/TEST_ID"/>
-    <cex:ref-area rdf:resource="http://example.org/894"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/SLIIPFRI0">
-    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Slice"/>
-    <qb:observation rdf:resource="http://example.org/OBSIPFRI1"/>
-    <qb:dataSet rdf:resource="http://example.org/TEST_ID"/>
-    <lb:dimension rdf:resource="http://purl.org/weso/landbook/ontology#724"/>
-    <qb:observation rdf:resource="http://example.org/OBSIPFRI0"/>
-    <cex:indicator rdf:resource="http://example.org/INDIPFRI0"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/FRA">
-    <rdfs:label xml:lang="en">France</rdfs:label>
-    <lb:iso2>FR</lb:iso2>
-    <lb:is_part_of>Europe</lb:is_part_of>
-    <lb:faoURI rdf:resource="http://www.fao.org/countryprofiles/index/en/?iso3=FRA"/>
-    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Area"/>
-    <lb:iso3>FRA</lb:iso3>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://purl.org/weso/computex/ontology#Raw">
-    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Computation"/>
-    <rdfs:label xml:lang="en">Raw values obtained from source</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/LAND_GENDER">
-    <rdf:type rdf:resource="http://purl.org/weso/landbook/ontology#Topic"/>
-    <rdfs:label xml:lang="en">Land Gender</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/INDIPFRI1">
-    <lb:indicatorType rdf:resource="http://purl.org/weso/computex/ontology#indicators"/>
-    <lb:measurement rdf:resource="http://purl.org/weso/computex/ontology#%"/>
-    <lb:starred rdf:datatype="http://www.w3.org/2001/XMLSchema#Boolean">false</lb:starred>
-    <lb:topic rdf:resource="http://purl.org/weso/computex/ontology#TEMP_TOPIC"/>
-    <rdfs:label xml:lang="en">Prevalence of underweight in children under five years (%)</rdfs:label>
-    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Indicator"/>
-    <rdfs:comment xml:lang="en">Description of Prevalence of underweight in children under five years (%)</rdfs:comment>
-    <lb:last_update rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-05-13T10:55:44.260193</lb:last_update>
-    <lb:preferable_tendency rdf:resource="http://purl.org/weso/computex/ontology#decrease"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/Europe">
-    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Area"/>
-    <rdfs:label xml:lang="en">Europe</rdfs:label>
-    <lb:UNCode rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">150</lb:UNCode>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/INDIPFRI0">
-    <lb:starred rdf:datatype="http://www.w3.org/2001/XMLSchema#Boolean">false</lb:starred>
-    <lb:topic rdf:resource="http://purl.org/weso/computex/ontology#LAND_GENDER"/>
-    <rdfs:label xml:lang="en">Prevalence of undernourishment in the population  (%)</rdfs:label>
-    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Indicator"/>
-    <lb:measurement rdf:resource="http://purl.org/weso/computex/ontology#%"/>
-    <lb:indicatorType rdf:resource="http://purl.org/weso/computex/ontology#indicators"/>
-    <lb:preferable_tendency rdf:resource="http://purl.org/weso/computex/ontology#decrease"/>
-    <lb:last_update rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-05-13T10:55:44.260193</lb:last_update>
-    <rdfs:comment xml:lang="en">Prevalence of undernourishment in the population  (%)</rdfs:comment>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/Antarctica">
-    <rdfs:label xml:lang="en">Antarctica</rdfs:label>
-    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Area"/>
-    <lb:UNCode>None</lb:UNCode>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/TEMP_TOPIC">
-    <rdfs:label xml:lang="en">Temp Topic</rdfs:label>
-    <rdf:type rdf:resource="http://purl.org/weso/landbook/ontology#Topic"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/SLIIPFRI2">
-    <qb:observation rdf:resource="http://example.org/OBSIPFRI2598"/>
-    <lb:dimension rdf:resource="http://purl.org/weso/landbook/ontology#1999-2002"/>
-    <qb:dataSet rdf:resource="http://example.org/TEST_ID"/>
-    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Slice"/>
-    <cex:indicator rdf:resource="http://example.org/INDIPFRI0"/>
-    <qb:observation rdf:resource="http://example.org/OBSIPFRI2599"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/Asia">
-    <lb:UNCode rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">142</lb:UNCode>
-    <rdfs:label xml:lang="en">Asia</rdfs:label>
-    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Area"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/LAND_TENURE">
-    <rdfs:label xml:lang="en">Land Tenure</rdfs:label>
-    <rdf:type rdf:resource="http://purl.org/weso/landbook/ontology#Topic"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/Africa">
-    <rdfs:label xml:lang="en">Africa</rdfs:label>
-    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Area"/>
-    <lb:UNCode rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</lb:UNCode>
+    <foaf:account>USRIPFRIIMPORTER</foaf:account>
+    <org:memberOf rdf:resource="http://example.org/None"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://example.org/Oceania">
     <lb:UNCode rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9</lb:UNCode>
     <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Area"/>
     <rdfs:label xml:lang="en">Oceania</rdfs:label>
   </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/FRA">
+    <lb:iso3>FRA</lb:iso3>
+    <lb:faoURI rdf:resource="http://www.fao.org/countryprofiles/index/en/?iso3=FRA"/>
+    <lb:iso2>FR</lb:iso2>
+    <lb:is_part_of>Europe</lb:is_part_of>
+    <rdfs:label xml:lang="en">France</rdfs:label>
+    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Area"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/LAND_GENDER">
+    <rdfs:label xml:lang="en">Land Gender</rdfs:label>
+    <rdf:type rdf:resource="http://purl.org/weso/landbook/ontology#Topic"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/INDIPFRI0">
+    <lb:topic rdf:resource="http://purl.org/weso/computex/ontology#LAND_GENDER"/>
+    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Indicator"/>
+    <rdfs:comment xml:lang="en">Prevalence of undernourishment in the population  (%)</rdfs:comment>
+    <lb:starred rdf:datatype="http://www.w3.org/2001/XMLSchema#Boolean">false</lb:starred>
+    <lb:indicatorType rdf:resource="http://purl.org/weso/computex/ontology#indicators"/>
+    <rdfs:label xml:lang="en">Prevalence of undernourishment in the population  (%)</rdfs:label>
+    <lb:preferable_tendency rdf:resource="http://purl.org/weso/computex/ontology#decrease"/>
+    <lb:measurement rdf:resource="http://purl.org/weso/computex/ontology#%"/>
+    <lb:last_update rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-05-13T12:51:16.129193</lb:last_update>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/OBSIPFRI0">
+    <qb:slice rdf:resource="http://example.org/SLIIPFRI0"/>
+    <cex:ref-indicator rdf:resource="http://example.org/INDIPFRI0"/>
+    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
+    <cex:value rdf:datatype="http://www.w3.org/2001/XMLSchema#double">None</cex:value>
+    <cex:computation rdf:resource="http://purl.org/weso/computex/ontology#Raw"/>
+    <cex:ref-time rdf:resource="http://example.org/1990-1993"/>
+    <rdfs:label xml:lang="en">Observation of ESP within the period of 1990-1993 for indicator INDIPFRI0</rdfs:label>
+    <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-04-04T11:50:18</dcterms:issued>
+    <sdmx-concept:obsStatus rdf:resource="http://purl.org/linked-data/sdmx/2009/code#obsStatus-M"/>
+    <cex:ref-area rdf:resource="http://example.org/ESP"/>
+    <qb:dataSet rdf:resource="http://example.org/TEST_ID"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/LAND_TENURE">
+    <rdf:type rdf:resource="http://purl.org/weso/landbook/ontology#Topic"/>
+    <rdfs:label xml:lang="en">Land Tenure</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/OBSIPFRI2597">
+    <sdmx-concept:obsStatus rdf:resource="http://purl.org/linked-data/sdmx/2009/code#obsStatus-A"/>
+    <cex:computation rdf:resource="http://purl.org/weso/computex/ontology#Raw"/>
+    <cex:ref-time rdf:resource="http://example.org/2013"/>
+    <cex:ref-area rdf:resource="http://example.org/887"/>
+    <cex:ref-indicator rdf:resource="http://example.org/INDIPFRI2"/>
+    <cex:value rdf:datatype="http://www.w3.org/2001/XMLSchema#double">26.5</cex:value>
+    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
+    <qb:slice rdf:resource="http://example.org/SLIIPFRI1"/>
+    <rdfs:label xml:lang="en">Observation of 887 within the period of 2013 for indicator INDIPFRI2</rdfs:label>
+    <qb:dataSet rdf:resource="http://example.org/TEST_ID"/>
+    <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-04-04T11:50:18</dcterms:issued>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/weso/computex/ontology#Raw">
+    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Computation"/>
+    <rdfs:label xml:lang="en">Raw values obtained from source</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ESP">
+    <lb:iso3>ESP</lb:iso3>
+    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Area"/>
+    <lb:is_part_of>Europe</lb:is_part_of>
+    <rdfs:label xml:lang="en">Spain</rdfs:label>
+    <lb:faoURI rdf:resource="http://www.fao.org/countryprofiles/index/en/?iso3=ESP"/>
+    <lb:iso2>ES</lb:iso2>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/OBSIPFRI2599">
+    <qb:slice rdf:resource="http://example.org/SLIIPFRI2"/>
+    <cex:computation rdf:resource="http://purl.org/weso/computex/ontology#Raw"/>
+    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
+    <cex:ref-time rdf:resource="http://example.org/2013-12"/>
+    <cex:ref-area rdf:resource="http://example.org/716"/>
+    <cex:value rdf:datatype="http://www.w3.org/2001/XMLSchema#double">16.5</cex:value>
+    <cex:ref-indicator rdf:resource="http://example.org/INDIPFRI3"/>
+    <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-04-04T11:50:18</dcterms:issued>
+    <qb:dataSet rdf:resource="http://example.org/TEST_ID"/>
+    <rdfs:label xml:lang="en">Observation of 716 within the period of 2013-12 for indicator INDIPFRI3</rdfs:label>
+    <sdmx-concept:obsStatus rdf:resource="http://purl.org/linked-data/sdmx/2009/code#obsStatus-A"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ifpri.org/copyright">
+    <rdf:type rdf:resource="http://purl.org/weso/landbook/ontology#License"/>
+    <lb:description>Attribution, no modification and non commercial without permission.</lb:description>
+    <lb:name>IPFRI Copyright</lb:name>
+    <lb:republish rdf:datatype="http://www.w3.org/2001/XMLSchema#Boolean">true</lb:republish>
+    <lb:url>http://www.ifpri.org/copyright</lb:url>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/INDIPFRI1">
+    <rdfs:comment xml:lang="en">Description of Prevalence of underweight in children under five years (%)</rdfs:comment>
+    <lb:topic rdf:resource="http://purl.org/weso/computex/ontology#TEMP_TOPIC"/>
+    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Indicator"/>
+    <rdfs:label xml:lang="en">Prevalence of underweight in children under five years (%)</rdfs:label>
+    <lb:starred rdf:datatype="http://www.w3.org/2001/XMLSchema#Boolean">false</lb:starred>
+    <lb:last_update rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-05-13T12:51:16.129193</lb:last_update>
+    <lb:measurement rdf:resource="http://purl.org/weso/computex/ontology#%"/>
+    <lb:indicatorType rdf:resource="http://purl.org/weso/computex/ontology#indicators"/>
+    <lb:preferable_tendency rdf:resource="http://purl.org/weso/computex/ontology#decrease"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/Americas">
+    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Area"/>
+    <lb:UNCode rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">19</lb:UNCode>
+    <rdfs:label xml:lang="en">Americas</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/Africa">
+    <rdfs:label xml:lang="en">Africa</rdfs:label>
+    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Area"/>
+    <lb:UNCode rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</lb:UNCode>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/OBSIPFRI1">
+    <sdmx-concept:obsStatus rdf:resource="http://purl.org/linked-data/sdmx/2009/code#obsStatus-A"/>
+    <cex:value rdf:datatype="http://www.w3.org/2001/XMLSchema#double">9.0</cex:value>
+    <rdfs:label xml:lang="en">Observation of 8 within the period of 1990-1993 for indicator INDIPFRI1</rdfs:label>
+    <cex:ref-area rdf:resource="http://example.org/8"/>
+    <cex:computation rdf:resource="http://purl.org/weso/computex/ontology#Raw"/>
+    <qb:slice rdf:resource="http://example.org/SLIIPFRI0"/>
+    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
+    <cex:ref-time rdf:resource="http://example.org/1990-1993"/>
+    <cex:ref-indicator rdf:resource="http://example.org/INDIPFRI1"/>
+    <qb:dataSet rdf:resource="http://example.org/TEST_ID"/>
+    <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-04-04T11:50:18</dcterms:issued>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/OBSIPFRI2598">
+    <sdmx-concept:obsStatus rdf:resource="http://purl.org/linked-data/sdmx/2009/code#obsStatus-A"/>
+    <cex:ref-time rdf:resource="http://example.org/2013-2"/>
+    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
+    <cex:value rdf:datatype="http://www.w3.org/2001/XMLSchema#double">24.1</cex:value>
+    <cex:ref-indicator rdf:resource="http://example.org/INDIPFRI3"/>
+    <rdfs:label xml:lang="en">Observation of 894 within the period of 2013-2 for indicator INDIPFRI3</rdfs:label>
+    <cex:ref-area rdf:resource="http://example.org/894"/>
+    <cex:computation rdf:resource="http://purl.org/weso/computex/ontology#Raw"/>
+    <qb:slice rdf:resource="http://example.org/SLIIPFRI2"/>
+    <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-04-04T11:50:18</dcterms:issued>
+    <qb:dataSet rdf:resource="http://example.org/TEST_ID"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://www.ifpri.org/">
-    <rdfs:label xml:lang="en">IFPRI - International Food Policy Research Institute</rdfs:label>
     <rdf:type rdf:resource="http://www.w3.org/ns/org#Organization"/>
     <foaf:homepage>http://www.ifpri.org/</foaf:homepage>
+    <rdfs:label xml:lang="en">IFPRI - International Food Policy Research Institute</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/SLIIPFRI0">
+    <cex:indicator rdf:resource="http://example.org/INDIPFRI0"/>
+    <qb:observation rdf:resource="http://example.org/OBSIPFRI1"/>
+    <qb:observation rdf:resource="http://example.org/OBSIPFRI0"/>
+    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Slice"/>
+    <lb:dimension rdf:resource="http://purl.org/weso/landbook/ontology#724"/>
+    <qb:dataSet rdf:resource="http://example.org/TEST_ID"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/INDIPFRI2">
+    <lb:last_update rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-05-13T12:51:16.129193</lb:last_update>
+    <lb:measurement rdf:resource="http://purl.org/weso/computex/ontology#%"/>
+    <lb:preferable_tendency rdf:resource="http://purl.org/weso/computex/ontology#decrease"/>
+    <lb:topic rdf:resource="http://purl.org/weso/computex/ontology#LAND_TENURE"/>
+    <lb:indicatorType rdf:resource="http://purl.org/weso/computex/ontology#indicators"/>
+    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Indicator"/>
+    <rdfs:label xml:lang="en">Under-five Mortality rate  (%)</rdfs:label>
+    <lb:starred rdf:datatype="http://www.w3.org/2001/XMLSchema#Boolean">false</lb:starred>
+    <rdfs:comment xml:lang="en">Under-five Mortality rate  (%)</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/SLIIPFRI2">
+    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Slice"/>
+    <qb:dataSet rdf:resource="http://example.org/TEST_ID"/>
+    <cex:indicator rdf:resource="http://example.org/INDIPFRI0"/>
+    <lb:dimension rdf:resource="http://purl.org/weso/landbook/ontology#1999-2002"/>
+    <qb:observation rdf:resource="http://example.org/OBSIPFRI2598"/>
+    <qb:observation rdf:resource="http://example.org/OBSIPFRI2599"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/SLIIPFRI1">
+    <cex:indicator rdf:resource="http://example.org/INDIPFRI0"/>
+    <qb:observation rdf:resource="http://example.org/OBSIPFRI2597"/>
+    <qb:dataSet rdf:resource="http://example.org/TEST_ID"/>
+    <lb:dimension rdf:resource="http://purl.org/weso/landbook/ontology#FRA"/>
+    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Slice"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/Antarctica">
+    <rdfs:label xml:lang="en">Antarctica</rdfs:label>
+    <lb:UNCode>None</lb:UNCode>
+    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Area"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/TEMP_TOPIC">
+    <rdfs:label xml:lang="en">Temp Topic</rdfs:label>
+    <rdf:type rdf:resource="http://purl.org/weso/landbook/ontology#Topic"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/Asia">
+    <rdfs:label xml:lang="en">Asia</rdfs:label>
+    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Area"/>
+    <lb:UNCode rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">142</lb:UNCode>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/TEST_ID">
+    <sdmx-concept:freq rdf:resource="http://purl.org/linked-data/sdmx/2009/code#freq-A"/>
+    <lb:license rdf:resource="http://www.ifpri.org/copyright"/>
+    <rdf:type rdf:resource="http://purl.org/linked-data/cube#DataSet"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/Europe">
+    <rdf:type rdf:resource="http://purl.org/weso/computex/ontology#Area"/>
+    <rdfs:label xml:lang="en">Europe</rdfs:label>
+    <lb:UNCode rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">150</lb:UNCode>
   </rdf:Description>
 </rdf:RDF>

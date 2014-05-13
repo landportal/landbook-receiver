@@ -5,7 +5,7 @@
 		<datasource>IFPRI - International Food Policy Research Institute</datasource>
 		<type>excell</type>
 		<user>USRIPFRIIMPORTER</user>
-        <sdmx_frequency>http://test_ontology.org/frequency</sdmx_frequency>
+        <sdmx_frequency>freq-A</sdmx_frequency>
 	</import_process>
 	<license>
 		<lic_name>IPFRI Copyright</lic_name>

@@ -63,12 +63,6 @@
     rdfs:label "IFPRI - International Food Policy Research Institute"@en ;
     foaf:homepage "http://www.ifpri.org/" .
 
-<http://www.ifpri.org/copyright> a lb:License ;
-    lb:description "Attribution, no modification and non commercial without permission." ;
-    lb:name "IPFRI Copyright" ;
-    lb:republish "true"^^xsd:Boolean ;
-    lb:url "http://www.ifpri.org/copyright" .
-
 :ESP a cex:Area ;
     rdfs:label "Spain"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=ESP> ;
@@ -79,7 +73,7 @@
 :INDIPFRI1 a cex:Indicator ;
     rdfs:label "Prevalence of underweight in children under five years (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-13T10:55:44.260193"^^xsd:dateTime ;
+    lb:last_update "2014-05-13T12:51:16.129193"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
@@ -89,7 +83,7 @@
 :INDIPFRI2 a cex:Indicator ;
     rdfs:label "Under-five Mortality rate  (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-13T10:55:44.260193"^^xsd:dateTime ;
+    lb:last_update "2014-05-13T12:51:16.129193"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
@@ -162,6 +156,12 @@
     cex:indicator :INDIPFRI0 ;
     lb:dimension lb:FRA .
 
+<http://www.ifpri.org/copyright> a lb:License ;
+    lb:description "Attribution, no modification and non commercial without permission." ;
+    lb:name "IPFRI Copyright" ;
+    lb:republish "true"^^xsd:Boolean ;
+    lb:url "http://www.ifpri.org/copyright" .
+
 :SLIIPFRI0 a qb:Slice ;
     qb:dataSet :TEST_ID ;
     qb:observation :OBSIPFRI0,
@@ -179,7 +179,7 @@
 :INDIPFRI0 a cex:Indicator ;
     rdfs:label "Prevalence of undernourishment in the population  (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-13T10:55:44.260193"^^xsd:dateTime ;
+    lb:last_update "2014-05-13T12:51:16.129193"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
@@ -188,4 +188,8 @@
 
 cex:Raw a cex:Computation ;
     rdfs:label "Raw values obtained from source"@en .
+
+:TEST_ID a qb:DataSet ;
+    sdmx-concept:freq sdmx-code:freq-A ;
+    lb:license <http://www.ifpri.org/copyright> .
 

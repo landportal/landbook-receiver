@@ -216,7 +216,6 @@ class ReceiverRDFService(object):
 
     @staticmethod
     def _add_region(graph, arg):
-#        region = arg.region_code
         country_list_file = '../countries/country_list.xlsx'
         for region in CountryReader().get_countries(country_list_file):
             region_id = region.is_part_of_id
@@ -269,12 +268,25 @@ class ReceiverRDFService(object):
                        Literal(obs.computation.description, lang='en')))
         return graph
 
-    def serialize_rdf_xml(self, graph):
+    def add_dataset_triples(self, graph):
+        dataset = self.parser.get_dataset()
+        lic = self.parser.get_license()
+        graph.add((prefix_.term(dataset.id), RDF.type,
+                   qb.term(Literal("DataSet"))))
+        graph.add((prefix_.term(dataset.id), sdmx_concept.term("freq"),
+                       sdmx_code.term(dataset.sdmx_frequency)))
+        graph.add((prefix_.term(dataset.id), lb.term("license"),
+                       URIRef(lic.url)))
+        return graph
+
+    @staticmethod
+    def serialize_rdf_xml(graph):
         serialized = graph.serialize(format='application/rdf+xml')
         with open('../datasets/dataset.rdf', 'w') as dataset:
             dataset.write(serialized)
 
-    def serialize_turtle(self, graph):
+    @staticmethod
+    def serialize_turtle(graph):
         serialized = graph.serialize(format='turtle')
         with open('../datasets/dataset.ttl', 'w') as dataset:
             dataset.write(serialized)
