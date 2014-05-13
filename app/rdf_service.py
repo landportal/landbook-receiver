@@ -7,7 +7,7 @@ from rdflib.namespace import RDF, RDFS, FOAF
 import datetime
 from countries.country_reader import CountryReader
 import datetime as dt
-
+import sh
 
 class ReceiverRDFService(object):
     def __init__(self, content):
@@ -330,3 +330,8 @@ class ReceiverRDFService(object):
         serialized = graph.serialize(format='turtle')
         with open('../datasets/dataset.ttl', 'w') as dataset:
             dataset.write(serialized)
+
+    def load_data_set(self, host, api, graph_uri):
+        sh.curl(host+api+graph_uri,
+            digest=True, u="dba:root", verbose=True, X="POST",
+            T="../datasets/dataset.ttl")

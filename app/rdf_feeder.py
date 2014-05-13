@@ -13,6 +13,9 @@ with codecs.open(unicode('../xml/test_file.xml', encoding='utf-8')) as xml:
 
 graph = Graph()
 logging.basicConfig()
+host = "http://localhost:1300/"
+api = "sparql-graph-crud-auth?"
+graph_uri = "graph-uri=http://www.landportal.info"
 
 
 def feed_rdf():
@@ -36,6 +39,7 @@ def feed_rdf():
 
     rdf_service.serialize_turtle(graph)
     rdf_service.serialize_rdf_xml(graph)
+    rdf_service.load_data_set(host, api, graph_uri)
 
 if __name__ == "__main__":
     start = dt.datetime.now()
