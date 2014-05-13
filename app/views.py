@@ -3,6 +3,7 @@ import app
 from app.sql_service import ReceiverSQLService
 import config
 
+
 class Receiver(flask_restful.Resource):
     @staticmethod
     def post():

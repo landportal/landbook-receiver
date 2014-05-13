@@ -2,7 +2,7 @@
 	<import_process>
 		<organization_name>IFPRI - International Food Policy Research Institute</organization_name>
 		<organization_url>http://www.ifpri.org/</organization_url>
-		<datasource>IFPRI - International Food Policy Research Institute</datasource>
+		<datasource id="DSOURCE_ID">IFPRI - International Food Policy Research Institute</datasource>
 		<type>excell</type>
 		<user>USRIPFRIIMPORTER</user>
         <sdmx_frequency>freq-A</sdmx_frequency>

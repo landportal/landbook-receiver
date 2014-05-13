@@ -6,6 +6,7 @@ from rdflib import Literal, XSD, URIRef
 from rdflib.namespace import RDF, RDFS, FOAF
 import datetime
 from countries.country_reader import CountryReader
+import datetime as dt
 
 
 class ReceiverRDFService(object):
@@ -129,7 +130,6 @@ class ReceiverRDFService(object):
                Literal(usr.id)))
         graph.add((prefix_.term(usr.id), org.term("memberOf"),
                prefix_.term(str(usr.organization_id))))
-
         return graph
 
     def add_organizations_triples(self, graph):
@@ -271,12 +271,52 @@ class ReceiverRDFService(object):
     def add_dataset_triples(self, graph):
         dataset = self.parser.get_dataset()
         lic = self.parser.get_license()
+        dsource = self.parser.get_datasource()
         graph.add((prefix_.term(dataset.id), RDF.type,
                    qb.term(Literal("DataSet"))))
         graph.add((prefix_.term(dataset.id), sdmx_concept.term("freq"),
-                       sdmx_code.term(dataset.sdmx_frequency)))
+                   sdmx_code.term(dataset.sdmx_frequency)))
         graph.add((prefix_.term(dataset.id), lb.term("license"),
-                       URIRef(lic.url)))
+                   URIRef(lic.url)))
+        graph.add((prefix_.term(dataset.id), lb.term("dataSource"),
+                   Literal(dsource.dsource_id)))
+        return graph
+
+    def add_data_source_triples(self, graph):
+        dsource = self.parser.get_datasource()
+        org = self.parser.get_organization()
+        user = self.parser.get_user()
+        graph.add((prefix_.term(dsource.dsource_id), RDF.type,
+                   lb.term(Literal("DataSource"))))
+        graph.add((prefix_.term(dsource.dsource_id), RDFS.label,
+                   Literal(dsource.name, lang='en')))
+        graph.add((prefix_.term(dsource.dsource_id), lb.term("organization"),
+                   URIRef(org.url)))
+        graph.add((prefix_.term(dsource.dsource_id), dcterms.term("creator"),
+                   Literal(user.id)))
+        return graph
+
+    def add_upload_triples(self, graph):
+        upload = "upload" + str(dt.datetime.now().
+                                strftime("%y%m%d%H%M"))
+        user = self.parser.get_user()
+        dsource = self.parser.get_datasource()
+        observations = self.parser.get_observations()
+        graph.add((prefix_.term(upload), RDF.type,
+                   lb.term(Literal("Upload"))))
+        graph.add((prefix_.term(upload), lb.term("user"),
+                   lb.term(user.id)))
+        graph.add((prefix_.term(upload), lb.term("timestamp"),
+                   Literal(dt.datetime.now(), datatype=XSD.dateTime)))
+        #TODO get ip from the http request
+        graph.add((prefix_.term(upload), lb.term("ip"),
+                   Literal("156.35.82.103")))
+        for obs in observations:
+            graph.add((prefix_.term(upload), lb.term("observation"),
+                   prefix_.term(obs.id)))
+        graph.add((prefix_.term(upload), lb.term("dataSource"),
+                   lb.term(dsource.dsource_id)))
+
         return graph
 
     @staticmethod

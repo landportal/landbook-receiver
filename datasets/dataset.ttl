@@ -29,6 +29,11 @@
     rdfs:label "Asia"@en ;
     lb:UNCode 142 .
 
+:DSOURCE_ID a lb:DataSource ;
+    rdfs:label "IFPRI - International Food Policy Research Institute"@en ;
+    dcterms:creator "USRIPFRIIMPORTER" ;
+    lb:organization <http://www.ifpri.org/> .
+
 :Europe a cex:Area ;
     rdfs:label "Europe"@en ;
     lb:UNCode 150 .
@@ -59,9 +64,16 @@
     foaf:account "USRIPFRIIMPORTER" ;
     foaf:name "USRIPFRIIMPORTER" .
 
-<http://www.ifpri.org/> a org:Organization ;
-    rdfs:label "IFPRI - International Food Policy Research Institute"@en ;
-    foaf:homepage "http://www.ifpri.org/" .
+:upload1405131508 a lb:Upload ;
+    lb:dataSource lb:DSOURCE_ID ;
+    lb:ip "156.35.82.103" ;
+    lb:observation :OBSIPFRI0,
+        :OBSIPFRI1,
+        :OBSIPFRI2597,
+        :OBSIPFRI2598,
+        :OBSIPFRI2599 ;
+    lb:timestamp "2014-05-13T15:08:52.135480"^^xsd:dateTime ;
+    lb:user lb:USRIPFRIIMPORTER .
 
 :ESP a cex:Area ;
     rdfs:label "Spain"@en ;
@@ -73,7 +85,7 @@
 :INDIPFRI1 a cex:Indicator ;
     rdfs:label "Prevalence of underweight in children under five years (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-13T12:51:16.129193"^^xsd:dateTime ;
+    lb:last_update "2014-05-13T15:08:49.843790"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
@@ -83,12 +95,28 @@
 :INDIPFRI2 a cex:Indicator ;
     rdfs:label "Under-five Mortality rate  (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-13T12:51:16.129193"^^xsd:dateTime ;
+    lb:last_update "2014-05-13T15:08:49.843790"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
     lb:topic cex:LAND_TENURE ;
     rdfs:comment "Under-five Mortality rate  (%)"@en .
+
+:SLIIPFRI1 a qb:Slice ;
+    qb:dataSet :TEST_ID ;
+    qb:observation :OBSIPFRI2597 ;
+    cex:indicator :INDIPFRI0 ;
+    lb:dimension lb:FRA .
+
+<http://www.ifpri.org/> a org:Organization ;
+    rdfs:label "IFPRI - International Food Policy Research Institute"@en ;
+    foaf:homepage "http://www.ifpri.org/" .
+
+<http://www.ifpri.org/copyright> a lb:License ;
+    lb:description "Attribution, no modification and non commercial without permission." ;
+    lb:name "IPFRI Copyright" ;
+    lb:republish "true"^^xsd:Boolean ;
+    lb:url "http://www.ifpri.org/copyright" .
 
 :OBSIPFRI0 a qb:Observation ;
     rdfs:label "Observation of ESP within the period of 1990-1993 for indicator INDIPFRI0"@en ;
@@ -150,18 +178,6 @@
     cex:ref-time <http://example.org/2013-12> ;
     cex:value 1.65e+01 .
 
-:SLIIPFRI1 a qb:Slice ;
-    qb:dataSet :TEST_ID ;
-    qb:observation :OBSIPFRI2597 ;
-    cex:indicator :INDIPFRI0 ;
-    lb:dimension lb:FRA .
-
-<http://www.ifpri.org/copyright> a lb:License ;
-    lb:description "Attribution, no modification and non commercial without permission." ;
-    lb:name "IPFRI Copyright" ;
-    lb:republish "true"^^xsd:Boolean ;
-    lb:url "http://www.ifpri.org/copyright" .
-
 :SLIIPFRI0 a qb:Slice ;
     qb:dataSet :TEST_ID ;
     qb:observation :OBSIPFRI0,
@@ -179,7 +195,7 @@
 :INDIPFRI0 a cex:Indicator ;
     rdfs:label "Prevalence of undernourishment in the population  (%)"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-13T12:51:16.129193"^^xsd:dateTime ;
+    lb:last_update "2014-05-13T15:08:49.843790"^^xsd:dateTime ;
     lb:measurement <http://purl.org/weso/computex/ontology#%> ;
     lb:preferable_tendency cex:decrease ;
     lb:starred "false"^^xsd:Boolean ;
@@ -191,5 +207,6 @@ cex:Raw a cex:Computation ;
 
 :TEST_ID a qb:DataSet ;
     sdmx-concept:freq sdmx-code:freq-A ;
+    lb:dataSource "DSOURCE_ID" ;
     lb:license <http://www.ifpri.org/copyright> .
 

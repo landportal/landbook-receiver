@@ -29,6 +29,8 @@ def feed_rdf():
     rdf_service.add_computation_triples(graph)
     rdf_service.add_region_triples(graph)
     rdf_service.add_dataset_triples(graph)
+    rdf_service.add_data_source_triples(graph)
+    rdf_service.add_upload_triples(graph)
 
     bind_namespaces(graph)
 

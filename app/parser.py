@@ -58,8 +58,10 @@ class Parser(object):
         return organization
 
     def get_datasource(self):
-        dsource_name = self._root.find('import_process').find('datasource').text
-        return model.DataSource(name=dsource_name)
+        dsource = self._root.find('import_process').find('datasource')
+        dsource_name = dsource.text
+        dsource_id = dsource.get("id")
+        return model.DataSource(name=dsource_name, dsource_id=dsource_id)
 
     def get_dataset(self):
         dataset = model.Dataset()
