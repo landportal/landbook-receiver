@@ -110,7 +110,7 @@ class ReceiverRDFService(object):
                 dimension = slc.dimension.value
 
             graph.add((prefix_.term(slc.id), lb.term("dimension"),
-                   prefix_.term(dimension)))
+                       lb.term(dimension)))
 
             graph.add((prefix_.term(slc.id), qb.term("dataSet"),
                    prefix_.term(slc.dataset_id)))
@@ -263,9 +263,10 @@ class ReceiverRDFService(object):
 
     def add_computation_triples(self, graph):
         for obs in self.parser.get_observations():
-            graph.add((cex.term(obs.computation.uri), RDF.type, cex.term(Literal("Computation"))))
-            graph.add((prefix_.term(obs.computation.uri), RDFS.label,
-                       Literal("Raw values obtained directly from source", lang='en')))
+            graph.add((cex.term(obs.computation.uri), RDF.type,
+                       cex.term(Literal("Computation"))))
+            graph.add((cex.term(obs.computation.uri), RDFS.label,
+                       Literal(obs.computation.description, lang='en')))
         return graph
 
     def serialize_rdf_xml(self, graph):

@@ -236,7 +236,7 @@ class Parser(object):
 
     @staticmethod
     def _parse_computation(node):
-        computation = model.Computation(uri=node.text)
+        computation = model.Computation(description=node.text, uri=node.get("type"))
         return computation
 
     @staticmethod
