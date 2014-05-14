@@ -1,0 +1,334 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>app.sql_service &mdash; Land Portal Receiver 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Land Portal Receiver 1.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Land Portal Receiver 1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for app.sql_service</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">app</span>
+<span class="kn">import</span> <span class="nn">model.models</span> <span class="kn">as</span> <span class="nn">model</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">parser</span> <span class="kn">import</span> <span class="n">Parser</span>
+
+
+<div class="viewcode-block" id="ReceiverSQLService"><a class="viewcode-back" href="../../app.html#app.sql_service.ReceiverSQLService">[docs]</a><span class="k">class</span> <span class="nc">ReceiverSQLService</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="n">Parser</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+
+<div class="viewcode-block" id="ReceiverSQLService.store_data"><a class="viewcode-back" href="../../app.html#app.sql_service.ReceiverSQLService.store_data">[docs]</a>    <span class="k">def</span> <span class="nf">store_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_ip</span><span class="p">):</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">session</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_store_data</span><span class="p">(</span><span class="n">user_ip</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+            <span class="k">raise</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</div>
+    <span class="k">def</span> <span class="nf">_store_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_ip</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="n">organization</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store_organization</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_store_user</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">organization</span><span class="p">,</span> <span class="n">user_ip</span><span class="p">)</span>
+        <span class="n">datasource</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store_datasource</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">organization</span><span class="p">)</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store_dataset</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">datasource</span><span class="p">)</span>
+        <span class="c"># Store indicators</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_store_simple_indicators</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_store_compound_indicators</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_store_indicator_relationships</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_store_indicator_groups</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+        <span class="c"># Store slices</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_store_slices</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span>
+        <span class="c"># Store observations</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_store_observations</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_store_simple_indicators</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">enrich_indicator</span><span class="p">(</span><span class="n">ind</span><span class="p">):</span>
+            <span class="n">ind</span><span class="o">.</span><span class="n">starred</span> <span class="o">=</span> <span class="n">DBHelper</span><span class="o">.</span><span class="n">check_indicator_starred</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">ind</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+            <span class="n">ind</span><span class="o">.</span><span class="n">last_update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span>
+            <span class="k">return</span> <span class="n">ind</span>
+
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">get_simple_indicators</span><span class="p">():</span>
+            <span class="n">indicator</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">enrich_indicator</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+            <span class="n">dataset</span><span class="o">.</span><span class="n">add_indicator</span><span class="p">(</span><span class="n">indicator</span><span class="p">)</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_store_compound_indicators</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">enrich_indicator</span><span class="p">(</span><span class="n">ind</span><span class="p">):</span>
+            <span class="n">ind</span><span class="o">.</span><span class="n">starred</span> <span class="o">=</span> <span class="n">DBHelper</span><span class="o">.</span><span class="n">check_indicator_starred</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">ind</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+            <span class="n">ind</span><span class="o">.</span><span class="n">last_update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span>
+            <span class="k">for</span> <span class="n">rel</span> <span class="ow">in</span> <span class="n">DBHelper</span><span class="o">.</span><span class="n">find_indicators</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">ind</span><span class="o">.</span><span class="n">related_id</span><span class="p">):</span>
+                <span class="n">rel</span><span class="o">.</span><span class="n">compound_indicator_id</span> <span class="o">=</span> <span class="n">ind</span><span class="o">.</span><span class="n">id</span>
+            <span class="k">return</span> <span class="n">ind</span>
+
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">get_compound_indicators</span><span class="p">():</span>
+            <span class="n">indicator</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">enrich_indicator</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+            <span class="n">dataset</span><span class="o">.</span><span class="n">add_indicator</span><span class="p">(</span><span class="n">indicator</span><span class="p">)</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_store_indicator_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">get_indicator_groups</span><span class="p">():</span>
+            <span class="n">indicator_ref</span> <span class="o">=</span> <span class="n">DBHelper</span><span class="o">.</span><span class="n">find_compound_indicator</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">indicator_ref</span><span class="p">)</span>
+            <span class="n">indicator_ref</span><span class="o">.</span><span class="n">indicator_ref_group_id</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">id</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_store_indicator_relationships</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="n">indicators</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">get_simple_indicators</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">indicators</span><span class="p">:</span>
+            <span class="c"># Each indicator may be related with others</span>
+            <span class="c"># The related_id field was created in the parser and WILL NOT be</span>
+            <span class="c"># persisted, it is only used to create the relationship objects</span>
+            <span class="n">relationships</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">rel_id</span> <span class="ow">in</span> <span class="n">ind</span><span class="o">.</span><span class="n">related_id</span><span class="p">:</span>
+                <span class="n">rel</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">IndicatorRelationship</span><span class="p">()</span>
+                <span class="n">rel</span><span class="o">.</span><span class="n">source_id</span> <span class="o">=</span> <span class="n">ind</span><span class="o">.</span><span class="n">id</span>
+                <span class="n">rel</span><span class="o">.</span><span class="n">target_id</span> <span class="o">=</span> <span class="n">rel_id</span>
+                <span class="n">relationships</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rel</span><span class="p">)</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">add_all</span><span class="p">(</span><span class="n">relationships</span><span class="p">)</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_store_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">datasource</span><span class="p">):</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">()</span>
+        <span class="n">dataset</span><span class="o">.</span><span class="n">datasource_id</span> <span class="o">=</span> <span class="n">datasource</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">dataset</span>
+
+    <span class="k">def</span> <span class="nf">_store_datasource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">organization</span><span class="p">):</span>
+        <span class="n">xml_datasource</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">get_datasource</span><span class="p">()</span>
+        <span class="n">db_datasource</span> <span class="o">=</span> <span class="n">DBHelper</span><span class="o">.</span><span class="n">check_datasource</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">xml_datasource</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="c"># The datasource may exist in the database.</span>
+        <span class="k">if</span> <span class="n">db_datasource</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">db_datasource</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">xml_datasource</span><span class="o">.</span><span class="n">organization_id</span> <span class="o">=</span> <span class="n">organization</span><span class="o">.</span><span class="n">id</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">xml_datasource</span><span class="p">)</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">xml_datasource</span>
+
+    <span class="k">def</span> <span class="nf">_store_organization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="n">xml_organization</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">get_organization</span><span class="p">()</span>
+        <span class="n">db_organization</span> <span class="o">=</span> <span class="n">DBHelper</span><span class="o">.</span><span class="n">check_organization</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">xml_organization</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">db_organization</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">db_organization</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">xml_organization</span><span class="p">)</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">xml_organization</span>
+
+    <span class="k">def</span> <span class="nf">_store_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">organization</span><span class="p">,</span> <span class="n">user_ip</span><span class="p">):</span>
+        <span class="n">xml_user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">get_user</span><span class="p">()</span>
+        <span class="n">db_user</span> <span class="o">=</span> <span class="n">DBHelper</span><span class="o">.</span><span class="n">check_user</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">xml_user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">db_user</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">db_user</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">xml_user</span><span class="o">.</span><span class="n">organization_id</span> <span class="o">=</span> <span class="n">organization</span><span class="o">.</span><span class="n">id</span>
+            <span class="n">xml_user</span><span class="o">.</span><span class="n">ip</span> <span class="o">=</span> <span class="n">user_ip</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">xml_user</span><span class="p">)</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">xml_user</span>
+
+    <span class="k">def</span> <span class="nf">_store_observations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">enrich_observation</span><span class="p">(</span><span class="n">obs</span><span class="p">):</span>
+            <span class="n">obs</span><span class="o">.</span><span class="n">dataset_id</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">id</span>
+            <span class="k">if</span> <span class="n">obs</span><span class="o">.</span><span class="n">region_code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">obs</span><span class="o">.</span><span class="n">region_id</span> <span class="o">=</span> <span class="n">DBHelper</span><span class="o">.</span><span class="n">find_region_id</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">obs</span><span class="o">.</span><span class="n">region_code</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">obs</span><span class="o">.</span><span class="n">country_code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">obs</span><span class="o">.</span><span class="n">region_id</span> <span class="o">=</span> <span class="n">DBHelper</span><span class="o">.</span><span class="n">find_country_id</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">obs</span><span class="o">.</span><span class="n">country_code</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">obs</span>
+
+        <span class="c">#We need to make the flush after a certain number of elements in order to control</span>
+        <span class="c">#that not too many inserts are made at the same time, which results in a DataBase</span>
+        <span class="c">#crash.</span>
+        <span class="n">number_inserted</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">observation</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">get_observations</span><span class="p">():</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">enrich_observation</span><span class="p">(</span><span class="n">observation</span><span class="p">))</span>
+            <span class="n">number_inserted</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">number_inserted</span> <span class="o">==</span> <span class="mi">10000</span><span class="p">:</span>
+                <span class="n">session</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+                <span class="n">session</span><span class="o">.</span><span class="n">expunge_all</span><span class="p">()</span>
+                <span class="n">number_inserted</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">expunge_all</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_store_slices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">enrich_slice</span><span class="p">(</span><span class="n">sli</span><span class="p">):</span>
+            <span class="n">sli</span><span class="o">.</span><span class="n">dataset_id</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">id</span>
+            <span class="k">if</span> <span class="n">sli</span><span class="o">.</span><span class="n">region_code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">sli</span><span class="o">.</span><span class="n">dimension_id</span> <span class="o">=</span> <span class="n">DBHelper</span><span class="o">.</span><span class="n">find_region_id</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">sli</span><span class="o">.</span><span class="n">region_code</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">sli</span><span class="o">.</span><span class="n">country_code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">sli</span><span class="o">.</span><span class="n">dimension_id</span> <span class="o">=</span> <span class="n">DBHelper</span><span class="o">.</span><span class="n">find_country_id</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">sli</span><span class="o">.</span><span class="n">country_code</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">sli</span>
+
+        <span class="n">number_inserted</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="nb">slice</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">get_slices</span><span class="p">():</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">enrich_slice</span><span class="p">(</span><span class="nb">slice</span><span class="p">))</span>
+            <span class="n">number_inserted</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">number_inserted</span> <span class="o">==</span> <span class="mi">5000</span><span class="p">:</span>
+                <span class="n">number_inserted</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">session</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+                <span class="n">session</span><span class="o">.</span><span class="n">expunge_all</span><span class="p">()</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">expunge_all</span><span class="p">()</span>
+
+</div>
+<div class="viewcode-block" id="DBHelper"><a class="viewcode-back" href="../../app.html#app.sql_service.DBHelper">[docs]</a><span class="k">class</span> <span class="nc">DBHelper</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="DBHelper.check_datasource"><a class="viewcode-back" href="../../app.html#app.sql_service.DBHelper.check_datasource">[docs]</a>    <span class="k">def</span> <span class="nf">check_datasource</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">datasource_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Find a DataSource by name in the DB. Returns None if not found.&quot;&quot;&quot;</span>
+        <span class="n">datasource</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">DataSource</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">DataSource</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">datasource_name</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">datasource</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="DBHelper.check_organization"><a class="viewcode-back" href="../../app.html#app.sql_service.DBHelper.check_organization">[docs]</a>    <span class="k">def</span> <span class="nf">check_organization</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">organization_url</span><span class="p">):</span>
+        <span class="n">organization</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Organization</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Organization</span><span class="o">.</span><span class="n">url</span> <span class="o">==</span> <span class="n">organization_url</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">organization</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="DBHelper.check_user"><a class="viewcode-back" href="../../app.html#app.sql_service.DBHelper.check_user">[docs]</a>    <span class="k">def</span> <span class="nf">check_user</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">User</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">user_id</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">user</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="DBHelper.check_indicator_starred"><a class="viewcode-back" href="../../app.html#app.sql_service.DBHelper.check_indicator_starred">[docs]</a>    <span class="k">def</span> <span class="nf">check_indicator_starred</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">indicator_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if an Indicator is starred&quot;&quot;&quot;</span>
+        <span class="n">indicator</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Indicator</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Indicator</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">indicator_id</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">indicator</span><span class="o">.</span><span class="n">starred</span> <span class="k">if</span> <span class="n">indicator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="bp">False</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="DBHelper.find_region_id"><a class="viewcode-back" href="../../app.html#app.sql_service.DBHelper.find_region_id">[docs]</a>    <span class="k">def</span> <span class="nf">find_region_id</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">reg_code</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the Region ID using its UN_CODE&quot;&quot;&quot;</span>
+        <span class="n">region</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Region</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Region</span><span class="o">.</span><span class="n">un_code</span> <span class="o">==</span> <span class="n">reg_code</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">region</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;The region with UN_CODE = {} does not exist in &quot;</span>
+                            <span class="s">&quot;the database&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reg_code</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">region</span><span class="o">.</span><span class="n">id</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="DBHelper.find_country_id"><a class="viewcode-back" href="../../app.html#app.sql_service.DBHelper.find_country_id">[docs]</a>    <span class="k">def</span> <span class="nf">find_country_id</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">country_code</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the Country ID using its ISO3&quot;&quot;&quot;</span>
+        <span class="n">country</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Country</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Country</span><span class="o">.</span><span class="n">iso3</span> <span class="o">==</span> <span class="n">country_code</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">country</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;The country with ISO3 = {} does not exist in &quot;</span>
+                            <span class="s">&quot;the database&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">country_code</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">country</span><span class="o">.</span><span class="n">id</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="DBHelper.find_observations"><a class="viewcode-back" href="../../app.html#app.sql_service.DBHelper.find_observations">[docs]</a>    <span class="k">def</span> <span class="nf">find_observations</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">ids</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get all observations in a list of IDs&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Observation</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Observation</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">in_</span><span class="p">(</span><span class="n">ids</span><span class="p">))</span>\
+            <span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="DBHelper.find_indicators"><a class="viewcode-back" href="../../app.html#app.sql_service.DBHelper.find_indicators">[docs]</a>    <span class="k">def</span> <span class="nf">find_indicators</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">ids</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get all indicators in a list of IDs&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Indicator</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Indicator</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">in_</span><span class="p">(</span><span class="n">ids</span><span class="p">))</span>\
+            <span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="DBHelper.find_compound_indicator"><a class="viewcode-back" href="../../app.html#app.sql_service.DBHelper.find_compound_indicator">[docs]</a>    <span class="k">def</span> <span class="nf">find_compound_indicator</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">ind_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get a compound indicator by its ID&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">CompoundIndicator</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">CompoundIndicator</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">ind_id</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">first</span><span class="p">()</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Land Portal Receiver 1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Weso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

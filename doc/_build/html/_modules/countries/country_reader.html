@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>countries.country_reader &mdash; Land Portal Receiver 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Land Portal Receiver 1.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Land Portal Receiver 1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for countries.country_reader</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">xlrd</span>
+<span class="kn">from</span> <span class="nn">model</span> <span class="kn">import</span> <span class="n">models</span>
+
+
+<div class="viewcode-block" id="CountryReader"><a class="viewcode-back" href="../../countries.html#countries.country_reader.CountryReader">[docs]</a><span class="k">class</span> <span class="nc">CountryReader</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="c">#ROW INDEX</span>
+    <span class="n">FIRST_ROW</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">LAST_ROW</span> <span class="o">=</span> <span class="mi">248</span>
+
+    <span class="c">#COLUMN INDEX (starts in 0)</span>
+    <span class="c">#FIELDS ORDERED BY PRIORITY</span>
+    <span class="c">#ISO-3</span>
+    <span class="n">ISO3_ADMIN</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">ISO3_FAO</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="c">#ISO-2</span>
+    <span class="n">ISO2_ADMIN</span> <span class="o">=</span> <span class="mi">27</span>
+    <span class="c">#NAME-EN</span>
+    <span class="n">NAME_EN_FAO_S</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">NAME_EN_FAO</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">NAME_EN_ADMIN</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">NAME_EN_ADMIN_LONG</span> <span class="o">=</span> <span class="mi">11</span>
+    <span class="c">#NAME-ES</span>
+    <span class="n">NAME_ES_FAO_S</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="n">NAME_ES_FAO</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="c">#NAME-FR</span>
+    <span class="n">NAME_FR_FAO_S</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">NAME_FR_FAO</span> <span class="o">=</span> <span class="mi">9</span>
+    <span class="c">#UN_CODE</span>
+    <span class="n">UN_CODE</span> <span class="o">=</span> <span class="mi">30</span>
+    <span class="c">#REGIONS</span>
+    <span class="n">REGION_EN</span> <span class="o">=</span> <span class="mi">38</span>
+
+<div class="viewcode-block" id="CountryReader.get_countries"><a class="viewcode-back" href="../../countries.html#countries.country_reader.CountryReader.get_countries">[docs]</a>    <span class="k">def</span> <span class="nf">get_countries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Return a list of all Landportal countries</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">countries</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_all_countries</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">countries</span>
+</div>
+    <span class="k">def</span> <span class="nf">_get_all_countries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="n">country_file</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">open_workbook</span><span class="p">(</span><span class="n">path</span><span class="p">,</span>
+            <span class="n">encoding_override</span><span class="o">=</span><span class="s">&#39;latin-1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sheet_by_index</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">countries</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">FIRST_ROW</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">LAST_ROW</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">countries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_country</span><span class="p">(</span><span class="n">country_file</span><span class="o">.</span><span class="n">row</span><span class="p">(</span><span class="n">row</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">countries</span>
+
+<div class="viewcode-block" id="CountryReader.parse_country"><a class="viewcode-back" href="../../countries.html#countries.country_reader.CountryReader.parse_country">[docs]</a>    <span class="k">def</span> <span class="nf">parse_country</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">country_data</span><span class="p">):</span>
+        <span class="n">iso2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_iso2</span><span class="p">(</span><span class="n">country_data</span><span class="p">)</span>
+        <span class="n">iso3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_iso3</span><span class="p">(</span><span class="n">country_data</span><span class="p">)</span>
+        <span class="n">fao_uri</span> <span class="o">=</span> <span class="s">&#39;http://www.fao.org/countryprofiles/index/en/?iso3=&#39;</span> <span class="o">+</span> <span class="n">iso3</span>
+        <span class="n">un_code</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_blank_value</span><span class="p">(</span><span class="n">country_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">UN_CODE</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">):</span>
+            <span class="n">un_code</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">country_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">UN_CODE</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">country</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Country</span><span class="p">(</span><span class="n">iso2</span><span class="o">=</span><span class="n">iso2</span><span class="p">,</span> <span class="n">iso3</span><span class="o">=</span><span class="n">iso3</span><span class="p">,</span> <span class="n">fao_URI</span><span class="o">=</span><span class="n">fao_uri</span><span class="p">,</span>
+                                 <span class="n">un_code</span><span class="o">=</span><span class="n">un_code</span><span class="p">)</span>
+        <span class="c">#Parse country name translations</span>
+        <span class="n">name_en</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_name_en</span><span class="p">(</span><span class="n">country_data</span><span class="p">)</span>
+        <span class="n">name_fr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_name_fr</span><span class="p">(</span><span class="n">country_data</span><span class="p">)</span>
+        <span class="n">name_es</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_name_es</span><span class="p">(</span><span class="n">country_data</span><span class="p">)</span>
+        <span class="n">country</span><span class="o">.</span><span class="n">add_translation</span><span class="p">(</span>
+            <span class="n">models</span><span class="o">.</span><span class="n">RegionTranslation</span><span class="p">(</span><span class="n">lang_code</span><span class="o">=</span><span class="s">&#39;en&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name_en</span><span class="p">))</span>
+        <span class="n">country</span><span class="o">.</span><span class="n">add_translation</span><span class="p">(</span>
+            <span class="n">models</span><span class="o">.</span><span class="n">RegionTranslation</span><span class="p">(</span><span class="n">lang_code</span><span class="o">=</span><span class="s">&#39;fr&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name_fr</span><span class="p">))</span>
+        <span class="n">country</span><span class="o">.</span><span class="n">add_translation</span><span class="p">(</span>
+            <span class="n">models</span><span class="o">.</span><span class="n">RegionTranslation</span><span class="p">(</span><span class="n">lang_code</span><span class="o">=</span><span class="s">&#39;es&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name_es</span><span class="p">))</span>
+        <span class="c"># Add region</span>
+        <span class="n">reg_name</span> <span class="o">=</span> <span class="n">country_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">REGION_EN</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">country</span><span class="o">.</span><span class="n">is_part_of_id</span> <span class="o">=</span> <span class="n">reg_name</span>
+        <span class="k">return</span> <span class="n">country</span>
+</div>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_get_region_id</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the region_id associated to a region name or None.</span>
+<span class="sd">        The region name must be in english.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">app</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="p">()</span>
+        <span class="n">region</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">RegionTranslation</span><span class="p">)</span><span class="o">.</span> \
+            <span class="nb">filter</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">RegionTranslation</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">region</span><span class="o">.</span><span class="n">region_id</span> <span class="k">if</span> <span class="n">region</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">_parse_iso2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">country_data</span><span class="p">):</span>
+        <span class="n">iso2_admin</span> <span class="o">=</span> <span class="n">country_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ISO2_ADMIN</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_blank_value</span><span class="p">(</span><span class="n">iso2_admin</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">iso2_admin</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">_parse_iso3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">country_data</span><span class="p">):</span>
+        <span class="n">iso3_admin</span> <span class="o">=</span> <span class="n">country_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ISO3_ADMIN</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">iso3_fao</span> <span class="o">=</span> <span class="n">country_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ISO3_FAO</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_blank_value</span><span class="p">(</span><span class="n">iso3_admin</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">iso3_admin</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_blank_value</span><span class="p">(</span><span class="n">iso3_fao</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">iso3_fao</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">_parse_name_en</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">country_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return english country name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name_en_fao_s</span> <span class="o">=</span> <span class="n">country_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">NAME_EN_FAO_S</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">name_en_fao</span> <span class="o">=</span> <span class="n">country_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">NAME_EN_FAO</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">name_en_admin</span> <span class="o">=</span> <span class="n">country_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">NAME_EN_ADMIN</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">name_en_admin_long</span> <span class="o">=</span> <span class="n">country_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">NAME_EN_ADMIN_LONG</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_blank_value</span><span class="p">(</span><span class="n">name_en_fao_s</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">name_en_fao_s</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_blank_value</span><span class="p">(</span><span class="n">name_en_fao</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">name_en_fao</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_blank_value</span><span class="p">(</span><span class="n">name_en_admin</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">name_en_admin</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">name_en_admin_long</span>
+
+    <span class="k">def</span> <span class="nf">_parse_name_es</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">country_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return spanish country name. It may be an empty string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name_es_fao_s</span> <span class="o">=</span> <span class="n">country_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">NAME_ES_FAO_S</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">name_es_fao</span> <span class="o">=</span> <span class="n">country_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">NAME_ES_FAO</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_blank_value</span><span class="p">(</span><span class="n">name_es_fao_s</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">name_es_fao_s</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">name_es_fao</span>
+
+    <span class="k">def</span> <span class="nf">_parse_name_fr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">country_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return french country name. It may be an empty string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name_fr_fao_s</span> <span class="o">=</span> <span class="n">country_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">NAME_FR_FAO_S</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">name_fr_fao</span> <span class="o">=</span> <span class="n">country_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">NAME_FR_FAO</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_blank_value</span><span class="p">(</span><span class="n">name_fr_fao_s</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">name_fr_fao_s</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">name_fr_fao</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_is_blank_value</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">value</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">==</span> <span class="s">&#39;&#39;</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">==</span> <span class="o">-</span><span class="mi">99</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">==</span> <span class="s">&#39;-99&#39;</span>
+
+</div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">CountryReader</span><span class="p">()</span><span class="o">.</span><span class="n">get_countries</span><span class="p">(</span><span class="s">&#39;country_list.xlsx&#39;</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Land Portal Receiver 1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Weso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

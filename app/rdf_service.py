@@ -12,11 +12,24 @@ import config
 
 
 class ReceiverRDFService(object):
+    """
+    Service that gets the xml input from the html request, generates RDF triples and store
+    them in Virtuoso triple store
+    """
     def __init__(self, content):
         self.parser = Parser(content)
         self.time = datetime.datetime.now()
 
     def run_service(self, graph, host, api, graph_uri, user_ip):
+        """Run the ReceiverRDFService
+
+        :param graph: RDF graph.
+        :param graph_uri: RDF graph URI to be stored in the triple store.
+        :param host: Triple store host.
+        :param api: Triple store authentication api.
+        :param user_ip: IP from the invoker client.
+        :returns: RDF graph.
+        """
         bind_namespaces(graph)
         self._add_observations_triples(graph)
         self._add_indicators_triples(graph)
@@ -39,6 +52,9 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_observations_triples(self, graph):
+        """
+
+        """
         for obs in self.parser.get_observations():
             region = self._get_area_code(obs)
             graph.add((prefix_.term(obs.id), RDF.type,
