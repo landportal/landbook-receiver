@@ -3,35 +3,56 @@
 
 def create_database():
     from app import db
-    from model import models
+    import model.models as models
+    def _store_topics(session):
+        session.add_all(MetadataPopulator.get_topics())
+        session.flush()
 
-    # Create DB Schema
-    db.create_all()
+    def _store_languages(session):
+        session.add_all(MetadataPopulator.get_languages())
+        session.flush()
+
+    def _store_countries(session):
+        def _get_regionid_by_name(regname):
+            import model.models as models
+            region = session.query(models.RegionTranslation). \
+                filter(models.RegionTranslation.name == regname).first()
+            return region.region_id if region is not None else None
+
+        countries = MetadataPopulator.get_countries()
+        for country in countries:
+            country.is_part_of_id = _get_regionid_by_name(country.is_part_of_id)
+            session.add(country)
+        session.flush()
+        return countries
+
+    def _store_regions(session):
+        global_reg = MetadataPopulator.get_global_region()
+        session.add(global_reg)
+        session.flush()
+        # The continents are part of the global region
+        regions = MetadataPopulator.get_regions()
+        for reg in regions:
+            reg.is_part_of_id = global_reg.id
+        session.add_all(regions)
+        session.flush()
+        return regions
+
     session = db.session
-    # Create language list
-    session.add_all(MetadataPopulator.get_languages())
-    session.commit()
-    # Create region list
-    global_reg = MetadataPopulator.get_global_region()
-    session.add(global_reg)
-    session.flush()
-    regions = MetadataPopulator.get_regions()
-    #All the regions are part of the global region
-    for reg in regions:
-        reg.is_part_of_id = global_reg.id
-    session.add_all(regions)
-    session.commit()
-    # Create country list
-    regions = session.query(models.Region).all()
-    session.add_all(MetadataPopulator.get_countries(regions))
-    session.commit()
-    # Create topic list
-    session.add_all(MetadataPopulator.get_topics())
-    session.commit()
-
+    try:
+        db.create_all()
+        _store_languages(session)
+        _store_regions(session)
+        _store_countries(session)
+        _store_topics(session)
+        session.commit()
+    except:
+        session.rollback()
+        raise
+    finally:
+        session.close()
 
 class MetadataPopulator(object):
-
     @staticmethod
     def get_languages():
         from model import models
@@ -43,9 +64,9 @@ class MetadataPopulator(object):
         return languages
 
     @staticmethod
-    def get_countries(regions):
-        from countries.country_reader import CountryReader
-        return CountryReader().get_countries('countries/country_list.xlsx', regions)
+    def get_countries():
+      from countries.country_reader import CountryReader
+      return CountryReader().get_countries('countries/country_list.xlsx')
 
     @staticmethod
     def get_global_region():
