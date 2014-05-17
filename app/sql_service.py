@@ -5,11 +5,21 @@ from parser import Parser
 
 
 class ReceiverSQLService(object):
+    """
+    Service that gets the xml input from the html request, generates SQL output
+    and stores it into the configured relational database.
+    """
     def __init__(self, content):
         self.parser = Parser(content)
         self.time = datetime.datetime.now()
 
     def store_data(self, user_ip):
+        """
+        Stores the data in the XML into the relational database.
+        :param user_ip: The IP of the user that calls the service.
+        :raises: The exception that made the data storing fail.  If an exception
+            occurs, nothing will be stored into the database.
+        """
         session = app.db.session
         try:
             self._store_data(user_ip, session)
@@ -167,6 +177,9 @@ class ReceiverSQLService(object):
 
 
 class DBHelper(object):
+    """
+    Helper for querying the relational database.
+    """
     @staticmethod
     def check_datasource(session, datasource_id):
         """Find a DataSource in the DB. Returns None if not found."""
@@ -184,6 +197,7 @@ class DBHelper(object):
 
     @staticmethod
     def check_user(session, user_id):
+        """Check if a user exists in the database using its ID"""
         user = session.query(model.User).filter(model.User.id == user_id)\
             .first()
         return user
