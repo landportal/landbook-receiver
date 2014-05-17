@@ -27,12 +27,12 @@ class Receiver(flask_restful.Resource):
 
         if 'xml' in flask_restful.request.form:
             content = flask_restful.request.form['xml']
-            #ReceiverSQLService(content.encode('utf-8')).store_data(user_ip)
-            ReceiverRDFService(content.encode('utf-8')).run_service(host=host,
-                                                                    api=triple_api,
-                                                                    graph_uri=graph_uri,
-                                                                    user_ip=user_ip,
-                                                                    graph=graph)
+            ReceiverSQLService(content.encode('utf-8')).store_data(user_ip)
+            #ReceiverRDFService(content.encode('utf-8')).run_service(host=host,
+            #                                                        api=triple_api,
+            #                                                        graph_uri=graph_uri,
+            #                                                        user_ip=user_ip,
+            #                                                        graph=graph)
         else:
             flask_restful.abort(400)
 

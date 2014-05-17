@@ -90,7 +90,7 @@ class ReceiverSQLService(object):
 
     def _store_datasource(self, session, organization):
         xml_datasource = self.parser.get_datasource()
-        db_datasource = DBHelper.check_datasource(session, xml_datasource.name)
+        db_datasource = DBHelper.check_datasource(session, xml_datasource.id)
         # The datasource may exist in the database.
         if db_datasource is not None:
             return db_datasource
@@ -168,10 +168,10 @@ class ReceiverSQLService(object):
 
 class DBHelper(object):
     @staticmethod
-    def check_datasource(session, datasource_name):
-        """Find a DataSource by name in the DB. Returns None if not found."""
+    def check_datasource(session, datasource_id):
+        """Find a DataSource in the DB. Returns None if not found."""
         datasource = session.query(model.DataSource)\
-            .filter(model.DataSource.name == datasource_name)\
+            .filter(model.DataSource.id == datasource_id)\
             .first()
         return datasource
 
