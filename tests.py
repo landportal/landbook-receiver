@@ -74,7 +74,7 @@ class CountriesTest(ReceiverParserTest):
         country = self.session.query(model.Country)\
             .filter(model.Country.iso3 == "ESP")\
             .first()
-        expected_faouri = "http://landportal.info/ontology/country/ESP"
+        expected_faouri = "http://www.fao.org/countryprofiles/index/en/?iso3=ESP"
         self.assertTrue(country.faoURI == expected_faouri)
 
     def test_country_uncode(self):
@@ -300,22 +300,20 @@ class ObservationsTest(ReceiverParserTest):
             .filter(model.Observation.id == "OBSIPFRI1")\
             .first()
         computation = obs.computation.uri
-        self.assertTrue(computation == "purl.org/weso/ontology/computex#Raw")
+        self.assertTrue(computation == "Raw")
 
     def test_value(self):
         obs = self.session.query(model.Observation)\
             .filter(model.Observation.id == "OBSIPFRI2597")\
             .first()
         self.assertTrue(obs.value.value == "26.5")
-        self.assertTrue(obs.value.obs_status ==\
-            "http://purl.org/linked-data/sdmx/2009/code#obsStatus-A")
+        self.assertTrue(obs.value.obs_status == "obsStatus-A")
 
     def test_missing_value(self):
         obs = self.session.query(model.Observation)\
             .filter(model.Observation.id == "OBSIPFRI0")\
             .first()
-        self.assertTrue(obs.value.obs_status ==\
-            "http://purl.org/linked-data/sdmx/2009/code#obsStatus-M")
+        self.assertTrue(obs.value.obs_status == "obsStatus-M")
         self.assertTrue(obs.value.value is None)
 
     def test_month_interval(self):
@@ -363,13 +361,13 @@ class OrganizationsTest(ReceiverParserTest):
 
     def test_organization_name(self):
         org = self.session.query(model.Organization) \
-            .filter(model.Organization.id == 'http://www.ifpri.org/') \
+            .filter(model.Organization.id == 'ifpri') \
             .first()
         self.assertTrue('IFPRI' in org.name)
 
     def test_organization_users(self):
         org = self.session.query(model.Organization) \
-            .filter(model.Organization.id == "http://www.ifpri.org/") \
+            .filter(model.Organization.id == "ifpri") \
             .first()
         self.assertTrue(org.users)
 
@@ -391,7 +389,7 @@ class UsersTest(ReceiverParserTest):
         user = self.session.query(model.User)\
             .filter(model.User.id == "USRIPFRIIMPORTER")\
             .first()
-        self.assertTrue(user.organization.id == "http://www.ifpri.org/")
+        self.assertTrue(user.organization.id == "ifpri")
 
 
 class DataSourceTests(ReceiverParserTest):
@@ -406,7 +404,7 @@ class DataSourceTests(ReceiverParserTest):
 
     def test_organization(self):
         dsource = self.session.query(model.DataSource).first()
-        self.assertTrue(dsource.organization.id == "http://www.ifpri.org/")
+        self.assertTrue(dsource.organization.id == "ifpri")
 
     def test_datasets(self):
         dsource = self.session.query(model.DataSource).first()
@@ -433,8 +431,7 @@ class DatasetTests(ReceiverParserTest):
 
     def test_frequency(self):
         dataset = self.session.query(model.Dataset).first()
-        self.assertTrue(dataset.sdmx_frequency ==\
-            'http://test_ontology.org/frequency')
+        self.assertTrue(dataset.sdmx_frequency == "freq-A")
 
 
 class SliceParserTest(ReceiverParserTest):
