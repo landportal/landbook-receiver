@@ -54,11 +54,21 @@
 
 
 <div class="viewcode-block" id="ReceiverSQLService"><a class="viewcode-back" href="../../app.html#app.sql_service.ReceiverSQLService">[docs]</a><span class="k">class</span> <span class="nc">ReceiverSQLService</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Service that gets the xml input from the html request, generates SQL output</span>
+<span class="sd">    and stores it into the configured relational database.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="n">Parser</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 
-<div class="viewcode-block" id="ReceiverSQLService.store_data"><a class="viewcode-back" href="../../app.html#app.sql_service.ReceiverSQLService.store_data">[docs]</a>    <span class="k">def</span> <span class="nf">store_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_ip</span><span class="p">):</span>
+<div class="viewcode-block" id="ReceiverSQLService.run_service"><a class="viewcode-back" href="../../app.html#app.sql_service.ReceiverSQLService.run_service">[docs]</a>    <span class="k">def</span> <span class="nf">run_service</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_ip</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stores the data in the XML into the relational database.</span>
+<span class="sd">        :param user_ip: The IP of the user that calls the service.</span>
+<span class="sd">        :raises: The exception that made the data storing fail.  If an exception</span>
+<span class="sd">            occurs, nothing will be stored into the database.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">session</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">session</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_store_data</span><span class="p">(</span><span class="n">user_ip</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span>
@@ -139,7 +149,7 @@
 
     <span class="k">def</span> <span class="nf">_store_datasource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">organization</span><span class="p">):</span>
         <span class="n">xml_datasource</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">get_datasource</span><span class="p">()</span>
-        <span class="n">db_datasource</span> <span class="o">=</span> <span class="n">DBHelper</span><span class="o">.</span><span class="n">check_datasource</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">xml_datasource</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">db_datasource</span> <span class="o">=</span> <span class="n">DBHelper</span><span class="o">.</span><span class="n">check_datasource</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">xml_datasource</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
         <span class="c"># The datasource may exist in the database.</span>
         <span class="k">if</span> <span class="n">db_datasource</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">db_datasource</span>
@@ -216,11 +226,14 @@
 
 </div>
 <div class="viewcode-block" id="DBHelper"><a class="viewcode-back" href="../../app.html#app.sql_service.DBHelper">[docs]</a><span class="k">class</span> <span class="nc">DBHelper</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper for querying the relational database.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="DBHelper.check_datasource"><a class="viewcode-back" href="../../app.html#app.sql_service.DBHelper.check_datasource">[docs]</a>    <span class="k">def</span> <span class="nf">check_datasource</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">datasource_name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Find a DataSource by name in the DB. Returns None if not found.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="DBHelper.check_datasource"><a class="viewcode-back" href="../../app.html#app.sql_service.DBHelper.check_datasource">[docs]</a>    <span class="k">def</span> <span class="nf">check_datasource</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">datasource_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Find a DataSource in the DB. Returns None if not found.&quot;&quot;&quot;</span>
         <span class="n">datasource</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">DataSource</span><span class="p">)</span>\
-            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">DataSource</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">datasource_name</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">DataSource</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">datasource_id</span><span class="p">)</span>\
             <span class="o">.</span><span class="n">first</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">datasource</span>
 </div>
@@ -233,6 +246,7 @@
 </div>
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="DBHelper.check_user"><a class="viewcode-back" href="../../app.html#app.sql_service.DBHelper.check_user">[docs]</a>    <span class="k">def</span> <span class="nf">check_user</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if a user exists in the database using its ID&quot;&quot;&quot;</span>
         <span class="n">user</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">User</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">user_id</span><span class="p">)</span>\
             <span class="o">.</span><span class="n">first</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">user</span>

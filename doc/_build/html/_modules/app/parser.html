@@ -64,8 +64,9 @@
     <span class="k">def</span> <span class="nf">_get_observations_slices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Creates an inverse index of observations and slices.</span>
 
-<span class="sd">        Returns a map in which the key is the observation ID and the</span>
-<span class="sd">        value is its corresponding slice ID.&quot;&quot;&quot;</span>
+<span class="sd">        :returns: map in which the key is the observation ID and the</span>
+<span class="sd">        value is its corresponding slice ID.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">obs_map</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">slices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&quot;.//slice&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">sli</span> <span class="ow">in</span> <span class="n">slices</span><span class="p">:</span>
@@ -75,44 +76,63 @@
         <span class="k">return</span> <span class="n">obs_map</span>
 
 <div class="viewcode-block" id="Parser.get_simple_indicators"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_simple_indicators">[docs]</a>    <span class="k">def</span> <span class="nf">get_simple_indicators</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a list of indicators</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: list of simple indicators found in the XML file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ind_root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;indicators&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_simple_indicator</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span> <span class="k">for</span> <span class="n">ind</span>
                 <span class="ow">in</span> <span class="n">ind_root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&quot;indicator&quot;</span><span class="p">))</span>
 </div>
 <div class="viewcode-block" id="Parser.get_compound_indicators"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_compound_indicators">[docs]</a>    <span class="k">def</span> <span class="nf">get_compound_indicators</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: list of compound indicators found in the XML file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ind_root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;indicators&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_compound_indicator</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span> <span class="k">for</span> <span class="n">ind</span>
                 <span class="ow">in</span> <span class="n">ind_root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&quot;compound_indicator&quot;</span><span class="p">))</span>
 </div>
 <div class="viewcode-block" id="Parser.get_indicator_groups"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_indicator_groups">[docs]</a>    <span class="k">def</span> <span class="nf">get_indicator_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: list of indicator groups found in the XML file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">groups_element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;indicator_groups&#39;</span><span class="p">)</span>\
             <span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;indicator_group&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_indicator_group</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">groups_element</span><span class="p">]</span>
 </div>
 <div class="viewcode-block" id="Parser.get_user"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_user">[docs]</a>    <span class="k">def</span> <span class="nf">get_user</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Parse the user data from the XML.</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: user data found in the XML file (whithout user_ip)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">username</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;import_process&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;user&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
         <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">User</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">())</span>
 </div>
 <div class="viewcode-block" id="Parser.get_organization"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_organization">[docs]</a>    <span class="k">def</span> <span class="nf">get_organization</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Parse the organization data from the XML.</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: organization data found in the XML file.  The organization ID</span>
+<span class="sd">            is constructed with the domain name in the organization_url, for</span>
+<span class="sd">            example www.observatoire-foncier.com will result in the ID</span>
+<span class="sd">            &#39;observatoire-foncier&#39;.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">org_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;import_process&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;organization_name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
         <span class="n">org_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;import_process&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;organization_url&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
-        <span class="n">organization</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Organization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">org_name</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">org_url</span><span class="p">)</span>
+        <span class="n">org_id</span> <span class="o">=</span> <span class="n">org_url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">organization</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Organization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">org_name</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">org_id</span><span class="p">)</span>
         <span class="n">organization</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">org_url</span>
         <span class="k">return</span> <span class="n">organization</span>
 </div>
 <div class="viewcode-block" id="Parser.get_datasource"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_datasource">[docs]</a>    <span class="k">def</span> <span class="nf">get_datasource</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: datasource data found in the XML file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dsource</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;import_process&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;datasource&#39;</span><span class="p">)</span>
         <span class="n">dsource_name</span> <span class="o">=</span> <span class="n">dsource</span><span class="o">.</span><span class="n">text</span>
         <span class="n">dsource_id</span> <span class="o">=</span> <span class="n">dsource</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">DataSource</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">dsource_name</span><span class="p">,</span> <span class="n">dsource_id</span><span class="o">=</span><span class="n">dsource_id</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="Parser.get_dataset"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_dataset">[docs]</a>    <span class="k">def</span> <span class="nf">get_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: dataset data found in the XML file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dataset</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Dataset</span><span class="p">()</span>
         <span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">)</span>
         <span class="n">dataset</span><span class="o">.</span><span class="n">sdmx_frequency</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;import_process&#39;</span><span class="p">)</span><span class="o">.</span>\
@@ -121,16 +141,15 @@
         <span class="k">return</span> <span class="n">dataset</span>
 </div>
 <div class="viewcode-block" id="Parser.get_license"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_license">[docs]</a>    <span class="k">def</span> <span class="nf">get_license</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Parse a license node and return a License object.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: license data of the XML file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;license&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;lic_name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
         <span class="n">description</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;license&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;lic_description&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
         <span class="n">republish</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;license&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;republish&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;license&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;lic_url&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
-        <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">License</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
-                                 <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
-                                 <span class="n">republish</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">republish</span><span class="p">),</span>
-                                 <span class="n">url</span><span class="o">=</span><span class="n">url</span>
-                                <span class="p">)</span>
+        <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">License</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>\
+            <span class="n">republish</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">republish</span><span class="p">),</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
 </div>
     <span class="k">def</span> <span class="nf">_get_simple_indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ind</span><span class="p">):</span>
         <span class="n">indicator</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Indicator</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">ind</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">))</span>
@@ -193,12 +212,22 @@
         <span class="n">indicator</span><span class="o">.</span><span class="n">indicator_ref</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;indicator-ref&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">indicator</span>
 
-    <span class="c">#@profile</span>
 <div class="viewcode-block" id="Parser.get_observations"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_observations">[docs]</a>    <span class="k">def</span> <span class="nf">get_observations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: list of observations found in the XML files.  Every observation</span>
+<span class="sd">            comes with its ref_time, value and computation.  Each observation</span>
+<span class="sd">            has the fields &#39;region_code&#39; (UN_code) and &#39;country_code&#39; (ISO3) of</span>
+<span class="sd">            the region they reffer to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">obs_root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;observations&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_observation</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span> <span class="k">for</span> <span class="n">obs</span> <span class="ow">in</span> <span class="n">obs_root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&quot;observation&quot;</span><span class="p">))</span>
 </div>
 <div class="viewcode-block" id="Parser.get_slices"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_slices">[docs]</a>    <span class="k">def</span> <span class="nf">get_slices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: list of slices found in the XML files.  Each slice</span>
+<span class="sd">            has the fields &#39;region_code&#39; (UN_code) and &#39;country_code&#39; (ISO3) of</span>
+<span class="sd">            the region they reffer to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sli_root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;slices&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_slice</span><span class="p">(</span><span class="n">sli</span><span class="p">)</span> <span class="k">for</span> <span class="n">sli</span> <span class="ow">in</span> <span class="n">sli_root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;slice&#39;</span><span class="p">))</span>
 </div>
@@ -292,9 +321,6 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_parse_measurement_unit</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Returns a MeasurementUnit.</span>
-<span class="sd">         @param node -&gt; the XML node containing the measurement information</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">MeasurementUnit</span><span class="p">(</span>
             <span class="n">name</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
             <span class="n">convertible_to</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;convertible_to&quot;</span><span class="p">),</span>

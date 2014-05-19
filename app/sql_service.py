@@ -13,7 +13,7 @@ class ReceiverSQLService(object):
         self.parser = Parser(content)
         self.time = datetime.datetime.now()
 
-    def store_data(self, user_ip):
+    def run_service(self, user_ip):
         """
         Stores the data in the XML into the relational database.
         :param user_ip: The IP of the user that calls the service.
