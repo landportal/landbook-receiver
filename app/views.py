@@ -4,7 +4,6 @@ from app.sql_service import ReceiverSQLService
 from app.rdf_service import ReceiverRDFService
 from app.ckan_service import ReceiverCKANService
 import config
-import os
 from rdflib import Graph
 from flask import request
 
@@ -35,14 +34,12 @@ class Receiver(flask_restful.Resource):
             xml_content = flask_restful.request.form['xml']
             _file = request.files['file']
             #ReceiverSQLService(xml_content.encode('utf-8')).run_service(user_ip)
-            ReceiverRDFService(xml_content.encode('utf-8')).\
-                run_service(host=host, api=triple_api, graph_uri=graph_uri,
-                            user_ip=user_ip, graph=graph)
-          # ReceiverCKANService(xml_content).run_service(
-          #     api_key=ckan_api_key,
-          #     ckan_instance=ckan_instance,
-          #     dataset_title='The Dataset Name',
-          #     _file=_file)
+           #ReceiverRDFService(xml_content.encode('utf-8')).\
+           #    run_service(host=host, api=triple_api, graph_uri=graph_uri,
+           #                user_ip=user_ip, graph=graph)
+            ReceiverCKANService(xml_content).\
+                run_service(api_key=ckan_api_key, ckan_instance=ckan_instance,
+                            dataset_title='The Dataset Name', _file=_file)
         else:
             flask_restful.abort(400)
 
