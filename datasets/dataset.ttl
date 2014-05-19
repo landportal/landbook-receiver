@@ -1,0 +1,212 @@
+@prefix : <http://example.org/> .
+@prefix cex: <http://purl.org/weso/computex/ontology#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix lb: <http://purl.org/weso/landbook/ontology#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sdmx-code: <http://purl.org/linked-data/sdmx/2009/code#> .
+@prefix sdmx-concept: <http://purl.org/linked-data/sdmx/2009/concept#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Africa a cex:Area ;
+    rdfs:label "Africa"@en ;
+    lb:UNCode 2 .
+
+:Americas a cex:Area ;
+    rdfs:label "Americas"@en ;
+    lb:UNCode 19 .
+
+:Antarctica a cex:Area ;
+    rdfs:label "Antarctica"@en ;
+    lb:UNCode "None" .
+
+:Asia a cex:Area ;
+    rdfs:label "Asia"@en ;
+    lb:UNCode 142 .
+
+:DSOURCE_ID a lb:DataSource ;
+    rdfs:label "IFPRI - International Food Policy Research Institute"@en ;
+    dcterms:creator "USRIPFRIIMPORTER" ;
+    lb:organization <http://www.ifpri.org/> .
+
+:Europe a cex:Area ;
+    rdfs:label "Europe"@en ;
+    lb:UNCode 150 .
+
+:FRA a cex:Area ;
+    rdfs:label "France"@en ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=FRA> ;
+    lb:is_part_of "Europe" ;
+    lb:iso2 "FR" ;
+    lb:iso3 "FRA" .
+
+:LAND_GENDER a lb:Topic ;
+    rdfs:label "Land Gender"@en .
+
+:LAND_TENURE a lb:Topic ;
+    rdfs:label "Land Tenure"@en .
+
+:Oceania a cex:Area ;
+    rdfs:label "Oceania"@en ;
+    lb:UNCode 9 .
+
+:TEMP_TOPIC a lb:Topic ;
+    rdfs:label "Temp Topic"@en .
+
+:USRIPFRIIMPORTER a foaf:Person ;
+    rdfs:label "USRIPFRIIMPORTER"@en ;
+    org:memberOf <ifpri> ;
+    foaf:account "USRIPFRIIMPORTER" ;
+    foaf:name "USRIPFRIIMPORTER" .
+
+:upload1405191821 a lb:Upload ;
+    lb:dataSource lb:DSOURCE_ID ;
+    lb:ip "127.0.0.1" ;
+    lb:observation :OBSIPFRI0,
+        :OBSIPFRI1,
+        :OBSIPFRI2597,
+        :OBSIPFRI2598,
+        :OBSIPFRI2599 ;
+    lb:timestamp "2014-05-19T18:21:11.312319"^^xsd:dateTime ;
+    lb:user lb:USRIPFRIIMPORTER .
+
+:ESP a cex:Area ;
+    rdfs:label "Spain"@en ;
+    lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=ESP> ;
+    lb:is_part_of "Europe" ;
+    lb:iso2 "ES" ;
+    lb:iso3 "ESP" .
+
+:INDIPFRI1 a cex:Indicator ;
+    rdfs:label "Prevalence of underweight in children under five years (%)"@en ;
+    lb:indicatorType cex:indicators ;
+    lb:last_update "2014-05-19T18:21:08.786890"^^xsd:dateTime ;
+    lb:measurement <http://purl.org/weso/computex/ontology#%> ;
+    lb:preferable_tendency cex:decrease ;
+    lb:starred "false"^^xsd:Boolean ;
+    lb:topic cex:TEMP_TOPIC ;
+    rdfs:comment "Description of Prevalence of underweight in children under five years (%)"@en .
+
+:INDIPFRI2 a cex:Indicator ;
+    rdfs:label "Under-five Mortality rate  (%)"@en ;
+    lb:indicatorType cex:indicators ;
+    lb:last_update "2014-05-19T18:21:08.786890"^^xsd:dateTime ;
+    lb:measurement <http://purl.org/weso/computex/ontology#%> ;
+    lb:preferable_tendency cex:decrease ;
+    lb:starred "false"^^xsd:Boolean ;
+    lb:topic cex:LAND_TENURE ;
+    rdfs:comment "Under-five Mortality rate  (%)"@en .
+
+:SLIIPFRI1 a qb:Slice ;
+    qb:dataSet :TEST_ID ;
+    qb:observation :OBSIPFRI2597 ;
+    cex:indicator :INDIPFRI0 ;
+    lb:dimension lb:FRA .
+
+<http://www.ifpri.org/copyright> a lb:License ;
+    lb:description "Attribution, no modification and non commercial without permission." ;
+    lb:name "IPFRI Copyright" ;
+    lb:republish "true"^^xsd:Boolean ;
+    lb:url "http://www.ifpri.org/copyright" .
+
+<ifpri> a org:Organization ;
+    rdfs:label "IFPRI - International Food Policy Research Institute"@en ;
+    foaf:homepage "http://www.ifpri.org/" .
+
+:OBSIPFRI0 a qb:Observation ;
+    rdfs:label "Observation of ESP within the period of 1990-1993 for indicator INDIPFRI0"@en ;
+    dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
+    qb:dataSet :TEST_ID ;
+    qb:slice :SLIIPFRI0 ;
+    sdmx-concept:obsStatus sdmx-code:obsStatus-M ;
+    cex:computation cex:Raw ;
+    cex:ref-area :ESP ;
+    cex:ref-indicator :INDIPFRI0 ;
+    cex:ref-time <http://example.org/1990-1993> ;
+    cex:value "None"^^xsd:double .
+
+:OBSIPFRI1 a qb:Observation ;
+    rdfs:label "Observation of 8 within the period of 1990-1993 for indicator INDIPFRI1"@en ;
+    dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
+    qb:dataSet :TEST_ID ;
+    qb:slice :SLIIPFRI0 ;
+    sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
+    cex:computation cex:Raw ;
+    cex:ref-area <http://example.org/8> ;
+    cex:ref-indicator :INDIPFRI1 ;
+    cex:ref-time <http://example.org/1990-1993> ;
+    cex:value 9e+00 .
+
+:OBSIPFRI2597 a qb:Observation ;
+    rdfs:label "Observation of 887 within the period of 2013 for indicator INDIPFRI2"@en ;
+    dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
+    qb:dataSet :TEST_ID ;
+    qb:slice :SLIIPFRI1 ;
+    sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
+    cex:computation cex:Raw ;
+    cex:ref-area <http://example.org/887> ;
+    cex:ref-indicator :INDIPFRI2 ;
+    cex:ref-time <http://example.org/2013> ;
+    cex:value 2.65e+01 .
+
+:OBSIPFRI2598 a qb:Observation ;
+    rdfs:label "Observation of 894 within the period of 2013-2 for indicator INDIPFRI3"@en ;
+    dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
+    qb:dataSet :TEST_ID ;
+    qb:slice :SLIIPFRI2 ;
+    sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
+    cex:computation cex:Raw ;
+    cex:ref-area <http://example.org/894> ;
+    cex:ref-indicator :INDIPFRI3 ;
+    cex:ref-time <http://example.org/2013-2> ;
+    cex:value 2.41e+01 .
+
+:OBSIPFRI2599 a qb:Observation ;
+    rdfs:label "Observation of 716 within the period of 2013-12 for indicator INDIPFRI3"@en ;
+    dcterms:issued "2014-04-04T11:50:18"^^xsd:dateTime ;
+    qb:dataSet :TEST_ID ;
+    qb:slice :SLIIPFRI2 ;
+    sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
+    cex:computation cex:Raw ;
+    cex:ref-area <http://example.org/716> ;
+    cex:ref-indicator :INDIPFRI3 ;
+    cex:ref-time <http://example.org/2013-12> ;
+    cex:value 1.65e+01 .
+
+:SLIIPFRI0 a qb:Slice ;
+    qb:dataSet :TEST_ID ;
+    qb:observation :OBSIPFRI0,
+        :OBSIPFRI1 ;
+    cex:indicator :INDIPFRI0 ;
+    lb:dimension <http://purl.org/weso/landbook/ontology#724> .
+
+:SLIIPFRI2 a qb:Slice ;
+    qb:dataSet :TEST_ID ;
+    qb:observation :OBSIPFRI2598,
+        :OBSIPFRI2599 ;
+    cex:indicator :INDIPFRI0 ;
+    lb:dimension <http://purl.org/weso/landbook/ontology#1999-2002> .
+
+:INDIPFRI0 a cex:Indicator ;
+    rdfs:label "Prevalence of undernourishment in the population  (%)"@en ;
+    lb:indicatorType cex:indicators ;
+    lb:last_update "2014-05-19T18:21:08.786890"^^xsd:dateTime ;
+    lb:measurement <http://purl.org/weso/computex/ontology#%> ;
+    lb:preferable_tendency cex:decrease ;
+    lb:starred "false"^^xsd:Boolean ;
+    lb:topic cex:LAND_GENDER ;
+    rdfs:comment "Prevalence of undernourishment in the population  (%)"@en .
+
+cex:Raw a cex:Computation ;
+    rdfs:label "Raw values obtained from source"@en .
+
+:TEST_ID a qb:DataSet ;
+    sdmx-concept:freq sdmx-code:freq-A ;
+    lb:dataSource "DSOURCE_ID" ;
+    lb:license <http://www.ifpri.org/copyright> .
+

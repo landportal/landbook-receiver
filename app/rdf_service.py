@@ -48,7 +48,7 @@ class ReceiverRDFService(object):
         self._serialize_rdf_xml(graph)
         self._serialize_turtle(graph)
         self._load_data_set(graph_uri=graph_uri, host=host, api=api)
-        self._remove_data_sets()
+        #self._remove_data_sets()
         return graph
 
     def _add_observations_triples(self, graph):

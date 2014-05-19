@@ -3,7 +3,9 @@ import app
 from app.sql_service import ReceiverSQLService
 from app.rdf_service import ReceiverRDFService
 import config
+import os
 from rdflib import Graph
+from flask import request
 
 
 class Receiver(flask_restful.Resource):
@@ -25,19 +27,17 @@ class Receiver(flask_restful.Resource):
         if not _check_allowed_ip(user_ip):
             flask_restful.abort(403)
 
-        print flask_restful.request.form
-
-        if 'xml' in flask_restful.request.form:
+        if 'xml' in flask_restful.request.form and \
+                        'file' in flask_restful.request.files:
             xml_content = flask_restful.request.form['xml']
-            ReceiverSQLService(xml_content.encode('utf-8')).run_service(user_ip)
+            #ReceiverSQLService(xml_content.encode('utf-8')).run_service(user_ip)
             ReceiverRDFService(xml_content.encode('utf-8')).\
                 run_service(host=host, api=triple_api, graph_uri=graph_uri,
                             user_ip=user_ip, graph=graph)
-
-        elif 'file' in flask_restful.request.form:
-            file_content = flask_restful.request.form['file']
-            with open("SPREADSHEET.xlsx", "w") as f:
-                f.write(file_content)
+            _file = request.files['file']
+            _file.save(os.path.join('', _file.filename))
+            #print xml_content
+            print _file.filename
         else:
             flask_restful.abort(400)
 

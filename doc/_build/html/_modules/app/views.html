@@ -74,14 +74,21 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">_check_allowed_ip</span><span class="p">(</span><span class="n">user_ip</span><span class="p">):</span>
             <span class="n">flask_restful</span><span class="o">.</span><span class="n">abort</span><span class="p">(</span><span class="mi">403</span><span class="p">)</span>
 
+        <span class="k">print</span> <span class="n">flask_restful</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">form</span>
+
         <span class="k">if</span> <span class="s">&#39;xml&#39;</span> <span class="ow">in</span> <span class="n">flask_restful</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">:</span>
-            <span class="n">content</span> <span class="o">=</span> <span class="n">flask_restful</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s">&#39;xml&#39;</span><span class="p">]</span>
-            <span class="c">#ReceiverSQLService(content.encode(&#39;utf-8&#39;)).store_data(user_ip)</span>
-            <span class="n">ReceiverRDFService</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">run_service</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span>
-                                                                    <span class="n">api</span><span class="o">=</span><span class="n">triple_api</span><span class="p">,</span>
-                                                                    <span class="n">graph_uri</span><span class="o">=</span><span class="n">graph_uri</span><span class="p">,</span>
-                                                                    <span class="n">user_ip</span><span class="o">=</span><span class="n">user_ip</span><span class="p">,</span>
-                                                                    <span class="n">graph</span><span class="o">=</span><span class="n">graph</span><span class="p">)</span>
+            <span class="n">xml_content</span> <span class="o">=</span> <span class="n">flask_restful</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s">&#39;xml&#39;</span><span class="p">]</span>
+            <span class="n">ReceiverSQLService</span><span class="p">(</span><span class="n">xml_content</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">run_service</span><span class="p">(</span><span class="n">user_ip</span><span class="p">)</span>
+            <span class="n">ReceiverRDFService</span><span class="p">(</span><span class="n">xml_content</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">))</span><span class="o">.</span>\
+                <span class="n">run_service</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">api</span><span class="o">=</span><span class="n">triple_api</span><span class="p">,</span> <span class="n">graph_uri</span><span class="o">=</span><span class="n">graph_uri</span><span class="p">,</span>
+                            <span class="n">user_ip</span><span class="o">=</span><span class="n">user_ip</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="n">graph</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="s">&#39;file&#39;</span> <span class="ow">in</span> <span class="n">flask_restful</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">:</span>
+            <span class="n">file_content</span> <span class="o">=</span> <span class="n">flask_restful</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s">&#39;file&#39;</span><span class="p">]</span>
+            <span class="n">newFileByteArray</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">file_content</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;test.xlsx&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">_file</span><span class="p">:</span>
+                <span class="n">_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">newFileByteArray</span><span class="p">)</span>
+            <span class="c">#print file_content</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">flask_restful</span><span class="o">.</span><span class="n">abort</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
 

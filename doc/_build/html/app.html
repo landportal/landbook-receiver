@@ -58,55 +58,139 @@
 <dl class="method">
 <dt id="app.parser.Parser.get_compound_indicators">
 <tt class="descname">get_compound_indicators</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_compound_indicators"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_compound_indicators" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of compound indicators found in the XML file.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="app.parser.Parser.get_dataset">
 <tt class="descname">get_dataset</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_dataset" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">dataset data found in the XML file.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="app.parser.Parser.get_datasource">
 <tt class="descname">get_datasource</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_datasource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_datasource" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">datasource data found in the XML file.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="app.parser.Parser.get_indicator_groups">
 <tt class="descname">get_indicator_groups</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_indicator_groups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_indicator_groups" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of indicator groups found in the XML file.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="app.parser.Parser.get_license">
 <tt class="descname">get_license</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_license"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_license" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse a license node and return a License object.</p>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">license data of the XML file.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="app.parser.Parser.get_observations">
 <tt class="descname">get_observations</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_observations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_observations" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of observations found in the XML files.  Every observation
+comes with its ref_time, value and computation.  Each observation
+has the fields &#8216;region_code&#8217; (UN_code) and &#8216;country_code&#8217; (ISO3) of
+the region they reffer to.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="app.parser.Parser.get_organization">
 <tt class="descname">get_organization</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_organization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_organization" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse the organization data from the XML.</p>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">organization data found in the XML file.  The organization ID
+is constructed with the domain name in the organization_url, for
+example www.observatoire-foncier.com will result in the ID
+&#8216;observatoire-foncier&#8217;.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="app.parser.Parser.get_simple_indicators">
 <tt class="descname">get_simple_indicators</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_simple_indicators"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_simple_indicators" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a list of indicators</p>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of simple indicators found in the XML file.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="app.parser.Parser.get_slices">
 <tt class="descname">get_slices</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_slices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_slices" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of slices found in the XML files.  Each slice
+has the fields &#8216;region_code&#8217; (UN_code) and &#8216;country_code&#8217; (ISO3) of
+the region they reffer to.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="app.parser.Parser.get_user">
 <tt class="descname">get_user</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_user" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse the user data from the XML.</p>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">user data found in the XML file (whithout user_ip)</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -161,10 +245,11 @@ them in Virtuoso triple store</p>
 <dt id="app.sql_service.DBHelper">
 <em class="property">class </em><tt class="descclassname">app.sql_service.</tt><tt class="descname">DBHelper</tt><a class="reference internal" href="_modules/app/sql_service.html#DBHelper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.sql_service.DBHelper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Helper for querying the relational database.</p>
 <dl class="staticmethod">
 <dt id="app.sql_service.DBHelper.check_datasource">
-<em class="property">static </em><tt class="descname">check_datasource</tt><big>(</big><em>session</em>, <em>datasource_name</em><big>)</big><a class="reference internal" href="_modules/app/sql_service.html#DBHelper.check_datasource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.sql_service.DBHelper.check_datasource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find a DataSource by name in the DB. Returns None if not found.</p>
+<em class="property">static </em><tt class="descname">check_datasource</tt><big>(</big><em>session</em>, <em>datasource_id</em><big>)</big><a class="reference internal" href="_modules/app/sql_service.html#DBHelper.check_datasource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.sql_service.DBHelper.check_datasource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find a DataSource in the DB. Returns None if not found.</p>
 </dd></dl>
 
 <dl class="staticmethod">
@@ -181,7 +266,8 @@ them in Virtuoso triple store</p>
 <dl class="staticmethod">
 <dt id="app.sql_service.DBHelper.check_user">
 <em class="property">static </em><tt class="descname">check_user</tt><big>(</big><em>session</em>, <em>user_id</em><big>)</big><a class="reference internal" href="_modules/app/sql_service.html#DBHelper.check_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.sql_service.DBHelper.check_user" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Check if a user exists in the database using its ID</p>
+</dd></dl>
 
 <dl class="staticmethod">
 <dt id="app.sql_service.DBHelper.find_compound_indicator">
@@ -219,10 +305,17 @@ them in Virtuoso triple store</p>
 <dt id="app.sql_service.ReceiverSQLService">
 <em class="property">class </em><tt class="descclassname">app.sql_service.</tt><tt class="descname">ReceiverSQLService</tt><big>(</big><em>content</em><big>)</big><a class="reference internal" href="_modules/app/sql_service.html#ReceiverSQLService"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.sql_service.ReceiverSQLService" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Service that gets the xml input from the html request, generates SQL output
+and stores it into the configured relational database.</p>
 <dl class="method">
-<dt id="app.sql_service.ReceiverSQLService.store_data">
-<tt class="descname">store_data</tt><big>(</big><em>user_ip</em><big>)</big><a class="reference internal" href="_modules/app/sql_service.html#ReceiverSQLService.store_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.sql_service.ReceiverSQLService.store_data" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="app.sql_service.ReceiverSQLService.run_service">
+<tt class="descname">run_service</tt><big>(</big><em>user_ip</em><big>)</big><a class="reference internal" href="_modules/app/sql_service.html#ReceiverSQLService.run_service"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.sql_service.ReceiverSQLService.run_service" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores the data in the XML into the relational database.
+:param user_ip: The IP of the user that calls the service.
+:raises: The exception that made the data storing fail.  If an exception</p>
+<blockquote>
+<div>occurs, nothing will be stored into the database.</div></blockquote>
+</dd></dl>
 
 </dd></dl>
 

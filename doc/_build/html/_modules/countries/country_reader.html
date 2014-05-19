@@ -117,17 +117,6 @@
         <span class="n">country</span><span class="o">.</span><span class="n">is_part_of_id</span> <span class="o">=</span> <span class="n">reg_name</span>
         <span class="k">return</span> <span class="n">country</span>
 </div>
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_get_region_id</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the region_id associated to a region name or None.</span>
-<span class="sd">        The region name must be in english.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">app</span>
-        <span class="n">session</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="p">()</span>
-        <span class="n">region</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">RegionTranslation</span><span class="p">)</span><span class="o">.</span> \
-            <span class="nb">filter</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">RegionTranslation</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">region</span><span class="o">.</span><span class="n">region_id</span> <span class="k">if</span> <span class="n">region</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="bp">None</span>
-
     <span class="k">def</span> <span class="nf">_parse_iso2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">country_data</span><span class="p">):</span>
         <span class="n">iso2_admin</span> <span class="o">=</span> <span class="n">country_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ISO2_ADMIN</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
 
