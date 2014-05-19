@@ -26,6 +26,10 @@ class Parser(object):
                 obs_map[obs.get("id")] = sli.get("id")
         return obs_map
 
+    def get_file_name(self):
+        file_name = self._root.find('import_process').find('file_name').text
+        return file_name
+
     def get_simple_indicators(self):
         """
         :returns: list of simple indicators found in the XML file.
@@ -277,3 +281,5 @@ class Parser(object):
             convertible_to=node.get("convertible_to"),
             factor=node.get("factor")
         )
+
+
