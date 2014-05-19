@@ -15,8 +15,9 @@ class Parser(object):
     def _get_observations_slices(self):
         """Creates an inverse index of observations and slices.
 
-        Returns a map in which the key is the observation ID and the
-        value is its corresponding slice ID."""
+        :returns: map in which the key is the observation ID and the
+        value is its corresponding slice ID.
+        """
         obs_map = {}
         slices = self._root.findall(".//slice")
         for sli in slices:
@@ -26,44 +27,63 @@ class Parser(object):
         return obs_map
 
     def get_simple_indicators(self):
-        """Return a list of indicators
+        """
+        :returns: list of simple indicators found in the XML file.
         """
         ind_root = self._root.find("indicators")
         return (self._get_simple_indicator(ind) for ind
                 in ind_root.findall("indicator"))
 
     def get_compound_indicators(self):
+        """
+        :returns: list of compound indicators found in the XML file.
+        """
         ind_root = self._root.find("indicators")
         return (self._get_compound_indicator(ind) for ind
                 in ind_root.findall("compound_indicator"))
 
     def get_indicator_groups(self):
+        """
+        :returns: list of indicator groups found in the XML file.
+        """
         groups_element = self._root.find('indicator_groups')\
             .findall('indicator_group')
         return [self._get_indicator_group(ind) for ind in groups_element]
 
     def get_user(self):
-        """Parse the user data from the XML.
+        """
+        :returns: user data found in the XML file (whithout user_ip)
         """
         username = self._root.find('import_process').find('user').text
         return model.User(id=username, timestamp=datetime.datetime.utcnow())
 
     def get_organization(self):
-        """Parse the organization data from the XML.
+        """
+        :returns: organization data found in the XML file.  The organization ID
+            is constructed with the domain name in the organization_url, for
+            example www.observatoire-foncier.com will result in the ID
+            'observatoire-foncier'.
         """
         org_name = self._root.find('import_process').find('organization_name').text
         org_url = self._root.find('import_process').find('organization_url').text
-        organization = model.Organization(name=org_name, id=org_url)
+        org_id = org_url.split(".")[1]
+        organization = model.Organization(name=org_name, id=org_id)
         organization.url = org_url
         return organization
 
     def get_datasource(self):
+        """
+        :returns: datasource data found in the XML file.
+        """
         dsource = self._root.find('import_process').find('datasource')
         dsource_name = dsource.text
         dsource_id = dsource.get("id")
         return model.DataSource(name=dsource_name, dsource_id=dsource_id)
 
     def get_dataset(self):
+        """
+        :returns: dataset data found in the XML file.
+        """
         dataset = model.Dataset()
         dataset.id = self._root.get('id')
         dataset.sdmx_frequency = self._root.find('import_process').\
@@ -72,16 +92,15 @@ class Parser(object):
         return dataset
 
     def get_license(self):
-        """Parse a license node and return a License object."""
+        """
+        :returns: license data of the XML file.
+        """
         name = self._root.find('license').find('lic_name').text
         description = self._root.find('license').find('lic_description').text
         republish = self._root.find('license').find('republish').text
         url = self._root.find('license').find('lic_url').text
-        return model.License(name=name,
-                                 description=description,
-                                 republish=bool(republish),
-                                 url=url
-                                )
+        return model.License(name=name, description=description,\
+            republish=bool(republish), url=url)
 
     def _get_simple_indicator(self, ind):
         indicator = model.Indicator(id=ind.get('id'))
@@ -144,12 +163,22 @@ class Parser(object):
         indicator.indicator_ref = group.get('indicator-ref')
         return indicator
 
-    #@profile
     def get_observations(self):
+        """
+        :returns: list of observations found in the XML files.  Every observation
+            comes with its ref_time, value and computation.  Each observation
+            has the fields 'region_code' (UN_code) and 'country_code' (ISO3) of
+            the region they reffer to.
+        """
         obs_root = self._root.find("observations")
         return (self._get_observation(obs) for obs in obs_root.findall("observation"))
 
     def get_slices(self):
+        """
+        :returns: list of slices found in the XML files.  Each slice
+            has the fields 'region_code' (UN_code) and 'country_code' (ISO3) of
+            the region they reffer to.
+        """
         sli_root = self._root.find('slices')
         return (self._get_slice(sli) for sli in sli_root.findall('slice'))
 
@@ -243,9 +272,6 @@ class Parser(object):
 
     @staticmethod
     def _parse_measurement_unit(node):
-        """ Returns a MeasurementUnit.
-         @param node -> the XML node containing the measurement information
-        """
         return model.MeasurementUnit(
             name=node.text,
             convertible_to=node.get("convertible_to"),

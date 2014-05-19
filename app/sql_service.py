@@ -5,11 +5,21 @@ from parser import Parser
 
 
 class ReceiverSQLService(object):
+    """
+    Service that gets the xml input from the html request, generates SQL output
+    and stores it into the configured relational database.
+    """
     def __init__(self, content):
         self.parser = Parser(content)
         self.time = datetime.datetime.now()
 
     def run_service(self, user_ip):
+        """
+        Stores the data in the XML into the relational database.
+        :param user_ip: The IP of the user that calls the service.
+        :raises: The exception that made the data storing fail.  If an exception
+            occurs, nothing will be stored into the database.
+        """
         session = app.db.session
         try:
             self._store_data(user_ip, session)
@@ -90,7 +100,7 @@ class ReceiverSQLService(object):
 
     def _store_datasource(self, session, organization):
         xml_datasource = self.parser.get_datasource()
-        db_datasource = DBHelper.check_datasource(session, xml_datasource.name)
+        db_datasource = DBHelper.check_datasource(session, xml_datasource.id)
         # The datasource may exist in the database.
         if db_datasource is not None:
             return db_datasource
@@ -167,11 +177,14 @@ class ReceiverSQLService(object):
 
 
 class DBHelper(object):
+    """
+    Helper for querying the relational database.
+    """
     @staticmethod
-    def check_datasource(session, datasource_name):
-        """Find a DataSource by name in the DB. Returns None if not found."""
+    def check_datasource(session, datasource_id):
+        """Find a DataSource in the DB. Returns None if not found."""
         datasource = session.query(model.DataSource)\
-            .filter(model.DataSource.name == datasource_name)\
+            .filter(model.DataSource.id == datasource_id)\
             .first()
         return datasource
 
@@ -184,6 +197,7 @@ class DBHelper(object):
 
     @staticmethod
     def check_user(session, user_id):
+        """Check if a user exists in the database using its ID"""
         user = session.query(model.User).filter(model.User.id == user_id)\
             .first()
         return user

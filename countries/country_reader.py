@@ -68,17 +68,6 @@ class CountryReader(object):
         country.is_part_of_id = reg_name
         return country
 
-    @staticmethod
-    def _get_region_id(name):
-        """Returns the region_id associated to a region name or None.
-        The region name must be in english.
-        """
-        import app
-        session = app.db.session()
-        region = session.query(models.RegionTranslation). \
-            filter(models.RegionTranslation.name == name).first()
-        return region.region_id if region is not None else None
-
     def _parse_iso2(self, country_data):
         iso2_admin = country_data[self.ISO2_ADMIN].value
 
@@ -144,4 +133,3 @@ class CountryReader(object):
 
 if __name__ == '__main__':
     CountryReader().get_countries('country_list.xlsx')
-
