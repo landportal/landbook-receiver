@@ -25,14 +25,19 @@ class Receiver(flask_restful.Resource):
         if not _check_allowed_ip(user_ip):
             flask_restful.abort(403)
 
+        print flask_restful.request.form
+
         if 'xml' in flask_restful.request.form:
-            content = flask_restful.request.form['xml']
-            #ReceiverSQLService(content.encode('utf-8')).store_data(user_ip)
-            ReceiverRDFService(content.encode('utf-8')).run_service(host=host,
-                                                                    api=triple_api,
-                                                                    graph_uri=graph_uri,
-                                                                    user_ip=user_ip,
-                                                                    graph=graph)
+            xml_content = flask_restful.request.form['xml']
+            #ReceiverSQLService(content.encode('utf-8')).run_service(user_ip)
+            ReceiverRDFService(xml_content.encode('utf-8')).\
+                run_service(host=host, api=triple_api, graph_uri=graph_uri,
+                            user_ip=user_ip, graph=graph)
+
+        elif 'file' in flask_restful.request.form:
+            file_content = flask_restful.request.form['file']
+            with open("SPREADSHEET.xlsx", "w") as f:
+                f.write(file_content)
         else:
             flask_restful.abort(400)
 

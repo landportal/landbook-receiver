@@ -9,7 +9,7 @@ class ReceiverSQLService(object):
         self.parser = Parser(content)
         self.time = datetime.datetime.now()
 
-    def store_data(self, user_ip):
+    def run_service(self, user_ip):
         session = app.db.session
         try:
             self._store_data(user_ip, session)
