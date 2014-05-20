@@ -39,7 +39,7 @@ class Receiver(flask_restful.Resource):
            #                user_ip=user_ip, graph=graph)
             ReceiverCKANService(xml_content).\
                 run_service(api_key=ckan_api_key, ckan_instance=ckan_instance,
-                            dataset_title='The Dataset Name', _file=_file)
+                            _file=_file)
         else:
             flask_restful.abort(400)
 

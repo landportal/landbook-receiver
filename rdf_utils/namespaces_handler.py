@@ -12,7 +12,7 @@ qb = Namespace("http://purl.org/linked-data/cube#")
 sdmx_concept = Namespace("http://purl.org/linked-data/sdmx/2009/concept#")
 time = Namespace("http://www.w3.org/2006/time#")
 sdmx_code = Namespace("http://purl.org/linked-data/sdmx/2009/code#")
-prefix_ = Namespace("http://example.org/")
+prefix_ = Namespace("http://book.landportal.org/")
 
 
 def bind_namespaces(graph):

@@ -4,10 +4,10 @@ from parser import Parser
 from rdf_utils.namespaces_handler import *
 from rdflib import Literal, XSD, URIRef
 from rdflib.namespace import RDF, RDFS, FOAF
-import datetime
 from countries.country_reader import CountryReader
 import datetime as dt
-import sh, os
+import sh
+import os
 import config
 
 
@@ -18,7 +18,7 @@ class ReceiverRDFService(object):
     """
     def __init__(self, content):
         self.parser = Parser(content)
-        self.time = datetime.datetime.now()
+        self.time = dt.datetime.now()
 
     def run_service(self, graph, host, api, graph_uri, user_ip):
         """Run the ReceiverRDFService
@@ -70,7 +70,8 @@ class ReceiverRDFService(object):
             graph.add((prefix_.term(obs.id), cex.term("computation"),
                        cex.term(obs.computation.uri)))
             graph.add((prefix_.term(obs.id), dcterms.term("issued"),
-                       Literal(obs.issued.timestamp, datatype=XSD.dateTime)))
+                       Literal(obs.issued.timestamp.strftime("%Y-%m-%d"),
+                               datatype=XSD.date)))
             graph.add((prefix_.term(obs.id), qb.term("dataSet"),
                        prefix_.term(obs.dataset_id)))
             graph.add((prefix_.term(obs.id), qb.term("slice"),
@@ -93,7 +94,7 @@ class ReceiverRDFService(object):
             graph.add((prefix_.term(ind.id), lb.term("measurement"),
                        cex.term(ind.measurement_unit.name)))
             graph.add((prefix_.term(ind.id), lb.term("last_update"),
-                       Literal(self.time, datatype=XSD.dateTime)))
+                       Literal(self.time.strftime("%Y-%m-%d"), datatype=XSD.date)))
             graph.add((prefix_.term(ind.id), lb.term("starred"),
                        Literal(ind.starred, datatype=XSD.Boolean)))
             graph.add((prefix_.term(ind.id), lb.term("topic"),
@@ -307,7 +308,7 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_upload_triples(self, graph, ip):
-        upload = "upload" + str(dt.datetime.now().
+        upload = "upload" + str(self.time.
                                 strftime("%y%m%d%H%M"))
         user = self.parser.get_user()
         dsource = self.parser.get_datasource()
@@ -317,7 +318,8 @@ class ReceiverRDFService(object):
         graph.add((prefix_.term(upload), lb.term("user"),
                    lb.term(user.id)))
         graph.add((prefix_.term(upload), lb.term("timestamp"),
-                   Literal(dt.datetime.now(), datatype=XSD.dateTime)))
+                   Literal(self.time.strftime("%Y-%m-%d"),
+                           datatype=XSD.date)))
         graph.add((prefix_.term(upload), lb.term("ip"),
                    Literal(ip)))
         for obs in observations:
