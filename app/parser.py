@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import model.models as model
 import datetime
 try:

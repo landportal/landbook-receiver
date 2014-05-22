@@ -6,7 +6,7 @@ from parser import Parser
 
 class ReceiverSQLService(object):
     """
-    Service that gets the xml input from the html request, generates SQL output
+    Service that gets the _xml input from the html request, generates SQL output
     and stores it into the configured relational database.
     """
     def __init__(self, content):

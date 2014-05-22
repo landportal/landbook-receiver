@@ -14,7 +14,7 @@ class Receiver(flask_restful.Resource):
     def post():
         """ Parse an XML and store the model mapping into the database.
 
-        Receives an xml=... with the XML content to parse
+        Receives an _xml=... with the XML content to parse
         Returns a 200 response if everything went right or 400 if there
         is not any content to parse.
         """
@@ -29,14 +29,14 @@ class Receiver(flask_restful.Resource):
         if not _check_allowed_ip(user_ip):
             flask_restful.abort(403)
 
-        if 'xml' in flask_restful.request.form and \
+        if '_xml' in flask_restful.request.form and \
            'file' in flask_restful.request.files:
-            xml_content = flask_restful.request.form['xml']
+            xml_content = flask_restful.request.form['_xml']
             _file = request.files['file']
-            ReceiverSQLService(xml_content.encode('utf-8')).run_service(user_ip)
-            ReceiverRDFService(xml_content.encode('utf-8')).\
-               run_service(host=host, api=triple_api, graph_uri=graph_uri,
-                           user_ip=user_ip, graph=graph)
+          #  ReceiverSQLService(xml_content.encode('utf-8')).run_service(user_ip)
+          #  ReceiverRDFService(xml_content.encode('utf-8')).\
+          #     run_service(host=host, api=triple_api, graph_uri=graph_uri,
+          #                 user_ip=user_ip, graph=graph)
             ReceiverCKANService(xml_content).\
                 run_service(api_key=ckan_api_key, ckan_instance=ckan_instance,
                             _file=_file)

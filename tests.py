@@ -32,9 +32,9 @@ class ReceiverInterfaceTest(ServiceTest):
     """Tests for the receiver interface"""
     def test_request_with_data(self):
         """Send a request with data to the Receiver"""
-        xml = open('xml/test_file.xml', 'r').read()
+        xml = open('_xml/test_file.xml', 'r').read()
         content = unicode(xml).encode("UTF-8")
-        response = self.send_request(content={'xml': content})
+        response = self.send_request(content={'_xml': content})
         self.assert200(response)
 
     def test_request_with_no_data(self):
@@ -53,8 +53,8 @@ class ReceiverParserTest(ServiceTest):
     """Base class for testing the Receiver parsing"""
     def setUp(self):
         super(ReceiverParserTest, self).setUp()
-        with open('xml/test_file.xml') as xml:
-            self.send_request(content={'xml': xml.read()})
+        with open('_xml/test_file.xml') as xml:
+            self.send_request(content={'_xml': xml.read()})
         self.session = app.db.session
 
 

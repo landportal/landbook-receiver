@@ -13,7 +13,7 @@ import config
 
 class ReceiverRDFService(object):
     """
-    Service that gets the xml input from the html request, generates RDF triples and store
+    Service that gets the _xml input from the html request, generates RDF triples and store
     them in Virtuoso triple store
     """
     def __init__(self, content):
@@ -332,7 +332,7 @@ class ReceiverRDFService(object):
 
     @staticmethod
     def _serialize_rdf_xml(graph):
-        serialized = graph.serialize(format='application/rdf+xml')
+        serialized = graph.serialize(format='application/rdf+_xml')
         with open(config.RDF_DATA_SET, 'w') as dataset:
             dataset.write(serialized)
 

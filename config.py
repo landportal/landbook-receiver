@@ -22,5 +22,5 @@ GRAPH_URI = "graph-uri=http://www.landportal.info"
 COUNTRY_LIST_FILE = 'countries/country_list.xlsx'
 RDF_DATA_SET = 'datasets/dataset.rdf'
 TURTLE_DATA_SET = 'datasets/dataset.ttl'
-CKAN_API_KEY = '0ff3b240-181c-42fb-955b-66e9713d9012'
+CKAN_API_KEY = '12dcbd1b-458b-45e1-afb7-bc66a56f0e0f'
 CKAN_INSTANCE = 'http://localhost:1100/data/'
