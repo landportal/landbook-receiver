@@ -33,13 +33,13 @@ class Receiver(flask_restful.Resource):
            'file' in flask_restful.request.files:
             xml_content = flask_restful.request.form['xml']
             _file = request.files['file']
-          #  ReceiverSQLService(xml_content.encode('utf-8')).run_service(user_ip)
+            ReceiverSQLService(xml_content.encode('utf-8')).run_service(user_ip)
             ReceiverRDFService(xml_content.encode('utf-8')).\
-               run_service(host=host, api=triple_api, graph_uri=graph_uri,
-                           user_ip=user_ip, graph=graph)
-          # ReceiverCKANService(xml_content).\
-          #     run_service(api_key=ckan_api_key, ckan_instance=ckan_instance,
-          #                 _file=_file)
+                run_service(host=host, api=triple_api, graph_uri=graph_uri,
+                            user_ip=user_ip, graph=graph)
+           # ReceiverCKANService(xml_content).\
+           #     run_service(api_key=ckan_api_key, ckan_instance=ckan_instance,
+           #                 _file=_file)
         else:
             flask_restful.abort(400)
 
