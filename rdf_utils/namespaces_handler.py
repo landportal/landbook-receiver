@@ -12,20 +12,27 @@ qb = Namespace("http://purl.org/linked-data/cube#")
 sdmx_concept = Namespace("http://purl.org/linked-data/sdmx/2009/concept#")
 time = Namespace("http://www.w3.org/2006/time#")
 sdmx_code = Namespace("http://purl.org/linked-data/sdmx/2009/code#")
-prefix_ = Namespace("http://book.landportal.org/")
+
+base = Namespace("http://book.landportal.org/")
+base_obs = Namespace("http://book.landportal.org/observation/")
+base_ind = Namespace("http://book.landportal.org/indicator/")
+base_slice = Namespace("http://book.landportal.org/slice/")
+base_dsource = Namespace("http://book.landportal.org/datasource/")
+base_topic = Namespace("http://book.landportal.org/topic/")
+base_upload = Namespace("http://book.landportal.org/upload/")
 
 
 def bind_namespaces(graph):
     """
     Binds Landportal uris with their corresponding prefixes
     """
-    graph.namespace_manager.bind("cex", URIRef(cex))
-    graph.namespace_manager.bind("dcterms", URIRef(dcterms))
-    graph.namespace_manager.bind("foaf", URIRef(foaf))
-    graph.namespace_manager.bind("lb", URIRef(lb))
-    graph.namespace_manager.bind("org", URIRef(org))
-    graph.namespace_manager.bind("qb", URIRef(qb))
-    graph.namespace_manager.bind("sdmx-concept", URIRef(sdmx_concept))
-    graph.namespace_manager.bind("time", URIRef(time))
-    graph.namespace_manager.bind("sdmx-code", URIRef(sdmx_code))
-    graph.namespace_manager.bind("", URIRef(prefix_))
+    n_space = {"cex": cex, "dcterms": dcterms, "foaf": foaf,
+               "lb": lb, "org": org, "qb": qb,
+               "sdmx-concept": sdmx_concept, "time": time,
+               "sdmx-code": sdmx_code, "": base,
+               "base-obs": base_obs, "base-ind": base_ind, "base-slice": base_slice,
+               "base-data-source": base_dsource, "base-topic": base_topic,
+               "base-upload": base_upload}
+
+    for prefix, uri in n_space.items():
+        graph.namespace_manager.bind(prefix, URIRef(Namespace(uri)))
