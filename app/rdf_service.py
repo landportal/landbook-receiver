@@ -64,7 +64,7 @@ class ReceiverRDFService(object):
             graph.add((base_obs.term(obs.id), cex.term("ref-area"),
                        base.term(region)))
             graph.add((base_obs.term(obs.id), cex.term("ref-indicator"),
-                       base.term(obs.indicator_id)))
+                       base_ind.term(obs.indicator_id)))
             graph.add((base_obs.term(obs.id), cex.term("value"),
                        Literal(str(obs.value.value), datatype=XSD.double)))
             graph.add((base_obs.term(obs.id), cex.term("computation"),
@@ -87,35 +87,35 @@ class ReceiverRDFService(object):
 
     def _add_indicators_triples(self, graph):
         for ind in self.parser.get_simple_indicators():
-            graph.add((base.term(ind.id), RDF.type,
+            graph.add((base_ind.term(ind.id), RDF.type,
                        cex.term("Indicator")))
-            graph.add((base.term(ind.id), lb.term("preferable_tendency"),
+            graph.add((base_ind.term(ind.id), lb.term("preferable_tendency"),
                        cex.term(ind.preferable_tendency)))
-            graph.add((base.term(ind.id), lb.term("measurement"),
+            graph.add((base_ind.term(ind.id), lb.term("measurement"),
                        cex.term(ind.measurement_unit.name)))
-            graph.add((base.term(ind.id), lb.term("last_update"),
+            graph.add((base_ind.term(ind.id), lb.term("last_update"),
                        Literal(self.time.strftime("%Y-%m-%d"), datatype=XSD.date)))
-            graph.add((base.term(ind.id), lb.term("starred"),
+            graph.add((base_ind.term(ind.id), lb.term("starred"),
                        Literal(ind.starred, datatype=XSD.Boolean)))
-            graph.add((base.term(ind.id), lb.term("topic"),
+            graph.add((base_ind.term(ind.id), lb.term("topic"),
                        cex.term(ind.topic_id)))
-            graph.add((base.term(ind.id), lb.term("indicatorType"),
+            graph.add((base_ind.term(ind.id), lb.term("indicatorType"),
                        cex.term(ind.type)))
-            graph.add((base.term(ind.id), RDFS.label,
+            graph.add((base_ind.term(ind.id), RDFS.label,
                        Literal(ind.translations[0].name, lang='en')))
-            graph.add((base.term(ind.id), RDFS.comment,
+            graph.add((base_ind.term(ind.id), RDFS.comment,
                        Literal(ind.translations[0].description, lang='en')))
         return graph
 
     def _add_slices_triples(self, graph):
         for slc in self.parser.get_slices():
-            graph.add((base.term(slc.id), RDF.type,
+            graph.add((base_slice.term(slc.id), RDF.type,
                        qb.term("Slice")))
-            graph.add((base.term(slc.id), cex.term("indicator"),
+            graph.add((base_slice.term(slc.id), cex.term("indicator"),
                        base.term(str(slc.indicator_id))))
             for obs in self.parser.get_observations():
                 if obs.slice_id == slc.id:
-                    graph.add((base.term(slc.id), qb.term("observation"),
+                    graph.add((base_slice.term(slc.id), qb.term("observation"),
                                base.term(str(obs.id))))
             if slc.region_code is not None:
                 dimension = slc.region_code
@@ -123,9 +123,9 @@ class ReceiverRDFService(object):
                 dimension = slc.country_code
             else:
                 dimension = slc.dimension.value
-            graph.add((base.term(slc.id), lb.term("dimension"),
+            graph.add((base_slice.term(slc.id), lb.term("dimension"),
                        lb.term(dimension)))
-            graph.add((base.term(slc.id), qb.term("dataSet"),
+            graph.add((base_slice.term(slc.id), qb.term("dataSet"),
                        base.term(slc.dataset_id)))
         return graph
 
@@ -297,13 +297,13 @@ class ReceiverRDFService(object):
         data_source = self.parser.get_datasource()
         organization = self.parser.get_organization()
         user = self.parser.get_user()
-        graph.add((base.term(data_source.dsource_id), RDF.type,
+        graph.add((base_dsource.term(data_source.dsource_id), RDF.type,
                    lb.term(Literal("DataSource"))))
-        graph.add((base.term(data_source.dsource_id), RDFS.label,
+        graph.add((base_dsource.term(data_source.dsource_id), RDFS.label,
                    Literal(data_source.name, lang='en')))
-        graph.add((base.term(data_source.dsource_id), lb.term("organization"),
+        graph.add((base_dsource.term(data_source.dsource_id), lb.term("organization"),
                    URIRef(organization.url)))
-        graph.add((base.term(data_source.dsource_id), dcterms.term("creator"),
+        graph.add((base_dsource.term(data_source.dsource_id), dcterms.term("creator"),
                    Literal(user.id)))
         return graph
 
@@ -313,19 +313,19 @@ class ReceiverRDFService(object):
         user = self.parser.get_user()
         dsource = self.parser.get_datasource()
         observations = self.parser.get_observations()
-        graph.add((base.term(upload), RDF.type,
+        graph.add((base_upload.term(upload), RDF.type,
                    lb.term(Literal("Upload"))))
-        graph.add((base.term(upload), lb.term("user"),
+        graph.add((base_upload.term(upload), lb.term("user"),
                    lb.term(user.id)))
-        graph.add((base.term(upload), lb.term("timestamp"),
+        graph.add((base_upload.term(upload), lb.term("timestamp"),
                    Literal(self.time.strftime("%Y-%m-%d"),
                            datatype=XSD.date)))
-        graph.add((base.term(upload), lb.term("ip"),
+        graph.add((base_upload.term(upload), lb.term("ip"),
                    Literal(ip)))
         for obs in observations:
-            graph.add((base.term(upload), lb.term("observation"),
+            graph.add((base_upload.term(upload), lb.term("observation"),
                        base.term(obs.id)))
-        graph.add((base.term(upload), lb.term("dataSource"),
+        graph.add((base_upload.term(upload), lb.term("dataSource"),
                    lb.term(dsource.dsource_id)))
 
         return graph

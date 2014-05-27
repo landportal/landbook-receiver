@@ -1,5 +1,10 @@
 @prefix : <http://book.landportal.org/> .
+@prefix base-dsource: <http://book.landportal.org/datasource/> .
+@prefix base-ind: <http://book.landportal.org/indicator/> .
 @prefix base-obs: <http://book.landportal.org/observation/> .
+@prefix base-slice: <http://book.landportal.org/slice/> .
+@prefix base-topic: <http://book.landportal.org/topic/> .
+@prefix base-upload: <http://book.landportal.org/upload/> .
 @prefix cex: <http://purl.org/weso/computex/ontology#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
@@ -44,16 +49,16 @@
     rdfs:label "Oceania"@en ;
     lb:UNCode 9 .
 
-:SOUFAOGENDER1 a lb:DataSource ;
-    rdfs:label "FAO Gender and Land Rights"@en ;
-    dcterms:creator "USRFAOGENDERIMPORTER" ;
-    lb:organization <http://www.fao.org/> .
-
 :USRFAOGENDERIMPORTER a foaf:Person ;
     rdfs:label "USRFAOGENDERIMPORTER"@en ;
     org:memberOf <fao> ;
     foaf:account "USRFAOGENDERIMPORTER" ;
     foaf:name "USRFAOGENDERIMPORTER" .
+
+base-dsource:SOUFAOGENDER1 a lb:DataSource ;
+    rdfs:label "FAO Gender and Land Rights"@en ;
+    dcterms:creator "USRFAOGENDERIMPORTER" ;
+    lb:organization <http://www.fao.org/> .
 
 base-obs:OBSFAOGENDER0 a qb:Observation ;
     rdfs:label "Observation of ARG within the period of 2002 for indicator INDFAOGENDER3"@en ;
@@ -63,7 +68,7 @@ base-obs:OBSFAOGENDER0 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :ARG ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2002> ;
     cex:value 2.02423e+05 .
 
@@ -75,7 +80,7 @@ base-obs:OBSFAOGENDER1 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :ARG ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2002> ;
     cex:value 3.6846e+04 .
 
@@ -87,7 +92,7 @@ base-obs:OBSFAOGENDER10 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :BWA ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2004> ;
     cex:value 5.069e+04 .
 
@@ -99,7 +104,7 @@ base-obs:OBSFAOGENDER100 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :THA ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2003> ;
     cex:value 5.787774e+06 .
 
@@ -111,7 +116,7 @@ base-obs:OBSFAOGENDER101 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :THA ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2003> ;
     cex:value 1.58585e+06 .
 
@@ -123,7 +128,7 @@ base-obs:OBSFAOGENDER102 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :THA ;
-    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-indicator base-ind:INDFAOGENDER1 ;
     cex:ref-time <http://book.landportal.org/1988> ;
     cex:value 8.933e+03 .
 
@@ -135,7 +140,7 @@ base-obs:OBSFAOGENDER103 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :TTO ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2004> ;
     cex:value 1.9051e+04 .
 
@@ -147,7 +152,7 @@ base-obs:OBSFAOGENDER104 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :TTO ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2004> ;
     cex:value 2.802e+03 .
 
@@ -159,7 +164,7 @@ base-obs:OBSFAOGENDER105 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :TTO ;
-    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-indicator base-ind:INDFAOGENDER1 ;
     cex:ref-time <http://book.landportal.org/2004> ;
     cex:value 4.6e+02 .
 
@@ -171,7 +176,7 @@ base-obs:OBSFAOGENDER106 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :TTO ;
-    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-indicator base-ind:INDFAOGENDER0 ;
     cex:ref-time <http://book.landportal.org/2000> ;
     cex:value 3.03871e+05 .
 
@@ -183,7 +188,7 @@ base-obs:OBSFAOGENDER107 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :TZA ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2002-2004> ;
     cex:value 4.901837e+06 .
 
@@ -195,7 +200,7 @@ base-obs:OBSFAOGENDER108 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :TZA ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2002-2004> ;
     cex:value 9.66076e+05 .
 
@@ -207,7 +212,7 @@ base-obs:OBSFAOGENDER109 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :UGA ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/1991> ;
     cex:value 1.704721e+06 .
 
@@ -219,7 +224,7 @@ base-obs:OBSFAOGENDER11 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :BWA ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2004> ;
     cex:value 1.7576e+04 .
 
@@ -231,7 +236,7 @@ base-obs:OBSFAOGENDER110 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :UGA ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/1991> ;
     cex:value 2.77693e+05 .
 
@@ -243,7 +248,7 @@ base-obs:OBSFAOGENDER111 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :URY ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2000> ;
     cex:value 4.9302e+04 .
 
@@ -255,7 +260,7 @@ base-obs:OBSFAOGENDER112 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :URY ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2000> ;
     cex:value 8.922e+03 .
 
@@ -267,7 +272,7 @@ base-obs:OBSFAOGENDER113 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :URY ;
-    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-indicator base-ind:INDFAOGENDER1 ;
     cex:ref-time <http://book.landportal.org/2000> ;
     cex:value 1.6639e+04 .
 
@@ -279,7 +284,7 @@ base-obs:OBSFAOGENDER114 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :VEN ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/1997-1999> ;
     cex:value 6.6976e+04 .
 
@@ -291,7 +296,7 @@ base-obs:OBSFAOGENDER115 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :VEN ;
-    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-indicator base-ind:INDFAOGENDER0 ;
     cex:ref-time <http://book.landportal.org/2004> ;
     cex:value 1.9e+06 .
 
@@ -303,7 +308,7 @@ base-obs:OBSFAOGENDER116 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :VNM ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2001> ;
     cex:value 6.1017e+04 .
 
@@ -315,7 +320,7 @@ base-obs:OBSFAOGENDER117 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :VNM ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2001> ;
     cex:value 5.382e+03 .
 
@@ -327,7 +332,7 @@ base-obs:OBSFAOGENDER118 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :ZMB ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2000> ;
     cex:value 1.305783e+06 .
 
@@ -339,7 +344,7 @@ base-obs:OBSFAOGENDER119 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :ZMB ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2000> ;
     cex:value 2.5071e+05 .
 
@@ -351,7 +356,7 @@ base-obs:OBSFAOGENDER12 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :BWA ;
-    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-indicator base-ind:INDFAOGENDER0 ;
     cex:ref-time <http://book.landportal.org/2006> ;
     cex:value 2.02669e+05 .
 
@@ -363,7 +368,7 @@ base-obs:OBSFAOGENDER13 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :CHL ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2007> ;
     cex:value 2.68787e+05 .
 
@@ -375,7 +380,7 @@ base-obs:OBSFAOGENDER14 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :CHL ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2007> ;
     cex:value 8.0255e+04 .
 
@@ -387,7 +392,7 @@ base-obs:OBSFAOGENDER15 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :CHL ;
-    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-indicator base-ind:INDFAOGENDER0 ;
     cex:ref-time <http://book.landportal.org/2004> ;
     cex:value 1.325257e+06 .
 
@@ -399,7 +404,7 @@ base-obs:OBSFAOGENDER16 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :CHN ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/1997> ;
     cex:value 1.93088e+08 .
 
@@ -411,7 +416,7 @@ base-obs:OBSFAOGENDER17 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :CHN ;
-    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-indicator base-ind:INDFAOGENDER1 ;
     cex:ref-time <http://book.landportal.org/1997> ;
     cex:value 5.97e+04 .
 
@@ -423,7 +428,7 @@ base-obs:OBSFAOGENDER18 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :CIV ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2001> ;
     cex:value 1.117667e+06 .
 
@@ -435,7 +440,7 @@ base-obs:OBSFAOGENDER19 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :CIV ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2001> ;
     cex:value 1.13312e+05 .
 
@@ -447,7 +452,7 @@ base-obs:OBSFAOGENDER2 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :ARG ;
-    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-indicator base-ind:INDFAOGENDER1 ;
     cex:ref-time <http://book.landportal.org/2002> ;
     cex:value 2.4e+02 .
 
@@ -459,7 +464,7 @@ base-obs:OBSFAOGENDER20 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :COG ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/1990> ;
     cex:value 4.4796e+06 .
 
@@ -471,7 +476,7 @@ base-obs:OBSFAOGENDER21 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :COG ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/1990> ;
     cex:value 3.984e+05 .
 
@@ -483,7 +488,7 @@ base-obs:OBSFAOGENDER22 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :COL ;
-    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-indicator base-ind:INDFAOGENDER0 ;
     cex:ref-time <http://book.landportal.org/2008> ;
     cex:value 4.84762e+05 .
 
@@ -495,7 +500,7 @@ base-obs:OBSFAOGENDER23 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :CPV ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2004> ;
     cex:value 4.445e+04 .
 
@@ -507,7 +512,7 @@ base-obs:OBSFAOGENDER24 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :CPV ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2004> ;
     cex:value 2.2461e+04 .
 
@@ -519,7 +524,7 @@ base-obs:OBSFAOGENDER25 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :CRI ;
-    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-indicator base-ind:INDFAOGENDER0 ;
     cex:ref-time <http://book.landportal.org/2000> ;
     cex:value 1.644e+05 .
 
@@ -531,7 +536,7 @@ base-obs:OBSFAOGENDER26 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :DOM ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/1998> ;
     cex:value 2.43104e+05 .
 
@@ -543,7 +548,7 @@ base-obs:OBSFAOGENDER27 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :DOM ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/1998> ;
     cex:value 2.4772e+04 .
 
@@ -555,7 +560,7 @@ base-obs:OBSFAOGENDER28 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :DOM ;
-    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-indicator base-ind:INDFAOGENDER0 ;
     cex:ref-time <http://book.landportal.org/2002> ;
     cex:value 7.74161e+05 .
 
@@ -567,7 +572,7 @@ base-obs:OBSFAOGENDER29 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :DZA ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2001> ;
     cex:value 1.023799e+06 .
 
@@ -579,7 +584,7 @@ base-obs:OBSFAOGENDER3 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :ARG ;
-    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-indicator base-ind:INDFAOGENDER0 ;
     cex:ref-time <http://book.landportal.org/2001> ;
     cex:value 2.787961e+06 .
 
@@ -591,7 +596,7 @@ base-obs:OBSFAOGENDER30 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :DZA ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2001> ;
     cex:value 4.1793e+04 .
 
@@ -603,7 +608,7 @@ base-obs:OBSFAOGENDER31 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :ECU ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2000> ;
     cex:value 8.42882e+05 .
 
@@ -615,7 +620,7 @@ base-obs:OBSFAOGENDER32 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :ECU ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2000> ;
     cex:value 2.13731e+05 .
 
@@ -627,7 +632,7 @@ base-obs:OBSFAOGENDER33 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :EGY ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/1999-2001> ;
     cex:value 4.537319e+06 .
 
@@ -639,7 +644,7 @@ base-obs:OBSFAOGENDER34 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :EGY ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/1999-2001> ;
     cex:value 2.36632e+05 .
 
@@ -651,7 +656,7 @@ base-obs:OBSFAOGENDER35 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :ESP ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2007> ;
     cex:value 9.8806e+05 .
 
@@ -663,7 +668,7 @@ base-obs:OBSFAOGENDER36 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :ESP ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2007> ;
     cex:value 2.8462e+05 .
 
@@ -675,7 +680,7 @@ base-obs:OBSFAOGENDER37 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :ETH ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2006-2008> ;
     cex:value 1.394338e+07 .
 
@@ -687,7 +692,7 @@ base-obs:OBSFAOGENDER38 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :ETH ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2001-2003> ;
     cex:value 2.149675e+06 .
 
@@ -699,7 +704,7 @@ base-obs:OBSFAOGENDER39 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :FRA ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2007> ;
     cex:value 4.2763e+05 .
 
@@ -711,7 +716,7 @@ base-obs:OBSFAOGENDER4 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :AZE ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2004> ;
     cex:value 6.2324e+05 .
 
@@ -723,7 +728,7 @@ base-obs:OBSFAOGENDER40 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :FRA ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2007> ;
     cex:value 9.884e+04 .
 
@@ -735,7 +740,7 @@ base-obs:OBSFAOGENDER41 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :GBR ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2007> ;
     cex:value 2.8339e+05 .
 
@@ -747,7 +752,7 @@ base-obs:OBSFAOGENDER42 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :GBR ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2007> ;
     cex:value 5.332e+04 .
 
@@ -759,7 +764,7 @@ base-obs:OBSFAOGENDER43 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :GMB ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2001-2003> ;
     cex:value 6.914e+04 .
 
@@ -771,7 +776,7 @@ base-obs:OBSFAOGENDER44 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :GMB ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2001-2003> ;
     cex:value 5.731e+03 .
 
@@ -783,7 +788,7 @@ base-obs:OBSFAOGENDER45 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :GTM ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2003> ;
     cex:value 8.19162e+05 .
 
@@ -795,7 +800,7 @@ base-obs:OBSFAOGENDER46 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :GTM ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2003> ;
     cex:value 6.3627e+04 .
 
@@ -807,7 +812,7 @@ base-obs:OBSFAOGENDER47 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :IDN ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/1993> ;
     cex:value 2.033175e+07 .
 
@@ -819,7 +824,7 @@ base-obs:OBSFAOGENDER48 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :IDN ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/1993> ;
     cex:value 1.790741e+06 .
 
@@ -831,7 +836,7 @@ base-obs:OBSFAOGENDER49 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :IND ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2000-2002> ;
     cex:value 1.19621e+08 .
 
@@ -843,7 +848,7 @@ base-obs:OBSFAOGENDER5 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :BFA ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/1993> ;
     cex:value 8.86638e+05 .
 
@@ -855,7 +860,7 @@ base-obs:OBSFAOGENDER50 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :IND ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2000-2002> ;
     cex:value 1.2987e+07 .
 
@@ -867,7 +872,7 @@ base-obs:OBSFAOGENDER51 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :ITA ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2007> ;
     cex:value 1.66351e+06 .
 
@@ -879,7 +884,7 @@ base-obs:OBSFAOGENDER52 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :ITA ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2007> ;
     cex:value 5.3562e+05 .
 
@@ -891,7 +896,7 @@ base-obs:OBSFAOGENDER53 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :ITA ;
-    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-indicator base-ind:INDFAOGENDER1 ;
     cex:ref-time <http://book.landportal.org/2000> ;
     cex:value 4.5778e+04 .
 
@@ -903,7 +908,7 @@ base-obs:OBSFAOGENDER54 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :ITA ;
-    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-indicator base-ind:INDFAOGENDER0 ;
     cex:ref-time <http://book.landportal.org/2003> ;
     cex:value 1.684e+06 .
 
@@ -915,7 +920,7 @@ base-obs:OBSFAOGENDER55 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :JAM ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/1978-1980> ;
     cex:value 1.82169e+05 .
 
@@ -927,7 +932,7 @@ base-obs:OBSFAOGENDER56 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :JAM ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/1978-1980> ;
     cex:value 3.5185e+04 .
 
@@ -939,7 +944,7 @@ base-obs:OBSFAOGENDER57 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :KGZ ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2002> ;
     cex:value 2.44404e+05 .
 
@@ -951,7 +956,7 @@ base-obs:OBSFAOGENDER58 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :KGZ ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2002> ;
     cex:value 3.0254e+04 .
 
@@ -963,7 +968,7 @@ base-obs:OBSFAOGENDER59 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :KOR ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/1990> ;
     cex:value 1.767033e+06 .
 
@@ -975,7 +980,7 @@ base-obs:OBSFAOGENDER6 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :BFA ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/1993> ;
     cex:value 7.4559e+04 .
 
@@ -987,7 +992,7 @@ base-obs:OBSFAOGENDER60 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :LAO ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/1998-2000> ;
     cex:value 6.679e+05 .
 
@@ -999,7 +1004,7 @@ base-obs:OBSFAOGENDER61 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :LAO ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/1998-2000> ;
     cex:value 6.06e+04 .
 
@@ -1011,7 +1016,7 @@ base-obs:OBSFAOGENDER62 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :LKA ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2002> ;
     cex:value 1.748341e+06 .
 
@@ -1023,7 +1028,7 @@ base-obs:OBSFAOGENDER63 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :LKA ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2002> ;
     cex:value 2.85214e+05 .
 
@@ -1035,7 +1040,7 @@ base-obs:OBSFAOGENDER64 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :LSO ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/1999-2001> ;
     cex:value 3.37795e+05 .
 
@@ -1047,7 +1052,7 @@ base-obs:OBSFAOGENDER65 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :LSO ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/1999-2001> ;
     cex:value 1.03878e+05 .
 
@@ -1059,7 +1064,7 @@ base-obs:OBSFAOGENDER66 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :MAR ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/1996> ;
     cex:value 1.492844e+06 .
 
@@ -1071,7 +1076,7 @@ base-obs:OBSFAOGENDER67 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :MAR ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/1996> ;
     cex:value 6.6395e+04 .
 
@@ -1083,7 +1088,7 @@ base-obs:OBSFAOGENDER68 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :MDG ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2004-2006> ;
     cex:value 2.428492e+06 .
 
@@ -1095,7 +1100,7 @@ base-obs:OBSFAOGENDER69 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :MDG ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2004-2006> ;
     cex:value 3.71158e+05 .
 
@@ -1107,7 +1112,7 @@ base-obs:OBSFAOGENDER7 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :BGD ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2005> ;
     cex:value 2.81657e+07 .
 
@@ -1119,7 +1124,7 @@ base-obs:OBSFAOGENDER70 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :MEX ;
-    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-indicator base-ind:INDFAOGENDER0 ;
     cex:ref-time <http://book.landportal.org/2005> ;
     cex:value 1.017124e+06 .
 
@@ -1131,7 +1136,7 @@ base-obs:OBSFAOGENDER71 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :MLI ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2004-2006> ;
     cex:value 8.05194e+05 .
 
@@ -1143,7 +1148,7 @@ base-obs:OBSFAOGENDER72 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :MLI ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2004-2006> ;
     cex:value 2.4636e+04 .
 
@@ -1155,7 +1160,7 @@ base-obs:OBSFAOGENDER73 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :MOZ ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/1999-2001> ;
     cex:value 3.064195e+06 .
 
@@ -1167,7 +1172,7 @@ base-obs:OBSFAOGENDER74 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :MOZ ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/1999-2001> ;
     cex:value 7.08353e+05 .
 
@@ -1179,7 +1184,7 @@ base-obs:OBSFAOGENDER75 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :MWI ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/1993> ;
     cex:value 1.561416e+06 .
 
@@ -1191,7 +1196,7 @@ base-obs:OBSFAOGENDER76 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :MWI ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/1993> ;
     cex:value 5.01919e+05 .
 
@@ -1203,7 +1208,7 @@ base-obs:OBSFAOGENDER77 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :MYS ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2005> ;
     cex:value 5.26265e+05 .
 
@@ -1215,7 +1220,7 @@ base-obs:OBSFAOGENDER78 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :MYS ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2005> ;
     cex:value 9.4906e+04 .
 
@@ -1227,7 +1232,7 @@ base-obs:OBSFAOGENDER79 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :MYS ;
-    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-indicator base-ind:INDFAOGENDER1 ;
     cex:ref-time <http://book.landportal.org/2005> ;
     cex:value 3.3026e+04 .
 
@@ -1239,7 +1244,7 @@ base-obs:OBSFAOGENDER8 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :BGD ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2005> ;
     cex:value 7.97378e+05 .
 
@@ -1251,7 +1256,7 @@ base-obs:OBSFAOGENDER80 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :NAM ;
-    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-indicator base-ind:INDFAOGENDER0 ;
     cex:ref-time <http://book.landportal.org/2002-2004> ;
     cex:value 3.935e+04 .
 
@@ -1263,7 +1268,7 @@ base-obs:OBSFAOGENDER81 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :NIC ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2001> ;
     cex:value 1.96909e+05 .
 
@@ -1275,7 +1280,7 @@ base-obs:OBSFAOGENDER82 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :NIC ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2001> ;
     cex:value 3.5586e+04 .
 
@@ -1287,7 +1292,7 @@ base-obs:OBSFAOGENDER83 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :NIC ;
-    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-indicator base-ind:INDFAOGENDER1 ;
     cex:ref-time <http://book.landportal.org/2001> ;
     cex:value 1.642e+03 .
 
@@ -1299,7 +1304,7 @@ base-obs:OBSFAOGENDER84 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :NIC ;
-    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-indicator base-ind:INDFAOGENDER0 ;
     cex:ref-time <http://book.landportal.org/2005> ;
     cex:value 8.1581e+04 .
 
@@ -1311,7 +1316,7 @@ base-obs:OBSFAOGENDER85 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :NPL ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2002> ;
     cex:value 3.364139e+06 .
 
@@ -1323,7 +1328,7 @@ base-obs:OBSFAOGENDER86 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :NPL ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2002> ;
     cex:value 2.71507e+05 .
 
@@ -1335,7 +1340,7 @@ base-obs:OBSFAOGENDER87 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :PAN ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2001> ;
     cex:value 2.32464e+05 .
 
@@ -1347,7 +1352,7 @@ base-obs:OBSFAOGENDER88 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :PAN ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2001> ;
     cex:value 6.8152e+04 .
 
@@ -1359,7 +1364,7 @@ base-obs:OBSFAOGENDER89 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :PAN ;
-    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-indicator base-ind:INDFAOGENDER0 ;
     cex:ref-time <http://book.landportal.org/2000> ;
     cex:value 1.1821e+05 .
 
@@ -1371,7 +1376,7 @@ base-obs:OBSFAOGENDER9 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :BRA ;
-    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-indicator base-ind:INDFAOGENDER0 ;
     cex:ref-time <http://book.landportal.org/2000> ;
     cex:value 9.54724e+05 .
 
@@ -1383,7 +1388,7 @@ base-obs:OBSFAOGENDER90 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :PER ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/1994> ;
     cex:value 1.75064e+06 .
 
@@ -1395,7 +1400,7 @@ base-obs:OBSFAOGENDER91 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :PER ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/1994> ;
     cex:value 3.57176e+05 .
 
@@ -1407,7 +1412,7 @@ base-obs:OBSFAOGENDER92 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :PHL ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/2002> ;
     cex:value 4.822739e+06 .
 
@@ -1419,7 +1424,7 @@ base-obs:OBSFAOGENDER93 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :PHL ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/2002> ;
     cex:value 5.16572e+05 .
 
@@ -1431,7 +1436,7 @@ base-obs:OBSFAOGENDER94 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :PHL ;
-    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-indicator base-ind:INDFAOGENDER1 ;
     cex:ref-time <http://book.landportal.org/2002> ;
     cex:value 1.3629e+04 .
 
@@ -1443,7 +1448,7 @@ base-obs:OBSFAOGENDER95 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :PRY ;
-    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-indicator base-ind:INDFAOGENDER0 ;
     cex:ref-time <http://book.landportal.org/2002> ;
     cex:value 9.4036e+04 .
 
@@ -1455,7 +1460,7 @@ base-obs:OBSFAOGENDER96 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :SEN ;
-    cex:ref-indicator :INDFAOGENDER3 ;
+    cex:ref-indicator base-ind:INDFAOGENDER3 ;
     cex:ref-time <http://book.landportal.org/1998-2000> ;
     cex:value 4.37036e+05 .
 
@@ -1467,7 +1472,7 @@ base-obs:OBSFAOGENDER97 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :SEN ;
-    cex:ref-indicator :INDFAOGENDER2 ;
+    cex:ref-indicator base-ind:INDFAOGENDER2 ;
     cex:ref-time <http://book.landportal.org/1998-2000> ;
     cex:value 3.9597e+04 .
 
@@ -1479,7 +1484,7 @@ base-obs:OBSFAOGENDER98 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :SLV ;
-    cex:ref-indicator :INDFAOGENDER1 ;
+    cex:ref-indicator base-ind:INDFAOGENDER1 ;
     cex:ref-time <http://book.landportal.org/1994> ;
     cex:value 3.46e+02 .
 
@@ -1491,11 +1496,11 @@ base-obs:OBSFAOGENDER99 a qb:Observation ;
     sdmx-concept:obsStatus sdmx-code:obsStatus-A ;
     cex:computation cex:Raw ;
     cex:ref-area :SLV ;
-    cex:ref-indicator :INDFAOGENDER0 ;
+    cex:ref-indicator base-ind:INDFAOGENDER0 ;
     cex:ref-time <http://book.landportal.org/2007> ;
     cex:value 6.11301e+05 .
 
-:upload1405271421 a lb:Upload ;
+base-upload:upload1405271553 a lb:Upload ;
     lb:dataSource lb:SOUFAOGENDER1 ;
     lb:ip "127.0.0.1" ;
     lb:observation :OBSFAOGENDER0,
@@ -2023,7 +2028,7 @@ base-obs:OBSFAOGENDER99 a qb:Observation ;
     lb:iso2 "TT" ;
     lb:iso3 "TTO" .
 
-:INDFAOGENDER1 a cex:Indicator ;
+base-ind:INDFAOGENDER1 a cex:Indicator ;
     rdfs:label "Number of holdings under co-ownership"@en ;
     lb:indicatorType cex:indicators ;
     lb:last_update "2014-05-27"^^xsd:date ;
@@ -2033,7 +2038,7 @@ base-obs:OBSFAOGENDER99 a qb:Observation ;
     lb:topic cex:LAND_TENURE ;
     rdfs:comment "Number of holdings under co-ownership"@en .
 
-:INDFAOGENDER0 a cex:Indicator ;
+base-ind:INDFAOGENDER0 a cex:Indicator ;
     rdfs:label "Number of rural households headed by women"@en ;
     lb:indicatorType cex:indicators ;
     lb:last_update "2014-05-27"^^xsd:date ;
@@ -2043,7 +2048,7 @@ base-obs:OBSFAOGENDER99 a qb:Observation ;
     lb:topic cex:LAND_GENDER ;
     rdfs:comment "Number of rural households headed by women"@en .
 
-:INDFAOGENDER2 a cex:Indicator ;
+base-ind:INDFAOGENDER2 a cex:Indicator ;
     rdfs:label "Women holders"@en ;
     lb:indicatorType cex:indicators ;
     lb:last_update "2014-05-27"^^xsd:date ;
@@ -2053,7 +2058,7 @@ base-obs:OBSFAOGENDER99 a qb:Observation ;
     lb:topic cex:LAND_GENDER ;
     rdfs:comment "Women holders"@en .
 
-:INDFAOGENDER3 a cex:Indicator ;
+base-ind:INDFAOGENDER3 a cex:Indicator ;
     rdfs:label "Total number of holders"@en ;
     lb:indicatorType cex:indicators ;
     lb:last_update "2014-05-27"^^xsd:date ;
