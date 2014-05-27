@@ -12,7 +12,15 @@ qb = Namespace("http://purl.org/linked-data/cube#")
 sdmx_concept = Namespace("http://purl.org/linked-data/sdmx/2009/concept#")
 time = Namespace("http://www.w3.org/2006/time#")
 sdmx_code = Namespace("http://purl.org/linked-data/sdmx/2009/code#")
-prefix_ = Namespace("http://book.landportal.org/")
+
+base = Namespace("http://book.landportal.org/")
+base_obs = Namespace("http://book.landportal.org/observation/")
+base_ind = Namespace("http://book.landportal.org/indicator/")
+base_slice = Namespace("http://book.landportal.org/slice/")
+base_dsource = Namespace("http://book.landportal.org/datasource/")
+base_topic = Namespace("http://book.landportal.org/topic/")
+base_upload = Namespace("http://book.landportal.org/upload/")
+base_lic = Namespace("http://book.landportal.org/license/")
 
 
 def bind_namespaces(graph):
@@ -28,4 +36,5 @@ def bind_namespaces(graph):
     graph.namespace_manager.bind("sdmx-concept", URIRef(sdmx_concept))
     graph.namespace_manager.bind("time", URIRef(time))
     graph.namespace_manager.bind("sdmx-code", URIRef(sdmx_code))
-    graph.namespace_manager.bind("", URIRef(prefix_))
+    graph.namespace_manager.bind("", URIRef(base))
+    graph.namespace_manager.bind("base-obs", URIRef(base_obs))
