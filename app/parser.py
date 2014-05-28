@@ -71,7 +71,7 @@ class Parser(object):
         """
         org_name = self._root.find('import_process').find('organization_name').text
         org_url = self._root.find('import_process').find('organization_url').text
-        org_id = org_url.split(".")[1]
+        org_id = self._root.find('import_process').find('organization_id').text
         organization = model.Organization(name=org_name, id=org_id)
         organization.url = org_url
         return organization

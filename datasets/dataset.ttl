@@ -1,7 +1,8 @@
 @prefix : <http://book.landportal.org/> .
-@prefix base-dsource: <http://book.landportal.org/datasource/> .
+@prefix base-data-source: <http://book.landportal.org/datasource/> .
 @prefix base-ind: <http://book.landportal.org/indicator/> .
 @prefix base-obs: <http://book.landportal.org/observation/> .
+@prefix base-org: <http://book.landportal.org/organization/> .
 @prefix base-slice: <http://book.landportal.org/slice/> .
 @prefix base-topic: <http://book.landportal.org/topic/> .
 @prefix base-upload: <http://book.landportal.org/upload/> .
@@ -19,31 +20,9 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-:Africa a cex:Area ;
-    rdfs:label "Africa"@en ;
-    lb:UNCode 2 .
-
-:Americas a cex:Area ;
-    rdfs:label "Americas"@en ;
-    lb:UNCode 19 .
-
 :Antarctica a cex:Area ;
     rdfs:label "Antarctica"@en ;
     lb:UNCode "None" .
-
-:Asia a cex:Area ;
-    rdfs:label "Asia"@en ;
-    lb:UNCode 142 .
-
-:Europe a cex:Area ;
-    rdfs:label "Europe"@en ;
-    lb:UNCode 150 .
-
-:LAND_GENDER a lb:Topic ;
-    rdfs:label "Land Gender"@en .
-
-:LAND_TENURE a lb:Topic ;
-    rdfs:label "Land Tenure"@en .
 
 :Oceania a cex:Area ;
     rdfs:label "Oceania"@en ;
@@ -51,14 +30,9 @@
 
 :USRFAOGENDERIMPORTER a foaf:Person ;
     rdfs:label "USRFAOGENDERIMPORTER"@en ;
-    org:memberOf <fao> ;
+    org:memberOf base-org:ORGFAO ;
     foaf:account "USRFAOGENDERIMPORTER" ;
     foaf:name "USRFAOGENDERIMPORTER" .
-
-base-dsource:SOUFAOGENDER1 a lb:DataSource ;
-    rdfs:label "FAO Gender and Land Rights"@en ;
-    dcterms:creator "USRFAOGENDERIMPORTER" ;
-    lb:organization <http://www.fao.org/> .
 
 base-obs:OBSFAOGENDER0 a qb:Observation ;
     rdfs:label "Observation of ARG within the period of 2002 for indicator INDFAOGENDER3"@en ;
@@ -1500,7 +1474,7 @@ base-obs:OBSFAOGENDER99 a qb:Observation ;
     cex:ref-time <http://book.landportal.org/2007> ;
     cex:value 6.11301e+05 .
 
-base-upload:upload1405271553 a lb:Upload ;
+base-upload:upload1405281206 a lb:Upload ;
     lb:dataSource lb:SOUFAOGENDER1 ;
     lb:ip "127.0.0.1" ;
     lb:observation :OBSFAOGENDER0,
@@ -1623,68 +1597,73 @@ base-upload:upload1405271553 a lb:Upload ;
         :OBSFAOGENDER97,
         :OBSFAOGENDER98,
         :OBSFAOGENDER99 ;
-    lb:timestamp "2014-05-27"^^xsd:date ;
+    lb:timestamp "2014-05-28"^^xsd:date ;
     lb:user lb:USRFAOGENDERIMPORTER .
-
-<fao> a org:Organization ;
-    rdfs:label "FAO: Food and Agriculture Organization of the United Nations"@en ;
-    foaf:homepage "http://www.fao.org/" .
 
 :AZE a cex:Area ;
     rdfs:label "Azerbaijan"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=AZE> ;
-    lb:is_part_of "Asia" ;
+    lb:is_part_of :Asia ;
     lb:iso2 "AZ" ;
     lb:iso3 "AZE" .
 
 :BRA a cex:Area ;
     rdfs:label "Brazil"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=BRA> ;
-    lb:is_part_of "Americas" ;
+    lb:is_part_of :Americas ;
     lb:iso2 "BR" ;
     lb:iso3 "BRA" .
 
 :COL a cex:Area ;
     rdfs:label "Colombia"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=COL> ;
-    lb:is_part_of "Americas" ;
+    lb:is_part_of :Americas ;
     lb:iso2 "CO" ;
     lb:iso3 "COL" .
 
 :CRI a cex:Area ;
     rdfs:label "Costa Rica"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=CRI> ;
-    lb:is_part_of "Americas" ;
+    lb:is_part_of :Americas ;
     lb:iso2 "CR" ;
     lb:iso3 "CRI" .
 
 :KOR a cex:Area ;
     rdfs:label "Republic of Korea"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=KOR> ;
-    lb:is_part_of "Asia" ;
+    lb:is_part_of :Asia ;
     lb:iso2 "KR" ;
     lb:iso3 "KOR" .
 
 :MEX a cex:Area ;
     rdfs:label "Mexico"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=MEX> ;
-    lb:is_part_of "Americas" ;
+    lb:is_part_of :Americas ;
     lb:iso2 "MX" ;
     lb:iso3 "MEX" .
 
 :NAM a cex:Area ;
     rdfs:label "Namibia"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=NAM> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "NA" ;
     lb:iso3 "NAM" .
 
 :PRY a cex:Area ;
     rdfs:label "Paraguay"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=PRY> ;
-    lb:is_part_of "Americas" ;
+    lb:is_part_of :Americas ;
     lb:iso2 "PY" ;
     lb:iso3 "PRY" .
+
+base-data-source:SOUFAOGENDER1 a lb:DataSource ;
+    rdfs:label "FAO Gender and Land Rights"@en ;
+    dcterms:creator "USRFAOGENDERIMPORTER" ;
+    lb:organization <http://www.fao.org/> .
+
+base-org:ORGFAO a org:Organization ;
+    rdfs:label "FAO: Food and Agriculture Organization of the United Nations"@en ;
+    foaf:homepage "http://www.fao.org/" .
 
 <http://www.fao.org/contact-us/terms/en/> a lb:License ;
     lb:description "Attribution and need permission for commercial use" ;
@@ -1695,382 +1674,404 @@ base-upload:upload1405271553 a lb:Upload ;
 :BFA a cex:Area ;
     rdfs:label "Burkina Faso"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=BFA> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "BF" ;
     lb:iso3 "BFA" .
 
 :BGD a cex:Area ;
     rdfs:label "Bangladesh"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=BGD> ;
-    lb:is_part_of "Asia" ;
+    lb:is_part_of :Asia ;
     lb:iso2 "BD" ;
     lb:iso3 "BGD" .
 
 :CHN a cex:Area ;
     rdfs:label "China"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=CHN> ;
-    lb:is_part_of "Asia" ;
+    lb:is_part_of :Asia ;
     lb:iso2 "CN" ;
     lb:iso3 "CHN" .
 
 :CIV a cex:Area ;
     rdfs:label "Côte d'Ivoire"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=CIV> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "CI" ;
     lb:iso3 "CIV" .
 
 :COG a cex:Area ;
     rdfs:label "Congo"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=COG> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "CG" ;
     lb:iso3 "COG" .
 
 :CPV a cex:Area ;
     rdfs:label "Cape Verde"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=CPV> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "CV" ;
     lb:iso3 "CPV" .
 
 :DZA a cex:Area ;
     rdfs:label "Algeria"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=DZA> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "DZ" ;
     lb:iso3 "DZA" .
 
 :ECU a cex:Area ;
     rdfs:label "Ecuador"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=ECU> ;
-    lb:is_part_of "Americas" ;
+    lb:is_part_of :Americas ;
     lb:iso2 "EC" ;
     lb:iso3 "ECU" .
 
 :EGY a cex:Area ;
     rdfs:label "Egypt"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=EGY> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "EG" ;
     lb:iso3 "EGY" .
 
 :ESP a cex:Area ;
     rdfs:label "Spain"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=ESP> ;
-    lb:is_part_of "Europe" ;
+    lb:is_part_of :Europe ;
     lb:iso2 "ES" ;
     lb:iso3 "ESP" .
 
 :ETH a cex:Area ;
     rdfs:label "Ethiopia"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=ETH> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "ET" ;
     lb:iso3 "ETH" .
 
 :FRA a cex:Area ;
     rdfs:label "France"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=FRA> ;
-    lb:is_part_of "Europe" ;
+    lb:is_part_of :Europe ;
     lb:iso2 "FR" ;
     lb:iso3 "FRA" .
 
 :GBR a cex:Area ;
     rdfs:label "United Kingdom"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=GBR> ;
-    lb:is_part_of "Europe" ;
+    lb:is_part_of :Europe ;
     lb:iso2 "GB" ;
     lb:iso3 "GBR" .
 
 :GMB a cex:Area ;
     rdfs:label "Gambia"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=GMB> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "GM" ;
     lb:iso3 "GMB" .
 
 :GTM a cex:Area ;
     rdfs:label "Guatemala"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=GTM> ;
-    lb:is_part_of "Americas" ;
+    lb:is_part_of :Americas ;
     lb:iso2 "GT" ;
     lb:iso3 "GTM" .
 
 :IDN a cex:Area ;
     rdfs:label "Indonesia"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=IDN> ;
-    lb:is_part_of "Asia" ;
+    lb:is_part_of :Asia ;
     lb:iso2 "ID" ;
     lb:iso3 "IDN" .
 
 :IND a cex:Area ;
     rdfs:label "India"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=IND> ;
-    lb:is_part_of "Asia" ;
+    lb:is_part_of :Asia ;
     lb:iso2 "IN" ;
     lb:iso3 "IND" .
 
 :JAM a cex:Area ;
     rdfs:label "Jamaica"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=JAM> ;
-    lb:is_part_of "Americas" ;
+    lb:is_part_of :Americas ;
     lb:iso2 "JM" ;
     lb:iso3 "JAM" .
 
 :KGZ a cex:Area ;
     rdfs:label "Kyrgyzstan"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=KGZ> ;
-    lb:is_part_of "Asia" ;
+    lb:is_part_of :Asia ;
     lb:iso2 "KG" ;
     lb:iso3 "KGZ" .
 
 :LAO a cex:Area ;
     rdfs:label "Lao"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=LAO> ;
-    lb:is_part_of "Asia" ;
+    lb:is_part_of :Asia ;
     lb:iso2 "LA" ;
     lb:iso3 "LAO" .
 
 :LKA a cex:Area ;
     rdfs:label "Sri Lanka"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=LKA> ;
-    lb:is_part_of "Asia" ;
+    lb:is_part_of :Asia ;
     lb:iso2 "LK" ;
     lb:iso3 "LKA" .
 
 :LSO a cex:Area ;
     rdfs:label "Lesotho"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=LSO> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "LS" ;
     lb:iso3 "LSO" .
 
 :MAR a cex:Area ;
     rdfs:label "Morocco"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=MAR> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "MA" ;
     lb:iso3 "MAR" .
 
 :MDG a cex:Area ;
     rdfs:label "Madagascar"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=MDG> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "MG" ;
     lb:iso3 "MDG" .
 
 :MLI a cex:Area ;
     rdfs:label "Mali"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=MLI> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "ML" ;
     lb:iso3 "MLI" .
 
 :MOZ a cex:Area ;
     rdfs:label "Mozambique"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=MOZ> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "MZ" ;
     lb:iso3 "MOZ" .
 
 :MWI a cex:Area ;
     rdfs:label "Malawi"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=MWI> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "MW" ;
     lb:iso3 "MWI" .
 
 :NPL a cex:Area ;
     rdfs:label "Nepal"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=NPL> ;
-    lb:is_part_of "Asia" ;
+    lb:is_part_of :Asia ;
     lb:iso2 "NP" ;
     lb:iso3 "NPL" .
 
 :PER a cex:Area ;
     rdfs:label "Peru"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=PER> ;
-    lb:is_part_of "Americas" ;
+    lb:is_part_of :Americas ;
     lb:iso2 "PE" ;
     lb:iso3 "PER" .
 
 :SEN a cex:Area ;
     rdfs:label "Senegal"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=SEN> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "SN" ;
     lb:iso3 "SEN" .
 
 :SLV a cex:Area ;
     rdfs:label "El Salvador"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=SLV> ;
-    lb:is_part_of "Americas" ;
+    lb:is_part_of :Americas ;
     lb:iso2 "SV" ;
     lb:iso3 "SLV" .
 
 :TZA a cex:Area ;
     rdfs:label "United Republic of Tanzania"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=TZA> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "TZ" ;
     lb:iso3 "TZA" .
 
 :UGA a cex:Area ;
     rdfs:label "Uganda"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=UGA> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "UG" ;
     lb:iso3 "UGA" .
 
 :VEN a cex:Area ;
     rdfs:label "Venezuela"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=VEN> ;
-    lb:is_part_of "Americas" ;
+    lb:is_part_of :Americas ;
     lb:iso2 "VE" ;
     lb:iso3 "VEN" .
 
 :VNM a cex:Area ;
     rdfs:label "Viet Nam"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=VNM> ;
-    lb:is_part_of "Asia" ;
+    lb:is_part_of :Asia ;
     lb:iso2 "VN" ;
     lb:iso3 "VNM" .
 
 :ZMB a cex:Area ;
     rdfs:label "Zambia"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=ZMB> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "ZM" ;
     lb:iso3 "ZMB" .
+
+base-topic:LAND_GENDER a lb:Topic ;
+    rdfs:label "Land Gender"@en .
+
+base-topic:LAND_TENURE a lb:Topic ;
+    rdfs:label "Land Tenure"@en .
 
 :BWA a cex:Area ;
     rdfs:label "Botswana"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=BWA> ;
-    lb:is_part_of "Africa" ;
+    lb:is_part_of :Africa ;
     lb:iso2 "BW" ;
     lb:iso3 "BWA" .
 
 :CHL a cex:Area ;
     rdfs:label "Chile"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=CHL> ;
-    lb:is_part_of "Americas" ;
+    lb:is_part_of :Americas ;
     lb:iso2 "CL" ;
     lb:iso3 "CHL" .
 
 :DOM a cex:Area ;
     rdfs:label "Dominican Republic"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=DOM> ;
-    lb:is_part_of "Americas" ;
+    lb:is_part_of :Americas ;
     lb:iso2 "DO" ;
     lb:iso3 "DOM" .
 
 :MYS a cex:Area ;
     rdfs:label "Malaysia"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=MYS> ;
-    lb:is_part_of "Asia" ;
+    lb:is_part_of :Asia ;
     lb:iso2 "MY" ;
     lb:iso3 "MYS" .
 
 :PAN a cex:Area ;
     rdfs:label "Panama"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=PAN> ;
-    lb:is_part_of "Americas" ;
+    lb:is_part_of :Americas ;
     lb:iso2 "PA" ;
     lb:iso3 "PAN" .
 
 :PHL a cex:Area ;
     rdfs:label "Philippines"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=PHL> ;
-    lb:is_part_of "Asia" ;
+    lb:is_part_of :Asia ;
     lb:iso2 "PH" ;
     lb:iso3 "PHL" .
 
 :THA a cex:Area ;
     rdfs:label "Thailand"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=THA> ;
-    lb:is_part_of "Asia" ;
+    lb:is_part_of :Asia ;
     lb:iso2 "TH" ;
     lb:iso3 "THA" .
 
 :URY a cex:Area ;
     rdfs:label "Uruguay"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=URY> ;
-    lb:is_part_of "Americas" ;
+    lb:is_part_of :Americas ;
     lb:iso2 "UY" ;
     lb:iso3 "URY" .
 
 :ARG a cex:Area ;
     rdfs:label "Argentina"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=ARG> ;
-    lb:is_part_of "Americas" ;
+    lb:is_part_of :Americas ;
     lb:iso2 "AR" ;
     lb:iso3 "ARG" .
+
+:Europe a cex:Area ;
+    rdfs:label "Europe"@en ;
+    lb:UNCode 150 .
 
 :ITA a cex:Area ;
     rdfs:label "Italy"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=ITA> ;
-    lb:is_part_of "Europe" ;
+    lb:is_part_of :Europe ;
     lb:iso2 "IT" ;
     lb:iso3 "ITA" .
 
 :NIC a cex:Area ;
     rdfs:label "Nicaragua"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=NIC> ;
-    lb:is_part_of "Americas" ;
+    lb:is_part_of :Americas ;
     lb:iso2 "NI" ;
     lb:iso3 "NIC" .
 
 :TTO a cex:Area ;
     rdfs:label "Trinidad and Tobago"@en ;
     lb:faoURI <http://www.fao.org/countryprofiles/index/en/?iso3=TTO> ;
-    lb:is_part_of "Americas" ;
+    lb:is_part_of :Americas ;
     lb:iso2 "TT" ;
     lb:iso3 "TTO" .
 
 base-ind:INDFAOGENDER1 a cex:Indicator ;
     rdfs:label "Number of holdings under co-ownership"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-27"^^xsd:date ;
+    lb:last_update "2014-05-28"^^xsd:date ;
     lb:measurement cex:Units ;
     lb:preferable_tendency cex:increase ;
     lb:starred "false"^^xsd:Boolean ;
-    lb:topic cex:LAND_TENURE ;
+    lb:topic base-topic:LAND_TENURE ;
     rdfs:comment "Number of holdings under co-ownership"@en .
+
+:Asia a cex:Area ;
+    rdfs:label "Asia"@en ;
+    lb:UNCode 142 .
 
 base-ind:INDFAOGENDER0 a cex:Indicator ;
     rdfs:label "Number of rural households headed by women"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-27"^^xsd:date ;
+    lb:last_update "2014-05-28"^^xsd:date ;
     lb:measurement cex:Units ;
     lb:preferable_tendency cex:increase ;
     lb:starred "false"^^xsd:Boolean ;
-    lb:topic cex:LAND_GENDER ;
+    lb:topic base-topic:LAND_GENDER ;
     rdfs:comment "Number of rural households headed by women"@en .
+
+:Americas a cex:Area ;
+    rdfs:label "Americas"@en ;
+    lb:UNCode 19 .
+
+:Africa a cex:Area ;
+    rdfs:label "Africa"@en ;
+    lb:UNCode 2 .
 
 base-ind:INDFAOGENDER2 a cex:Indicator ;
     rdfs:label "Women holders"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-27"^^xsd:date ;
+    lb:last_update "2014-05-28"^^xsd:date ;
     lb:measurement cex:Units ;
     lb:preferable_tendency cex:increase ;
     lb:starred "false"^^xsd:Boolean ;
-    lb:topic cex:LAND_GENDER ;
+    lb:topic base-topic:LAND_GENDER ;
     rdfs:comment "Women holders"@en .
 
 base-ind:INDFAOGENDER3 a cex:Indicator ;
     rdfs:label "Total number of holders"@en ;
     lb:indicatorType cex:indicators ;
-    lb:last_update "2014-05-27"^^xsd:date ;
+    lb:last_update "2014-05-28"^^xsd:date ;
     lb:measurement cex:Units ;
     lb:preferable_tendency cex:increase ;
     lb:starred "false"^^xsd:Boolean ;
-    lb:topic cex:LAND_TENURE ;
+    lb:topic base-topic:LAND_TENURE ;
     rdfs:comment "Total number of holders"@en .
 
 :DATFAOGENDER0 a qb:DataSet ;
     sdmx-concept:freq sdmx-code:freq-A ;
-    lb:dataSource "SOUFAOGENDER1" ;
+    lb:dataSource base-data-source:SOUFAOGENDER1 ;
     lb:license <http://www.fao.org/contact-us/terms/en/> .
 
 cex:Raw a cex:Computation ;

@@ -98,7 +98,7 @@ class ReceiverRDFService(object):
             graph.add((base_ind.term(ind.id), lb.term("starred"),
                        Literal(ind.starred, datatype=XSD.Boolean)))
             graph.add((base_ind.term(ind.id), lb.term("topic"),
-                       cex.term(ind.topic_id)))
+                       base_topic.term(ind.topic_id)))
             graph.add((base_ind.term(ind.id), lb.term("indicatorType"),
                        cex.term(ind.type)))
             graph.add((base_ind.term(ind.id), RDFS.label,
@@ -141,16 +141,16 @@ class ReceiverRDFService(object):
         graph.add((base.term(usr.id), FOAF.account,
                    Literal(usr.id)))
         graph.add((base.term(usr.id), org.term("memberOf"),
-                   URIRef(str(organization.id))))
+                   base_org.term(str(organization.id))))
         return graph
 
     def _add_organizations_triples(self, graph):
         organization = self.parser.get_organization()
-        graph.add((URIRef(organization.id), RDF.type,
+        graph.add((base_org.term(organization.id), RDF.type,
                    org.term("Organization")))
-        graph.add((URIRef(organization.id), RDFS.label,
+        graph.add((base_org.term(organization.id), RDFS.label,
                    Literal(organization.name, lang='en')))
-        graph.add((URIRef(organization.id), FOAF.homepage,
+        graph.add((base_org.term(organization.id), FOAF.homepage,
                    Literal(organization.url)))
         return graph
 
@@ -168,9 +168,9 @@ class ReceiverRDFService(object):
         for tp in MetadataPopulator.get_topics():
             if topic_id == tp.id:
                 topic_label = tp.translations[0].name
-        graph.add((base.term(topic_id), RDF.type,
+        graph.add((base_topic.term(topic_id), RDF.type,
                    lb.term("Topic")))
-        graph.add((base.term(topic_id), RDFS.label,
+        graph.add((base_topic.term(topic_id), RDFS.label,
                    Literal(topic_label, lang='en')))
         return topic_id
 
@@ -219,7 +219,7 @@ class ReceiverRDFService(object):
         graph.add((base.term(country_id), lb.term("faoURI"),
                    URIRef(fao_uri)))
         graph.add((base.term(country_id), lb.term("is_part_of"),
-                   Literal(region)))
+                   base.term(region)))
         return code
 
     def _add_region_triples(self, graph):
@@ -290,7 +290,7 @@ class ReceiverRDFService(object):
         graph.add((base.term(dataset.id), lb.term("license"),
                    URIRef(lic.url)))
         graph.add((base.term(dataset.id), lb.term("dataSource"),
-                   Literal(dsource.dsource_id)))
+                   base_dsource.term(dsource.dsource_id)))
         return graph
 
     def _add_data_source_triples(self, graph):

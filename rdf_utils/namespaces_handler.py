@@ -20,6 +20,7 @@ base_slice = Namespace("http://book.landportal.org/slice/")
 base_dsource = Namespace("http://book.landportal.org/datasource/")
 base_topic = Namespace("http://book.landportal.org/topic/")
 base_upload = Namespace("http://book.landportal.org/upload/")
+base_org = Namespace("http://book.landportal.org/organization/")
 
 
 def bind_namespaces(graph):
@@ -32,7 +33,7 @@ def bind_namespaces(graph):
                "sdmx-code": sdmx_code, "": base,
                "base-obs": base_obs, "base-ind": base_ind, "base-slice": base_slice,
                "base-data-source": base_dsource, "base-topic": base_topic,
-               "base-upload": base_upload}
+               "base-upload": base_upload, "base-org": base_org}
 
     for prefix, uri in n_space.items():
         graph.namespace_manager.bind(prefix, URIRef(Namespace(uri)))
