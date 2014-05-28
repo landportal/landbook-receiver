@@ -3,7 +3,7 @@
 
 def create_database():
     from app import db
-    import model.models as models
+
     def _store_topics(session):
         session.add_all(MetadataPopulator.get_topics())
         session.flush()
@@ -65,8 +65,9 @@ class MetadataPopulator(object):
 
     @staticmethod
     def get_countries():
-      from countries.country_reader import CountryReader
-      return CountryReader().get_countries('countries/country_list.xlsx')
+        from countries.country_reader import CountryReader
+        import config
+        return CountryReader().get_countries(config.COUNTRY_LIST_FILE)
 
     @staticmethod
     def get_global_region():

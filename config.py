@@ -19,8 +19,8 @@ DBA_PASSWORD = "root"
 TRIPLE_STORE_HOST = "http://localhost:1300/"
 TRIPLE_STORE_API = "sparql-graph-crud-auth?"
 GRAPH_URI = "graph-uri=http://www.landportal.info"
-COUNTRY_LIST_FILE = 'countries/country_list.xlsx'
-RDF_DATA_SET = 'datasets/dataset.rdf'
-TURTLE_DATA_SET = 'datasets/dataset.ttl'
+COUNTRY_LIST_FILE = '/var/www/landportal-receiver/countries/country_list.xlsx'
+RDF_DATA_SET = '/var/www/landportal-receiver/datasets/dataset.rdf'
+TURTLE_DATA_SET = '/var/www/landportal-receiver/datasets/dataset.ttl'
 CKAN_API_KEY = '12dcbd1b-458b-45e1-afb7-bc66a56f0e0f'
 CKAN_INSTANCE = 'http://localhost:1100/data/'
