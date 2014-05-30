@@ -22,7 +22,6 @@ class Receiver(flask_restful.Resource):
         triple_api = config.TRIPLE_STORE_API
         graph_uri = config.GRAPH_URI
         graph = Graph()
-        ckan_api_key = config.CKAN_API_KEY
         ckan_instance = config.CKAN_INSTANCE
 
         user_ip = flask_restful.request.remote_addr
@@ -32,14 +31,14 @@ class Receiver(flask_restful.Resource):
         if 'xml' in flask_restful.request.form and \
            'file' in flask_restful.request.files:
             xml_content = flask_restful.request.form['xml']
-            _file = request.files['file']
-            ReceiverSQLService(xml_content.encode('utf-8')).run_service(user_ip)
-            ReceiverRDFService(xml_content.encode('utf-8')).\
-                run_service(host=host, api=triple_api, graph_uri=graph_uri,
-                            user_ip=user_ip, graph=graph)
-           # ReceiverCKANService(xml_content).\
-           #     run_service(api_key=ckan_api_key, ckan_instance=ckan_instance,
-           #                 _file=_file)
+            ckan_api_key = flask_restful.request.form['api_key']
+            file_ = request.files['file']
+            #ReceiverSQLService(xml_content.encode('utf-8')).run_service(user_ip)
+            #ReceiverRDFService(xml_content.encode('utf-8')).\
+            #    run_service(host=host, api=triple_api, graph_uri=graph_uri,
+            #                user_ip=user_ip, graph=graph)
+            ReceiverCKANService(content=xml_content, api_key=ckan_api_key).\
+                run_service(ckan_instance=ckan_instance, file_=file_)
         else:
             flask_restful.abort(400)
 
