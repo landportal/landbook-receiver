@@ -72,8 +72,11 @@ class Parser(object):
         org_name = self._root.find('import_process').find('organization_name').text
         org_url = self._root.find('import_process').find('organization_url').text
         org_id = self._root.find('import_process').find('organization_id').text
+        org_desc = self._root.find('import_process').\
+            find('organization_description_en').text
         organization = model.Organization(name=org_name, id=org_id)
         organization.url = org_url
+        organization.description = org_desc
         return organization
 
     def get_datasource(self):
@@ -104,8 +107,8 @@ class Parser(object):
         description = self._root.find('license').find('lic_description').text
         republish = self._root.find('license').find('republish').text
         url = self._root.find('license').find('lic_url').text
-        return model.License(name=name, description=description,\
-            republish=bool(republish), url=url)
+        return model.License(name=name, description=description,
+                             republish=bool(republish), url=url)
 
     def _get_simple_indicator(self, ind):
         indicator = model.Indicator(id=ind.get('id'))
