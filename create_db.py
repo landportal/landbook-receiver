@@ -107,21 +107,31 @@ class MetadataPopulator(object):
     def get_topics():
         from model import models
         top1 = models.Topic(id='CLIMATE_CHANGE')
-        top1.add_translation(models.TopicTranslation(lang_code='en', name='Climate change'))
+        top1.add_translation(models.TopicTranslation(lang_code='en', name="Climate change"))
+        top1.add_translation(models.TopicTranslation(lang_code='es', name="Cambio climático"))
+        top1.add_translation(models.TopicTranslation(lang_code='fr', name="Changement climatique"))
         top2 = models.Topic(id='GEOGRAPH_SOCIO')
-        top2.add_translation(models.TopicTranslation(lang_code='en', name='Geograph Socio'))
+        top2.add_translation(models.TopicTranslation(lang_code='en', name="Geographic and Socioeconomic"))
+        top2.add_translation(models.TopicTranslation(lang_code='es', name="Geográfico y socioeconómico"))
+        top2.add_translation(models.TopicTranslation(lang_code='fr', name="Géographique et socio-économique"))
         top3 = models.Topic(id='LAND_USE')
-        top3.add_translation(models.TopicTranslation(lang_code='en', name='Land Use'))
+        top3.add_translation(models.TopicTranslation(lang_code='en', name="Land use, agriculture and investment"))
+        top3.add_translation(models.TopicTranslation(lang_code='es', name="Uso de la tierra, agricultura e inversión"))
+        top3.add_translation(models.TopicTranslation(lang_code='fr', name="L'utilisation des terres, de l'agriculture et de l'investissement"))
         top4 = models.Topic(id='LAND_GENDER')
-        top4.add_translation(models.TopicTranslation(lang_code='en', name='Land Gender'))
+        top4.add_translation(models.TopicTranslation(lang_code='en', name="Land and Gender"))
+        top4.add_translation(models.TopicTranslation(lang_code='es', name="Tierra y género"))
+        top4.add_translation(models.TopicTranslation(lang_code='fr', name="Terrain et le sexe"))
         top5 = models.Topic(id='LAND_TENURE')
-        top5.add_translation(models.TopicTranslation(lang_code='en', name='Land Tenure'))
+        top5.add_translation(models.TopicTranslation(lang_code='en', name="Land Tenure"))
+        top5.add_translation(models.TopicTranslation(lang_code='es', name="Propiedad de la tierra"))
+        top5.add_translation(models.TopicTranslation(lang_code='fr', name="Foncière"))
         top6 = models.Topic(id='FSECURITY_HUNGER')
-        top6.add_translation(models.TopicTranslation(lang_code='en', name='F Security Hunger'))
-        top7 = models.Topic(id='TEMP_TOPIC')
-        top7.add_translation(models.TopicTranslation(lang_code='en', name='Temp Topic'))
+        top6.add_translation(models.TopicTranslation(lang_code='en', name="Food, Security and Hunger"))
+        top6.add_translation(models.TopicTranslation(lang_code='es', name="Alimento, seguridad y hambre"))
+        top6.add_translation(models.TopicTranslation(lang_code='fr', name="Alimentaire, de la sécurité et de la faim"))
 
-        topics = [top1, top2, top3, top4, top5, top6, top7]
+        topics = [top1, top2, top3, top4, top5, top6]
         return topics
 
 if __name__ == '__main__':
