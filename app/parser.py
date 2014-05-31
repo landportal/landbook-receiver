@@ -64,18 +64,35 @@ class Parser(object):
 
     def get_organization(self):
         """
-        :returns: organization data found in the XML file.  The organization ID
-            is constructed with the domain name in the organization_url, for
-            example www.observatoire-foncier.com will result in the ID
-            'observatoire-foncier'.
+        :returns: organization data found in the XML file.  With translated
+          descriptions.
         """
         org_name = self._root.find('import_process').find('organization_name').text
         org_url = self._root.find('import_process').find('organization_url').text
         org_id = self._root.find('import_process').find('organization_id').text
         org_desc = self._root.find('import_process').\
             find('organization_description_en').text
-        organization = model.Organization(name=org_name, id=org_id)
-        organization.url = org_url
+        organization = model.Organization(name=org_name, id=org_id, url=org_url)
+        organization.add_translation(
+          model.OrganizationTranslation(
+            lang_code = "en",
+            organization_id = org_id,
+            description = self._root.find('import_process').find('organization_description_en').text
+          ))
+        organization.add_translation(
+          model.OrganizationTranslation(
+            lang_code = "es",
+            organization_id = org_id,
+            description = self._root.find('import_process').find('organization_description_es').text
+          ))
+        organization.add_translation(
+          model.OrganizationTranslation(
+            lang_code = "fr",
+            organization_id = org_id,
+            description = self._root.find('import_process').find('organization_description_fr').text
+          ))
+        #The description field is NOT persisted to the database and is only
+        #used in the RDF generation
         organization.description = org_desc
         return organization
 
@@ -285,5 +302,3 @@ class Parser(object):
             convertible_to=node.get("convertible_to"),
             factor=node.get("factor")
         )
-
-
