@@ -11,7 +11,7 @@ class ReceiverCKANService(object):
     instance
     """
     def __init__(self, content, api_key):
-        self.parser = Parser(content)
+        self.parser = Parser(content.encode(encoding='utf-8'))
         self.api_key = api_key
 
     def run_service(self, file_, ckan_instance):
