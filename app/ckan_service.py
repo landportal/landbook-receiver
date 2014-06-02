@@ -2,6 +2,7 @@ __author__ = 'guillermo'
 import ckanapi
 import os
 from parser import Parser
+import config
 
 
 class ReceiverCKANService(object):
@@ -19,18 +20,38 @@ class ReceiverCKANService(object):
         data_set = self._create_package(org=org, site=ckan_site)
         self._create_resource(data_set=data_set, file_=file_, site=ckan_site)
 
+    def _get_org_logo(self):
+        org_uri = self.parser.get_organization().id
+        org_img = config.PORTAL_HUB + config.SOURCE_IMG_PATH
+        for key in config.SOURCE_IMG.keys():
+            if key in org_uri:
+                org_img += config.SOURCE_IMG[key]
+        return org_img
+
     def _create_organization(self, site):
-        print "Creating organization ..."
+        """ Creates a new organization
+        Checks if the organization does not exists in database and if not creates it
+        :param site:
+        :return:org_uri
+        """
         org_name = self.parser.get_organization().name
         org_uri = self.parser.get_organization().id.lower()
         org_desc = self.parser.get_organization().description
+        org_logo = self._get_org_logo()
         organizations = site.action.organization_list(order_by="name")
         if org_uri not in organizations:
             site.action.organization_create(name=org_uri, title=org_name,
-                                            description=org_desc)
+                                            description=org_desc,
+                                            image_url=org_logo)
         return org_uri
 
     def _create_package(self, org, site):
+        """ Creates a new data set
+        Checks if the data set does not exists and if it's owned by an organization
+        :param org:
+        :param site:
+        :return:data_set_uri
+        """
         print "Creating dataset ..."
         data_set_id = self.parser.get_dataset().id
         data_set_uri = self.parser.get_dataset().id.lower()
@@ -41,10 +62,16 @@ class ReceiverCKANService(object):
         return data_set_uri
 
     def _create_resource(self, data_set, site, file_):
-        print "Uploading file ..."
+        """ Creates a new resource or file associated with its data set
+        :param data_set:
+        :param site:
+        :param file_:
+        """
         file_name = file_.filename
         path = os.path.join('datasets', file_.filename)
         file_.save(path)
         url = self.parser.get_file_name()
         site.action.resource_create(package_id=data_set, upload=open(path),
                                     name=file_name, url=url)
+
+

@@ -3,7 +3,7 @@
 # Put here all the IPs which can send requests to the receiver.
 # If this list is empty, ALL REQUESTS WILL BE ACCEPTED
 ALLOWED_IPS = [
-#    "127.0.0.1",
+    # "127.0.0.1",
 ]
 
 # Those are the database configuration parameters.  Change them
@@ -23,3 +23,14 @@ COUNTRY_LIST_FILE = '/var/www/landportal-receiver/countries/country_list.xlsx'
 RDF_DATA_SET = '/var/www/landportal-receiver/datasets/dataset.rdf'
 TURTLE_DATA_SET = '/var/www/landportal-receiver/datasets/dataset.ttl'
 CKAN_INSTANCE = 'http://localhost:2000/data/'
+PORTAL_HUB = 'http://localhost:2000'
+SOURCE_IMG_PATH = '/sites/all/themes/book/static/images/sources/'
+SOURCE_IMG = {"ORGFAO": "fao.png",
+              "ORGUNDP": "undp.png",
+              "ORGOECD": "oecd.png",
+              "ORGWHO": "who.png",
+              "ORGFONCIER": "observatoire-foncier.png",
+              "ORGWB": "worldbank.png",
+              "ORGIFPRI": "ifpri.png"
+
+}
