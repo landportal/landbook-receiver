@@ -16,12 +16,12 @@ MYSQL_USER = "root"
 MYSQL_PASSWORD = "root"
 DBA_USER = "dba"
 DBA_PASSWORD = "root"
-TRIPLE_STORE_HOST = "http://localhost:1300/"
+TRIPLE_STORE_HOST = "http://localhost:3000/"
 TRIPLE_STORE_API = "sparql-graph-crud-auth?"
-GRAPH_URI = "graph-uri=http://www.landportal.info"
-COUNTRY_LIST_FILE = '/var/www/landportal-receiver/countries/country_list.xlsx'
-RDF_DATA_SET = '/var/www/landportal-receiver/datasets/dataset.rdf'
-TURTLE_DATA_SET = '/var/www/landportal-receiver/datasets/dataset.ttl'
+GRAPH_URI = "graph-uri=http://book.landportal.org"
+COUNTRY_LIST_FILE = 'countries/country_list.xlsx'
+RDF_DATA_SET = 'datasets/dataset.rdf'
+TURTLE_DATA_SET = 'datasets/dataset.ttl'
 CKAN_INSTANCE = 'http://localhost:2000/data/'
 PORTAL_HUB = 'http://localhost:2000'
 SOURCE_IMG_PATH = '/sites/all/themes/book/static/images/sources/'

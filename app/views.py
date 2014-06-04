@@ -34,9 +34,9 @@ class Receiver(flask_restful.Resource):
             ckan_api_key = flask_restful.request.form['api_key']
             file_ = request.files['file']
             #ReceiverSQLService(xml_content.encode('utf-8')).run_service(user_ip)
-           # ReceiverRDFService(xml_content.encode('utf-8')).\
-           #     run_service(host=host, api=triple_api, graph_uri=graph_uri,
-           #                 user_ip=user_ip, graph=graph)
+            ReceiverRDFService(xml_content.encode('utf-8')).\
+               run_service(host=host, api=triple_api, graph_uri=graph_uri,
+                           user_ip=user_ip, graph=graph)
             ReceiverCKANService(content=xml_content, api_key=ckan_api_key).\
                 run_service(ckan_instance=ckan_instance, file_=file_)
         else:

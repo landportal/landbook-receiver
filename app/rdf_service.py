@@ -30,6 +30,7 @@ class ReceiverRDFService(object):
         :param user_ip: IP from the invoker client.
         :returns: RDF graph.
         """
+        print "Running RDF service..."
         bind_namespaces(graph)
         self._add_observations_triples(graph)
         self._add_indicators_triples(graph)
@@ -47,7 +48,7 @@ class ReceiverRDFService(object):
         self._add_topics_triples(graph)
         self._serialize_rdf_xml(graph)
         self._serialize_turtle(graph)
-        #self._load_data_set(graph_uri=graph_uri, host=host, api=api)
+        self._load_data_set(graph_uri=graph_uri, host=host, api=api)
         #self._remove_data_sets()
         return graph
 
@@ -55,6 +56,7 @@ class ReceiverRDFService(object):
         """
 
         """
+        print "Adding observations..."
         for obs in self.parser.get_observations():
             region = self._get_area_code(obs)
             graph.add((base_obs.term(obs.id), RDF.type,
@@ -86,13 +88,14 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_indicators_triples(self, graph):
+        print "Adding indicators..."
         for ind in self.parser.get_simple_indicators():
             graph.add((base_ind.term(ind.id), RDF.type,
                        cex.term("Indicator")))
             graph.add((base_ind.term(ind.id), lb.term("preferable_tendency"),
                        cex.term(ind.preferable_tendency)))
             graph.add((base_ind.term(ind.id), lb.term("measurement"),
-                       cex.term(ind.measurement_unit.name)))
+                       Literal(ind.measurement_unit.name)))
             graph.add((base_ind.term(ind.id), lb.term("last_update"),
                        Literal(self.time.strftime("%Y-%m-%d"), datatype=XSD.date)))
             graph.add((base_ind.term(ind.id), lb.term("starred"),
@@ -108,6 +111,7 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_slices_triples(self, graph):
+        print "Adding slices..."
         for slc in self.parser.get_slices():
             graph.add((base_slice.term(slc.id), RDF.type,
                        qb.term("Slice")))
@@ -130,6 +134,7 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_users_triples(self, graph):
+        print "Adding users..."
         usr = self.parser.get_user()
         organization = self.parser.get_organization()
         graph.add((base.term(usr.id), RDF.type,
@@ -145,6 +150,7 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_organizations_triples(self, graph):
+        print "Adding organizations..."
         organization = self.parser.get_organization()
         graph.add((base_org.term(organization.id), RDF.type,
                    org.term("Organization")))
