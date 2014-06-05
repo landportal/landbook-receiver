@@ -5,6 +5,7 @@ from rdf_utils.namespaces_handler import *
 from rdflib import Literal, XSD, URIRef
 from rdflib.namespace import RDF, RDFS, FOAF
 from countries.country_reader import CountryReader
+import model.models as model
 import datetime as dt
 import sh
 import os
@@ -16,6 +17,7 @@ class ReceiverRDFService(object):
     Service that gets the _xml input from the html request, generates RDF triples and store
     them in Virtuoso triple store
     """
+
     def __init__(self, content):
         self.parser = Parser(content)
         self.time = dt.datetime.now()
@@ -46,10 +48,37 @@ class ReceiverRDFService(object):
         self._add_upload_triples(graph, user_ip)
         self._add_users_triples(graph)
         self._add_topics_triples(graph)
+        self._add_dates_tripletes(graph)
         self._serialize_rdf_xml(graph)
         self._serialize_turtle(graph)
         self._load_data_set(graph_uri=graph_uri, host=host, api=api)
         #self._remove_data_sets()
+        return graph
+
+    def _add_dates_tripletes(self, graph):
+        for obs in self.parser.get_observations():
+            time_value = obs.ref_time
+            term_object = base_time.term(time_value.value)
+            if isinstance(time_value, model.YearInterval):
+                graph.add(term_object,
+                          cex.term("year"),
+                          Literal(str(time_value.year), datatype=XSD.int))
+            elif isinstance(time_value, model.MonthInterval):
+                graph.add(term_object,
+                          cex.term("year"),
+                          Literal(str(time_value.year), datatype=XSD.int))
+                graph.add(term_object,
+                          cex.term("month"),
+                          Literal(str(time_value.year), datatype=XSD.int))
+            elif isinstance(time_value, model.Interval):
+                graph.add(term_object,
+                          cex.term("start-time"),
+                          Literal(str(time_value.start_time.year), datatype=XSD.int))
+                graph.add(term_object,
+                          cex.term("end-time"),
+                          Literal(str(time_value.end_time.year), datatype=XSD.int))
+            else:
+                print "Unrecognized type of date: " + type(time_value)  # TODO. What now?
         return graph
 
     def _add_observations_triples(self, graph):
@@ -62,7 +91,7 @@ class ReceiverRDFService(object):
             graph.add((base_obs.term(obs.id), RDF.type,
                        qb.term("Observation")))
             graph.add((base_obs.term(obs.id), cex.term("ref-time"),
-                       base.term(obs.ref_time.value)))
+                       base_time.term(obs.ref_time.value)))
             graph.add((base_obs.term(obs.id), cex.term("ref-area"),
                        base.term(region)))
             graph.add((base_obs.term(obs.id), cex.term("ref-indicator"),
@@ -164,6 +193,7 @@ class ReceiverRDFService(object):
         for ind in self.parser.get_simple_indicators():
             self._add_topic(graph, ind)
         return graph
+
 
     @staticmethod
     def _add_topic(graph, indicator):
