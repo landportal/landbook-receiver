@@ -22,7 +22,7 @@ class ReceiverCKANService(object):
 
     def _get_org_logo(self):
         org_uri = self.parser.get_organization().id
-        org_img = config.PORTAL_HUB + config.SOURCE_IMG_PATH
+        org_img = config.SOURCE_IMG_PATH
         for key in config.SOURCE_IMG.keys():
             if key in org_uri:
                 org_img += config.SOURCE_IMG[key]
