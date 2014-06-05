@@ -14,6 +14,7 @@ time = Namespace("http://www.w3.org/2006/time#")
 sdmx_code = Namespace("http://purl.org/linked-data/sdmx/2009/code#")
 
 base = Namespace("http://book.landportal.org/")
+base_time = Namespace("http://book.landportal.org/time/")
 base_obs = Namespace("http://book.landportal.org/observation/")
 base_ind = Namespace("http://book.landportal.org/indicator/")
 base_slice = Namespace("http://book.landportal.org/slice/")
@@ -33,7 +34,7 @@ def bind_namespaces(graph):
                "sdmx-code": sdmx_code, "": base,
                "base-obs": base_obs, "base-ind": base_ind, "base-slice": base_slice,
                "base-data-source": base_dsource, "base-topic": base_topic,
-               "base-upload": base_upload, "base-org": base_org}
+               "base-upload": base_upload, "base-org": base_org, "base-time": base_time}
 
     for prefix, uri in n_space.items():
         graph.namespace_manager.bind(prefix, URIRef(Namespace(uri)))
