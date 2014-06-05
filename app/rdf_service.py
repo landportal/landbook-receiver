@@ -48,35 +48,35 @@ class ReceiverRDFService(object):
         self._add_upload_triples(graph, user_ip)
         self._add_users_triples(graph)
         self._add_topics_triples(graph)
-        self._add_dates_tripletes(graph)
+        self._add_dates_triples(graph)
         self._serialize_rdf_xml(graph)
         self._serialize_turtle(graph)
         self._load_data_set(graph_uri=graph_uri, host=host, api=api)
         #self._remove_data_sets()
         return graph
 
-    def _add_dates_tripletes(self, graph):
+    def _add_dates_triples(self, graph):
         for obs in self.parser.get_observations():
             time_value = obs.ref_time
             term_object = base_time.term(time_value.value)
             if isinstance(time_value, model.YearInterval):
-                graph.add(term_object,
+                graph.add((term_object,
                           cex.term("year"),
-                          Literal(str(time_value.year), datatype=XSD.int))
+                          Literal(str(time_value.year), datatype=XSD.int)))
             elif isinstance(time_value, model.MonthInterval):
-                graph.add(term_object,
+                graph.add((term_object,
                           cex.term("year"),
-                          Literal(str(time_value.year), datatype=XSD.int))
-                graph.add(term_object,
+                          Literal(str(time_value.year), datatype=XSD.int)))
+                graph.add((term_object,
                           cex.term("month"),
-                          Literal(str(time_value.year), datatype=XSD.int))
+                          Literal(str(time_value.year), datatype=XSD.int)))
             elif isinstance(time_value, model.Interval):
-                graph.add(term_object,
+                graph.add((term_object,
                           cex.term("start-time"),
-                          Literal(str(time_value.start_time.year), datatype=XSD.int))
-                graph.add(term_object,
+                          Literal(str(time_value.start_time.year), datatype=XSD.int)))
+                graph.add((term_object,
                           cex.term("end-time"),
-                          Literal(str(time_value.end_time.year), datatype=XSD.int))
+                          Literal(str(time_value.end_time.year), datatype=XSD.int)))
             else:
                 print "Unrecognized type of date: " + type(time_value)  # TODO. What now?
         return graph
