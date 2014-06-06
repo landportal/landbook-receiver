@@ -59,6 +59,9 @@ class ReceiverRDFService(object):
         for obs in self.parser.get_observations():
             time_value = obs.ref_time
             term_object = base_time.term(time_value.value)
+            graph.add((term_object,
+                      RDF.type,
+                      Literal(str(time_value.year), datatype=XSD.int)))
             if isinstance(time_value, model.YearInterval):
                 graph.add((term_object,
                           cex.term("year"),
@@ -338,7 +341,7 @@ class ReceiverRDFService(object):
         graph.add((base_dsource.term(data_source.dsource_id), RDFS.label,
                    Literal(data_source.name, lang='en')))
         graph.add((base_dsource.term(data_source.dsource_id), lb.term("organization"),
-                   URIRef(organization.url)))
+                   base_org.term(organization.id)))
         graph.add((base_dsource.term(data_source.dsource_id), dcterms.term("creator"),
                    Literal(user.id)))
         return graph
