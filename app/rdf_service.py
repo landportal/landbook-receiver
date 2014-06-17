@@ -61,28 +61,110 @@ class ReceiverRDFService(object):
             term_object = base_time.term(time_value.value)
             graph.add((term_object,
                       RDF.type,
-                      Literal(str(time_value.year), datatype=XSD.int)))
+                      time.term('DateTimeInterval')))
             if isinstance(time_value, model.YearInterval):
-                graph.add((term_object,
-                          cex.term("year"),
-                          Literal(str(time_value.year), datatype=XSD.int)))
+                self._add_triples_of_year_interval(time_value, graph)
+
             elif isinstance(time_value, model.MonthInterval):
-                graph.add((term_object,
-                          cex.term("year"),
-                          Literal(str(time_value.year), datatype=XSD.int)))
-                graph.add((term_object,
-                          cex.term("month"),
-                          Literal(str(time_value.year), datatype=XSD.int)))
+                self._add_triples_of_month_interval(time_value, graph)
+
             elif isinstance(time_value, model.Interval):
-                graph.add((term_object,
-                          cex.term("start-time"),
-                          Literal(str(time_value.start_time.year), datatype=XSD.int)))
-                graph.add((term_object,
-                          cex.term("end-time"),
-                          Literal(str(time_value.end_time.year), datatype=XSD.int)))
+                self._add_triples_of_interval(time_value, graph)
+
             else:
-                print "Unrecognized type of date: " + type(time_value)  # TODO. What now?
+                print "Unrecognized type of date: " + type(time_value)
         return graph
+
+    def _add_triples_of_year_interval(self, time_object, graph):
+        #base term
+        term_object = base_time.term(time_object.value)
+
+        #beginning and end
+        graph.add((term_object,
+                   time.term("hasBeginning"),
+                   self._term_of_an_instant(time_object.year, 1, 1, graph)))
+        graph.add((term_object,
+                   time.term("hasEnd"),
+                   self._term_of_an_instant(time_object.year, 12, 31, graph)))
+
+        #DateTimeDescription
+        date_time_desc_term = base_time.term(time_object.value + "_desc")
+        graph.add((term_object,
+                   time.term("hasDateTimeDescription"),
+                   time.term(date_time_desc_term)))
+        graph.add((date_time_desc_term,
+                   time.term("year"),
+                   Literal(str(time_object.year), datatype=XSD.gYear)))
+        graph.add((date_time_desc_term,
+                   time.term("unitType"),
+                   time.term("unitYear")))
+
+        #Our ontology properties
+        graph.add((term_object,
+                   base_time.term("year"),
+                   Literal(str(time_object.year), datatype=XSD.int)))
+
+
+    def _add_triples_of_month_interval(self, time_object, graph):
+        #base term
+        term_object = base_time.term(time_object.value)
+
+        #beginning and end
+        graph.add((term_object,
+                   time.term("hasBeginning"),
+                   self._term_of_an_instant(time_object.year, time_object.month, 1, graph)))
+        graph.add((term_object,
+                   time.term("hasEnd"),
+                   self._term_of_an_instant(time_object.year, time_object.month, 31, graph)))
+        #DateTimeDescription
+        date_time_desc_term = base_time.term(time_object.value + "_desc")
+        graph.add((term_object,
+                   time.term("hasDateTimeDescription"),
+                   time.term(date_time_desc_term)))
+        graph.add((date_time_desc_term,
+                   time.term("year"),
+                   Literal(str(time_object.year), datatype=XSD.gYear)))
+        graph.add((date_time_desc_term,
+                   time.term("month"),
+                   Literal("--" + str(time_object.month), datatype=XSD.gMonth)))
+        graph.add((date_time_desc_term,
+                   time.term("unitType"),
+                   time.term("unitMonth")))
+
+        #Our ontology properties
+        graph.add((term_object,
+                   base_time.term("year"),
+                   Literal(str(time_object.year), datatype=XSD.int)))
+        graph.add((term_object,
+                   base_time.term("month"),
+                   Literal(str(time_object.month), datatype=XSD.int)))
+
+
+    def _add_triples_of_interval(self, time_object, graph):
+        #base term
+        term_object = base_time.term(time_object.value)
+
+        #beginning and end
+        graph.add((term_object,
+                   time.term("hasBeginning"),
+                   self._term_of_an_instant(time_object.start_time.year, 1, 1, graph)))
+        graph.add((term_object,
+                   time.term("hasEnd"),
+                   self._term_of_an_instant(time_object.end_time.year, 12, 31, graph)))
+
+    @staticmethod
+    def _term_of_an_instant(year, month, day, graph):
+        instant_term = base_time.term("instant_" + str(year) + "_" + str(month) + "_" + str(day))
+        graph.add((instant_term,
+                  RDF.type,
+                  time.term("Instant")))
+        graph.add((instant_term,
+                  time.term("inXSDDateTime"),
+                  Literal(str(year) + "-" + str(month) + "-" + str(day) + "T00:00:00Z")))
+        #2011-12-24T14:24:05Z
+
+        return instant_term
+
 
     def _add_observations_triples(self, graph):
         """
@@ -234,7 +316,7 @@ class ReceiverRDFService(object):
     @staticmethod
     def _add_country(graph, arg):
         code = arg.country_code
-        country_list_file = config.COUNTRY_LIST_FILE
+        country_list_file = "../countries/country_list.xlsx"
         country_id = ""
         country_name = ""
         iso2 = ""
