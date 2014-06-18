@@ -267,7 +267,7 @@ class Parser(object):
                 end_year = int(interval.find("end").text)
 
                 beginning = datetime.date(year=start_year, month=1, day=1)
-                end = datetime.date(year=end_year+1, month=1, day=1)
+                end = datetime.date(year=end_year, month=12, day=31)
                 return model.Interval(beginning, end)
             else:
                 return model.YearInterval(int(node.text))
