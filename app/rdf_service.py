@@ -316,7 +316,7 @@ class ReceiverRDFService(object):
     @staticmethod
     def _add_country(graph, arg):
         code = arg.country_code
-        country_list_file = "../countries/country_list.xlsx"
+        country_list_file = config.COUNTRY_LIST_FILE
         country_id = ""
         country_name = ""
         iso2 = ""
