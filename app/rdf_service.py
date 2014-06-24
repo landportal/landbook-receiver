@@ -51,7 +51,7 @@ class ReceiverRDFService(object):
         self._add_dates_triples(graph)
         self._serialize_rdf_xml(graph)
         self._serialize_turtle(graph)
-        self._load_data_set(graph_uri=graph_uri, host=host, api=api)
+        #self._load_data_set(graph_uri=graph_uri, host=host, api=api)
         #self._remove_data_sets()
         return graph
 
@@ -181,8 +181,13 @@ class ReceiverRDFService(object):
                        base.term(region)))
             graph.add((base_obs.term(obs.id), cex.term("ref-indicator"),
                        base_ind.term(obs.indicator_id)))
-            graph.add((base_obs.term(obs.id), cex.term("value"),
-                       Literal(str(obs.value.value), datatype=XSD.double)))
+            if not obs.value.obs_status == "obsStatus-M":
+                if float(obs.value.value) % 1 != 0:
+                    graph.add((base_obs.term(obs.id), cex.term("value"),
+                              Literal(obs.value.value, datatype=XSD.double)))
+                else:
+                    graph.add((base_obs.term(obs.id), cex.term("value"),
+                              Literal(int(float(obs.value.value)), datatype=XSD.integer)))
             graph.add((base_obs.term(obs.id), cex.term("computation"),
                        cex.term(str(obs.computation.uri))))
             graph.add((base_obs.term(obs.id), dcterms.term("issued"),

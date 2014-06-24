@@ -37,8 +37,8 @@ class Receiver(flask_restful.Resource):
             ReceiverRDFService(xml_content.encode('utf-8')).\
                run_service(host=host, api=triple_api, graph_uri=graph_uri,
                            user_ip=user_ip, graph=graph)
-            ReceiverCKANService(content=xml_content, api_key=ckan_api_key).\
-                run_service(ckan_instance=ckan_instance, file_=file_)
+           # ReceiverCKANService(content=xml_content, api_key=ckan_api_key).\
+           #     run_service(ckan_instance=ckan_instance, file_=file_)
         else:
             flask_restful.abort(400)
 
