@@ -1,7 +1,6 @@
 Land Portal Receiver
 ====================
 
-[![Build Status](https://travis-ci.org/weso/landportal-receiver.png?branch=develop)](https://travis-ci.org/weso/landportal-receiver)
 
 Parser web service exporting enriched RDF and SQL from XML input.
 
