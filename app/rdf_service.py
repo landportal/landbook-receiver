@@ -40,6 +40,7 @@ class ReceiverRDFService(object):
         self._add_area_triples_from_slices(graph)
         self._add_computation_triples(graph)
         self._add_data_source_triples(graph)
+        self._add_catalog_triples(graph)
         self._add_dataset_triples(graph)
         self._add_licenses_triples(graph)
         self._add_organizations_triples(graph)
@@ -51,9 +52,47 @@ class ReceiverRDFService(object):
         self._add_dates_triples(graph)
         self._serialize_rdf_xml(graph)
         self._serialize_turtle(graph)
-        #self._load_data_set(graph_uri=graph_uri, host=host, api=api)
-        #self._remove_data_sets()
+        self._load_data_set(graph_uri=graph_uri, host=host, api=api)
+        self._remove_data_sets()
         return graph
+
+    def _add_catalog_triples(self, graph):
+        lp_catalog = "landportal-catalog"
+        dataset_id = dataset = self.parser.get_dataset().id
+        graph.add((base.term(lp_catalog), RDF.type, dcat.term("Catalog")))
+        graph.add((base.term(lp_catalog), dct.term("title"),
+                        Literal("Land Portal Catalog")))
+        graph.add((base.term(lp_catalog), RDFS.label,
+                        Literal("Land Portal Catalog", lang="en")))
+        graph.add((base.term(lp_catalog), foaf.term("homepage"),
+                        Literal("<http://5.9.221.11/book/catalog>")))
+        graph.add((base.term(lp_catalog), dcat.term("dataset"),
+                        base.term(dataset_id)))
+        return graph
+
+    def _add_dataset_triples(self, graph):
+        dataset = self.parser.get_dataset()
+        lic = self.parser.get_license()
+        dsource = self.parser.get_datasource()
+        graph.add((base.term(dataset.id), RDF.type,
+                   qb.term(Literal("DataSet"))))
+        graph.add((base.term(dataset.id), RDF.type,
+                   dcat.term(Literal("Dataset"))))
+        graph.add((base.term(dataset.id), sdmx_concept.term("freq"),
+                   sdmx_code.term(dataset.sdmx_frequency)))
+        graph.add((base.term(dataset.id), dct.term("accrualPeriodicity"),
+                   sdmx_code.term(dataset.sdmx_frequency)))
+        graph.add((base.term(dataset.id), lb.term("license"),
+                   URIRef(lic.url)))
+        graph.add((base.term(dataset.id), lb.term("dataSource"),
+                   base_dsource.term(dsource.dsource_id)))
+        graph.add((base.term(dataset.id), dct.term("issued"),
+                   Literal(dt.datetime.now().strftime("%Y-%m-%d"),
+                   datatype=XSD.date)))
+        return graph
+
+    def _add_distribution_triples(self, graph):
+        pass
 
     def _add_dates_triples(self, graph):
         for obs in self.parser.get_observations():
@@ -165,7 +204,6 @@ class ReceiverRDFService(object):
 
         return instant_term
 
-
     def _add_observations_triples(self, graph):
         """
 
@@ -190,7 +228,7 @@ class ReceiverRDFService(object):
                               Literal(int(float(obs.value.value)), datatype=XSD.integer)))
             graph.add((base_obs.term(obs.id), cex.term("computation"),
                        cex.term(str(obs.computation.uri))))
-            graph.add((base_obs.term(obs.id), dcterms.term("issued"),
+            graph.add((base_obs.term(obs.id), dct.term("issued"),
                        Literal(obs.issued.timestamp.strftime("%Y-%m-%d"),
                                datatype=XSD.date)))
             graph.add((base_obs.term(obs.id), qb.term("dataSet"),
@@ -405,19 +443,7 @@ class ReceiverRDFService(object):
                        Literal(obs.computation.description, lang='en')))
         return graph
 
-    def _add_dataset_triples(self, graph):
-        dataset = self.parser.get_dataset()
-        lic = self.parser.get_license()
-        dsource = self.parser.get_datasource()
-        graph.add((base.term(dataset.id), RDF.type,
-                   qb.term(Literal("DataSet"))))
-        graph.add((base.term(dataset.id), sdmx_concept.term("freq"),
-                   sdmx_code.term(dataset.sdmx_frequency)))
-        graph.add((base.term(dataset.id), lb.term("license"),
-                   URIRef(lic.url)))
-        graph.add((base.term(dataset.id), lb.term("dataSource"),
-                   base_dsource.term(dsource.dsource_id)))
-        return graph
+
 
     def _add_data_source_triples(self, graph):
         data_source = self.parser.get_datasource()
@@ -429,7 +455,7 @@ class ReceiverRDFService(object):
                    Literal(data_source.name, lang='en')))
         graph.add((base_dsource.term(data_source.dsource_id), lb.term("organization"),
                    base_org.term(organization.id)))
-        graph.add((base_dsource.term(data_source.dsource_id), dcterms.term("creator"),
+        graph.add((base_dsource.term(data_source.dsource_id), dct.term("creator"),
                    Literal(user.id)))
         return graph
 
