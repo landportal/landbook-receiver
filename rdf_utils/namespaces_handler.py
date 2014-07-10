@@ -4,7 +4,8 @@ from rdflib import Namespace, URIRef
 
 # Namespaces
 cex = Namespace("http://purl.org/weso/computex/ontology#")
-dcterms = Namespace("http://purl.org/dc/terms/")
+dct = Namespace("http://purl.org/dc/terms/")
+dctype = Namespace("http://purl.org/dc/dcmitype/")
 foaf = Namespace("http://xmlns.com/foaf/0.1/")
 lb = Namespace("http://purl.org/weso/landbook/ontology#")
 org = Namespace("http://www.w3.org/ns/org#")
@@ -23,18 +24,20 @@ base_topic = Namespace("http://book.landportal.org/topic/")
 base_upload = Namespace("http://book.landportal.org/upload/")
 base_org = Namespace("http://book.landportal.org/organization/")
 
+dcat = Namespace("http://www.w3.org/ns/dcat#")
+
 
 def bind_namespaces(graph):
     """
     Binds Landportal uris with their corresponding prefixes
     """
-    n_space = {"cex": cex, "dcterms": dcterms, "foaf": foaf,
-               "lb": lb, "org": org, "qb": qb,
-               "sdmx-concept": sdmx_concept, "time": time,
-               "sdmx-code": sdmx_code, "": base,
-               "base-obs": base_obs, "base-ind": base_ind, "base-slice": base_slice,
+    n_space = {"cex": cex, "dcterms": dct, "dctype": dctype, "foaf": foaf,
+               "lb": lb, "org": org, "qb": qb, "sdmx-concept": sdmx_concept, "time": time,
+               "sdmx-code": sdmx_code, "": base, "base-obs": base_obs,
+               "base-ind": base_ind, "base-slice": base_slice,
                "base-data-source": base_dsource, "base-topic": base_topic,
-               "base-upload": base_upload, "base-org": base_org, "base-time": base_time}
+               "base-upload": base_upload, "base-org": base_org, "base-time": base_time,
+               "dcat": dcat}
 
     for prefix, uri in n_space.items():
         graph.namespace_manager.bind(prefix, URIRef(Namespace(uri)))
