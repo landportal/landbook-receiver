@@ -68,7 +68,7 @@ class ReceiverCKANService(object):
         :param file_:
         """
         file_name = file_.filename
-        path = os.path.join(config.DATA_SETS_DIR, file_.filename)
+        path = os.path.join(config.DATA_SETS_DIR, file_name)
         file_.save(path)
         url = self.parser.get_file_name()
         site.action.resource_create(package_id=data_set, upload=open(path),

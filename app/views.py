@@ -6,6 +6,7 @@ from app.ckan_service import ReceiverCKANService
 import config
 from rdflib import Graph
 from flask import request
+import os
 
 
 class Receiver(flask_restful.Resource):
@@ -33,14 +34,23 @@ class Receiver(flask_restful.Resource):
             xml_content = flask_restful.request.form['xml']
             ckan_api_key = flask_restful.request.form['api_key']
             file_ = request.files['file']
+            path = os.path.join(config.DATA_SETS_DIR, "raw_file")
+            file_.save(path)
             #ReceiverSQLService(xml_content.encode('utf-8')).run_service(user_ip)
             ReceiverRDFService(xml_content.encode('utf-8')).\
                run_service(host=host, api=triple_api, graph_uri=graph_uri,
                            user_ip=user_ip, graph=graph)
            # ReceiverCKANService(content=xml_content, api_key=ckan_api_key).\
            #     run_service(ckan_instance=ckan_instance, file_=file_)
+            _remove_data_sets()
         else:
             flask_restful.abort(400)
+
+
+def _remove_data_sets():
+    os.remove(config.RDF_DATA_SET)
+    os.remove(config.TURTLE_DATA_SET)
+    os.remove(config.RAW_FILE)
 
 
 def _check_allowed_ip(ip):

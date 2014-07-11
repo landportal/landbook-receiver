@@ -5,6 +5,7 @@ from rdf_utils.namespaces_handler import *
 from rdflib import Literal, XSD, URIRef
 from rdflib.namespace import RDF, RDFS, FOAF
 from countries.country_reader import CountryReader
+from mimetypes import guess_type
 import model.models as model
 import datetime as dt
 import sh
@@ -34,31 +35,31 @@ class ReceiverRDFService(object):
         """
         print "Running RDF service..."
         bind_namespaces(graph)
-        self._add_observations_triples(graph)
-        self._add_indicators_triples(graph)
-        self._add_area_triples_from_observations(graph)
-        self._add_area_triples_from_slices(graph)
-        self._add_computation_triples(graph)
-        self._add_data_source_triples(graph)
+       # self._add_observations_triples(graph)
+       # self._add_indicators_triples(graph)
+       # self._add_area_triples_from_observations(graph)
+       # self._add_area_triples_from_slices(graph)
+       # self._add_computation_triples(graph)
+       # self._add_data_source_triples(graph)
         self._add_catalog_triples(graph)
         self._add_dataset_triples(graph)
-        self._add_licenses_triples(graph)
-        self._add_organizations_triples(graph)
-        self._add_region_triples(graph)
-        self._add_slices_triples(graph)
-        self._add_upload_triples(graph, user_ip)
-        self._add_users_triples(graph)
-        self._add_topics_triples(graph)
-        self._add_dates_triples(graph)
+        self._add_distribution_triples(graph)
+       # self._add_licenses_triples(graph)
+       # self._add_organizations_triples(graph)
+       # self._add_region_triples(graph)
+       # self._add_slices_triples(graph)
+       # self._add_upload_triples(graph, user_ip)
+       # self._add_users_triples(graph)
+       # self._add_topics_triples(graph)
+       # self._add_dates_triples(graph)
         self._serialize_rdf_xml(graph)
         self._serialize_turtle(graph)
         self._load_data_set(graph_uri=graph_uri, host=host, api=api)
-        self._remove_data_sets()
         return graph
 
     def _add_catalog_triples(self, graph):
         lp_catalog = "landportal-catalog"
-        dataset_id = dataset = self.parser.get_dataset().id
+        dataset_id = self.parser.get_dataset().id
         graph.add((base.term(lp_catalog), RDF.type, dcat.term("Catalog")))
         graph.add((base.term(lp_catalog), dct.term("title"),
                         Literal("Land Portal Catalog")))
@@ -75,7 +76,7 @@ class ReceiverRDFService(object):
         lic = self.parser.get_license()
         dsource = self.parser.get_datasource()
         graph.add((base.term(dataset.id), RDF.type,
-                   qb.term(Literal("DataSet"))))
+                   qb.term("DataSet")))
         graph.add((base.term(dataset.id), RDF.type,
                    dcat.term(Literal("Dataset"))))
         graph.add((base.term(dataset.id), sdmx_concept.term("freq"),
@@ -92,7 +93,25 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_distribution_triples(self, graph):
-        pass
+        file_name, file_extension = os.path.splitext(self.parser.get_file_name())
+        file_extension = file_extension.replace(".", "")
+        dataset_id = self.parser.get_dataset().id
+        dist_id = dataset_id + "-" + file_extension
+        file_type = guess_type(self.parser.get_file_name())
+        file_size = os.path.getsize(config.RAW_FILE)
+        graph.add((base.term(dist_id), RDF.type,
+                   dcat.term("Distribution")))
+        graph.add((base.term(dist_id), dcat.term("downloadURL"),
+                   Literal(config.CKAN_INSTANCE + "dataset/" + dataset_id.lower())))
+        graph.add((base.term(dist_id), dct.term("title"),
+                   Literal(file_extension.upper() + " distribution of dataset " +
+                           dataset_id, lang="en")))
+        graph.add((base.term(dist_id), dcat.term("mediaType"),
+                   Literal(file_type[0])))
+        graph.add((base.term(dist_id), dcat.term("byteSize"),
+                   Literal(file_size, datatype=XSD.decimal)))
+
+        return graph
 
     def _add_dates_triples(self, graph):
         for obs in self.parser.get_observations():
@@ -443,8 +462,6 @@ class ReceiverRDFService(object):
                        Literal(obs.computation.description, lang='en')))
         return graph
 
-
-
     def _add_data_source_triples(self, graph):
         data_source = self.parser.get_datasource()
         organization = self.parser.get_organization()
@@ -500,7 +517,4 @@ class ReceiverRDFService(object):
                 digest=True, u=config.DBA_USER + ":" + config.DBA_PASSWORD,
                 verbose=True, X="POST", T=config.RDF_DATA_SET)
 
-    @staticmethod
-    def _remove_data_sets():
-        os.remove(config.RDF_DATA_SET)
-        os.remove(config.TURTLE_DATA_SET)
+
