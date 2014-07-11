@@ -31,7 +31,7 @@ def bind_namespaces(graph):
     """
     Binds Landportal uris with their corresponding prefixes
     """
-    n_space = {"cex": cex, "dcterms": dct, "dctype": dctype, "foaf": foaf,
+    n_space = {"cex": cex, "dct": dct, "dctype": dctype, "foaf": foaf,
                "lb": lb, "org": org, "qb": qb, "sdmx-concept": sdmx_concept, "time": time,
                "sdmx-code": sdmx_code, "": base, "base-obs": base_obs,
                "base-ind": base_ind, "base-slice": base_slice,
