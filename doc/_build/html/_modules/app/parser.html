@@ -1,0 +1,371 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>app.parser &mdash; Land Portal Receiver 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Land Portal Receiver 1.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Land Portal Receiver 1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for app.parser</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">model.models</span> <span class="kn">as</span> <span class="nn">model</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">xml.etree.cElementTree</span> <span class="kn">as</span> <span class="nn">Et</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">as</span> <span class="nn">Et</span>
+
+
+<div class="viewcode-block" id="Parser"><a class="viewcode-back" href="../../app.html#app.parser.Parser">[docs]</a><span class="k">class</span> <span class="nc">Parser</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_content</span> <span class="o">=</span> <span class="n">content</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_root</span> <span class="o">=</span> <span class="n">Et</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_observations_slices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_observations_slices</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_get_observations_slices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates an inverse index of observations and slices.</span>
+
+<span class="sd">        :returns: map in which the key is the observation ID and the</span>
+<span class="sd">        value is its corresponding slice ID.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">obs_map</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">slices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&quot;.//slice&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">sli</span> <span class="ow">in</span> <span class="n">slices</span><span class="p">:</span>
+            <span class="n">observations</span> <span class="o">=</span> <span class="n">sli</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&quot;./referred/observation-ref&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">obs</span> <span class="ow">in</span> <span class="n">observations</span><span class="p">:</span>
+                <span class="n">obs_map</span><span class="p">[</span><span class="n">obs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="n">sli</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">obs_map</span>
+
+<div class="viewcode-block" id="Parser.get_simple_indicators"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_simple_indicators">[docs]</a>    <span class="k">def</span> <span class="nf">get_simple_indicators</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: list of simple indicators found in the XML file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ind_root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;indicators&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_simple_indicator</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span> <span class="k">for</span> <span class="n">ind</span>
+                <span class="ow">in</span> <span class="n">ind_root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&quot;indicator&quot;</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="Parser.get_compound_indicators"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_compound_indicators">[docs]</a>    <span class="k">def</span> <span class="nf">get_compound_indicators</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: list of compound indicators found in the XML file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ind_root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;indicators&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_compound_indicator</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span> <span class="k">for</span> <span class="n">ind</span>
+                <span class="ow">in</span> <span class="n">ind_root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&quot;compound_indicator&quot;</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="Parser.get_indicator_groups"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_indicator_groups">[docs]</a>    <span class="k">def</span> <span class="nf">get_indicator_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: list of indicator groups found in the XML file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">groups_element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;indicator_groups&#39;</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;indicator_group&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_indicator_group</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">groups_element</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="Parser.get_user"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_user">[docs]</a>    <span class="k">def</span> <span class="nf">get_user</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: user data found in the XML file (whithout user_ip)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">username</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;import_process&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;user&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">User</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">())</span>
+</div>
+<div class="viewcode-block" id="Parser.get_organization"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_organization">[docs]</a>    <span class="k">def</span> <span class="nf">get_organization</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: organization data found in the XML file.  The organization ID</span>
+<span class="sd">            is constructed with the domain name in the organization_url, for</span>
+<span class="sd">            example www.observatoire-foncier.com will result in the ID</span>
+<span class="sd">            &#39;observatoire-foncier&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">org_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;import_process&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;organization_name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">org_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;import_process&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;organization_url&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">org_id</span> <span class="o">=</span> <span class="n">org_url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">organization</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Organization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">org_name</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">org_id</span><span class="p">)</span>
+        <span class="n">organization</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">org_url</span>
+        <span class="k">return</span> <span class="n">organization</span>
+</div>
+<div class="viewcode-block" id="Parser.get_datasource"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_datasource">[docs]</a>    <span class="k">def</span> <span class="nf">get_datasource</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: datasource data found in the XML file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dsource</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;import_process&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;datasource&#39;</span><span class="p">)</span>
+        <span class="n">dsource_name</span> <span class="o">=</span> <span class="n">dsource</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">dsource_id</span> <span class="o">=</span> <span class="n">dsource</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">DataSource</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">dsource_name</span><span class="p">,</span> <span class="n">dsource_id</span><span class="o">=</span><span class="n">dsource_id</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Parser.get_dataset"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_dataset">[docs]</a>    <span class="k">def</span> <span class="nf">get_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: dataset data found in the XML file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Dataset</span><span class="p">()</span>
+        <span class="n">dataset</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">)</span>
+        <span class="n">dataset</span><span class="o">.</span><span class="n">sdmx_frequency</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;import_process&#39;</span><span class="p">)</span><span class="o">.</span>\
+            <span class="n">find</span><span class="p">(</span><span class="s">&#39;sdmx_frequency&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">dataset</span><span class="o">.</span><span class="n">license</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_license</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">dataset</span>
+</div>
+<div class="viewcode-block" id="Parser.get_license"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_license">[docs]</a>    <span class="k">def</span> <span class="nf">get_license</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: license data of the XML file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;license&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;lic_name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;license&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;lic_description&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">republish</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;license&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;republish&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;license&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;lic_url&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">License</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>\
+            <span class="n">republish</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">republish</span><span class="p">),</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">_get_simple_indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ind</span><span class="p">):</span>
+        <span class="n">indicator</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Indicator</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">ind</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">))</span>
+        <span class="n">indicator</span><span class="o">.</span><span class="n">measurement_unit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_measurement_unit</span><span class="p">(</span><span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;measure_unit&quot;</span><span class="p">))</span>
+        <span class="n">indicator</span><span class="o">.</span><span class="n">topic_id</span> <span class="o">=</span> <span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;topic-ref&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">indicator</span><span class="o">.</span><span class="n">preferable_tendency</span> <span class="o">=</span> <span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;preferable_tendency&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">indicator</span><span class="o">.</span><span class="n">add_translation</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">IndicatorTranslation</span><span class="p">(</span><span class="n">lang_code</span><span class="o">=</span><span class="s">&#39;en&#39;</span><span class="p">,</span>
+                                        <span class="n">name</span><span class="o">=</span><span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;ind_name_en&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                                        <span class="n">description</span><span class="o">=</span><span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;ind_description_en&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+        <span class="n">indicator</span><span class="o">.</span><span class="n">add_translation</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">IndicatorTranslation</span><span class="p">(</span><span class="n">lang_code</span><span class="o">=</span><span class="s">&#39;es&#39;</span><span class="p">,</span>
+                                        <span class="n">name</span><span class="o">=</span><span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;ind_name_es&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                                        <span class="n">description</span><span class="o">=</span><span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;ind_description_es&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+        <span class="n">indicator</span><span class="o">.</span><span class="n">add_translation</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">IndicatorTranslation</span><span class="p">(</span><span class="n">lang_code</span><span class="o">=</span><span class="s">&#39;fr&#39;</span><span class="p">,</span>
+                                        <span class="n">name</span><span class="o">=</span><span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;ind_name_fr&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                                        <span class="n">description</span><span class="o">=</span><span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;ind_description_fr&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+        <span class="c"># The indicator may be related with others</span>
+        <span class="c"># The attribute related_id WILL NOT be persisted to the database and</span>
+        <span class="c"># it is only used to create the relationships objects in the services</span>
+        <span class="n">indicator</span><span class="o">.</span><span class="n">related_id</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;splitsIn&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">rel</span> <span class="ow">in</span> <span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;splitsIn&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;indicator-ref&#39;</span><span class="p">):</span>
+                <span class="n">indicator</span><span class="o">.</span><span class="n">related_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rel</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">indicator</span>
+
+    <span class="k">def</span> <span class="nf">_get_compound_indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ind</span><span class="p">):</span>
+        <span class="n">indicator</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">CompoundIndicator</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">ind</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">))</span>
+        <span class="n">indicator</span><span class="o">.</span><span class="n">measurement_unit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_measurement_unit</span><span class="p">(</span><span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;measure_unit&quot;</span><span class="p">))</span>
+        <span class="n">indicator</span><span class="o">.</span><span class="n">topic_id</span> <span class="o">=</span> <span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;topic-ref&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">indicator</span><span class="o">.</span><span class="n">preferable_tendency</span> <span class="o">=</span> <span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;preferable_tendency&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">indicator</span><span class="o">.</span><span class="n">add_translation</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">IndicatorTranslation</span><span class="p">(</span><span class="n">lang_code</span><span class="o">=</span><span class="s">&#39;en&#39;</span><span class="p">,</span>
+                                        <span class="n">name</span><span class="o">=</span><span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;ind_name_en&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                                        <span class="n">description</span><span class="o">=</span><span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;ind_description_en&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+        <span class="n">indicator</span><span class="o">.</span><span class="n">add_translation</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">IndicatorTranslation</span><span class="p">(</span><span class="n">lang_code</span><span class="o">=</span><span class="s">&#39;es&#39;</span><span class="p">,</span>
+                                        <span class="n">name</span><span class="o">=</span><span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;ind_name_es&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                                        <span class="n">description</span><span class="o">=</span><span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;ind_description_es&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+        <span class="n">indicator</span><span class="o">.</span><span class="n">add_translation</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">IndicatorTranslation</span><span class="p">(</span><span class="n">lang_code</span><span class="o">=</span><span class="s">&#39;fr&#39;</span><span class="p">,</span>
+                                        <span class="n">name</span><span class="o">=</span><span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;ind_name_fr&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                                        <span class="n">description</span><span class="o">=</span><span class="n">ind</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;ind_description_fr&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+        <span class="c"># The indicator may be related with others</span>
+        <span class="c"># The attribute related_id WILL NOT be persisted to the database and</span>
+        <span class="c"># it is only used to create the relationships objects in the services</span>
+        <span class="n">indicator</span><span class="o">.</span><span class="n">related_id</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">rel</span> <span class="ow">in</span> <span class="n">ind</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;indicator-ref&#39;</span><span class="p">):</span>
+            <span class="n">indicator</span><span class="o">.</span><span class="n">related_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rel</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">indicator</span>
+
+    <span class="k">def</span> <span class="nf">_get_indicator_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">):</span>
+        <span class="n">indicator</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">IndicatorGroup</span><span class="p">()</span>
+        <span class="n">indicator</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">)</span>
+        <span class="c">#The indicator group is linked to a CompoundIndicator. The attribute</span>
+        <span class="c">#indicator-ref will be used in the services layer to link the</span>
+        <span class="c">#IndicatorGroup and the CompoundIndicator, and it will not be</span>
+        <span class="c">#persisted to the database</span>
+        <span class="n">indicator</span><span class="o">.</span><span class="n">indicator_ref</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;indicator-ref&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">indicator</span>
+
+<div class="viewcode-block" id="Parser.get_observations"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_observations">[docs]</a>    <span class="k">def</span> <span class="nf">get_observations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: list of observations found in the XML files.  Every observation</span>
+<span class="sd">            comes with its ref_time, value and computation.  Each observation</span>
+<span class="sd">            has the fields &#39;region_code&#39; (UN_code) and &#39;country_code&#39; (ISO3) of</span>
+<span class="sd">            the region they reffer to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">obs_root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;observations&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_observation</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span> <span class="k">for</span> <span class="n">obs</span> <span class="ow">in</span> <span class="n">obs_root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&quot;observation&quot;</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="Parser.get_slices"><a class="viewcode-back" href="../../app.html#app.parser.Parser.get_slices">[docs]</a>    <span class="k">def</span> <span class="nf">get_slices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: list of slices found in the XML files.  Each slice</span>
+<span class="sd">            has the fields &#39;region_code&#39; (UN_code) and &#39;country_code&#39; (ISO3) of</span>
+<span class="sd">            the region they reffer to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sli_root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;slices&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_slice</span><span class="p">(</span><span class="n">sli</span><span class="p">)</span> <span class="k">for</span> <span class="n">sli</span> <span class="ow">in</span> <span class="n">sli_root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;slice&#39;</span><span class="p">))</span>
+</div>
+    <span class="k">def</span> <span class="nf">_get_observation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obs</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">get_slice_id</span><span class="p">(</span><span class="n">obs_id</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_observations_slices</span><span class="p">[</span><span class="n">obs_id</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">None</span>
+
+        <span class="n">observation</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Observation</span><span class="p">()</span>
+        <span class="n">observation</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">obs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">)</span>
+        <span class="n">observation</span><span class="o">.</span><span class="n">indicator_id</span> <span class="o">=</span> <span class="n">obs</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;indicator-ref&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;indicator&#39;</span><span class="p">)</span>
+        <span class="n">observation</span><span class="o">.</span><span class="n">ref_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_time</span><span class="p">(</span><span class="n">obs</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;time&#39;</span><span class="p">))</span>
+        <span class="n">observation</span><span class="o">.</span><span class="n">issued</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_issued</span><span class="p">(</span><span class="n">obs</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;issued&#39;</span><span class="p">))</span>
+        <span class="n">observation</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_obs_value</span><span class="p">(</span><span class="n">obs</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;obs-status&#39;</span><span class="p">),</span> <span class="n">obs</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;value&#39;</span><span class="p">))</span>
+        <span class="n">observation</span><span class="o">.</span><span class="n">computation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_computation</span><span class="p">(</span><span class="n">obs</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;computation&#39;</span><span class="p">))</span>
+        <span class="n">observation</span><span class="o">.</span><span class="n">indicator_group_id</span> <span class="o">=</span> <span class="n">obs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;group&#39;</span><span class="p">)</span>
+        <span class="n">observation</span><span class="o">.</span><span class="n">slice_id</span> <span class="o">=</span> <span class="n">get_slice_id</span><span class="p">(</span><span class="n">observation</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="n">observation</span><span class="o">.</span><span class="n">dataset_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">()</span><span class="o">.</span><span class="n">id</span>
+        <span class="c"># An observation may refer to a country or to a whole region</span>
+        <span class="c"># This fields will not be persisted to the database, instead it will</span>
+        <span class="c"># be used to link the observation with is referred region or country in the</span>
+        <span class="c"># services layer.</span>
+        <span class="n">observation</span><span class="o">.</span><span class="n">region_code</span> <span class="o">=</span> <span class="n">obs</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;region&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>\
+                <span class="k">if</span> <span class="n">obs</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;region&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>\
+                <span class="k">else</span> <span class="bp">None</span>
+        <span class="n">observation</span><span class="o">.</span><span class="n">country_code</span> <span class="o">=</span> <span class="n">obs</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;country&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>\
+                <span class="k">if</span> <span class="n">obs</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;country&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>\
+                <span class="k">else</span> <span class="bp">None</span>
+        <span class="k">return</span> <span class="n">observation</span>
+
+    <span class="k">def</span> <span class="nf">_get_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sli</span><span class="p">):</span>
+        <span class="nb">slice</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Slice</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">sli</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">))</span>
+        <span class="nb">slice</span><span class="o">.</span><span class="n">indicator_id</span> <span class="o">=</span> <span class="n">sli</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;sli_metadata&#39;</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;indicator-ref&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">)</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="n">sli</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;sli_metadata&quot;</span><span class="p">)</span>
+        <span class="nb">slice</span><span class="o">.</span><span class="n">dataset_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">()</span><span class="o">.</span><span class="n">id</span>
+        <span class="c"># The slice&#39;s dimension may be a Region or a Time. If it is a Time we</span>
+        <span class="c"># can create it here and link it with the slice. If it is a Region we</span>
+        <span class="c"># we must check the API using it&#39;s region code or iso3 code.</span>
+        <span class="nb">slice</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_time</span><span class="p">(</span><span class="n">metadata</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;time&quot;</span><span class="p">))</span>\
+                <span class="k">if</span> <span class="n">metadata</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;time&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>\
+                <span class="k">else</span> <span class="bp">None</span>
+        <span class="c"># Those fields will not be persisted to the database, instead it will</span>
+        <span class="c"># be used to link the slice with its regions from the helpers layer.</span>
+        <span class="nb">slice</span><span class="o">.</span><span class="n">region_code</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;region&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>\
+                <span class="k">if</span> <span class="n">metadata</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;region&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>\
+                <span class="k">else</span> <span class="bp">None</span>
+        <span class="nb">slice</span><span class="o">.</span><span class="n">country_code</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;country&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>\
+                <span class="k">if</span> <span class="n">metadata</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;country&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>\
+                <span class="k">else</span> <span class="bp">None</span>
+        <span class="k">return</span> <span class="nb">slice</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_parse_time</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;unit&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;years&quot;</span><span class="p">:</span>
+            <span class="n">interval</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;interval&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">interval</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">start_year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;beginning&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+                <span class="n">end_year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;end&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+                <span class="n">beginning</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">start_year</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">end_year</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="n">beginning</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">YearInterval</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;unit&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;months&quot;</span><span class="p">:</span>
+            <span class="c">#The information comes in the format MM/YYYY</span>
+            <span class="n">month</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">MonthInterval</span><span class="p">(</span><span class="n">month</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span>
+
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_parse_issued</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s">&#39;%Y-%m-</span><span class="si">%d</span><span class="s">T%H:%M:%S&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">Instant</span><span class="p">(</span><span class="n">instant</span><span class="o">=</span><span class="n">date</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_parse_obs_value</span><span class="p">(</span><span class="n">status_node</span><span class="p">,</span> <span class="n">value_node</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Value</span><span class="p">(</span><span class="n">obs_status</span><span class="o">=</span><span class="n">status_node</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">value</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value_node</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_parse_computation</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+        <span class="n">computation</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Computation</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">uri</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">computation</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_parse_measurement_unit</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">MeasurementUnit</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+            <span class="n">convertible_to</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;convertible_to&quot;</span><span class="p">),</span>
+            <span class="n">factor</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;factor&quot;</span><span class="p">)</span>
+        <span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Land Portal Receiver 1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Weso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

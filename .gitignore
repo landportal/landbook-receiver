@@ -40,3 +40,10 @@ venv
 include
 local
 *.pyc
+.idea
+
+# Landportal Model
+model/
+
+# Database files
+*.db
