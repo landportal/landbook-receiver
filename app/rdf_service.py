@@ -1,3 +1,5 @@
+from countries.fao_uri_resolver import FaoUriResolver
+
 __author__ = 'guillermo'
 
 from parser import Parser
@@ -382,8 +384,10 @@ class ReceiverRDFService(object):
         country_id = ""
         country_name = ""
         iso2 = ""
-        fao_uri = ""
+        fao_uri = ""  # URL of the page
         region = ""
+        fao_semantic_uri = ""  # Semantic uri node
+        fao_resolver = FaoUriResolver()
         for country in CountryReader().get_countries(country_list_file):
             if code == country.iso3:
                 country_id = country.iso3
@@ -391,6 +395,7 @@ class ReceiverRDFService(object):
                 iso2 = country.iso2
                 fao_uri = country.faoURI
                 region = country.is_part_of_id
+                fao_semantic_uri = fao_resolver.get_URI_from_iso3(country.iso3)
         graph.add((base.term(country_id), RDF.type,
                    cex.term("Area")))
         graph.add((base.term(country_id), RDFS.label,
@@ -403,6 +408,10 @@ class ReceiverRDFService(object):
                    URIRef(fao_uri)))
         graph.add((base.term(country_id), lb.term("is_part_of"),
                    base.term(region)))
+        if fao_semantic_uri is not None:
+            graph.add((base.term(country_id), lb.term("faoReference"),
+                       URIRef(fao_semantic_uri)))
+
         return code
 
     def _add_region_triples(self, graph):
