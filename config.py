@@ -23,6 +23,7 @@ COUNTRY_LIST_FILE = 'countries/country_list.xlsx'
 RDF_DATA_SET = 'datasets/dataset.rdf'
 TURTLE_DATA_SET = 'datasets/dataset.ttl'
 DATA_SETS_DIR = "datasets"
+RAW_FILE = 'datasets/raw_file'
 CKAN_INSTANCE = 'http://localhost:2000/data/'
 PORTAL_HUB = 'http://localhost:2000'
 SOURCE_IMG_PATH = '/sites/all/themes/book/static/images/sources/'
