@@ -75,7 +75,7 @@ class MetadataPopulator(object):
         global_reg = models.Region(un_code=001)
         global_reg.add_translation(models.RegionTranslation(lang_code='en', name=u'Global'))
         global_reg.add_translation(models.RegionTranslation(lang_code='es', name=u'Global'))
-        global_reg.add_translation(models.RegionTranslation(lang_code='fr', name=u'Global'))
+        global_reg.add_translation(models.RegionTranslation(lang_code='fr', name=u'Monde'))
         return global_reg
 
     @staticmethod
@@ -88,7 +88,7 @@ class MetadataPopulator(object):
         reg2 = models.Region(un_code=19)
         reg2.add_translation(models.RegionTranslation(lang_code='en', name=u'Americas'))
         reg2.add_translation(models.RegionTranslation(lang_code='es', name=u'América'))
-        reg2.add_translation(models.RegionTranslation(lang_code='fr', name=u'Amerique'))
+        reg2.add_translation(models.RegionTranslation(lang_code='fr', name=u'Amérique'))
         reg3 = models.Region(un_code=150)
         reg3.add_translation(models.RegionTranslation(lang_code='en', name=u'Europe'))
         reg3.add_translation(models.RegionTranslation(lang_code='es', name=u'Europa'))
@@ -96,11 +96,11 @@ class MetadataPopulator(object):
         reg4 = models.Region(un_code=9)
         reg4.add_translation(models.RegionTranslation(lang_code='en', name=u'Oceania'))
         reg4.add_translation(models.RegionTranslation(lang_code='es', name=u'Oceanía'))
-        reg4.add_translation(models.RegionTranslation(lang_code='fr', name=u'Oceanie'))
+        reg4.add_translation(models.RegionTranslation(lang_code='fr', name=u'Océanie'))
         reg5 = models.Region(un_code=142)
         reg5.add_translation(models.RegionTranslation(lang_code='en', name=u'Asia'))
         reg5.add_translation(models.RegionTranslation(lang_code='es', name=u'Asia'))
-        reg5.add_translation(models.RegionTranslation(lang_code='fr', name=u'Asia'))
+        reg5.add_translation(models.RegionTranslation(lang_code='fr', name=u'Asie'))
         return [reg1, reg2, reg3, reg4, reg5]
 
     @staticmethod
