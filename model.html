@@ -1,0 +1,1834 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>model package &mdash; Land Portal Receiver 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Land Portal Receiver 1.0 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">Land Portal Receiver 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="model-package">
+<h1>model package<a class="headerlink" href="#model-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-model.models">
+<span id="model-models-module"></span><h2>model.models module<a class="headerlink" href="#module-model.models" title="Permalink to this headline">¶</a></h2>
+<p>Created on 03/02/2014</p>
+<p>&#64;author: Herminio</p>
+<dl class="class">
+<dt id="model.models.Auth">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">Auth</tt><big>(</big><em>user</em>, <em>token</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Auth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Auth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<dl class="attribute">
+<dt id="model.models.Auth.token">
+<tt class="descname">token</tt><a class="headerlink" href="#model.models.Auth.token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Auth.user">
+<tt class="descname">user</tt><a class="headerlink" href="#model.models.Auth.user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.Becomes">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">Becomes</tt><big>(</big><em>source=None</em>, <em>target=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Becomes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Becomes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#model.models.IndicatorRelationship" title="model.models.IndicatorRelationship"><tt class="xref py py-class docutils literal"><span class="pre">model.models.IndicatorRelationship</span></tt></a></p>
+<p>classdocs</p>
+<dl class="attribute">
+<dt id="model.models.Becomes.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.Becomes.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Becomes.source">
+<tt class="descname">source</tt><a class="headerlink" href="#model.models.Becomes.source" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Becomes.source_id">
+<tt class="descname">source_id</tt><a class="headerlink" href="#model.models.Becomes.source_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Becomes.target">
+<tt class="descname">target</tt><a class="headerlink" href="#model.models.Becomes.target" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Becomes.target_id">
+<tt class="descname">target_id</tt><a class="headerlink" href="#model.models.Becomes.target_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Becomes.type">
+<tt class="descname">type</tt><a class="headerlink" href="#model.models.Becomes.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.CompoundIndicator">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">CompoundIndicator</tt><big>(</big><em>id</em>, <em>preferable_tendency=None</em>, <em>measurement_unit_id=None</em>, <em>dataset_id=None</em>, <em>compound_indicator_id=None</em>, <em>starred=False</em><big>)</big><a class="reference internal" href="_modules/model/models.html#CompoundIndicator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.CompoundIndicator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#model.models.Indicator" title="model.models.Indicator"><tt class="xref py py-class docutils literal"><span class="pre">model.models.Indicator</span></tt></a></p>
+<p>classdocs</p>
+<dl class="attribute">
+<dt id="model.models.CompoundIndicator.compound_indicator_id">
+<tt class="descname">compound_indicator_id</tt><a class="headerlink" href="#model.models.CompoundIndicator.compound_indicator_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.CompoundIndicator.dataset_id">
+<tt class="descname">dataset_id</tt><a class="headerlink" href="#model.models.CompoundIndicator.dataset_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.CompoundIndicator.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.CompoundIndicator.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.CompoundIndicator.indicator_id">
+<tt class="descname">indicator_id</tt><a class="headerlink" href="#model.models.CompoundIndicator.indicator_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.CompoundIndicator.indicator_ref_group">
+<tt class="descname">indicator_ref_group</tt><a class="headerlink" href="#model.models.CompoundIndicator.indicator_ref_group" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.CompoundIndicator.indicator_ref_group_id">
+<tt class="descname">indicator_ref_group_id</tt><a class="headerlink" href="#model.models.CompoundIndicator.indicator_ref_group_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.CompoundIndicator.indicator_refs">
+<tt class="descname">indicator_refs</tt><a class="headerlink" href="#model.models.CompoundIndicator.indicator_refs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.CompoundIndicator.last_update">
+<tt class="descname">last_update</tt><a class="headerlink" href="#model.models.CompoundIndicator.last_update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.CompoundIndicator.measurement_unit">
+<tt class="descname">measurement_unit</tt><a class="headerlink" href="#model.models.CompoundIndicator.measurement_unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.CompoundIndicator.measurement_unit_id">
+<tt class="descname">measurement_unit_id</tt><a class="headerlink" href="#model.models.CompoundIndicator.measurement_unit_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.CompoundIndicator.preferable_tendency">
+<tt class="descname">preferable_tendency</tt><a class="headerlink" href="#model.models.CompoundIndicator.preferable_tendency" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.CompoundIndicator.starred">
+<tt class="descname">starred</tt><a class="headerlink" href="#model.models.CompoundIndicator.starred" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.CompoundIndicator.topic_id">
+<tt class="descname">topic_id</tt><a class="headerlink" href="#model.models.CompoundIndicator.topic_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.CompoundIndicator.translations">
+<tt class="descname">translations</tt><a class="headerlink" href="#model.models.CompoundIndicator.translations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.CompoundIndicator.type">
+<tt class="descname">type</tt><a class="headerlink" href="#model.models.CompoundIndicator.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.Computation">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">Computation</tt><big>(</big><em>uri=None</em>, <em>description=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Computation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Computation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>classdocs</p>
+<dl class="attribute">
+<dt id="model.models.Computation.description">
+<tt class="descname">description</tt><a class="headerlink" href="#model.models.Computation.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Computation.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.Computation.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Computation.uri">
+<tt class="descname">uri</tt><a class="headerlink" href="#model.models.Computation.uri" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.Country">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">Country</tt><big>(</big><em>iso2=None</em>, <em>iso3=None</em>, <em>fao_URI=None</em>, <em>is_part_of=None</em>, <em>un_code=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Country"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Country" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#model.models.Region" title="model.models.Region"><tt class="xref py py-class docutils literal"><span class="pre">model.models.Region</span></tt></a></p>
+<p>classdocs</p>
+<dl class="attribute">
+<dt id="model.models.Country.faoURI">
+<tt class="descname">faoURI</tt><a class="headerlink" href="#model.models.Country.faoURI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="model.models.Country.get_dimension_string">
+<tt class="descname">get_dimension_string</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/model/models.html#Country.get_dimension_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Country.get_dimension_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Country.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.Country.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Country.is_part_of">
+<tt class="descname">is_part_of</tt><a class="headerlink" href="#model.models.Country.is_part_of" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Country.is_part_of_id">
+<tt class="descname">is_part_of_id</tt><a class="headerlink" href="#model.models.Country.is_part_of_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Country.iso2">
+<tt class="descname">iso2</tt><a class="headerlink" href="#model.models.Country.iso2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Country.iso3">
+<tt class="descname">iso3</tt><a class="headerlink" href="#model.models.Country.iso3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Country.observations">
+<tt class="descname">observations</tt><a class="headerlink" href="#model.models.Country.observations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Country.translations">
+<tt class="descname">translations</tt><a class="headerlink" href="#model.models.Country.translations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Country.type">
+<tt class="descname">type</tt><a class="headerlink" href="#model.models.Country.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Country.un_code">
+<tt class="descname">un_code</tt><a class="headerlink" href="#model.models.Country.un_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.DataSource">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">DataSource</tt><big>(</big><em>name=None</em>, <em>organization=None</em>, <em>dsource_id=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#DataSource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.DataSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>classdocs</p>
+<dl class="method">
+<dt id="model.models.DataSource.add_dataset">
+<tt class="descname">add_dataset</tt><big>(</big><em>dataset</em><big>)</big><a class="reference internal" href="_modules/model/models.html#DataSource.add_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.DataSource.add_dataset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="model.models.DataSource.add_observation">
+<tt class="descname">add_observation</tt><big>(</big><em>observation</em><big>)</big><a class="reference internal" href="_modules/model/models.html#DataSource.add_observation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.DataSource.add_observation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.DataSource.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.DataSource.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.DataSource.name">
+<tt class="descname">name</tt><a class="headerlink" href="#model.models.DataSource.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.DataSource.organization">
+<tt class="descname">organization</tt><a class="headerlink" href="#model.models.DataSource.organization" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.DataSource.organization_id">
+<tt class="descname">organization_id</tt><a class="headerlink" href="#model.models.DataSource.organization_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.Dataset">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">Dataset</tt><big>(</big><em>data_set_id=None</em>, <em>frequency=None</em>, <em>source=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>classdocs</p>
+<dl class="method">
+<dt id="model.models.Dataset.add_indicator">
+<tt class="descname">add_indicator</tt><big>(</big><em>indicator</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Dataset.add_indicator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Dataset.add_indicator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="model.models.Dataset.add_slice">
+<tt class="descname">add_slice</tt><big>(</big><em>data_slice</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Dataset.add_slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Dataset.add_slice" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Dataset.datasource">
+<tt class="descname">datasource</tt><a class="headerlink" href="#model.models.Dataset.datasource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Dataset.datasource_id">
+<tt class="descname">datasource_id</tt><a class="headerlink" href="#model.models.Dataset.datasource_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Dataset.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.Dataset.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Dataset.indicators">
+<tt class="descname">indicators</tt><a class="headerlink" href="#model.models.Dataset.indicators" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Dataset.license">
+<tt class="descname">license</tt><a class="headerlink" href="#model.models.Dataset.license" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Dataset.license_id">
+<tt class="descname">license_id</tt><a class="headerlink" href="#model.models.Dataset.license_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Dataset.sdmx_frequency">
+<tt class="descname">sdmx_frequency</tt><a class="headerlink" href="#model.models.Dataset.sdmx_frequency" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.Dimension">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">Dimension</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Dimension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Dimension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>classdocs</p>
+<dl class="method">
+<dt id="model.models.Dimension.get_dimension_string">
+<tt class="descname">get_dimension_string</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/model/models.html#Dimension.get_dimension_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Dimension.get_dimension_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Dimension.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.Dimension.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Dimension.type">
+<tt class="descname">type</tt><a class="headerlink" href="#model.models.Dimension.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.Indicator">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">Indicator</tt><big>(</big><em>id</em>, <em>preferable_tendency=None</em>, <em>measurement_unit_id=None</em>, <em>dataset_id=None</em>, <em>compound_indicator_id=None</em>, <em>starred=False</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Indicator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Indicator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>classdocs</p>
+<dl class="method">
+<dt id="model.models.Indicator.add_translation">
+<tt class="descname">add_translation</tt><big>(</big><em>translation</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Indicator.add_translation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Indicator.add_translation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Indicator.compound_indicator_id">
+<tt class="descname">compound_indicator_id</tt><a class="headerlink" href="#model.models.Indicator.compound_indicator_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Indicator.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.Indicator.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Indicator.last_update">
+<tt class="descname">last_update</tt><a class="headerlink" href="#model.models.Indicator.last_update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Indicator.measurement_unit">
+<tt class="descname">measurement_unit</tt><a class="headerlink" href="#model.models.Indicator.measurement_unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Indicator.measurement_unit_id">
+<tt class="descname">measurement_unit_id</tt><a class="headerlink" href="#model.models.Indicator.measurement_unit_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Indicator.preferable_tendency">
+<tt class="descname">preferable_tendency</tt><a class="headerlink" href="#model.models.Indicator.preferable_tendency" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Indicator.starred">
+<tt class="descname">starred</tt><a class="headerlink" href="#model.models.Indicator.starred" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Indicator.topic_id">
+<tt class="descname">topic_id</tt><a class="headerlink" href="#model.models.Indicator.topic_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Indicator.translations">
+<tt class="descname">translations</tt><a class="headerlink" href="#model.models.Indicator.translations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Indicator.type">
+<tt class="descname">type</tt><a class="headerlink" href="#model.models.Indicator.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.IndicatorGroup">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">IndicatorGroup</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/model/models.html#IndicatorGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.IndicatorGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>classdocs</p>
+<dl class="attribute">
+<dt id="model.models.IndicatorGroup.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.IndicatorGroup.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.IndicatorGroup.observations">
+<tt class="descname">observations</tt><a class="headerlink" href="#model.models.IndicatorGroup.observations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.IndicatorRelationship">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">IndicatorRelationship</tt><big>(</big><em>source=None</em>, <em>target=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#IndicatorRelationship"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.IndicatorRelationship" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>classdocs</p>
+<dl class="attribute">
+<dt id="model.models.IndicatorRelationship.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.IndicatorRelationship.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.IndicatorRelationship.source">
+<tt class="descname">source</tt><a class="headerlink" href="#model.models.IndicatorRelationship.source" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.IndicatorRelationship.source_id">
+<tt class="descname">source_id</tt><a class="headerlink" href="#model.models.IndicatorRelationship.source_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.IndicatorRelationship.target">
+<tt class="descname">target</tt><a class="headerlink" href="#model.models.IndicatorRelationship.target" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.IndicatorRelationship.target_id">
+<tt class="descname">target_id</tt><a class="headerlink" href="#model.models.IndicatorRelationship.target_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.IndicatorRelationship.type">
+<tt class="descname">type</tt><a class="headerlink" href="#model.models.IndicatorRelationship.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.IndicatorTranslation">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">IndicatorTranslation</tt><big>(</big><em>lang_code</em>, <em>name</em>, <em>description</em>, <em>indicator_id=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#IndicatorTranslation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.IndicatorTranslation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>Contains translations for indicator names and descriptions</p>
+<dl class="attribute">
+<dt id="model.models.IndicatorTranslation.description">
+<tt class="descname">description</tt><a class="headerlink" href="#model.models.IndicatorTranslation.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.IndicatorTranslation.indicator_id">
+<tt class="descname">indicator_id</tt><a class="headerlink" href="#model.models.IndicatorTranslation.indicator_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.IndicatorTranslation.lang_code">
+<tt class="descname">lang_code</tt><a class="headerlink" href="#model.models.IndicatorTranslation.lang_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.IndicatorTranslation.name">
+<tt class="descname">name</tt><a class="headerlink" href="#model.models.IndicatorTranslation.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.Instant">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">Instant</tt><big>(</big><em>instant=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Instant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Instant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#model.models.Time" title="model.models.Time"><tt class="xref py py-class docutils literal"><span class="pre">model.models.Time</span></tt></a></p>
+<p>classdocs</p>
+<dl class="method">
+<dt id="model.models.Instant.get_time_string">
+<tt class="descname">get_time_string</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/model/models.html#Instant.get_time_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Instant.get_time_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Instant.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.Instant.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Instant.timestamp">
+<tt class="descname">timestamp</tt><a class="headerlink" href="#model.models.Instant.timestamp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Instant.type">
+<tt class="descname">type</tt><a class="headerlink" href="#model.models.Instant.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.Interval">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">Interval</tt><big>(</big><em>start_time=None</em>, <em>end_time=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Interval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#model.models.Time" title="model.models.Time"><tt class="xref py py-class docutils literal"><span class="pre">model.models.Time</span></tt></a></p>
+<p>Represents any interval of time</p>
+<dl class="attribute">
+<dt id="model.models.Interval.end_time">
+<tt class="descname">end_time</tt><a class="headerlink" href="#model.models.Interval.end_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="model.models.Interval.get_time_string">
+<tt class="descname">get_time_string</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/model/models.html#Interval.get_time_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Interval.get_time_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Interval.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.Interval.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Interval.start_time">
+<tt class="descname">start_time</tt><a class="headerlink" href="#model.models.Interval.start_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Interval.type">
+<tt class="descname">type</tt><a class="headerlink" href="#model.models.Interval.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Interval.value">
+<tt class="descname">value</tt><a class="headerlink" href="#model.models.Interval.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.IsPartOf">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">IsPartOf</tt><big>(</big><em>source=None</em>, <em>target=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#IsPartOf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.IsPartOf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#model.models.IndicatorRelationship" title="model.models.IndicatorRelationship"><tt class="xref py py-class docutils literal"><span class="pre">model.models.IndicatorRelationship</span></tt></a></p>
+<p>classdocs</p>
+<dl class="attribute">
+<dt id="model.models.IsPartOf.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.IsPartOf.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.IsPartOf.source">
+<tt class="descname">source</tt><a class="headerlink" href="#model.models.IsPartOf.source" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.IsPartOf.source_id">
+<tt class="descname">source_id</tt><a class="headerlink" href="#model.models.IsPartOf.source_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.IsPartOf.target">
+<tt class="descname">target</tt><a class="headerlink" href="#model.models.IsPartOf.target" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.IsPartOf.target_id">
+<tt class="descname">target_id</tt><a class="headerlink" href="#model.models.IsPartOf.target_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.IsPartOf.type">
+<tt class="descname">type</tt><a class="headerlink" href="#model.models.IsPartOf.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.Language">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">Language</tt><big>(</big><em>name</em>, <em>lang_code</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Language"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Language" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>Language class. Contains language name and two-character code</p>
+<dl class="attribute">
+<dt id="model.models.Language.lang_code">
+<tt class="descname">lang_code</tt><a class="headerlink" href="#model.models.Language.lang_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Language.name">
+<tt class="descname">name</tt><a class="headerlink" href="#model.models.Language.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.License">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">License</tt><big>(</big><em>name=None</em>, <em>description=None</em>, <em>republish=None</em>, <em>url=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#License"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.License" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>classdocs</p>
+<dl class="attribute">
+<dt id="model.models.License.description">
+<tt class="descname">description</tt><a class="headerlink" href="#model.models.License.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.License.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.License.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.License.name">
+<tt class="descname">name</tt><a class="headerlink" href="#model.models.License.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.License.republish">
+<tt class="descname">republish</tt><a class="headerlink" href="#model.models.License.republish" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.License.url">
+<tt class="descname">url</tt><a class="headerlink" href="#model.models.License.url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.MeasurementUnit">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">MeasurementUnit</tt><big>(</big><em>id=None</em>, <em>name=None</em>, <em>convertible_to=None</em>, <em>factor=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#MeasurementUnit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.MeasurementUnit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>classdocs</p>
+<dl class="attribute">
+<dt id="model.models.MeasurementUnit.convertible_to">
+<tt class="descname">convertible_to</tt><a class="headerlink" href="#model.models.MeasurementUnit.convertible_to" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.MeasurementUnit.factor">
+<tt class="descname">factor</tt><a class="headerlink" href="#model.models.MeasurementUnit.factor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.MeasurementUnit.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.MeasurementUnit.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.MeasurementUnit.name">
+<tt class="descname">name</tt><a class="headerlink" href="#model.models.MeasurementUnit.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.MonthInterval">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">MonthInterval</tt><big>(</big><em>month</em>, <em>year</em><big>)</big><a class="reference internal" href="_modules/model/models.html#MonthInterval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.MonthInterval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#model.models.Interval" title="model.models.Interval"><tt class="xref py py-class docutils literal"><span class="pre">model.models.Interval</span></tt></a></p>
+<p>Represents a single month</p>
+<dl class="attribute">
+<dt id="model.models.MonthInterval.end_time">
+<tt class="descname">end_time</tt><a class="headerlink" href="#model.models.MonthInterval.end_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="model.models.MonthInterval.get_time_string">
+<tt class="descname">get_time_string</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/model/models.html#MonthInterval.get_time_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.MonthInterval.get_time_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.MonthInterval.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.MonthInterval.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.MonthInterval.month">
+<tt class="descname">month</tt><a class="headerlink" href="#model.models.MonthInterval.month" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.MonthInterval.start_time">
+<tt class="descname">start_time</tt><a class="headerlink" href="#model.models.MonthInterval.start_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.MonthInterval.type">
+<tt class="descname">type</tt><a class="headerlink" href="#model.models.MonthInterval.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.MonthInterval.value">
+<tt class="descname">value</tt><a class="headerlink" href="#model.models.MonthInterval.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.MonthInterval.year">
+<tt class="descname">year</tt><a class="headerlink" href="#model.models.MonthInterval.year" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.Observation">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">Observation</tt><big>(</big><em>id=None</em>, <em>ref_time=None</em>, <em>issued=None</em>, <em>computation=None</em>, <em>value=None</em>, <em>indicator=None</em>, <em>provider=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Observation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Observation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>classdocs</p>
+<dl class="attribute">
+<dt id="model.models.Observation.computation">
+<tt class="descname">computation</tt><a class="headerlink" href="#model.models.Observation.computation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Observation.computation_id">
+<tt class="descname">computation_id</tt><a class="headerlink" href="#model.models.Observation.computation_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Observation.dataset">
+<tt class="descname">dataset</tt><a class="headerlink" href="#model.models.Observation.dataset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Observation.dataset_id">
+<tt class="descname">dataset_id</tt><a class="headerlink" href="#model.models.Observation.dataset_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Observation.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.Observation.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Observation.indicator">
+<tt class="descname">indicator</tt><a class="headerlink" href="#model.models.Observation.indicator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Observation.indicator_group">
+<tt class="descname">indicator_group</tt><a class="headerlink" href="#model.models.Observation.indicator_group" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Observation.indicator_group_id">
+<tt class="descname">indicator_group_id</tt><a class="headerlink" href="#model.models.Observation.indicator_group_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Observation.indicator_id">
+<tt class="descname">indicator_id</tt><a class="headerlink" href="#model.models.Observation.indicator_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Observation.issued">
+<tt class="descname">issued</tt><a class="headerlink" href="#model.models.Observation.issued" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Observation.issued_id">
+<tt class="descname">issued_id</tt><a class="headerlink" href="#model.models.Observation.issued_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Observation.ref_time">
+<tt class="descname">ref_time</tt><a class="headerlink" href="#model.models.Observation.ref_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Observation.ref_time_id">
+<tt class="descname">ref_time_id</tt><a class="headerlink" href="#model.models.Observation.ref_time_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Observation.region_id">
+<tt class="descname">region_id</tt><a class="headerlink" href="#model.models.Observation.region_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Observation.slice_id">
+<tt class="descname">slice_id</tt><a class="headerlink" href="#model.models.Observation.slice_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Observation.value">
+<tt class="descname">value</tt><a class="headerlink" href="#model.models.Observation.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Observation.value_id">
+<tt class="descname">value_id</tt><a class="headerlink" href="#model.models.Observation.value_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.Organization">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">Organization</tt><big>(</big><em>id=None</em>, <em>name=None</em>, <em>is_part_of=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Organization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Organization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>classdocs</p>
+<dl class="method">
+<dt id="model.models.Organization.add_data_source">
+<tt class="descname">add_data_source</tt><big>(</big><em>data_source</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Organization.add_data_source"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Organization.add_data_source" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Organization.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.Organization.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Organization.is_part_of">
+<tt class="descname">is_part_of</tt><a class="headerlink" href="#model.models.Organization.is_part_of" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Organization.is_part_of_id">
+<tt class="descname">is_part_of_id</tt><a class="headerlink" href="#model.models.Organization.is_part_of_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Organization.name">
+<tt class="descname">name</tt><a class="headerlink" href="#model.models.Organization.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Organization.url">
+<tt class="descname">url</tt><a class="headerlink" href="#model.models.Organization.url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.Region">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">Region</tt><big>(</big><em>is_part_of=None</em>, <em>un_code=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Region"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Region" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#model.models.Dimension" title="model.models.Dimension"><tt class="xref py py-class docutils literal"><span class="pre">model.models.Dimension</span></tt></a></p>
+<p>classdocs</p>
+<dl class="method">
+<dt id="model.models.Region.add_observation">
+<tt class="descname">add_observation</tt><big>(</big><em>observation</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Region.add_observation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Region.add_observation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="model.models.Region.add_translation">
+<tt class="descname">add_translation</tt><big>(</big><em>translation</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Region.add_translation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Region.add_translation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="model.models.Region.get_dimension_string">
+<tt class="descname">get_dimension_string</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/model/models.html#Region.get_dimension_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Region.get_dimension_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Region.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.Region.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Region.is_part_of">
+<tt class="descname">is_part_of</tt><a class="headerlink" href="#model.models.Region.is_part_of" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Region.is_part_of_id">
+<tt class="descname">is_part_of_id</tt><a class="headerlink" href="#model.models.Region.is_part_of_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Region.observations">
+<tt class="descname">observations</tt><a class="headerlink" href="#model.models.Region.observations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Region.translations">
+<tt class="descname">translations</tt><a class="headerlink" href="#model.models.Region.translations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Region.type">
+<tt class="descname">type</tt><a class="headerlink" href="#model.models.Region.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Region.un_code">
+<tt class="descname">un_code</tt><a class="headerlink" href="#model.models.Region.un_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.RegionTranslation">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">RegionTranslation</tt><big>(</big><em>lang_code</em>, <em>name</em>, <em>region_id=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#RegionTranslation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.RegionTranslation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>Contains translations for country names</p>
+<dl class="attribute">
+<dt id="model.models.RegionTranslation.lang_code">
+<tt class="descname">lang_code</tt><a class="headerlink" href="#model.models.RegionTranslation.lang_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.RegionTranslation.name">
+<tt class="descname">name</tt><a class="headerlink" href="#model.models.RegionTranslation.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.RegionTranslation.region_id">
+<tt class="descname">region_id</tt><a class="headerlink" href="#model.models.RegionTranslation.region_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.Slice">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">Slice</tt><big>(</big><em>id</em>, <em>dimension=None</em>, <em>dataset=None</em>, <em>indicator=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Slice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>classdocs</p>
+<dl class="method">
+<dt id="model.models.Slice.add_observation">
+<tt class="descname">add_observation</tt><big>(</big><em>observation</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Slice.add_observation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Slice.add_observation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Slice.dataset">
+<tt class="descname">dataset</tt><a class="headerlink" href="#model.models.Slice.dataset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Slice.dataset_id">
+<tt class="descname">dataset_id</tt><a class="headerlink" href="#model.models.Slice.dataset_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Slice.dimension">
+<tt class="descname">dimension</tt><a class="headerlink" href="#model.models.Slice.dimension" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Slice.dimension_id">
+<tt class="descname">dimension_id</tt><a class="headerlink" href="#model.models.Slice.dimension_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Slice.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.Slice.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Slice.indicator">
+<tt class="descname">indicator</tt><a class="headerlink" href="#model.models.Slice.indicator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Slice.indicator_id">
+<tt class="descname">indicator_id</tt><a class="headerlink" href="#model.models.Slice.indicator_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Slice.observations">
+<tt class="descname">observations</tt><a class="headerlink" href="#model.models.Slice.observations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.Time">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">Time</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#model.models.Dimension" title="model.models.Dimension"><tt class="xref py py-class docutils literal"><span class="pre">model.models.Dimension</span></tt></a></p>
+<p>classdocs</p>
+<dl class="method">
+<dt id="model.models.Time.get_dimension_string">
+<tt class="descname">get_dimension_string</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/model/models.html#Time.get_dimension_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Time.get_dimension_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="model.models.Time.get_time_string">
+<tt class="descname">get_time_string</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/model/models.html#Time.get_time_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Time.get_time_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Time.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.Time.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Time.type">
+<tt class="descname">type</tt><a class="headerlink" href="#model.models.Time.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.Topic">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">Topic</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Topic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Topic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>Topic class. Each indicator refers to a topic</p>
+<dl class="method">
+<dt id="model.models.Topic.add_translation">
+<tt class="descname">add_translation</tt><big>(</big><em>translation</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Topic.add_translation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Topic.add_translation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Topic.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.Topic.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Topic.indicators">
+<tt class="descname">indicators</tt><a class="headerlink" href="#model.models.Topic.indicators" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Topic.translations">
+<tt class="descname">translations</tt><a class="headerlink" href="#model.models.Topic.translations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.TopicTranslation">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">TopicTranslation</tt><big>(</big><em>lang_code</em>, <em>name</em>, <em>topic_id=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#TopicTranslation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.TopicTranslation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>Contains translations for topic names</p>
+<dl class="attribute">
+<dt id="model.models.TopicTranslation.lang_code">
+<tt class="descname">lang_code</tt><a class="headerlink" href="#model.models.TopicTranslation.lang_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.TopicTranslation.name">
+<tt class="descname">name</tt><a class="headerlink" href="#model.models.TopicTranslation.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.TopicTranslation.topic_id">
+<tt class="descname">topic_id</tt><a class="headerlink" href="#model.models.TopicTranslation.topic_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.User">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">User</tt><big>(</big><em>id=None</em>, <em>ip=None</em>, <em>timestamp=None</em>, <em>organization_id=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#User"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.User" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>User model object</p>
+<dl class="attribute">
+<dt id="model.models.User.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.User.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.User.ip">
+<tt class="descname">ip</tt><a class="headerlink" href="#model.models.User.ip" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.User.organization">
+<tt class="descname">organization</tt><a class="headerlink" href="#model.models.User.organization" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.User.organization_id">
+<tt class="descname">organization_id</tt><a class="headerlink" href="#model.models.User.organization_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.User.timestamp">
+<tt class="descname">timestamp</tt><a class="headerlink" href="#model.models.User.timestamp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.Value">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">Value</tt><big>(</big><em>obs_status=None</em><big>)</big><a class="reference internal" href="_modules/model/models.html#Value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.Value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>classdocs</p>
+<dl class="attribute">
+<dt id="model.models.Value.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.Value.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Value.obs_status">
+<tt class="descname">obs_status</tt><a class="headerlink" href="#model.models.Value.obs_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Value.value">
+<tt class="descname">value</tt><a class="headerlink" href="#model.models.Value.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.Value.value_type">
+<tt class="descname">value_type</tt><a class="headerlink" href="#model.models.Value.value_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="model.models.YearInterval">
+<em class="property">class </em><tt class="descclassname">model.models.</tt><tt class="descname">YearInterval</tt><big>(</big><em>year</em><big>)</big><a class="reference internal" href="_modules/model/models.html#YearInterval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.YearInterval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#model.models.Interval" title="model.models.Interval"><tt class="xref py py-class docutils literal"><span class="pre">model.models.Interval</span></tt></a></p>
+<p>Represents a single year</p>
+<dl class="attribute">
+<dt id="model.models.YearInterval.end_time">
+<tt class="descname">end_time</tt><a class="headerlink" href="#model.models.YearInterval.end_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="model.models.YearInterval.get_time_string">
+<tt class="descname">get_time_string</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/model/models.html#YearInterval.get_time_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#model.models.YearInterval.get_time_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.YearInterval.id">
+<tt class="descname">id</tt><a class="headerlink" href="#model.models.YearInterval.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.YearInterval.start_time">
+<tt class="descname">start_time</tt><a class="headerlink" href="#model.models.YearInterval.start_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.YearInterval.type">
+<tt class="descname">type</tt><a class="headerlink" href="#model.models.YearInterval.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.YearInterval.value">
+<tt class="descname">value</tt><a class="headerlink" href="#model.models.YearInterval.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="model.models.YearInterval.year">
+<tt class="descname">year</tt><a class="headerlink" href="#model.models.YearInterval.year" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="model.models.relationship">
+<tt class="descclassname">model.models.</tt><tt class="descname">relationship</tt><big>(</big><em>argument</em>, <em>secondary=None</em>, <em>primaryjoin=None</em>, <em>secondaryjoin=None</em>, <em>foreign_keys=None</em>, <em>uselist=None</em>, <em>order_by=False</em>, <em>backref=None</em>, <em>back_populates=None</em>, <em>post_update=False</em>, <em>cascade=False</em>, <em>extension=None</em>, <em>viewonly=False</em>, <em>lazy=True</em>, <em>collection_class=None</em>, <em>passive_deletes=False</em>, <em>passive_updates=True</em>, <em>remote_side=None</em>, <em>enable_typechecks=True</em>, <em>join_depth=None</em>, <em>comparator_factory=None</em>, <em>single_parent=False</em>, <em>innerjoin=False</em>, <em>distinct_target_key=None</em>, <em>doc=None</em>, <em>active_history=False</em>, <em>cascade_backrefs=True</em>, <em>load_on_pending=False</em>, <em>strategy_class=None</em>, <em>_local_remote_pairs=None</em>, <em>query_class=None</em>, <em>info=None</em><big>)</big><a class="headerlink" href="#model.models.relationship" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide a relationship between two mapped classes.</p>
+<p>This corresponds to a parent-child or associative table relationship.  The
+constructed class is an instance of <tt class="xref py py-class docutils literal"><span class="pre">RelationshipProperty</span></tt>.</p>
+<p>A typical <a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a>, used in a classical mapping:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mapper</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">&#39;children&#39;</span><span class="p">:</span> <span class="n">relationship</span><span class="p">(</span><span class="n">Child</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+<p>Some arguments accepted by <a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a> optionally accept a
+callable function, which when called produces the desired value.
+The callable is invoked by the parent <tt class="xref py py-class docutils literal"><span class="pre">Mapper</span></tt> at &#8220;mapper
+initialization&#8221; time, which happens only when mappers are first used, and
+is assumed to be after all mappings have been constructed.  This can be
+used to resolve order-of-declaration and other dependency issues, such as
+if <tt class="docutils literal"><span class="pre">Child</span></tt> is declared below <tt class="docutils literal"><span class="pre">Parent</span></tt> in the same file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mapper</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="p">{</span>
+    <span class="s">&quot;children&quot;</span><span class="p">:</span><span class="n">relationship</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">Child</span><span class="p">,</span>
+                        <span class="n">order_by</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">Child</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+<p>When using the <em class="xref std std-ref">declarative_toplevel</em> extension, the Declarative
+initializer allows string arguments to be passed to <a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a>.
+These string arguments are converted into callables that evaluate
+the string as Python code, using the Declarative
+class-registry as a namespace.  This allows the lookup of related
+classes to be automatic via their string name, and removes the need to
+import related classes at all into the local module space:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">sqlalchemy.ext.declarative</span> <span class="kn">import</span> <span class="n">declarative_base</span>
+
+<span class="n">Base</span> <span class="o">=</span> <span class="n">declarative_base</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">Parent</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;parent&#39;</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">children</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s">&quot;Child&quot;</span><span class="p">,</span> <span class="n">order_by</span><span class="o">=</span><span class="s">&quot;Child.id&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p><em class="xref std std-ref">relationship_config_toplevel</em> - Full introductory and reference
+documentation for <a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a>.</p>
+<p class="last"><em class="xref std std-ref">orm_tutorial_relationship</em> - ORM tutorial introduction.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>argument</strong> &#8211; <p>a mapped class, or actual <tt class="xref py py-class docutils literal"><span class="pre">Mapper</span></tt> instance, representing the
+target of the relationship.</p>
+<p><a href="#id1"><span class="problematic" id="id2">:paramref:`~.relationship.argument`</span></a> may also be passed as a callable function
+which is evaluated at mapper initialization time, and may be passed as a
+Python-evaluable string when using Declarative.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><em class="xref std std-ref">declarative_configuring_relationships</em> - further detail
+on relationship configuration when using Declarative.</p>
+</div>
+</li>
+<li><strong>secondary</strong> &#8211; <p>for a many-to-many relationship, specifies the intermediary
+table, and is typically an instance of <tt class="xref py py-class docutils literal"><span class="pre">Table</span></tt>.
+In less common circumstances, the argument may also be specified
+as an <tt class="xref py py-class docutils literal"><span class="pre">Alias</span></tt> construct, or even a <tt class="xref py py-class docutils literal"><span class="pre">Join</span></tt> construct.</p>
+<p><a href="#id3"><span class="problematic" id="id4">:paramref:`~.relationship.secondary`</span></a> may
+also be passed as a callable function which is evaluated at
+mapper initialization time.  When using Declarative, it may also
+be a string argument noting the name of a <tt class="xref py py-class docutils literal"><span class="pre">Table</span></tt> that is
+present in the <tt class="xref py py-class docutils literal"><span class="pre">MetaData</span></tt> collection associated with the
+parent-mapped <tt class="xref py py-class docutils literal"><span class="pre">Table</span></tt>.</p>
+<p>The <a href="#id5"><span class="problematic" id="id6">:paramref:`~.relationship.secondary`</span></a> keyword argument is typically
+applied in the case where the intermediary <tt class="xref py py-class docutils literal"><span class="pre">Table</span></tt> is not
+otherwise exprssed in any direct class mapping. If the &#8220;secondary&#8221; table
+is also explicitly mapped elsewhere
+(e.g. as in <em class="xref std std-ref">association_pattern</em>), one should consider applying
+the <a href="#id7"><span class="problematic" id="id8">:paramref:`~.relationship.viewonly`</span></a> flag so that this <a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a>
+is not used for persistence operations which may conflict with those
+of the association object pattern.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p><em class="xref std std-ref">relationships_many_to_many</em> - Reference example of &#8220;many to many&#8221;.</p>
+<p><em class="xref std std-ref">orm_tutorial_many_to_many</em> - ORM tutorial introduction to
+many-to-many relationships.</p>
+<p><em class="xref std std-ref">self_referential_many_to_many</em> - Specifics on using many-to-many
+in a self-referential case.</p>
+<p><em class="xref std std-ref">declarative_many_to_many</em> - Additional options when using
+Declarative.</p>
+<p><em class="xref std std-ref">association_pattern</em> - an alternative to <a href="#id9"><span class="problematic" id="id10">:paramref:`~.relationship.secondary`</span></a>
+when composing association table relationships, allowing additional
+attributes to be specified on the association table.</p>
+<p class="last"><em class="xref std std-ref">composite_secondary_join</em> - a lesser-used pattern which in some
+cases can enable complex <a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a> SQL conditions
+to be used.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.9.2: </span><a href="#id11"><span class="problematic" id="id12">:paramref:`~.relationship.secondary`</span></a> works
+more effectively when referring to a <tt class="xref py py-class docutils literal"><span class="pre">Join</span></tt> instance.</p>
+</div>
+</li>
+<li><strong>active_history=False</strong> &#8211; When <tt class="docutils literal"><span class="pre">True</span></tt>, indicates that the &#8220;previous&#8221; value for a
+many-to-one reference should be loaded when replaced, if
+not already loaded. Normally, history tracking logic for
+simple many-to-ones only needs to be aware of the &#8220;new&#8221;
+value in order to perform a flush. This flag is available
+for applications that make use of
+<tt class="xref py py-func docutils literal"><span class="pre">attributes.get_history()</span></tt> which also need to know
+the &#8220;previous&#8221; value of the attribute.</li>
+<li><strong>backref</strong> &#8211; <p>indicates the string name of a property to be placed on the related
+mapper&#8217;s class that will handle this relationship in the other
+direction. The other property will be created automatically
+when the mappers are configured.  Can also be passed as a
+<tt class="xref py py-func docutils literal"><span class="pre">backref()</span></tt> object to control the configuration of the
+new relationship.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p><em class="xref std std-ref">relationships_backref</em> - Introductory documentation and
+examples.</p>
+<p><a href="#id13"><span class="problematic" id="id14">:paramref:`~.relationship.back_populates`</span></a> - alternative form
+of backref specification.</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">backref()</span></tt> - allows control over <a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a>
+configuration when using <a href="#id15"><span class="problematic" id="id16">:paramref:`~.relationship.backref`</span></a>.</p>
+</div>
+</li>
+<li><strong>back_populates</strong> &#8211; <p>Takes a string name and has the same meaning as <a href="#id17"><span class="problematic" id="id18">:paramref:`~.relationship.backref`</span></a>,
+except the complementing property is <strong>not</strong> created automatically,
+and instead must be configured explicitly on the other mapper.  The
+complementing property should also indicate <a href="#id19"><span class="problematic" id="id20">:paramref:`~.relationship.back_populates`</span></a>
+to this relationship to ensure proper functioning.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p><em class="xref std std-ref">relationships_backref</em> - Introductory documentation and
+examples.</p>
+<p class="last"><a href="#id21"><span class="problematic" id="id22">:paramref:`~.relationship.backref`</span></a> - alternative form
+of backref specification.</p>
+</div>
+</li>
+<li><strong>cascade</strong> &#8211; <p>a comma-separated list of cascade rules which determines how
+Session operations should be &#8220;cascaded&#8221; from parent to child.
+This defaults to <tt class="docutils literal"><span class="pre">False</span></tt>, which means the default cascade
+should be used - this default cascade is <tt class="docutils literal"><span class="pre">&quot;save-update,</span> <span class="pre">merge&quot;</span></tt>.</p>
+<p>The available cascades are <tt class="docutils literal"><span class="pre">save-update</span></tt>, <tt class="docutils literal"><span class="pre">merge</span></tt>,
+<tt class="docutils literal"><span class="pre">expunge</span></tt>, <tt class="docutils literal"><span class="pre">delete</span></tt>, <tt class="docutils literal"><span class="pre">delete-orphan</span></tt>, and <tt class="docutils literal"><span class="pre">refresh-expire</span></tt>.
+An additional option, <tt class="docutils literal"><span class="pre">all</span></tt> indicates shorthand for
+<tt class="docutils literal"><span class="pre">&quot;save-update,</span> <span class="pre">merge,</span> <span class="pre">refresh-expire,</span>
+<span class="pre">expunge,</span> <span class="pre">delete&quot;</span></tt>, and is often used as in <tt class="docutils literal"><span class="pre">&quot;all,</span> <span class="pre">delete-orphan&quot;</span></tt>
+to indicate that related objects should follow along with the
+parent object in all cases, and be deleted when de-associated.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p><em class="xref std std-ref">unitofwork_cascades</em> - Full detail on each of the available
+cascade options.</p>
+<p class="last"><em class="xref std std-ref">tutorial_delete_cascade</em> - Tutorial example describing
+a delete cascade.</p>
+</div>
+</li>
+<li><strong>cascade_backrefs=True</strong> &#8211; <p>a boolean value indicating if the <tt class="docutils literal"><span class="pre">save-update</span></tt> cascade should
+operate along an assignment event intercepted by a backref.
+When set to <tt class="docutils literal"><span class="pre">False</span></tt>, the attribute managed by this relationship
+will not cascade an incoming transient object into the session of a
+persistent parent, if the event is received via backref.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><em class="xref std std-ref">backref_cascade</em> - Full discussion and examples on how
+the <a href="#id23"><span class="problematic" id="id24">:paramref:`~.relationship.cascade_backrefs`</span></a> option is used.</p>
+</div>
+</li>
+<li><strong>collection_class</strong> &#8211; <p>a class or callable that returns a new list-holding object. will
+be used in place of a plain list for storing elements.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><em class="xref std std-ref">custom_collections</em> - Introductory documentation and
+examples.</p>
+</div>
+</li>
+<li><strong>comparator_factory</strong> &#8211; <p>a class which extends <tt class="xref py py-class docutils literal"><span class="pre">RelationshipProperty.Comparator</span></tt> which
+provides custom SQL clause generation for comparison operations.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p><tt class="xref py py-class docutils literal"><span class="pre">PropComparator</span></tt> - some detail on redefining comparators
+at this level.</p>
+<p class="last"><em class="xref std std-ref">custom_comparators</em> - Brief intro to this feature.</p>
+</div>
+</li>
+<li><strong>distinct_target_key=None</strong> &#8211; <p>Indicate if a &#8220;subquery&#8221; eager load should apply the DISTINCT
+keyword to the innermost SELECT statement.  When left as <tt class="docutils literal"><span class="pre">None</span></tt>,
+the DISTINCT keyword will be applied in those cases when the target
+columns do not comprise the full primary key of the target table.
+When set to <tt class="docutils literal"><span class="pre">True</span></tt>, the DISTINCT keyword is applied to the innermost
+SELECT unconditionally.</p>
+<p>It may be desirable to set this flag to False when the DISTINCT is
+reducing performance of the innermost subquery beyond that of what
+duplicate innermost rows may be causing.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.8.3: </span>- <a href="#id25"><span class="problematic" id="id26">:paramref:`~.relationship.distinct_target_key`</span></a>
+allows the
+subquery eager loader to apply a DISTINCT modifier to the
+innermost SELECT.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.9.0: </span>- <a href="#id27"><span class="problematic" id="id28">:paramref:`~.relationship.distinct_target_key`</span></a>
+now defaults to <tt class="docutils literal"><span class="pre">None</span></tt>, so that the feature enables itself automatically for
+those cases where the innermost query targets a non-unique
+key.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><em class="xref std std-ref">loading_toplevel</em> - includes an introduction to subquery
+eager loading.</p>
+</div>
+</li>
+<li><strong>doc</strong> &#8211; docstring which will be applied to the resulting descriptor.</li>
+<li><strong>extension</strong> &#8211; <p>an <tt class="xref py py-class docutils literal"><span class="pre">AttributeExtension</span></tt> instance, or list of extensions,
+which will be prepended to the list of attribute listeners for
+the resulting descriptor placed on the class.</p>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.7: </span>Please see <tt class="xref py py-class docutils literal"><span class="pre">AttributeEvents</span></tt>.</p>
+</div>
+</li>
+<li><strong>foreign_keys</strong> &#8211; <p>a list of columns which are to be used as &#8220;foreign key&#8221;
+columns, or columns which refer to the value in a remote
+column, within the context of this <a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a>
+object&#8217;s <a href="#id29"><span class="problematic" id="id30">:paramref:`~.relationship.primaryjoin`</span></a> condition.
+That is, if the <a href="#id31"><span class="problematic" id="id32">:paramref:`~.relationship.primaryjoin`</span></a>
+condition of this <a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a> is <tt class="docutils literal"><span class="pre">a.id</span> <span class="pre">==</span>
+<span class="pre">b.a_id</span></tt>, and the values in <tt class="docutils literal"><span class="pre">b.a_id</span></tt> are required to be
+present in <tt class="docutils literal"><span class="pre">a.id</span></tt>, then the &#8220;foreign key&#8221; column of this
+<a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a> is <tt class="docutils literal"><span class="pre">b.a_id</span></tt>.</p>
+<p>In normal cases, the <a href="#id33"><span class="problematic" id="id34">:paramref:`~.relationship.foreign_keys`</span></a>
+parameter is <strong>not required.</strong> <a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a> will
+automatically determine which columns in the
+<a href="#id35"><span class="problematic" id="id36">:paramref:`~.relationship.primaryjoin`</span></a> conditition are to be
+considered &#8220;foreign key&#8221; columns based on those
+<tt class="xref py py-class docutils literal"><span class="pre">Column</span></tt> objects that specify <tt class="xref py py-class docutils literal"><span class="pre">ForeignKey</span></tt>,
+or are otherwise listed as referencing columns in a
+<tt class="xref py py-class docutils literal"><span class="pre">ForeignKeyConstraint</span></tt> construct.
+<a href="#id37"><span class="problematic" id="id38">:paramref:`~.relationship.foreign_keys`</span></a> is only needed when:</p>
+<blockquote>
+<div><ol class="arabic">
+<li>There is more than one way to construct a join from the local
+table to the remote table, as there are multiple foreign key
+references present.  Setting <tt class="docutils literal"><span class="pre">foreign_keys</span></tt> will limit the
+<a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a> to consider just those columns specified
+here as &#8220;foreign&#8221;.<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.8: </span>A multiple-foreign key join ambiguity can be resolved by
+setting the <a href="#id39"><span class="problematic" id="id40">:paramref:`~.relationship.foreign_keys`</span></a> parameter alone, without the
+need to explicitly set <a href="#id41"><span class="problematic" id="id42">:paramref:`~.relationship.primaryjoin`</span></a> as well.</p>
+</div>
+</li>
+<li>The <tt class="xref py py-class docutils literal"><span class="pre">Table</span></tt> being mapped does not actually have
+<tt class="xref py py-class docutils literal"><span class="pre">ForeignKey</span></tt> or <tt class="xref py py-class docutils literal"><span class="pre">ForeignKeyConstraint</span></tt>
+constructs present, often because the table
+was reflected from a database that does not support foreign key
+reflection (MySQL MyISAM).</li>
+<li>The <a href="#id43"><span class="problematic" id="id44">:paramref:`~.relationship.primaryjoin`</span></a> argument is used to construct a non-standard
+join condition, which makes use of columns or expressions that do
+not normally refer to their &#8220;parent&#8221; column, such as a join condition
+expressed by a complex comparison using a SQL function.</li>
+</ol>
+</div></blockquote>
+<p>The <a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a> construct will raise informative
+error messages that suggest the use of the
+<a href="#id45"><span class="problematic" id="id46">:paramref:`~.relationship.foreign_keys`</span></a> parameter when
+presented with an ambiguous condition.   In typical cases,
+if <a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a> doesn&#8217;t raise any exceptions, the
+<a href="#id47"><span class="problematic" id="id48">:paramref:`~.relationship.foreign_keys`</span></a> parameter is usually
+not needed.</p>
+<p><a href="#id49"><span class="problematic" id="id50">:paramref:`~.relationship.foreign_keys`</span></a> may also be passed as a callable function
+which is evaluated at mapper initialization time, and may be passed as a
+Python-evaluable string when using Declarative.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p><em class="xref std std-ref">relationship_foreign_keys</em></p>
+<p><em class="xref std std-ref">relationship_custom_foreign</em></p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">foreign()</span></tt> - allows direct annotation of the &#8220;foreign&#8221; columns
+within a <a href="#id51"><span class="problematic" id="id52">:paramref:`~.relationship.primaryjoin`</span></a> condition.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.8: </span>The <tt class="xref py py-func docutils literal"><span class="pre">foreign()</span></tt> annotation can also be applied
+directly to the <a href="#id53"><span class="problematic" id="id54">:paramref:`~.relationship.primaryjoin`</span></a> expression, which is an alternate,
+more specific system of describing which columns in a particular
+<a href="#id55"><span class="problematic" id="id56">:paramref:`~.relationship.primaryjoin`</span></a> should be considered &#8220;foreign&#8221;.</p>
+</div>
+</li>
+<li><strong>info</strong> &#8211; <p>Optional data dictionary which will be populated into the
+<tt class="xref py py-attr docutils literal"><span class="pre">MapperProperty.info</span></tt> attribute of this object.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.8.</span></p>
+</div>
+</li>
+<li><strong>innerjoin=False</strong> &#8211; <p>when <tt class="docutils literal"><span class="pre">True</span></tt>, joined eager loads will use an inner join to join
+against related tables instead of an outer join.  The purpose
+of this option is generally one of performance, as inner joins
+generally perform better than outer joins.</p>
+<p>This flag can be set to <tt class="docutils literal"><span class="pre">True</span></tt> when the relationship references an
+object via many-to-one using local foreign keys that are not nullable,
+or when the reference is one-to-one or a collection that is guaranteed
+to have one or at least one entry.</p>
+<p>If the joined-eager load is chained onto an existing LEFT OUTER JOIN,
+<tt class="docutils literal"><span class="pre">innerjoin=True</span></tt> will be bypassed and the join will continue to
+chain as LEFT OUTER JOIN so that the results don&#8217;t change.  As an alternative,
+specify the value <tt class="docutils literal"><span class="pre">&quot;nested&quot;</span></tt>.  This will instead nest the join
+on the right side, e.g. using the form &#8220;a LEFT OUTER JOIN (b JOIN c)&#8221;.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.9.4: </span>Added <tt class="docutils literal"><span class="pre">innerjoin=&quot;nested&quot;</span></tt> option to support
+nesting of eager &#8220;inner&#8221; joins.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p><em class="xref std std-ref">what_kind_of_loading</em> - Discussion of some details of
+various loader options.</p>
+<p class="last"><a href="#id57"><span class="problematic" id="id58">:paramref:`.joinedload.innerjoin`</span></a> - loader option version</p>
+</div>
+</li>
+<li><strong>join_depth</strong> &#8211; <p>when non-<tt class="docutils literal"><span class="pre">None</span></tt>, an integer value indicating how many levels
+deep &#8220;eager&#8221; loaders should join on a self-referring or cyclical
+relationship.  The number counts how many times the same Mapper
+shall be present in the loading condition along a particular join
+branch.  When left at its default of <tt class="docutils literal"><span class="pre">None</span></tt>, eager loaders
+will stop chaining when they encounter a the same target mapper
+which is already higher up in the chain.  This option applies
+both to joined- and subquery- eager loaders.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><em class="xref std std-ref">self_referential_eager_loading</em> - Introductory documentation
+and examples.</p>
+</div>
+</li>
+<li><strong>lazy=&#8217;select&#8217;</strong> &#8211; <p>specifies
+how the related items should be loaded.  Default value is
+<tt class="docutils literal"><span class="pre">select</span></tt>.  Values include:</p>
+<ul>
+<li><tt class="docutils literal"><span class="pre">select</span></tt> - items should be loaded lazily when the property is first
+accessed, using a separate SELECT statement, or identity map
+fetch for simple many-to-one references.</li>
+<li><tt class="docutils literal"><span class="pre">immediate</span></tt> - items should be loaded as the parents are loaded,
+using a separate SELECT statement, or identity map fetch for
+simple many-to-one references.</li>
+<li><tt class="docutils literal"><span class="pre">joined</span></tt> - items should be loaded &#8220;eagerly&#8221; in the same query as
+that of the parent, using a JOIN or LEFT OUTER JOIN.  Whether
+the join is &#8220;outer&#8221; or not is determined by the
+<a href="#id59"><span class="problematic" id="id60">:paramref:`~.relationship.innerjoin`</span></a> parameter.</li>
+<li><tt class="docutils literal"><span class="pre">subquery</span></tt> - items should be loaded &#8220;eagerly&#8221; as the parents are
+loaded, using one additional SQL statement, which issues a JOIN to a
+subquery of the original statement, for each collection requested.</li>
+<li><tt class="docutils literal"><span class="pre">noload</span></tt> - no loading should occur at any time.  This is to
+support &#8220;write-only&#8221; attributes, or attributes which are
+populated in some manner specific to the application.</li>
+<li><tt class="docutils literal"><span class="pre">dynamic</span></tt> - the attribute will return a pre-configured
+<tt class="xref py py-class docutils literal"><span class="pre">Query</span></tt> object for all read
+operations, onto which further filtering operations can be
+applied before iterating the results.  See
+the section <em class="xref std std-ref">dynamic_relationship</em> for more details.</li>
+<li>True - a synonym for &#8216;select&#8217;</li>
+<li>False - a synonym for &#8216;joined&#8217;</li>
+<li>None - a synonym for &#8216;noload&#8217;</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p><tt class="xref doc docutils literal"><span class="pre">/orm/loading</span></tt> - Full documentation on relationship loader
+configuration.</p>
+<p class="last"><em class="xref std std-ref">dynamic_relationship</em> - detail on the <tt class="docutils literal"><span class="pre">dynamic</span></tt> option.</p>
+</div>
+</li>
+<li><strong>load_on_pending=False</strong> &#8211; <p>Indicates loading behavior for transient or pending parent objects.</p>
+<p>When set to <tt class="docutils literal"><span class="pre">True</span></tt>, causes the lazy-loader to
+issue a query for a parent object that is not persistent, meaning it has
+never been flushed.  This may take effect for a pending object when
+autoflush is disabled, or for a transient object that has been
+&#8220;attached&#8221; to a <tt class="xref py py-class docutils literal"><span class="pre">Session</span></tt> but is not part of its pending
+collection.</p>
+<p>The <a href="#id61"><span class="problematic" id="id62">:paramref:`~.relationship.load_on_pending`</span></a> flag does not improve behavior
+when the ORM is used normally - object references should be constructed
+at the object level, not at the foreign key level, so that they
+are present in an ordinary way before a flush proceeds.  This flag
+is not not intended for general use.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-meth docutils literal"><span class="pre">Session.enable_relationship_loading()</span></tt> - this method establishes
+&#8220;load on pending&#8221; behavior for the whole object, and also allows
+loading on objects that remain transient or detached.</p>
+</div>
+</li>
+<li><strong>order_by</strong> &#8211; <p>indicates the ordering that should be applied when loading these
+items.  <a href="#id63"><span class="problematic" id="id64">:paramref:`~.relationship.order_by`</span></a> is expected to refer to one
+of the <tt class="xref py py-class docutils literal"><span class="pre">Column</span></tt>
+objects to which the target class is mapped, or
+the attribute itself bound to the target class which refers
+to the column.</p>
+<p><a href="#id65"><span class="problematic" id="id66">:paramref:`~.relationship.order_by`</span></a> may also be passed as a callable function
+which is evaluated at mapper initialization time, and may be passed as a
+Python-evaluable string when using Declarative.</p>
+</li>
+<li><strong>passive_deletes=False</strong> &#8211; <p>Indicates loading behavior during delete operations.</p>
+<p>A value of True indicates that unloaded child items should not
+be loaded during a delete operation on the parent.  Normally,
+when a parent item is deleted, all child items are loaded so
+that they can either be marked as deleted, or have their
+foreign key to the parent set to NULL.  Marking this flag as
+True usually implies an ON DELETE &lt;CASCADE|SET NULL&gt; rule is in
+place which will handle updating/deleting child rows on the
+database side.</p>
+<p>Additionally, setting the flag to the string value &#8216;all&#8217; will
+disable the &#8220;nulling out&#8221; of the child foreign keys, when there
+is no delete or delete-orphan cascade enabled.  This is
+typically used when a triggering or error raise scenario is in
+place on the database side.  Note that the foreign key
+attributes on in-session child objects will not be changed
+after a flush occurs so this is a very special use-case
+setting.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><em class="xref std std-ref">passive_deletes</em> - Introductory documentation
+and examples.</p>
+</div>
+</li>
+<li><strong>passive_updates=True</strong> &#8211; <p>Indicates loading and INSERT/UPDATE/DELETE behavior when the
+source of a foreign key value changes (i.e. an &#8220;on update&#8221;
+cascade), which are typically the primary key columns of the
+source row.</p>
+<p>When True, it is assumed that ON UPDATE CASCADE is configured on
+the foreign key in the database, and that the database will
+handle propagation of an UPDATE from a source column to
+dependent rows.  Note that with databases which enforce
+referential integrity (i.e. PostgreSQL, MySQL with InnoDB tables),
+ON UPDATE CASCADE is required for this operation.  The
+relationship() will update the value of the attribute on related
+items which are locally present in the session during a flush.</p>
+<p>When False, it is assumed that the database does not enforce
+referential integrity and will not be issuing its own CASCADE
+operation for an update.  The relationship() will issue the
+appropriate UPDATE statements to the database in response to the
+change of a referenced key, and items locally present in the
+session during a flush will also be refreshed.</p>
+<p>This flag should probably be set to False if primary key changes
+are expected and the database in use doesn&#8217;t support CASCADE
+(i.e. SQLite, MySQL MyISAM tables).</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p><em class="xref std std-ref">passive_updates</em> - Introductory documentation and
+examples.</p>
+<p class="last"><a href="#id67"><span class="problematic" id="id68">:paramref:`.mapper.passive_updates`</span></a> - a similar flag which
+takes effect for joined-table inheritance mappings.</p>
+</div>
+</li>
+<li><strong>post_update</strong> &#8211; <p>this indicates that the relationship should be handled by a
+second UPDATE statement after an INSERT or before a
+DELETE. Currently, it also will issue an UPDATE after the
+instance was UPDATEd as well, although this technically should
+be improved. This flag is used to handle saving bi-directional
+dependencies between two individual rows (i.e. each row
+references the other), where it would otherwise be impossible to
+INSERT or DELETE both rows fully since one row exists before the
+other. Use this flag when a particular mapping arrangement will
+incur two rows that are dependent on each other, such as a table
+that has a one-to-many relationship to a set of child rows, and
+also has a column that references a single child row within that
+list (i.e. both tables contain a foreign key to each other). If
+a flush operation returns an error that a &#8220;cyclical
+dependency&#8221; was detected, this is a cue that you might want to
+use <a href="#id69"><span class="problematic" id="id70">:paramref:`~.relationship.post_update`</span></a> to &#8220;break&#8221; the cycle.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><em class="xref std std-ref">post_update</em> - Introductory documentation and examples.</p>
+</div>
+</li>
+<li><strong>primaryjoin</strong> &#8211; <p>a SQL expression that will be used as the primary
+join of this child object against the parent object, or in a
+many-to-many relationship the join of the primary object to the
+association table. By default, this value is computed based on the
+foreign key relationships of the parent and child tables (or association
+table).</p>
+<p><a href="#id71"><span class="problematic" id="id72">:paramref:`~.relationship.primaryjoin`</span></a> may also be passed as a callable function
+which is evaluated at mapper initialization time, and may be passed as a
+Python-evaluable string when using Declarative.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><em class="xref std std-ref">relationship_primaryjoin</em></p>
+</div>
+</li>
+<li><strong>remote_side</strong> &#8211; <p>used for self-referential relationships, indicates the column or
+list of columns that form the &#8220;remote side&#8221; of the relationship.</p>
+<p><a href="#id73"><span class="problematic" id="id74">:paramref:`.relationship.remote_side`</span></a> may also be passed as a callable function
+which is evaluated at mapper initialization time, and may be passed as a
+Python-evaluable string when using Declarative.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.8: </span>The <tt class="xref py py-func docutils literal"><span class="pre">remote()</span></tt> annotation can also be applied
+directly to the <tt class="docutils literal"><span class="pre">primaryjoin</span></tt> expression, which is an alternate,
+more specific system of describing which columns in a particular
+<tt class="docutils literal"><span class="pre">primaryjoin</span></tt> should be considered &#8220;remote&#8221;.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p><em class="xref std std-ref">self_referential</em> - in-depth explaination of how
+<a href="#id75"><span class="problematic" id="id76">:paramref:`~.relationship.remote_side`</span></a>
+is used to configure self-referential relationships.</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">remote()</span></tt> - an annotation function that accomplishes the same
+purpose as <a href="#id77"><span class="problematic" id="id78">:paramref:`~.relationship.remote_side`</span></a>, typically
+when a custom <a href="#id79"><span class="problematic" id="id80">:paramref:`~.relationship.primaryjoin`</span></a> condition
+is used.</p>
+</div>
+</li>
+<li><strong>query_class</strong> &#8211; <p>a <tt class="xref py py-class docutils literal"><span class="pre">Query</span></tt> subclass that will be used as the base of the
+&#8220;appender query&#8221; returned by a &#8220;dynamic&#8221; relationship, that
+is, a relationship that specifies <tt class="docutils literal"><span class="pre">lazy=&quot;dynamic&quot;</span></tt> or was
+otherwise constructed using the <tt class="xref py py-func docutils literal"><span class="pre">orm.dynamic_loader()</span></tt>
+function.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><em class="xref std std-ref">dynamic_relationship</em> - Introduction to &#8220;dynamic&#8221; relationship
+loaders.</p>
+</div>
+</li>
+<li><strong>secondaryjoin</strong> &#8211; <p>a SQL expression that will be used as the join of
+an association table to the child object. By default, this value is
+computed based on the foreign key relationships of the association and
+child tables.</p>
+<p><a href="#id81"><span class="problematic" id="id82">:paramref:`~.relationship.secondaryjoin`</span></a> may also be passed as a callable function
+which is evaluated at mapper initialization time, and may be passed as a
+Python-evaluable string when using Declarative.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><em class="xref std std-ref">relationship_primaryjoin</em></p>
+</div>
+</li>
+<li><strong>single_parent</strong> &#8211; <p>when True, installs a validator which will prevent objects
+from being associated with more than one parent at a time.
+This is used for many-to-one or many-to-many relationships that
+should be treated either as one-to-one or one-to-many.  Its usage
+is optional, except for <a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a> constructs which
+are many-to-one or many-to-many and also
+specify the <tt class="docutils literal"><span class="pre">delete-orphan</span></tt> cascade option.  The <a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a>
+construct itself will raise an error instructing when this option
+is required.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><em class="xref std std-ref">unitofwork_cascades</em> - includes detail on when the
+<a href="#id83"><span class="problematic" id="id84">:paramref:`~.relationship.single_parent`</span></a> flag may be appropriate.</p>
+</div>
+</li>
+<li><strong>uselist</strong> &#8211; <p>a boolean that indicates if this property should be loaded as a
+list or a scalar. In most cases, this value is determined
+automatically by <a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a> at mapper configuration
+time, based on the type and direction
+of the relationship - one to many forms a list, many to one
+forms a scalar, many to many is a list. If a scalar is desired
+where normally a list would be present, such as a bi-directional
+one-to-one relationship, set <a href="#id85"><span class="problematic" id="id86">:paramref:`~.relationship.uselist`</span></a> to False.</p>
+<p>The <a href="#id87"><span class="problematic" id="id88">:paramref:`~.relationship.uselist`</span></a> flag is also available on an
+existing <a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a> construct as a read-only attribute, which
+can be used to determine if this <a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a> deals with
+collections or scalar attributes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">User</span><span class="o">.</span><span class="n">addresses</span><span class="o">.</span><span class="n">property</span><span class="o">.</span><span class="n">uselist</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><em class="xref std std-ref">relationships_one_to_one</em> - Introduction to the &#8220;one to one&#8221;
+relationship pattern, which is typically when the
+<a href="#id89"><span class="problematic" id="id90">:paramref:`~.relationship.uselist`</span></a> flag is needed.</p>
+</div>
+</li>
+<li><strong>viewonly=False</strong> &#8211; when set to True, the relationship is used only for loading objects,
+and not for any persistence operation.  A <a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a>
+which specifies <a href="#id91"><span class="problematic" id="id92">:paramref:`~.relationship.viewonly`</span></a> can work
+with a wider range of SQL operations within the <a href="#id93"><span class="problematic" id="id94">:paramref:`~.relationship.primaryjoin`</span></a>
+condition, including operations that feature the use of
+a variety of comparison operators as well as SQL functions such
+as <tt class="xref py py-func docutils literal"><span class="pre">cast()</span></tt>.  The <a href="#id95"><span class="problematic" id="id96">:paramref:`~.relationship.viewonly`</span></a>
+flag is also of general use when defining any kind of <a class="reference internal" href="#model.models.relationship" title="model.models.relationship"><tt class="xref py py-func docutils literal"><span class="pre">relationship()</span></tt></a>
+that doesn&#8217;t represent the full set of related objects, to prevent
+modifications of the collection from resulting in persistence operations.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-model">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-model" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">model package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-model.models">model.models module</a></li>
+<li><a class="reference internal" href="#module-model">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/model.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">Land Portal Receiver 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Weso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

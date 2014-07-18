@@ -1,0 +1,420 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>app package &mdash; Land Portal Receiver 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Land Portal Receiver 1.0 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">Land Portal Receiver 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="app-package">
+<h1>app package<a class="headerlink" href="#app-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-app.parser">
+<span id="app-parser-module"></span><h2>app.parser module<a class="headerlink" href="#module-app.parser" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="app.parser.Parser">
+<em class="property">class </em><tt class="descclassname">app.parser.</tt><tt class="descname">Parser</tt><big>(</big><em>content</em><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="app.parser.Parser.get_compound_indicators">
+<tt class="descname">get_compound_indicators</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_compound_indicators"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_compound_indicators" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of compound indicators found in the XML file.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.parser.Parser.get_dataset">
+<tt class="descname">get_dataset</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">dataset data found in the XML file.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.parser.Parser.get_datasource">
+<tt class="descname">get_datasource</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_datasource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_datasource" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">datasource data found in the XML file.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.parser.Parser.get_indicator_groups">
+<tt class="descname">get_indicator_groups</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_indicator_groups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_indicator_groups" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of indicator groups found in the XML file.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.parser.Parser.get_license">
+<tt class="descname">get_license</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_license"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_license" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">license data of the XML file.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.parser.Parser.get_observations">
+<tt class="descname">get_observations</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_observations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_observations" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of observations found in the XML files.  Every observation
+comes with its ref_time, value and computation.  Each observation
+has the fields &#8216;region_code&#8217; (UN_code) and &#8216;country_code&#8217; (ISO3) of
+the region they reffer to.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.parser.Parser.get_organization">
+<tt class="descname">get_organization</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_organization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_organization" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">organization data found in the XML file.  The organization ID
+is constructed with the domain name in the organization_url, for
+example www.observatoire-foncier.com will result in the ID
+&#8216;observatoire-foncier&#8217;.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.parser.Parser.get_simple_indicators">
+<tt class="descname">get_simple_indicators</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_simple_indicators"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_simple_indicators" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of simple indicators found in the XML file.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.parser.Parser.get_slices">
+<tt class="descname">get_slices</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_slices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_slices" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of slices found in the XML files.  Each slice
+has the fields &#8216;region_code&#8217; (UN_code) and &#8216;country_code&#8217; (ISO3) of
+the region they reffer to.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.parser.Parser.get_user">
+<tt class="descname">get_user</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/parser.html#Parser.get_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.parser.Parser.get_user" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">user data found in the XML file (whithout user_ip)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-app.rdf_feeder">
+<span id="app-rdf-feeder-module"></span><h2>app.rdf_feeder module<a class="headerlink" href="#module-app.rdf_feeder" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="app.rdf_feeder.feed_rdf">
+<tt class="descclassname">app.rdf_feeder.</tt><tt class="descname">feed_rdf</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/rdf_feeder.html#feed_rdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.rdf_feeder.feed_rdf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-app.rdf_service">
+<span id="app-rdf-service-module"></span><h2>app.rdf_service module<a class="headerlink" href="#module-app.rdf_service" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="app.rdf_service.ReceiverRDFService">
+<em class="property">class </em><tt class="descclassname">app.rdf_service.</tt><tt class="descname">ReceiverRDFService</tt><big>(</big><em>content</em><big>)</big><a class="reference internal" href="_modules/app/rdf_service.html#ReceiverRDFService"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.rdf_service.ReceiverRDFService" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Service that gets the xml input from the html request, generates RDF triples and store
+them in Virtuoso triple store</p>
+<dl class="method">
+<dt id="app.rdf_service.ReceiverRDFService.run_service">
+<tt class="descname">run_service</tt><big>(</big><em>graph</em>, <em>host</em>, <em>api</em>, <em>graph_uri</em>, <em>user_ip</em><big>)</big><a class="reference internal" href="_modules/app/rdf_service.html#ReceiverRDFService.run_service"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.rdf_service.ReceiverRDFService.run_service" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the ReceiverRDFService</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>graph</strong> &#8211; RDF graph.</li>
+<li><strong>graph_uri</strong> &#8211; RDF graph URI to be stored in the triple store.</li>
+<li><strong>host</strong> &#8211; Triple store host.</li>
+<li><strong>api</strong> &#8211; Triple store authentication api.</li>
+<li><strong>user_ip</strong> &#8211; IP from the invoker client.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">RDF graph.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-app.sql_service">
+<span id="app-sql-service-module"></span><h2>app.sql_service module<a class="headerlink" href="#module-app.sql_service" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="app.sql_service.DBHelper">
+<em class="property">class </em><tt class="descclassname">app.sql_service.</tt><tt class="descname">DBHelper</tt><a class="reference internal" href="_modules/app/sql_service.html#DBHelper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.sql_service.DBHelper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Helper for querying the relational database.</p>
+<dl class="staticmethod">
+<dt id="app.sql_service.DBHelper.check_datasource">
+<em class="property">static </em><tt class="descname">check_datasource</tt><big>(</big><em>session</em>, <em>datasource_id</em><big>)</big><a class="reference internal" href="_modules/app/sql_service.html#DBHelper.check_datasource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.sql_service.DBHelper.check_datasource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find a DataSource in the DB. Returns None if not found.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="app.sql_service.DBHelper.check_indicator_starred">
+<em class="property">static </em><tt class="descname">check_indicator_starred</tt><big>(</big><em>session</em>, <em>indicator_id</em><big>)</big><a class="reference internal" href="_modules/app/sql_service.html#DBHelper.check_indicator_starred"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.sql_service.DBHelper.check_indicator_starred" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if an Indicator is starred</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="app.sql_service.DBHelper.check_organization">
+<em class="property">static </em><tt class="descname">check_organization</tt><big>(</big><em>session</em>, <em>organization_url</em><big>)</big><a class="reference internal" href="_modules/app/sql_service.html#DBHelper.check_organization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.sql_service.DBHelper.check_organization" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="app.sql_service.DBHelper.check_user">
+<em class="property">static </em><tt class="descname">check_user</tt><big>(</big><em>session</em>, <em>user_id</em><big>)</big><a class="reference internal" href="_modules/app/sql_service.html#DBHelper.check_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.sql_service.DBHelper.check_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a user exists in the database using its ID</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="app.sql_service.DBHelper.find_compound_indicator">
+<em class="property">static </em><tt class="descname">find_compound_indicator</tt><big>(</big><em>session</em>, <em>ind_id</em><big>)</big><a class="reference internal" href="_modules/app/sql_service.html#DBHelper.find_compound_indicator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.sql_service.DBHelper.find_compound_indicator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a compound indicator by its ID</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="app.sql_service.DBHelper.find_country_id">
+<em class="property">static </em><tt class="descname">find_country_id</tt><big>(</big><em>session</em>, <em>country_code</em><big>)</big><a class="reference internal" href="_modules/app/sql_service.html#DBHelper.find_country_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.sql_service.DBHelper.find_country_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the Country ID using its ISO3</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="app.sql_service.DBHelper.find_indicators">
+<em class="property">static </em><tt class="descname">find_indicators</tt><big>(</big><em>session</em>, <em>ids</em><big>)</big><a class="reference internal" href="_modules/app/sql_service.html#DBHelper.find_indicators"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.sql_service.DBHelper.find_indicators" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all indicators in a list of IDs</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="app.sql_service.DBHelper.find_observations">
+<em class="property">static </em><tt class="descname">find_observations</tt><big>(</big><em>session</em>, <em>ids</em><big>)</big><a class="reference internal" href="_modules/app/sql_service.html#DBHelper.find_observations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.sql_service.DBHelper.find_observations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all observations in a list of IDs</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="app.sql_service.DBHelper.find_region_id">
+<em class="property">static </em><tt class="descname">find_region_id</tt><big>(</big><em>session</em>, <em>reg_code</em><big>)</big><a class="reference internal" href="_modules/app/sql_service.html#DBHelper.find_region_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.sql_service.DBHelper.find_region_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the Region ID using its UN_CODE</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="app.sql_service.ReceiverSQLService">
+<em class="property">class </em><tt class="descclassname">app.sql_service.</tt><tt class="descname">ReceiverSQLService</tt><big>(</big><em>content</em><big>)</big><a class="reference internal" href="_modules/app/sql_service.html#ReceiverSQLService"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.sql_service.ReceiverSQLService" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Service that gets the xml input from the html request, generates SQL output
+and stores it into the configured relational database.</p>
+<dl class="method">
+<dt id="app.sql_service.ReceiverSQLService.store_data">
+<tt class="descname">store_data</tt><big>(</big><em>user_ip</em><big>)</big><a class="reference internal" href="_modules/app/sql_service.html#ReceiverSQLService.store_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.sql_service.ReceiverSQLService.store_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores the data in the XML into the relational database.
+:param user_ip: The IP of the user that calls the service.
+:raises: The exception that made the data storing fail.  If an exception</p>
+<blockquote>
+<div>occurs, nothing will be stored into the database.</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-app.views">
+<span id="app-views-module"></span><h2>app.views module<a class="headerlink" href="#module-app.views" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="app.views.Receiver">
+<em class="property">class </em><tt class="descclassname">app.views.</tt><tt class="descname">Receiver</tt><a class="reference internal" href="_modules/app/views.html#Receiver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.views.Receiver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_restful.Resource</span></tt></p>
+<dl class="attribute">
+<dt id="app.views.Receiver.endpoint">
+<tt class="descname">endpoint</tt><em class="property"> = 'receiver'</em><a class="headerlink" href="#app.views.Receiver.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="app.views.Receiver.mediatypes">
+<tt class="descname">mediatypes</tt><big>(</big><em>resource_cls</em><big>)</big><a class="headerlink" href="#app.views.Receiver.mediatypes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="app.views.Receiver.methods">
+<tt class="descname">methods</tt><em class="property"> = ['POST']</em><a class="headerlink" href="#app.views.Receiver.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="app.views.Receiver.post">
+<em class="property">static </em><tt class="descname">post</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/views.html#Receiver.post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.views.Receiver.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse an XML and store the model mapping into the database.</p>
+<p>Receives an xml=... with the XML content to parse
+Returns a 200 response if everything went right or 400 if there
+is not any content to parse.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-app">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-app" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">app package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-app.parser">app.parser module</a></li>
+<li><a class="reference internal" href="#module-app.rdf_feeder">app.rdf_feeder module</a></li>
+<li><a class="reference internal" href="#module-app.rdf_service">app.rdf_service module</a></li>
+<li><a class="reference internal" href="#module-app.sql_service">app.sql_service module</a></li>
+<li><a class="reference internal" href="#module-app.views">app.views module</a></li>
+<li><a class="reference internal" href="#module-app">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/app.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">Land Portal Receiver 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Weso.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
