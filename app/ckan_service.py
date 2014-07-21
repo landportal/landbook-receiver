@@ -3,6 +3,7 @@ import ckanapi
 import os
 from parser import Parser
 import config
+from zipfile import ZipFile
 
 
 class ReceiverCKANService(object):
@@ -11,6 +12,7 @@ class ReceiverCKANService(object):
     instance
     """
     def __init__(self, content, api_key):
+        self._xml_content = content
         self.parser = Parser(content.encode(encoding='utf-8'))
         self.api_key = api_key
 
@@ -67,11 +69,19 @@ class ReceiverCKANService(object):
         :param site:
         :param file_:
         """
-        file_name = file_.filename
-        path = os.path.join(config.DATA_SETS_DIR, file_name)
-        file_.save(path)
-        url = self.parser.get_file_name()
-        site.action.resource_create(package_id=data_set, upload=open(path),
-                                    name=file_name, url=url)
+        #content of the zip file
+        zip_file_name = file_.filename
+        zip_path = os.path.join(config.DATA_SETS_DIR, zip_file_name)
+        sourcezip = ZipFile(zip_path)
+        i = 0
+        while i < len(sourcezip.namelist()):
+            sourcezip.extract(sourcezip.namelist()[i])
+            file_.save(os.path.abspath(sourcezip.namelist()[i]))
+            url = self.parser.get_file_name().replace(".zip", "") + "_" + str(i)
+            site.action.resource_create(package_id=data_set, upload=open(os.path.abspath(sourcezip.namelist()[i])),
+                                        name=sourcezip.namelist()[i], url=url)
+            i += 1
 
-
+        #xml content
+        site.action.resource_create(package_id=data_set, upload=self._xml_content,
+                                    name=self.parser.get_dataset().id, url=self.parser.get_dataset().id)
