@@ -12,7 +12,7 @@ class ReceiverCKANService(object):
     instance
     """
     def __init__(self, content, api_key):
-        self._xml_content = content
+        self._content = content
         self.parser = Parser(content.encode(encoding='utf-8'))
         self.api_key = api_key
 
@@ -72,16 +72,22 @@ class ReceiverCKANService(object):
         #content of the zip file
         zip_file_name = file_.filename
         zip_path = os.path.join(config.DATA_SETS_DIR, zip_file_name)
+        file_.save(zip_path)
         sourcezip = ZipFile(zip_path)
         i = 0
         while i < len(sourcezip.namelist()):
-            sourcezip.extract(sourcezip.namelist()[i])
-            file_.save(os.path.abspath(sourcezip.namelist()[i]))
-            url = self.parser.get_file_name().replace(".zip", "") + "_" + str(i)
-            site.action.resource_create(package_id=data_set, upload=open(os.path.abspath(sourcezip.namelist()[i])),
+            zip_entry_path = os.path.join(os.path.abspath(os.path.dirname(zip_path)), sourcezip.namelist()[i])
+            sourcezip.extract(sourcezip.namelist()[i], config.DATA_SETS_DIR)
+            url = self.parser.get_file_name().replace(".zip","") + "_" + str(i)
+            site.action.resource_create(package_id=data_set, upload=open(zip_entry_path),
                                         name=sourcezip.namelist()[i], url=url)
             i += 1
 
         #xml content
-        site.action.resource_create(package_id=data_set, upload=self._xml_content,
-                                    name=self.parser.get_dataset().id, url=self.parser.get_dataset().id)
+        xml_file_name = self.parser.get_dataset().id + ".xml"
+        path = os.path.join(config.DATA_SETS_DIR, xml_file_name)
+        with open(path, "w") as ttmp:
+            ttmp.write(self._content.encode(encoding="utf-8"))
+        url = xml_file_name
+        site.action.resource_create(package_id=data_set, upload=open(path),
+                                    name=xml_file_name, url=url)
