@@ -7,7 +7,8 @@ class FaoUriResolver:
         self._load_dict()
 
     def _load_dict(self):
-        with open("iso3ToFao.txt", "r") as content:
+	# TODO extract filepath to config file
+        with open("countries/iso3ToFao.txt", "r") as content:
             lines = content.readlines()
             for line in lines:
                 splitted = line.split(":")
