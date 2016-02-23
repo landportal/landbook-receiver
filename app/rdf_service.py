@@ -25,7 +25,7 @@ class ReceiverRDFService(object):
         self.parser = Parser(content)
         self.time = dt.datetime.now()
 
-    def run_service(self, graph, host, api, graph_uri, user_ip):
+    def run_service(self, graph, host, api, graph_uri, user_ip, outputfile=None):
         """Run the ReceiverRDFService
 
         :param graph: RDF graph.
@@ -54,8 +54,14 @@ class ReceiverRDFService(object):
        # self._add_users_triples(graph)
        # self._add_topics_triples(graph)
        # self._add_dates_triples(graph)
-        self._serialize_rdf_xml(graph)
-        self._serialize_turtle(graph)
+	if outputfile is None:
+	   outputfile_rdf_xml = config.RDF_DATA_SET
+	   outputfile_turtle = config.TURTLE_DATA_SET
+	else:
+	   outputfile_rdf_xml = outputfile+".rdf"
+	   outputfile_turtle = outputfile+".ttl"
+        self._serialize_rdf_xml(graph, outputfile_rdf_xml)
+        self._serialize_turtle(graph, outputfile_turtle)
         self._load_data_set(graph_uri=graph_uri, host=host, api=api)
         return graph
 
@@ -509,15 +515,16 @@ class ReceiverRDFService(object):
         return graph
 
     @staticmethod
-    def _serialize_rdf_xml(graph):
+    def _serialize_rdf_xml(graph, filepath):
         serialized = graph.serialize(format='application/rdf+xml')
-        with open(config.RDF_DATA_SET, 'w') as dataset:
+        with open(filepath, 'w') as dataset:
             dataset.write(serialized)
+	    print "RDF/XML file generated at %s" %filepath
 
     @staticmethod
-    def _serialize_turtle(graph):
+    def _serialize_turtle(graph, filepath):
         serialized = graph.serialize(format='turtle')
-        with open(config.TURTLE_DATA_SET, 'w') as dataset:
+        with open(filepath, 'w') as dataset:
             dataset.write(serialized)
 
     @staticmethod
