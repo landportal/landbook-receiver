@@ -3,7 +3,7 @@ __author__ = 'guillermo'
 from rdflib import Namespace, URIRef
 
 # Namespaces
-cex = Namespace("http://purl.org/weso/computex/ontology#")
+cex = Namespace("http://purl.org/weso/ontology/computex#")
 dct = Namespace("http://purl.org/dc/terms/")
 dctype = Namespace("http://purl.org/dc/dcmitype/")
 foaf = Namespace("http://xmlns.com/foaf/0.1/")
