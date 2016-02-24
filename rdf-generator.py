@@ -43,11 +43,7 @@ def run(inputfile_path, outputfile_path):
 
 	#invoke the RDF Service (passing the output filepath)
         ReceiverRDFService(xml).\
-            run_service(host=host, 
-			api=triple_api, 
-			graph_uri=graph_uri, 
-			user_ip=user_ip, 
-			graph=graph, 
+            generate_rdf(graph=graph, 
 			outputfile=outputfile_path)
 
     	#TODO send the RDF

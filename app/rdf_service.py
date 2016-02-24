@@ -25,6 +25,43 @@ class ReceiverRDFService(object):
         self.parser = Parser(content)
         self.time = dt.datetime.now()
 
+    def generate_rdf(self, graph, outputfile=None):
+        """Generate RDF files
+
+        :param graph: RDF graph.
+        :param outputfile: Path for the output file.
+        :returns: RDF graph.
+        """
+        print "Generating RDF"
+        bind_namespaces(graph)
+        self._add_licenses_triples(graph)
+        # self._add_observations_triples(graph)
+        # self._add_indicators_triples(graph)
+        # self._add_area_triples_from_observations(graph)
+        # self._add_area_triples_from_slices(graph)
+        # self._add_computation_triples(graph)
+        # self._add_data_source_triples(graph)
+        # self._add_catalog_triples(graph)
+        # self._add_dataset_triples(graph)
+        # self._add_distribution_triples(graph)
+        # self._add_organizations_triples(graph)
+        # self._add_region_triples(graph)
+        # self._add_slices_triples(graph)
+        # self._add_upload_triples(graph, user_ip)
+        # self._add_users_triples(graph)
+        # self._add_topics_triples(graph)
+        # self._add_dates_triples(graph)
+
+        # dump the RDF graph to a file
+        if outputfile is None:
+           outputfile_rdf_xml = config.RDF_DATA_SET
+        else:
+           outputfile_rdf_xml = outputfile+".rdf"
+        self._serialize_rdf_xml(graph, outputfile_rdf_xml)
+
+        return graph
+
+
     def run_service(self, graph, host, api, graph_uri, user_ip, outputfile=None):
         """Run the ReceiverRDFService
 
