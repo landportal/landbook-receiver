@@ -13,7 +13,7 @@ import datetime as dt
 import sh
 import os
 import config
-
+import inspect
 
 class ReceiverRDFService(object):
     """
@@ -34,7 +34,13 @@ class ReceiverRDFService(object):
         """
         print "Generating RDF"
         bind_namespaces(graph)
-        self._add_licenses_triples(graph)
+	# Working
+	# self._add_licenses_triples(graph)
+
+	# Testing
+	self._add_organizations_triples(graph)
+
+	# Next steps
         # self._add_observations_triples(graph)
         # self._add_indicators_triples(graph)
         # self._add_area_triples_from_observations(graph)
@@ -371,14 +377,28 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_organizations_triples(self, graph):
-        print "Adding organizations..."
+        print "Adding organization..."
         organization = self.parser.get_organization()
-        graph.add((base_org.term(organization.id), RDF.type,
+
+	# This is the way to access to the description in other languages, due to model constraint. Maybe in the future we can just add attributes
+	description_en = next((x for x in organization.translations if x.lang_code == "en"), None).description
+	description_fr = next((x for x in organization.translations if x.lang_code == "fr"), None).description
+	description_es = next((x for x in organization.translations if x.lang_code == "es"), None).description
+
+	organization_uri = base_org.term(organization.id)
+        graph.add((organization_uri, RDF.type,
                    org.term("Organization")))
-        graph.add((base_org.term(organization.id), RDFS.label,
+        graph.add((organization_uri, RDFS.label,
                    Literal(organization.name, lang='en')))
-        graph.add((base_org.term(organization.id), FOAF.homepage,
-                   Literal(organization.url)))
+        graph.add((organization_uri, FOAF.homepage,
+                   URIRef(organization.url)))
+        graph.add((organization_uri, RDFS.comment,
+                   Literal(description_en, lang='en')))
+        graph.add((organization_uri, RDFS.comment,
+                   Literal(description_fr, lang='fr')))
+        graph.add((organization_uri, RDFS.comment,
+                   Literal(description_es, lang='es')))
+
         return graph
 
     def _add_topics_triples(self, graph):
