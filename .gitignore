@@ -47,3 +47,6 @@ model/
 
 # Database files
 *.db
+
+# log files
+*.log
