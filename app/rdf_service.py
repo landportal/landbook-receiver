@@ -37,13 +37,13 @@ class ReceiverRDFService(object):
 	# Working
 	# self._add_licenses_triples(graph)
 	# self._add_organizations_triples(graph)
+	# self._add_indicators_triples(graph)
 
 	# Testing
-	self._add_indicators_triples(graph)
+        self._add_observations_triples(graph)
 
 	# Next steps
         # self._add_topics_triples(graph)
-        # self._add_observations_triples(graph)
         # self._add_area_triples_from_observations(graph)
         # self._add_area_triples_from_slices(graph)
         # self._add_computation_triples(graph)
@@ -302,8 +302,10 @@ class ReceiverRDFService(object):
                                datatype=XSD.date)))
             graph.add((base_obs.term(obs.id), qb.term("dataSet"),
                        base.term(obs.dataset_id)))
-            graph.add((base_obs.term(obs.id), qb.term("slice"),
-                       base.term(str(obs.slice_id))))
+
+	    if obs.slice_id is not None:
+	       graph.add((base_obs.term(obs.id), qb.term("slice"), base.term(str(obs.slice_id))))
+
             graph.add((base_obs.term(obs.id), RDFS.label,
                        Literal("Observation of " + str(region) +
                                " within the period of " + str(obs.ref_time.value) +
