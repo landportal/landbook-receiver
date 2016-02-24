@@ -36,13 +36,14 @@ class ReceiverRDFService(object):
         bind_namespaces(graph)
 	# Working
 	# self._add_licenses_triples(graph)
+	# self._add_organizations_triples(graph)
 
 	# Testing
-	self._add_organizations_triples(graph)
+	self._add_indicators_triples(graph)
 
 	# Next steps
+        # self._add_topics_triples(graph)
         # self._add_observations_triples(graph)
-        # self._add_indicators_triples(graph)
         # self._add_area_triples_from_observations(graph)
         # self._add_area_triples_from_slices(graph)
         # self._add_computation_triples(graph)
@@ -50,12 +51,10 @@ class ReceiverRDFService(object):
         # self._add_catalog_triples(graph)
         # self._add_dataset_triples(graph)
         # self._add_distribution_triples(graph)
-        # self._add_organizations_triples(graph)
         # self._add_region_triples(graph)
         # self._add_slices_triples(graph)
         # self._add_upload_triples(graph, user_ip)
         # self._add_users_triples(graph)
-        # self._add_topics_triples(graph)
         # self._add_dates_triples(graph)
 
         # dump the RDF graph to a file
@@ -314,13 +313,28 @@ class ReceiverRDFService(object):
                        sdmx_code.term(obs.value.obs_status)))
         return graph
 
+    @staticmethod
+    def _get_literal_from_translations(element, attribute, lang_code):
+	return getattr(next((x for x in element.translations if x.lang_code == lang_code), None), attribute)
+
     def _add_indicators_triples(self, graph):
         print "Adding indicators..."
         for ind in self.parser.get_simple_indicators():
+
+	    # This is the way to access to the description in other languages, due to model constraint. Maybe in the future we can just add attributes
+	    name_en = self._get_literal_from_translations(ind, "name","en")
+	    name_fr = self._get_literal_from_translations(ind, "name","fr")
+	    name_es = self._get_literal_from_translations(ind, "name","es")
+
+	    description_en = self._get_literal_from_translations(ind, "description","en")
+	    description_fr = self._get_literal_from_translations(ind, "description","fr")
+	    description_es = self._get_literal_from_translations(ind, "description","es")
+
             graph.add((base_ind.term(ind.id), RDF.type,
                        cex.term("Indicator")))
             graph.add((base_ind.term(ind.id), lb.term("preferable_tendency"),
                        cex.term(ind.preferable_tendency)))
+	    # TODO generate proper measurement triples
             graph.add((base_ind.term(ind.id), lb.term("measurement"),
                        Literal(ind.measurement_unit.name)))
             graph.add((base_ind.term(ind.id), lb.term("last_update"),
@@ -329,12 +343,20 @@ class ReceiverRDFService(object):
                        Literal(ind.starred, datatype=XSD.Boolean)))
             graph.add((base_ind.term(ind.id), lb.term("topic"),
                        base_topic.term(ind.topic_id)))
-            graph.add((base_ind.term(ind.id), lb.term("indicatorType"),
-                       cex.term(ind.type)))
+            #graph.add((base_ind.term(ind.id), lb.term("indicatorType"),
+            #           cex.term(ind.type)))
             graph.add((base_ind.term(ind.id), RDFS.label,
-                       Literal(ind.translations[0].name, lang='en')))
+                       Literal(name_en, lang='en')))
             graph.add((base_ind.term(ind.id), RDFS.comment,
-                       Literal(ind.translations[0].description, lang='en')))
+                       Literal(description_en, lang='en')))
+            graph.add((base_ind.term(ind.id), RDFS.label,
+                       Literal(name_fr, lang='fr')))
+            graph.add((base_ind.term(ind.id), RDFS.comment,
+                       Literal(description_fr, lang='fr')))
+            graph.add((base_ind.term(ind.id), RDFS.label,
+                       Literal(name_es, lang='es')))
+            graph.add((base_ind.term(ind.id), RDFS.comment,
+                       Literal(description_es, lang='es')))
         return graph
 
     def _add_slices_triples(self, graph):
@@ -381,9 +403,10 @@ class ReceiverRDFService(object):
         organization = self.parser.get_organization()
 
 	# This is the way to access to the description in other languages, due to model constraint. Maybe in the future we can just add attributes
-	description_en = next((x for x in organization.translations if x.lang_code == "en"), None).description
-	description_fr = next((x for x in organization.translations if x.lang_code == "fr"), None).description
-	description_es = next((x for x in organization.translations if x.lang_code == "es"), None).description
+	description_en = self._get_literal_from_translations(organization, "description","en")
+	description_fr = self._get_literal_from_translations(organization, "description","fr")
+	description_es = self._get_literal_from_translations(organization, "description","es")
+
 
 	organization_uri = base_org.term(organization.id)
         graph.add((organization_uri, RDF.type,
