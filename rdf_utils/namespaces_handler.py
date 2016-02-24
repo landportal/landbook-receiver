@@ -31,13 +31,26 @@ def bind_namespaces(graph):
     """
     Binds Landportal uris with their corresponding prefixes
     """
-    n_space = {"cex": cex, "dct": dct, "dctype": dctype, "foaf": foaf,
-               "lb": lb, "org": org, "qb": qb, "sdmx-concept": sdmx_concept, "time": time,
-               "sdmx-code": sdmx_code, "": base, "base-obs": base_obs,
-               "base-ind": base_ind, "base-slice": base_slice,
-               "base-data-source": base_dsource, "base-topic": base_topic,
-               "base-upload": base_upload, "base-org": base_org, "base-time": base_time,
-               "dcat": dcat}
+    n_space = {	"cex": cex, 
+		"dct": dct, 
+		"dctype": dctype, 
+		"foaf": foaf,
+		"lb": lb,
+		"org": org,
+		"qb": qb,
+		"sdmx-concept": sdmx_concept,
+		"time": time,
+		"sdmx-code": sdmx_code, 
+		"": base, 
+		"base-obs": base_obs,
+		"base-ind": base_ind, 
+		"base-slice": base_slice,
+		"base-data-source": base_dsource, 
+		"base-topic": base_topic,
+		"base-upload": base_upload, 
+		"base-org": base_org, 
+		"base-time": base_time,
+		"dcat": dcat}
 
     for prefix, uri in n_space.items():
         graph.namespace_manager.bind(prefix, URIRef(Namespace(uri)))
