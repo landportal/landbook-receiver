@@ -457,16 +457,23 @@ class ReceiverRDFService(object):
 
     def _add_licenses_triples(self, graph):
         lic = self.parser.get_license()
-        graph.add((URIRef(lic.url), RDF.type,
+	license_URL = URIRef(lic.url)
+
+        graph.add((license_URL, RDF.type,
                    lb.term("License")))
-        graph.add((URIRef(lic.url), lb.term("name"),
-                   Literal(lic.name)))
-        graph.add((URIRef(lic.url), lb.term("description"),
-                   Literal(lic.description)))
-        graph.add((URIRef(lic.url), lb.term("url"),
-                   Literal(lic.url)))
-        graph.add((URIRef(lic.url), lb.term("republish"),
-                   Literal(lic.republish, datatype=XSD.Boolean)))
+
+        graph.add((license_URL, RDFS.label,
+                   Literal(lic.name, lang="en")))
+
+        graph.add((license_URL, RDFS.comment,
+                   Literal(lic.description, lang="en")))
+
+	graph.add((license_URL, foaf.term("page"),
+                   URIRef(lic.url)))
+
+	# TODO useful information to share?
+	# graph.add((license_URL, lb.term("republish"),
+	#           Literal(lic.republish, datatype=XSD.Boolean)))
         return graph
 
     def _add_computation_triples(self, graph):
@@ -526,6 +533,7 @@ class ReceiverRDFService(object):
         serialized = graph.serialize(format='turtle')
         with open(filepath, 'w') as dataset:
             dataset.write(serialized)
+	    print "Turtle file generated at %s" %filepath
 
     @staticmethod
     def _load_data_set(host, api, graph_uri):
