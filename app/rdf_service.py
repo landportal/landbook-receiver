@@ -44,12 +44,12 @@ class ReceiverRDFService(object):
 	# self._add_observations_triples(graph)
 	# self._add_computation_triples(graph)
 	# self._add_area_triples_from_observations(graph)
+	# self._add_region_triples(graph)
 
 	# Testing
-	self._add_region_triples(graph)
+        self._add_topics_triples(graph)
 
 	# Next steps
-        # self._add_topics_triples(graph)
         # self._add_area_triples_from_slices(graph)
         # self._add_data_source_triples(graph)
         # self._add_catalog_triples(graph)
@@ -430,24 +430,29 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_topics_triples(self, graph):
-        for ind in self.parser.get_simple_indicators():
+	print "Adding topics triples"
+	for ind in self.parser.get_simple_indicators():
             self._add_topic(graph, ind)
         return graph
 
 
-    @staticmethod
-    def _add_topic(graph, indicator):
+    def _add_topic(self, graph, indicator):
         from create_db import MetadataPopulator
 
         topic_id = indicator.topic_id
         topic_label = ""
-        for tp in MetadataPopulator.get_topics():
-            if topic_id == tp.id:
-                topic_label = tp.translations[0].name
-        graph.add((base_topic.term(topic_id), RDF.type,
-                   lb.term("Topic")))
-        graph.add((base_topic.term(topic_id), RDFS.label,
-                   Literal(topic_label, lang='en')))
+        for topic in MetadataPopulator.get_topics():
+            if topic_id == topic.id:
+	        name_en = self._get_literal_from_translations(topic, "name","en")
+        	name_fr = self._get_literal_from_translations(topic, "name","es")
+	        name_es = self._get_literal_from_translations(topic, "name","fr")
+
+        topic_url = base_topic.term(topic_id)
+
+	graph.add((topic_url, RDF.type, lb.term("Topic")))
+        graph.add((topic_url, RDFS.label, Literal(name_en, lang='en')))
+        graph.add((topic_url, RDFS.label, Literal(name_es, lang='es')))
+        graph.add((topic_url, RDFS.label, Literal(name_fr, lang='fr')))
         return topic_id
 
     def _add_area_triples_from_slices(self, graph):
