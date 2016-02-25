@@ -43,10 +43,10 @@ class ReceiverRDFService(object):
 	# self._add_indicators_triples(graph)
 	# self._add_observations_triples(graph)
 	# self._add_computation_triples(graph)
-	# self._add_region_triples(graph)
+	# self._add_area_triples_from_observations(graph)
 
 	# Testing
-	self._add_area_triples_from_observations(graph)
+	self._add_region_triples(graph)
 
 	# Next steps
         # self._add_topics_triples(graph)
@@ -519,12 +519,11 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_region_triples(self, graph):
+	print "Adding region triples"
         self._add_region(graph, None)
 
-    @staticmethod
-    def _add_region(graph, arg):
-        country_list_file = config.COUNTRY_LIST_FILE
-        for country in CountryReader().get_countries(country_list_file):
+    def _add_region(self, graph, arg):
+        for country in self.country_list:
             region_id = country.is_part_of_id
             region_URI = base.term(region_id)
             graph.add((region_URI, RDF.type,
