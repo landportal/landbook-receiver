@@ -39,19 +39,19 @@ class ReceiverRDFService(object):
 	# self._add_organizations_triples(graph)
 	# self._add_indicators_triples(graph)
 	# self._add_observations_triples(graph)
+	# self._add_computation_triples(graph)
 
 	# Testing
+	self._add_region_triples(graph)
 
 	# Next steps
         # self._add_topics_triples(graph)
         # self._add_area_triples_from_observations(graph)
         # self._add_area_triples_from_slices(graph)
-        self._add_computation_triples(graph)
         # self._add_data_source_triples(graph)
         # self._add_catalog_triples(graph)
         # self._add_dataset_triples(graph)
         # self._add_distribution_triples(graph)
-        # self._add_region_triples(graph)
         # self._add_slices_triples(graph)
         # self._add_upload_triples(graph, user_ip)
         # self._add_users_triples(graph)
@@ -508,11 +508,14 @@ class ReceiverRDFService(object):
     @staticmethod
     def _add_region(graph, arg):
         country_list_file = config.COUNTRY_LIST_FILE
-        for region in CountryReader().get_countries(country_list_file):
-            region_id = region.is_part_of_id
-            graph.add((base.term(region_id), RDF.type,
+        for country in CountryReader().get_countries(country_list_file):
+            region_id = country.is_part_of_id
+            region_URI = base.term(region_id)
+            graph.add((region_URI, RDF.type,
                        cex.term("Area")))
-            graph.add((base.term(region_id), RDFS.label,
+            graph.add((region_URI, RDF.type,
+                       lb.term("Region")))
+            graph.add((region_URI, RDFS.label,
                        Literal(region_id, lang="en")))
             un_code = None
             if region_id == "Americas":
@@ -525,8 +528,8 @@ class ReceiverRDFService(object):
                 un_code = 2
             elif region_id == "Asia":
                 un_code = 142
-            graph.add((base.term(region.is_part_of_id), lb.term("UNCode"),
-                       Literal(un_code)))
+            if un_code is not None:
+	        graph.add((region_URI, lb.term("UNCode"), Literal(un_code,datatype=XSD.string)))
 
     @staticmethod
     def _get_area_code(arg):
