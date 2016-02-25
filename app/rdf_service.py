@@ -46,9 +46,10 @@ class ReceiverRDFService(object):
 	# self._add_area_triples_from_observations(graph)
 	# self._add_region_triples(graph)
 	# self._add_topics_triples(graph)
+        self._add_data_source_triples(graph)
 
 	# Testing
-        self._add_data_source_triples(graph)
+	self._add_users_triples(graph)
 
 	# Next steps
         # self._add_area_triples_from_slices(graph)
@@ -57,7 +58,6 @@ class ReceiverRDFService(object):
         # self._add_distribution_triples(graph)
         # self._add_slices_triples(graph)
         # self._add_upload_triples(graph, user_ip)
-        # self._add_users_triples(graph)
         # self._add_dates_triples(graph)
 
         # dump the RDF graph to a file
@@ -389,18 +389,13 @@ class ReceiverRDFService(object):
 
     def _add_users_triples(self, graph):
         print "Adding users..."
-        usr = self.parser.get_user()
+        user = self.parser.get_user()
         organization = self.parser.get_organization()
-        graph.add((base.term(usr.id), RDF.type,
-                   FOAF.Person))
-        graph.add((base.term(usr.id), RDFS.label,
-                   Literal(usr.id, lang='en')))
-        graph.add((base.term(usr.id), FOAF.name,
-                   Literal(usr.id)))
-        graph.add((base.term(usr.id), FOAF.account,
-                   Literal(usr.id)))
-        graph.add((base.term(usr.id), org.term("memberOf"),
-                   base_org.term(str(organization.id))))
+	user_url = base_user.term(user.id)
+        graph.add((user_url, RDF.type, FOAF.Person))
+        graph.add((user_url, RDFS.label, Literal(user.id, lang='en')))
+        graph.add((user_url, FOAF.name, Literal(user.id)))
+        graph.add((user_url, org.term("memberOf"), base_org.term(str(organization.id))))
         return graph
 
     def _add_organizations_triples(self, graph):
@@ -430,7 +425,7 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_topics_triples(self, graph):
-	print "Adding topics triples"
+	print "Adding topics..."
         file_name = "rdf_utils/topics.rdf"
         graph.parse(location=file_name, format="application/rdf+xml")
         return graph
@@ -445,7 +440,7 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_area_triples_from_observations(self, graph):
-	print "Adding area triples from observations"
+	print "Adding areas (country and regions) from observations..."
         observations = self.parser.get_observations()
 	# Use set in order to only create triples the first time you find a new country or region
 	country_set = set()
@@ -504,7 +499,7 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_region_triples(self, graph):
-	print "Adding region triples"
+	print "Adding regions..."
         self._add_region(graph, None)
 
     def _add_region(self, graph, arg):
@@ -567,7 +562,7 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_data_source_triples(self, graph):
-	print "Adding DataSource triples..."
+	print "Adding DataSources..."
         data_source = self.parser.get_datasource()
         organization = self.parser.get_organization()
         user = self.parser.get_user()
@@ -577,8 +572,8 @@ class ReceiverRDFService(object):
                    Literal(data_source.name, lang='en')))
         graph.add((base_dsource.term(data_source.dsource_id), lb.term("organization"),
                    base_org.term(organization.id)))
-        graph.add((base_dsource.term(data_source.dsource_id), dc.term("creator"),
-                   Literal(user.id)))
+	usr = self.parser.get_user()
+        graph.add((base_dsource.term(data_source.dsource_id), dct.term("creator"), base_user.term(usr.id)))
         return graph
 
     def _add_upload_triples(self, graph, ip):
@@ -590,7 +585,7 @@ class ReceiverRDFService(object):
         graph.add((base_upload.term(upload), RDF.type,
                    lb.term(Literal("Upload"))))
         graph.add((base_upload.term(upload), lb.term("user"),
-                   lb.term(user.id)))
+                   base_user.term(user.id)))
         graph.add((base_upload.term(upload), lb.term("timestamp"),
                    Literal(self.time.strftime("%Y-%m-%d"),
                            datatype=XSD.date)))
