@@ -36,7 +36,7 @@ class ReceiverRDFService(object):
         :returns: RDF graph.
         """
         print "Generating RDF"
-	user_ip = "127.0.0.1"
+	user_ip = "127.0.0.1" # TODO change it for a config setting
         bind_namespaces(graph)
 	# Working
 	# self._add_licenses_triples(graph)
@@ -49,9 +49,10 @@ class ReceiverRDFService(object):
 	# self._add_topics_triples(graph)
         # self._add_data_source_triples(graph)
         # self._add_users_triples(graph)
+        # self._add_upload_triples(graph, user_ip)
 
 	# Testing
-        self._add_upload_triples(graph, user_ip)
+        self._add_dates_triples(graph)
 
 	# Next steps
         # self._add_area_triples_from_slices(graph)
@@ -59,7 +60,6 @@ class ReceiverRDFService(object):
         # self._add_dataset_triples(graph)
         # self._add_distribution_triples(graph)
         # self._add_slices_triples(graph)
-        # self._add_dates_triples(graph)
 
         # dump the RDF graph to a file
         if outputfile is None:
@@ -203,7 +203,10 @@ class ReceiverRDFService(object):
         date_time_desc_term = base_time.term(time_object.value + "_desc")
         graph.add((term_object,
                    time.term("hasDateTimeDescription"),
-                   time.term(date_time_desc_term)))
+                   date_time_desc_term))
+        graph.add((date_time_desc_term,
+                   RDF.type,
+                   time.term("DateTimeDescription")))
         graph.add((date_time_desc_term,
                    time.term("year"),
                    Literal(str(time_object.year), datatype=XSD.gYear)))
@@ -272,7 +275,7 @@ class ReceiverRDFService(object):
                   time.term("Instant")))
         graph.add((instant_term,
                   time.term("inXSDDateTime"),
-                  Literal(str(year) + "-" + str(month) + "-" + str(day) + "T00:00:00Z")))
+                  Literal(str(year) + "-" + str(month) + "-" + str(day) + "T00:00:00Z", datatype=XSD.dateTime)))
         #2011-12-24T14:24:05Z
 
         return instant_term
