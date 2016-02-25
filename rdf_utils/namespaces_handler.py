@@ -24,6 +24,7 @@ base_dsource = Namespace("http://book.landportal.org/datasource/")
 base_topic = Namespace("http://book.landportal.org/topic/")
 base_upload = Namespace("http://book.landportal.org/upload/")
 base_org = Namespace("http://book.landportal.org/organization/")
+base_user = Namespace("http://book.landportal.org/user/")
 
 dcat = Namespace("http://www.w3.org/ns/dcat#")
 
@@ -52,6 +53,7 @@ def bind_namespaces(graph):
 		"base-upload": base_upload, 
 		"base-org": base_org, 
 		"base-time": base_time,
+		"base-user": base_user,
 		"dcat": dcat}
 
     for prefix, uri in n_space.items():
