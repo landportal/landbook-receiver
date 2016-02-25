@@ -45,13 +45,13 @@ class ReceiverRDFService(object):
 	# self._add_computation_triples(graph)
 	# self._add_area_triples_from_observations(graph)
 	# self._add_region_triples(graph)
+	# self._add_topics_triples(graph)
 
 	# Testing
-        self._add_topics_triples(graph)
+        self._add_data_source_triples(graph)
 
 	# Next steps
         # self._add_area_triples_from_slices(graph)
-        # self._add_data_source_triples(graph)
         # self._add_catalog_triples(graph)
         # self._add_dataset_triples(graph)
         # self._add_distribution_triples(graph)
@@ -567,6 +567,7 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_data_source_triples(self, graph):
+	print "Adding DataSource triples..."
         data_source = self.parser.get_datasource()
         organization = self.parser.get_organization()
         user = self.parser.get_user()
@@ -576,7 +577,7 @@ class ReceiverRDFService(object):
                    Literal(data_source.name, lang='en')))
         graph.add((base_dsource.term(data_source.dsource_id), lb.term("organization"),
                    base_org.term(organization.id)))
-        graph.add((base_dsource.term(data_source.dsource_id), dct.term("creator"),
+        graph.add((base_dsource.term(data_source.dsource_id), dc.term("creator"),
                    Literal(user.id)))
         return graph
 
