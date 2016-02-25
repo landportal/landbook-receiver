@@ -4,6 +4,7 @@ from rdflib import Namespace, URIRef
 
 # Namespaces
 cex = Namespace("http://purl.org/weso/ontology/computex#")
+dc = Namespace("http://purl.org/dc/elements/1.1/")
 dct = Namespace("http://purl.org/dc/terms/")
 dctype = Namespace("http://purl.org/dc/dcmitype/")
 foaf = Namespace("http://xmlns.com/foaf/0.1/")
@@ -31,7 +32,8 @@ def bind_namespaces(graph):
     """
     Binds Landportal uris with their corresponding prefixes
     """
-    n_space = {	"cex": cex, 
+    n_space = {	"cex": cex,
+		"dc": dc, 
 		"dct": dct, 
 		"dctype": dctype, 
 		"foaf": foaf,
