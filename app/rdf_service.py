@@ -36,6 +36,7 @@ class ReceiverRDFService(object):
         :returns: RDF graph.
         """
         print "Generating RDF"
+	user_ip = "127.0.0.1"
         bind_namespaces(graph)
 	# Working
 	# self._add_licenses_triples(graph)
@@ -46,10 +47,11 @@ class ReceiverRDFService(object):
 	# self._add_area_triples_from_observations(graph)
 	# self._add_region_triples(graph)
 	# self._add_topics_triples(graph)
-        self._add_data_source_triples(graph)
+        # self._add_data_source_triples(graph)
+        # self._add_users_triples(graph)
 
 	# Testing
-	self._add_users_triples(graph)
+        self._add_upload_triples(graph, user_ip)
 
 	# Next steps
         # self._add_area_triples_from_slices(graph)
@@ -57,7 +59,6 @@ class ReceiverRDFService(object):
         # self._add_dataset_triples(graph)
         # self._add_distribution_triples(graph)
         # self._add_slices_triples(graph)
-        # self._add_upload_triples(graph, user_ip)
         # self._add_dates_triples(graph)
 
         # dump the RDF graph to a file
@@ -577,24 +578,21 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_upload_triples(self, graph, ip):
-        upload = "upload" + str(self.time.
-                                strftime("%y%m%d%H%M"))
+	print "Adding upload..."
+	now = dt.datetime.now()
+	timestamp = now.strftime("%Y-%m-%d")
         user = self.parser.get_user()
         dsource = self.parser.get_datasource()
         observations = self.parser.get_observations()
-        graph.add((base_upload.term(upload), RDF.type,
-                   lb.term(Literal("Upload"))))
-        graph.add((base_upload.term(upload), lb.term("user"),
-                   base_user.term(user.id)))
-        graph.add((base_upload.term(upload), lb.term("timestamp"),
-                   Literal(self.time.strftime("%Y-%m-%d"),
-                           datatype=XSD.date)))
-        graph.add((base_upload.term(upload), lb.term("ip"),
-                   Literal(ip)))
+        upload_id = dsource.dsource_id + "-" + timestamp
+        upload_url = base_upload.term(upload_id)
+        graph.add((upload_url, RDF.type, lb.term(Literal("Upload"))))
+        graph.add((upload_url, lb.term("user"), base_user.term(user.id)))
+        graph.add((upload_url, lb.term("timestamp"), Literal(timestamp, datatype=XSD.date)))
+        graph.add((upload_url, lb.term("ip"), Literal(ip, datatype=XSD.string)))
         for obs in observations:
-            graph.add((base_upload.term(upload), lb.term("observation"),
-                       base.term(obs.id)))
-        graph.add((base_upload.term(upload), lb.term("dataSource"),
+            graph.add((upload_url, lb.term("observation"), base.term(obs.id)))
+        graph.add((upload_url, lb.term("dataSource"),
                    lb.term(dsource.dsource_id)))
 
         return graph
