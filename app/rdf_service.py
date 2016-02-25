@@ -38,15 +38,15 @@ class ReceiverRDFService(object):
 	# self._add_licenses_triples(graph)
 	# self._add_organizations_triples(graph)
 	# self._add_indicators_triples(graph)
+	# self._add_observations_triples(graph)
 
 	# Testing
-        self._add_observations_triples(graph)
 
 	# Next steps
         # self._add_topics_triples(graph)
         # self._add_area_triples_from_observations(graph)
         # self._add_area_triples_from_slices(graph)
-        # self._add_computation_triples(graph)
+        self._add_computation_triples(graph)
         # self._add_data_source_triples(graph)
         # self._add_catalog_triples(graph)
         # self._add_dataset_triples(graph)
@@ -559,11 +559,8 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_computation_triples(self, graph):
-        for obs in self.parser.get_observations():
-            graph.add((cex.term(obs.computation.uri), RDF.type,
-                       cex.term(Literal("Computation"))))
-            graph.add((cex.term(obs.computation.uri), RDFS.label,
-                       Literal(obs.computation.description, lang='en')))
+	file_name = "rdf_utils/computation.rdf"
+	graph.parse(location=file_name, format="application/rdf+xml")
         return graph
 
     def _add_data_source_triples(self, graph):

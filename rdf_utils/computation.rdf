@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+
+  <rdf:Description rdf:about="http://purl.org/weso/ontology/computex#Raw">
+    <rdf:type rdf:resource="http://purl.org/weso/ontology/computex#Computation"/>
+    <rdfs:label xml:lang="en">Raw data</rdfs:label>
+    <rdfs:comment xml:lang="en">Raw data values that have been collected from a datasource without any normalisation process.</rdfs:comment>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://purl.org/weso/ontology/computex#Computed">
+    <rdf:type rdf:resource="http://purl.org/weso/ontology/computex#Computation"/>
+    <rdfs:label xml:lang="en">Computed data</rdfs:label>
+    <rdfs:comment xml:lang="en">Data values that have been computed by some algorithm.</rdfs:comment>
+  </rdf:Description>
+
+</rdf:RDF>
