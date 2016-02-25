@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="CLIMATE_CHANGE">
+    <rdf:type rdf:resource="http://purl.org/weso/landbook/ontology#Topic"/>
+    <rdfs:label xml:lang="en">Climate change</rdfs:label>
+    <rdfs:label xml:lang="es">Cambio climático</rdfs:label>
+    <rdfs:label xml:lang="fr">Changement climatique</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="GEOGRAPH_SOCIO">
+    <rdf:type rdf:resource="http://purl.org/weso/landbook/ontology#Topic"/>
+    <rdfs:label xml:lang="en">Geographic and Socioeconomic</rdfs:label>
+    <rdfs:label xml:lang="es">Geográfico y socioeconómico</rdfs:label>
+    <rdfs:label xml:lang="fr">Géographique et socio-économiqu</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="LAND_USE">
+    <rdf:type rdf:resource="http://purl.org/weso/landbook/ontology#Topic"/>
+    <rdfs:label xml:lang="en">Land use, agriculture and investmen</rdfs:label>
+    <rdfs:label xml:lang="es">Uso de la tierra, agricultura e inversión</rdfs:label>
+    <rdfs:label xml:lang="fr">L'utilisation des terres, de l'agriculture et de l'investissement</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="LAND_GENDER">
+    <rdf:type rdf:resource="http://purl.org/weso/landbook/ontology#Topic"/>
+    <rdfs:label xml:lang="en">Land and Gender</rdfs:label>
+    <rdfs:label xml:lang="es">Tierra y género</rdfs:label>
+    <rdfs:label xml:lang="fr">Terrain et le sexe</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="LAND_TENURE">
+    <rdf:type rdf:resource="http://purl.org/weso/landbook/ontology#Topic"/>
+    <rdfs:label xml:lang="en">Land Tenure</rdfs:label>
+    <rdfs:label xml:lang="es">Propiedad de la tierra</rdfs:label>
+    <rdfs:label xml:lang="fr">Foncière</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="FSECURITY_HUNGER">
+    <rdf:type rdf:resource="http://purl.org/weso/landbook/ontology#Topic"/>
+    <rdfs:label xml:lang="en">Food, Security and Hunger</rdfs:label>
+    <rdfs:label xml:lang="es">Alimento, seguridad y hambre</rdfs:label>
+    <rdfs:label xml:lang="fr">Alimentaire, de la sécurité et de la faim</rdfs:label>
+  </rdf:Description>
+  
+</rdf:RDF>

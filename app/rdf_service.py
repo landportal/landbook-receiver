@@ -431,29 +431,9 @@ class ReceiverRDFService(object):
 
     def _add_topics_triples(self, graph):
 	print "Adding topics triples"
-	for ind in self.parser.get_simple_indicators():
-            self._add_topic(graph, ind)
+        file_name = "rdf_utils/topics.rdf"
+        graph.parse(location=file_name, format="application/rdf+xml")
         return graph
-
-
-    def _add_topic(self, graph, indicator):
-        from create_db import MetadataPopulator
-
-        topic_id = indicator.topic_id
-        topic_label = ""
-        for topic in MetadataPopulator.get_topics():
-            if topic_id == topic.id:
-	        name_en = self._get_literal_from_translations(topic, "name","en")
-        	name_fr = self._get_literal_from_translations(topic, "name","es")
-	        name_es = self._get_literal_from_translations(topic, "name","fr")
-
-        topic_url = base_topic.term(topic_id)
-
-	graph.add((topic_url, RDF.type, lb.term("Topic")))
-        graph.add((topic_url, RDFS.label, Literal(name_en, lang='en')))
-        graph.add((topic_url, RDFS.label, Literal(name_es, lang='es')))
-        graph.add((topic_url, RDFS.label, Literal(name_fr, lang='fr')))
-        return topic_id
 
     def _add_area_triples_from_slices(self, graph):
         slices = self.parser.get_slices()
