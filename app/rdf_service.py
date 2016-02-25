@@ -24,6 +24,9 @@ class ReceiverRDFService(object):
     def __init__(self, content):
         self.parser = Parser(content)
         self.time = dt.datetime.now()
+	self.fao_resolver = FaoUriResolver() # Create an instance of FAO Resolver
+        country_list_file = config.COUNTRY_LIST_FILE # path to the master file
+	self.country_list = CountryReader().get_countries(country_list_file)
 
     def generate_rdf(self, graph, outputfile=None):
         """Generate RDF files
@@ -40,13 +43,13 @@ class ReceiverRDFService(object):
 	# self._add_indicators_triples(graph)
 	# self._add_observations_triples(graph)
 	# self._add_computation_triples(graph)
+	# self._add_region_triples(graph)
 
 	# Testing
-	self._add_region_triples(graph)
+	self._add_area_triples_from_observations(graph)
 
 	# Next steps
         # self._add_topics_triples(graph)
-        # self._add_area_triples_from_observations(graph)
         # self._add_area_triples_from_slices(graph)
         # self._add_data_source_triples(graph)
         # self._add_catalog_triples(graph)
@@ -457,50 +460,63 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_area_triples_from_observations(self, graph):
+	print "Adding area triples from observations"
         observations = self.parser.get_observations()
+	# Use set in order to only create triples the first time you find a new country or region
+	country_set = set()
+	region_set = set()
         for obs in observations:
-            if obs.country_code:
+            if obs.country_code not in country_set:
                 self._add_country(graph, obs)
-            elif obs.region_code:
+		country_set.add(obs.country_code)
+            elif obs.region_code not in region_set:
                 self._add_region(graph, obs)
+		region_set.add(obs.region_code)
         return graph
 
-    @staticmethod
-    def _add_country(graph, arg):
-        code = arg.country_code
-        country_list_file = config.COUNTRY_LIST_FILE
+    def _add_country(self, graph, arg):
+	''' Add country triples into the graph. The country added is the one provided by the arg.country_code.
+	Parameters
+	----------
+	graph : Graph
+	   Graph.
+	arg : 
+	   Slice or observation with a country_code attribute.
+	Returns:
+	   The graph (with the new triples added)
+	'''
+        country_iso3 = arg.country_code
+
         country_id = ""
         country_name = ""
         iso2 = ""
         fao_uri = ""  # URL of the page
         region = ""
         fao_semantic_uri = ""  # Semantic uri node
-        fao_resolver = FaoUriResolver()
-        for country in CountryReader().get_countries(country_list_file):
-            if code == country.iso3:
-                country_id = country.iso3
-                country_name = country.translations[0].name
-                iso2 = country.iso2
-                fao_uri = country.faoURI
-                region = country.is_part_of_id
-                fao_semantic_uri = fao_resolver.get_URI_from_iso3(country.iso3)
-        graph.add((base.term(country_id), RDF.type,
-                   cex.term("Area")))
-        graph.add((base.term(country_id), RDFS.label,
-                   Literal(country_name, lang="en")))
-        graph.add((base.term(country_id), lb.term("iso3"),
-                   Literal(code)))
-        graph.add((base.term(country_id), lb.term("iso2"),
-                   Literal(iso2)))
-        graph.add((base.term(country_id), lb.term("faoURI"),
-                   URIRef(fao_uri)))
-        graph.add((base.term(country_id), lb.term("is_part_of"),
-                   base.term(region)))
-        if fao_semantic_uri is not None:
-            graph.add((base.term(country_id), lb.term("faoReference"),
-                       URIRef(fao_semantic_uri)))
 
-        return code
+	country = next((country for country in self.country_list if country_iso3 == country.iso3), None) # stop the first time there is a match
+
+        country_name_en = self._get_literal_from_translations(country, "name", "en")
+        country_name_es = self._get_literal_from_translations(country, "name", "es")
+        country_name_fr = self._get_literal_from_translations(country, "name", "fr")
+        country_iso2 = country.iso2
+        country_fao_uri = country.faoURI
+        region = country.is_part_of_id
+        fao_semantic_uri = self.fao_resolver.get_URI_from_iso3(country_iso3)
+
+        country_generated_url = base.term(country_iso3)
+        graph.add((country_generated_url, RDF.type, cex.term("Area")))
+        graph.add((country_generated_url, RDF.type, lb.term("Country")))
+        graph.add((country_generated_url, RDFS.label, Literal(country_name_en, lang="en")))
+        graph.add((country_generated_url, RDFS.label, Literal(country_name_es, lang="es")))
+        graph.add((country_generated_url, RDFS.label, Literal(country_name_fr, lang="fr")))
+        graph.add((country_generated_url, lb.term("iso3"), Literal(country_iso3, datatype=XSD.string)))
+        graph.add((country_generated_url, lb.term("iso2"), Literal(country_iso2, datatype=XSD.string)))
+        graph.add((country_generated_url, lb.term("faoURI"), URIRef(country_fao_uri)))
+        graph.add((country_generated_url, lb.term("is_part_of"), base.term(region)))
+        if fao_semantic_uri is not None:
+            graph.add((country_generated_url, lb.term("faoReference"), URIRef(fao_semantic_uri)))
+        return graph
 
     def _add_region_triples(self, graph):
         self._add_region(graph, None)
