@@ -50,13 +50,13 @@ class ReceiverRDFService(object):
         # self._add_data_source_triples(graph)
         # self._add_users_triples(graph)
         # self._add_upload_triples(graph, user_ip)
+        # self._add_dates_triples(graph)
 
 	# Testing
-        self._add_dates_triples(graph)
+        self._add_catalog_triples(graph)
 
 	# Next steps
         # self._add_area_triples_from_slices(graph)
-        # self._add_catalog_triples(graph)
         # self._add_dataset_triples(graph)
         # self._add_distribution_triples(graph)
         # self._add_slices_triples(graph)
@@ -112,17 +112,18 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_catalog_triples(self, graph):
-        lp_catalog = "landportal-catalog"
+        lp_catalog = "catalog"
         dataset_id = self.parser.get_dataset().id
-        graph.add((base.term(lp_catalog), RDF.type, dcat.term("Catalog")))
-        graph.add((base.term(lp_catalog), dct.term("title"),
-                        Literal("Land Portal Catalog")))
-        graph.add((base.term(lp_catalog), RDFS.label,
-                        Literal("Land Portal Catalog", lang="en")))
-        graph.add((base.term(lp_catalog), foaf.term("homepage"),
-                        Literal("<http://5.9.221.11/book/catalog>")))
-        graph.add((base.term(lp_catalog), dcat.term("dataset"),
-                        base.term(dataset_id)))
+	catalog_url = base.term(lp_catalog)
+	catalog_homepage = "http://landportal.info/data" # This URI could change
+	landportal_url = "http://landportal.info"
+	dataset_url = base.term(dataset_id)
+        graph.add((catalog_url, RDF.type, dcat.term("Catalog")))
+        graph.add((catalog_url, RDFS.label, Literal("Land Portal Catalog", lang="en")))
+        graph.add((catalog_url, foaf.term("homepage"), URIRef(catalog_homepage)))
+        graph.add((catalog_url, dcat.term("dataset"), dataset_url))
+	graph.add((catalog_url, dct.term("publisher"), URIRef(landportal_url)))
+
         return graph
 
     def _add_dataset_triples(self, graph):
