@@ -14,19 +14,20 @@ qb = Namespace("http://purl.org/linked-data/cube#")
 sdmx_concept = Namespace("http://purl.org/linked-data/sdmx/2009/concept#")
 time = Namespace("http://www.w3.org/2006/time#")
 sdmx_code = Namespace("http://purl.org/linked-data/sdmx/2009/code#")
-
-base = Namespace("http://book.landportal.org/")
-base_time = Namespace("http://book.landportal.org/time/")
-base_obs = Namespace("http://book.landportal.org/observation/")
-base_ind = Namespace("http://book.landportal.org/indicator/")
-base_slice = Namespace("http://book.landportal.org/slice/")
-base_dsource = Namespace("http://book.landportal.org/datasource/")
-base_topic = Namespace("http://book.landportal.org/topic/")
-base_upload = Namespace("http://book.landportal.org/upload/")
-base_org = Namespace("http://book.landportal.org/organization/")
-base_user = Namespace("http://book.landportal.org/user/")
-
 dcat = Namespace("http://www.w3.org/ns/dcat#")
+
+
+base_url = "http://book.landportal.org/"
+base = Namespace(base_url)
+base_time = Namespace(base_url + "time/")
+base_obs = Namespace(base_url + "observation/")
+base_ind = Namespace(base_url + "indicator/")
+base_slice = Namespace(base_url + "slice/")
+base_dsource = Namespace(base_url + "datasource/")
+base_topic = Namespace(base_url + "topic/")
+base_upload = Namespace(base_url + "upload/")
+base_org = Namespace(base_url + "organization/")
+base_user = Namespace(base_url + "user/")
 
 
 def bind_namespaces(graph):
