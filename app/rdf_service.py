@@ -52,13 +52,13 @@ class ReceiverRDFService(object):
         # self._add_users_triples(graph)
         # self._add_upload_triples(graph, user_ip)
         # self._add_dates_triples(graph)
+        # self._add_catalog_triples(graph)
 
 	# Testing
-        self._add_catalog_triples(graph)
+        self._add_dataset_triples(graph)
 
 	# Next steps
         # self._add_area_triples_from_slices(graph)
-        # self._add_dataset_triples(graph)
         # self._add_distribution_triples(graph)
         # self._add_slices_triples(graph)
 
@@ -137,6 +137,8 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_dataset_triples(self, graph):
+	print "Adding datasets..."
+	# TODO add more information
         dataset = self.parser.get_dataset()
         lic = self.parser.get_license()
         dsource = self.parser.get_datasource()
