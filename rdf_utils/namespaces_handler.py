@@ -30,6 +30,8 @@ base_org = Namespace(base_url + "organization/")
 base_user = Namespace(base_url + "user/")
 base_dataset = Namespace(base_url + "dataset/")
 base_distribution = Namespace(base_url + "distribution/")
+base_dimension_area = Namespace (base_url + "dimension/area/")
+#base_dimension_year= Namespace (base_url + "dimension/year/")
 
 def bind_namespaces(graph):
     """

@@ -56,11 +56,13 @@ class ReceiverRDFService(object):
         # self._add_dataset_triples(graph)
 
 	# Testing
-        self._add_distribution_triples(graph)
 
 	# Next steps
         # self._add_area_triples_from_slices(graph)
-        # self._add_slices_triples(graph)
+        self._add_slices_triples(graph)
+
+	# Future
+        # self._add_distribution_triples(graph)
 
         # dump the RDF graph to a file
         if outputfile is None:
@@ -388,24 +390,27 @@ class ReceiverRDFService(object):
     def _add_slices_triples(self, graph):
         print "Adding slices..."
         for slc in self.parser.get_slices():
-            graph.add((base_slice.term(slc.id), RDF.type,
+	    slice_url = base_slice.term(slc.id)
+	    indicator_url = base_ind.term(str(slc.indicator_id))
+	    dataset_url = base_dataset.term(slc.dataset_id)
+
+            graph.add((slice_url, RDF.type,
                        qb.term("Slice")))
-            graph.add((base_slice.term(slc.id), cex.term("indicator"),
-                       base.term(str(slc.indicator_id))))
-            for obs in self.parser.get_observations():
-                if obs.slice_id == slc.id:
-                    graph.add((base_slice.term(slc.id), qb.term("observation"),
-                               base.term(str(obs.id))))
+            graph.add((dataset_url, qb.term("slice"),
+                       slice_url))
+            graph.add((slice_url, cex.term("indicator"),
+                       indicator_url))
+
             if slc.region_code is not None:
                 dimension = slc.region_code
             elif slc.country_code is not None:
                 dimension = slc.country_code
             else:
                 dimension = slc.dimension.value
-            graph.add((base_slice.term(slc.id), lb.term("dimension"),
-                       lb.term(dimension)))
-            graph.add((base_slice.term(slc.id), qb.term("dataSet"),
-                       base_dataset.term(slc.dataset_id)))
+
+            graph.add((slice_url, lb.term("dimension"),
+                       base_dimension_area.term(dimension)))
+
         return graph
 
     def _add_users_triples(self, graph):
