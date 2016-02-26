@@ -1,3 +1,5 @@
+import os
+
 __author__ = 'Dani'
 
 class FaoUriResolver:
@@ -8,7 +10,10 @@ class FaoUriResolver:
 
     def _load_dict(self):
 	# TODO extract filepath to config file
-        with open("countries/iso3ToFao.txt", "r") as content:
+	basepath = os.path.dirname(__file__)
+	filepath = os.path.abspath(os.path.join(basepath, "iso3ToFao.txt"))
+
+        with open(filepath, "r") as content:
             lines = content.readlines()
             for line in lines:
                 splitted = line.split(":")

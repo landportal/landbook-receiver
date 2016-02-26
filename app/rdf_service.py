@@ -39,30 +39,28 @@ class ReceiverRDFService(object):
 	user_ip = "127.0.0.1" # TODO change it for a config setting
         bind_namespaces(graph)
 	# Working
-	# self._add_landportal_triples(graph)
-	# self._add_licenses_triples(graph)
-	# self._add_organizations_triples(graph)
-	# self._add_indicators_triples(graph)
-	# self._add_observations_triples(graph)
-	# self._add_computation_triples(graph)
-	# self._add_area_triples_from_observations(graph)
-	# self._add_region_triples(graph)
-	# self._add_topics_triples(graph)
-        # self._add_data_source_triples(graph)
-        # self._add_users_triples(graph)
-        # self._add_upload_triples(graph, user_ip)
-        # self._add_dates_triples(graph)
-        # self._add_catalog_triples(graph)
-        # self._add_dataset_triples(graph)
-
-	# Testing
+	self._add_landportal_triples(graph)
+	self._add_licenses_triples(graph)
+	self._add_organizations_triples(graph)
+	self._add_indicators_triples(graph)
+	self._add_observations_triples(graph)
+	self._add_computation_triples(graph)
+	self._add_area_triples_from_observations(graph)
+	self._add_region_triples(graph)
+	self._add_topics_triples(graph)
+        self._add_data_source_triples(graph)
+        self._add_users_triples(graph)
+        self._add_upload_triples(graph, user_ip)
+        self._add_dates_triples(graph)
+        self._add_catalog_triples(graph)
+        self._add_dataset_triples(graph)
+        self._add_slices_triples(graph)
 
 	# Next steps
-        # self._add_area_triples_from_slices(graph)
-        self._add_slices_triples(graph)
 
 	# Future
         # self._add_distribution_triples(graph)
+        # self._add_area_triples_from_slices(graph)
 
         # dump the RDF graph to a file
         if outputfile is None:
@@ -117,8 +115,10 @@ class ReceiverRDFService(object):
 
     def _add_landportal_triples(self, graph):
 	print "Adding landportal.info ...."
-        file_name = "rdf_utils/landportal.info.rdf"
-        graph.parse(location=file_name, format="application/rdf+xml")
+	file_name = "../rdf_utils/landportal.info.rdf"
+        basepath = os.path.dirname(__file__)
+        filepath = os.path.abspath(os.path.join(basepath, file_name))
+        graph.parse(location=filepath, format="application/rdf+xml")
         return graph
 
 
@@ -452,8 +452,10 @@ class ReceiverRDFService(object):
 
     def _add_topics_triples(self, graph):
 	print "Adding topics..."
-        file_name = "rdf_utils/topics.rdf"
-        graph.parse(location=file_name, format="application/rdf+xml")
+	file_name = "../rdf_utils/topics.rdf"
+        basepath = os.path.dirname(__file__)
+        filepath = os.path.abspath(os.path.join(basepath, file_name))
+        graph.parse(location=filepath, format="application/rdf+xml")
         return graph
 
     def _add_area_triples_from_slices(self, graph):
@@ -583,8 +585,12 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_computation_triples(self, graph):
-	file_name = "rdf_utils/computation.rdf"
-	graph.parse(location=file_name, format="application/rdf+xml")
+	print "Adding computation..." 
+	file_name = "../rdf_utils/computation.rdf"
+        basepath = os.path.dirname(__file__)
+        filepath = os.path.abspath(os.path.join(basepath, file_name))
+        graph.parse(location=filepath, format="application/rdf+xml")
+
         return graph
 
     def _add_data_source_triples(self, graph):

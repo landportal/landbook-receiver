@@ -1,4 +1,5 @@
 import xlrd
+import os
 from model import models
 
 
@@ -30,6 +31,7 @@ class CountryReader(object):
     #REGIONS
     REGION_EN = 38
 
+
     def get_countries(self, file_path):
         """ Return a list of all Landportal countries
         """
@@ -37,7 +39,9 @@ class CountryReader(object):
         return countries
 
     def _get_all_countries(self, path):
-        country_file = xlrd.open_workbook(path,
+    	basepath = os.path.dirname(__file__)
+    	filepath = os.path.abspath(os.path.join(basepath, "..", path)) # NOTE. In order to keep compatibility, no more changes are done. Maybe it should be move the filename to the constructor
+        country_file = xlrd.open_workbook(filepath,
             encoding_override='latin-1').sheet_by_index(0)
         countries = []
         for row in range(self.FIRST_ROW, self.LAST_ROW + 1):
@@ -132,4 +136,6 @@ class CountryReader(object):
 
 
 if __name__ == '__main__':
-    CountryReader().get_countries('country_list.xlsx')
+    basepath = os.path.dirname(__file__)
+    filepath = os.path.abspath(os.path.join(basepath, "country_list.xlsx"))
+    CountryReader().get_countries(filepath)
