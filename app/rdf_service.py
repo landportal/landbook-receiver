@@ -51,9 +51,10 @@ class ReceiverRDFService(object):
         # self._add_users_triples(graph)
         # self._add_upload_triples(graph, user_ip)
         # self._add_dates_triples(graph)
+        # self._add_catalog_triples(graph)
 
 	# Testing
-        self._add_catalog_triples(graph)
+	self._add_landportal_triples(graph)
 
 	# Next steps
         # self._add_area_triples_from_slices(graph)
@@ -111,7 +112,16 @@ class ReceiverRDFService(object):
         self._load_data_set(graph_uri=graph_uri, host=host, api=api)
         return graph
 
+
+    def _add_landportal_triples(self, graph):
+	print "Adding landportal.info ...."
+        file_name = "rdf_utils/landportal.info.rdf"
+        graph.parse(location=file_name, format="application/rdf+xml")
+        return graph
+
+
     def _add_catalog_triples(self, graph):
+	print "Adding catalog..."
         lp_catalog = "catalog"
         dataset_id = self.parser.get_dataset().id
 	catalog_url = base.term(lp_catalog)

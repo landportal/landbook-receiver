@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://landportal.info">	
+    <rdfs:label>landportal.info</rdfs:label>
+	<rdfs:comment xml:lang="en">The leading online destination for information, resources, innovations and networking on land issues.</rdfs:comment>
+	<rdfs:comment xml:lang="es">El primer destino en línea para información, recursos, innovación y contactos en materia de la problemática de la tierra.</rdfs:comment>
+	<rdfs:comment xml:lang="fr">Premier site internet de partage d'informations, ressources, innovations et contacts sur les questions foncières.</rdfs:comment>
+  </rdf:Description>
+</rdf:RDF>
+
+
+
+
+
