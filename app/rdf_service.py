@@ -53,13 +53,13 @@ class ReceiverRDFService(object):
         # self._add_upload_triples(graph, user_ip)
         # self._add_dates_triples(graph)
         # self._add_catalog_triples(graph)
+        # self._add_dataset_triples(graph)
 
 	# Testing
-        self._add_dataset_triples(graph)
+        self._add_distribution_triples(graph)
 
 	# Next steps
         # self._add_area_triples_from_slices(graph)
-        # self._add_distribution_triples(graph)
         # self._add_slices_triples(graph)
 
         # dump the RDF graph to a file
@@ -161,23 +161,25 @@ class ReceiverRDFService(object):
         return graph
 
     def _add_distribution_triples(self, graph):
+	print "Adding distribution..."
         file_name, file_extension = os.path.splitext(self.parser.get_file_name())
         file_extension = file_extension.replace(".", "")
         dataset_id = self.parser.get_dataset().id
         dist_id = dataset_id + "-" + file_extension
+	dist_url = base_distribution.term(dist_id)
         file_type = guess_type(self.parser.get_file_name())
         file_size = os.path.getsize(config.RAW_FILE)
 
-        graph.add((base.term(dist_id), RDF.type,
+        graph.add((dist_url, RDF.type,
                    dcat.term("Distribution")))
-        graph.add((base.term(dist_id), dcat.term("downloadURL"),
+        graph.add((dist_url, dcat.term("downloadURL"),
                    Literal(config.CKAN_INSTANCE + "dataset/" + dataset_id.lower())))
-        graph.add((base.term(dist_id), dct.term("title"),
+        graph.add((dist_url, dct.term("title"),
                    Literal(file_extension.upper() + " distribution of dataset " +
                            dataset_id, lang="en")))
-        graph.add((base.term(dist_id), dcat.term("mediaType"),
+        graph.add((dist_url, dcat.term("mediaType"),
                    Literal(file_type[0])))
-        graph.add((base.term(dist_id), dcat.term("byteSize"),
+        graph.add((dist_url, dcat.term("byteSize"),
                    Literal(file_size, datatype=XSD.decimal)))
 
         return graph

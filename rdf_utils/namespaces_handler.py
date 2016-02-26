@@ -29,7 +29,7 @@ base_upload = Namespace(base_url + "upload/")
 base_org = Namespace(base_url + "organization/")
 base_user = Namespace(base_url + "user/")
 base_dataset = Namespace(base_url + "dataset/")
-
+base_distribution = Namespace(base_url + "distribution/")
 
 def bind_namespaces(graph):
     """
