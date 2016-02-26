@@ -39,6 +39,7 @@ class ReceiverRDFService(object):
 	user_ip = "127.0.0.1" # TODO change it for a config setting
         bind_namespaces(graph)
 	# Working
+	# self._add_landportal_triples(graph)
 	# self._add_licenses_triples(graph)
 	# self._add_organizations_triples(graph)
 	# self._add_indicators_triples(graph)
@@ -51,10 +52,9 @@ class ReceiverRDFService(object):
         # self._add_users_triples(graph)
         # self._add_upload_triples(graph, user_ip)
         # self._add_dates_triples(graph)
-        # self._add_catalog_triples(graph)
 
 	# Testing
-	self._add_landportal_triples(graph)
+        self._add_catalog_triples(graph)
 
 	# Next steps
         # self._add_area_triples_from_slices(graph)
@@ -127,7 +127,7 @@ class ReceiverRDFService(object):
 	catalog_url = base.term(lp_catalog)
 	catalog_homepage = "http://landportal.info/data" # This URI could change
 	landportal_url = "http://landportal.info"
-	dataset_url = base.term(dataset_id)
+	dataset_url = base_dataset.term(dataset_id)
         graph.add((catalog_url, RDF.type, dcat.term("Catalog")))
         graph.add((catalog_url, RDFS.label, Literal("Land Portal Catalog", lang="en")))
         graph.add((catalog_url, foaf.term("homepage"), URIRef(catalog_homepage)))
@@ -140,19 +140,20 @@ class ReceiverRDFService(object):
         dataset = self.parser.get_dataset()
         lic = self.parser.get_license()
         dsource = self.parser.get_datasource()
-        graph.add((base.term(dataset.id), RDF.type,
+	dataset_url = base_dataset.term(dataset.id)
+        graph.add((dataset_url, RDF.type,
                    qb.term("DataSet")))
-        graph.add((base.term(dataset.id), RDF.type,
+        graph.add((dataset_url, RDF.type,
                    dcat.term(Literal("Dataset"))))
-        graph.add((base.term(dataset.id), sdmx_concept.term("freq"),
+        graph.add((dataset_url, sdmx_concept.term("freq"),
                    sdmx_code.term(dataset.sdmx_frequency)))
-        graph.add((base.term(dataset.id), dct.term("accrualPeriodicity"),
+        graph.add((dataset_url, dct.term("accrualPeriodicity"),
                    sdmx_code.term(dataset.sdmx_frequency)))
-        graph.add((base.term(dataset.id), lb.term("license"),
+        graph.add((dataset_url, lb.term("license"),
                    URIRef(lic.url)))
-        graph.add((base.term(dataset.id), lb.term("dataSource"),
+        graph.add((dataset_url, lb.term("dataSource"),
                    base_dsource.term(dsource.dsource_id)))
-        graph.add((base.term(dataset.id), dct.term("issued"),
+        graph.add((dataset_url, dct.term("issued"),
                    Literal(dt.datetime.now().strftime("%Y-%m-%d"),
                    datatype=XSD.date)))
         return graph
@@ -164,6 +165,7 @@ class ReceiverRDFService(object):
         dist_id = dataset_id + "-" + file_extension
         file_type = guess_type(self.parser.get_file_name())
         file_size = os.path.getsize(config.RAW_FILE)
+
         graph.add((base.term(dist_id), RDF.type,
                    dcat.term("Distribution")))
         graph.add((base.term(dist_id), dcat.term("downloadURL"),
@@ -319,7 +321,7 @@ class ReceiverRDFService(object):
                        Literal(obs.issued.timestamp.strftime("%Y-%m-%d"),
                                datatype=XSD.date)))
             graph.add((base_obs.term(obs.id), qb.term("dataSet"),
-                       base.term(obs.dataset_id)))
+                       base_dataset.term(obs.dataset_id)))
 
 	    if obs.slice_id is not None:
 	       graph.add((base_obs.term(obs.id), qb.term("slice"), base.term(str(obs.slice_id))))
@@ -399,7 +401,7 @@ class ReceiverRDFService(object):
             graph.add((base_slice.term(slc.id), lb.term("dimension"),
                        lb.term(dimension)))
             graph.add((base_slice.term(slc.id), qb.term("dataSet"),
-                       base.term(slc.dataset_id)))
+                       base_dataset.term(slc.dataset_id)))
         return graph
 
     def _add_users_triples(self, graph):

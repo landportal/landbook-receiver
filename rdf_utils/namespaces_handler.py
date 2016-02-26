@@ -28,6 +28,7 @@ base_topic = Namespace(base_url + "topic/")
 base_upload = Namespace(base_url + "upload/")
 base_org = Namespace(base_url + "organization/")
 base_user = Namespace(base_url + "user/")
+base_dataset = Namespace(base_url + "dataset/")
 
 
 def bind_namespaces(graph):
