@@ -551,6 +551,8 @@ class ReceiverRDFService(object):
                 un_code = 2
             elif region_id == "Asia":
                 un_code = 142
+            elif region_id == "Antarctica":
+                un_code = 010
             if un_code is not None:
 	        graph.add((region_URI, lb.term("UNCode"), Literal(un_code,datatype=XSD.string)))
 
