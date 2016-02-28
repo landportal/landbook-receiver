@@ -531,8 +531,15 @@ class ReceiverRDFService(object):
         self._add_region(graph, None)
 
     def _add_region(self, graph, arg):
+	region_id_set = set()
+
         for country in self.country_list:
-            region_id = country.is_part_of_id
+	    if country.is_part_of_id not in region_id_set:
+	    	region_id_set.add(country.is_part_of_id)
+
+	print region_id_set
+
+	for region_id in region_id_set:
             region_URI = base.term(region_id)
             graph.add((region_URI, RDF.type,
                        cex.term("Area")))
@@ -552,7 +559,7 @@ class ReceiverRDFService(object):
             elif region_id == "Asia":
                 un_code = 142
             elif region_id == "Antarctica":
-                un_code = 010
+                un_code = 10
             if un_code is not None:
 	        graph.add((region_URI, lb.term("UNCode"), Literal(un_code,datatype=XSD.string)))
 
