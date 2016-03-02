@@ -398,7 +398,7 @@ class ReceiverRDFService(object):
                        qb.term("Slice")))
             graph.add((dataset_url, qb.term("slice"),
                        slice_url))
-            graph.add((slice_url, cex.term("indicator"),
+            graph.add((slice_url, cex.term("ref-indicator"),
                        indicator_url))
 
             if slc.region_code is not None:
@@ -531,13 +531,12 @@ class ReceiverRDFService(object):
         self._add_region(graph, None)
 
     def _add_region(self, graph, arg):
+	# TODO generate a static .rdf file with the triples and add to the graph
+	# As far as there are the same triples all the time
 	region_id_set = set()
-
         for country in self.country_list:
 	    if country.is_part_of_id not in region_id_set:
 	    	region_id_set.add(country.is_part_of_id)
-
-	print region_id_set
 
 	for region_id in region_id_set:
             region_URI = base.term(region_id)
