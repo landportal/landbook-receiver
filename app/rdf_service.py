@@ -408,7 +408,7 @@ class ReceiverRDFService(object):
             else:
                 dimension = slc.dimension.value
 
-            graph.add((slice_url, lb.term("dimension"),
+            graph.add((slice_url, qb.term("dimension"),
                        base_dimension_area.term(dimension)))
 
         return graph
