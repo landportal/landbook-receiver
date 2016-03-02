@@ -330,7 +330,7 @@ class ReceiverRDFService(object):
                        base_dataset.term(obs.dataset_id)))
 
 	    if obs.slice_id is not None:
-	       graph.add((base_obs.term(obs.id), qb.term("slice"), base.term(str(obs.slice_id))))
+	       graph.add((base.term(str(obs.slice_id)), qb.term("observation"), base_obs.term(obs.id)))
 
             graph.add((base_obs.term(obs.id), RDFS.label,
                        Literal("Observation of " + str(region) +
