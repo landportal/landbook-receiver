@@ -233,11 +233,6 @@ class ReceiverRDFService(object):
                    time.term("unitType"),
                    time.term("unitYear")))
 
-        #Our ontology properties
-        graph.add((term_object,
-                   base_time.term("year"),
-                   Literal(str(time_object.year), datatype=XSD.int)))
-
 
     def _add_triples_of_month_interval(self, time_object, graph):
         #base term
@@ -264,14 +259,6 @@ class ReceiverRDFService(object):
         graph.add((date_time_desc_term,
                    time.term("unitType"),
                    time.term("unitMonth")))
-
-        #Our ontology properties
-        graph.add((term_object,
-                   base_time.term("year"),
-                   Literal(str(time_object.year), datatype=XSD.int)))
-        graph.add((term_object,
-                   base_time.term("month"),
-                   Literal(str(time_object.month), datatype=XSD.int)))
 
 
     def _add_triples_of_interval(self, time_object, graph):
