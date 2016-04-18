@@ -55,7 +55,6 @@ class ReceiverRDFService(object):
         self._add_catalog_triples(graph)
         self._add_dataset_triples(graph)
         self._add_slices_triples(graph)
-
 	# Next steps
 
 	# Future
@@ -424,6 +423,8 @@ class ReceiverRDFService(object):
 	organization_uri = base_org.term(organization.id)
         graph.add((organization_uri, RDF.type,
                    org.term("Organization")))
+        graph.add((organization_uri, org.term("identifier"),
+                   Literal(organization.acronym)))
         graph.add((organization_uri, RDFS.label,
                    Literal(organization.name, lang='en')))
         graph.add((organization_uri, FOAF.homepage,

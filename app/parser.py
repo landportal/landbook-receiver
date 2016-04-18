@@ -94,6 +94,9 @@ class Parser(object):
         #The description field is NOT persisted to the database and is only
         #used in the RDF generation
         organization.description = org_desc
+
+        #The acronym field is NOT persisted to the database and is only used in the RDF generation
+        organization.acronym = self._root.find('import_process').find('organization_acronym').text
         return organization
 
     def get_datasource(self):
