@@ -17,7 +17,7 @@ sdmx_code = Namespace("http://purl.org/linked-data/sdmx/2009/code#")
 dcat = Namespace("http://www.w3.org/ns/dcat#")
 
 
-base_url = "http://book.landportal.org/"
+base_url = "http://data.landportal.info/"
 base = Namespace(base_url)
 base_time = Namespace(base_url + "time/")
 base_obs = Namespace(base_url + "observation/")
