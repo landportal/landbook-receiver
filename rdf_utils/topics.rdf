@@ -2,7 +2,7 @@
 <rdf:RDF
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-   xml:base="http://book.landportal.info/topic/"
+   xml:base="http://data.landportal.info/topic/"
 >
   <rdf:Description rdf:about="CLIMATE_CHANGE">
     <rdf:type rdf:resource="http://purl.org/weso/landbook/ontology#Topic"/>
