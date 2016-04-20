@@ -22,7 +22,7 @@ base = Namespace(base_url)
 base_time = Namespace(base_url + "time/")
 base_obs = Namespace(base_url + "observation/")
 base_ind = Namespace(base_url + "indicator/")
-base_slice = Namespace(base_url + "slice/")
+#base_slice = Namespace(base_url + "slice/")
 base_dsource = Namespace(base_url + "datasource/")
 base_topic = Namespace(base_url + "topic/")
 base_upload = Namespace(base_url + "upload/")
@@ -51,7 +51,7 @@ def bind_namespaces(graph):
 		"": base, 
 		"base-obs": base_obs,
 		"base-ind": base_ind, 
-		"base-slice": base_slice,
+#		"base-slice": base_slice,
 		"base-data-source": base_dsource, 
 		"base-topic": base_topic,
 		"base-upload": base_upload, 
@@ -62,3 +62,9 @@ def bind_namespaces(graph):
 
     for prefix, uri in n_space.items():
         graph.namespace_manager.bind(prefix, URIRef(Namespace(uri)))
+
+def generate_slice_namespace (dataset_id):
+    return Namespace(base_dataset + dataset_id + "/slice/")
+
+def generate_slice_uri (dataset_id, slice_id):
+    return generate_slice_namespace(dataset_id).term(slice_id)

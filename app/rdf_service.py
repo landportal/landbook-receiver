@@ -316,7 +316,8 @@ class ReceiverRDFService(object):
                        base_dataset.term(obs.dataset_id)))
 
 	    if obs.slice_id is not None:
-	       graph.add((base_slice.term(str(obs.slice_id)), qb.term("observation"), base_obs.term(obs.id)))
+               url_slice = generate_slice_uri(obs.dataset_id, obs.slice_id)
+	       graph.add((url_slice, qb.term("observation"), base_obs.term(obs.id)))
 
             graph.add((base_obs.term(obs.id), RDFS.label,
                        Literal("Observation of " + str(region) +
@@ -376,7 +377,7 @@ class ReceiverRDFService(object):
     def _add_slices_triples(self, graph):
         print "Adding slices..."
         for slc in self.parser.get_slices():
-	    slice_url = base_slice.term(slc.id)
+	    slice_url = generate_slice_uri(slc.dataset_id, slc.id)
 	    indicator_url = base_ind.term(str(slc.indicator_id))
 	    dataset_url = base_dataset.term(slc.dataset_id)
 
