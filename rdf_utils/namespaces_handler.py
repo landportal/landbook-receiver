@@ -66,7 +66,14 @@ def bind_namespaces(graph):
 def generate_slice_namespace (dataset_id):
     return Namespace(base_dataset + dataset_id + "/slice/")
 
-def generate_slice_uri (dataset_id, slice_id):
+def generate_slice_uri (slice):
+    dataset_id = slice.dataset_id
+    slice_id = slice.id
+    return generate_slice_namespace(dataset_id).term(slice_id)
+
+def generate_slice_uri_from_observation (observation):
+    dataset_id = observation.dataset_id
+    slice_id = observation.slice_id
     return generate_slice_namespace(dataset_id).term(slice_id)
 
 def generate_observation_namespace (dataset_id):
