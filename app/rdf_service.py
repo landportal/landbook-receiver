@@ -292,38 +292,39 @@ class ReceiverRDFService(object):
         print "Adding observations..."
         for obs in self.parser.get_observations():
             region = self._get_area_code(obs)
-            graph.add((base_obs.term(obs.id), RDF.type,
+            obs_uri = generate_observation_uri(obs)
+            graph.add((obs_uri, RDF.type,
                        qb.term("Observation")))
-            graph.add((base_obs.term(obs.id), cex.term("ref-time"),
+            graph.add((obs_uri, cex.term("ref-time"),
                        base_time.term(obs.ref_time.value)))
-            graph.add((base_obs.term(obs.id), cex.term("ref-area"),
+            graph.add((obs_uri, cex.term("ref-area"),
                        base.term(region)))
-            graph.add((base_obs.term(obs.id), cex.term("ref-indicator"),
+            graph.add((obs_uri, cex.term("ref-indicator"),
                        base_ind.term(obs.indicator_id)))
             if not obs.value.obs_status == "obsStatus-M":
                 if float(obs.value.value) % 1 != 0:
-                    graph.add((base_obs.term(obs.id), cex.term("value"),
+                    graph.add((obs_uri, cex.term("value"),
                               Literal(obs.value.value, datatype=XSD.double)))
                 else:
-                    graph.add((base_obs.term(obs.id), cex.term("value"),
+                    graph.add((obs_uri, cex.term("value"),
                               Literal(int(float(obs.value.value)), datatype=XSD.integer)))
-            graph.add((base_obs.term(obs.id), cex.term("computation"),
+            graph.add((obs_uri, cex.term("computation"),
                        cex.term(str(obs.computation.uri))))
-            graph.add((base_obs.term(obs.id), dct.term("issued"),
+            graph.add((obs_uri, dct.term("issued"),
                        Literal(obs.issued.timestamp.strftime("%Y-%m-%d"),
                                datatype=XSD.date)))
-            graph.add((base_obs.term(obs.id), qb.term("dataSet"),
+            graph.add((obs_uri, qb.term("dataSet"),
                        base_dataset.term(obs.dataset_id)))
 
 	    if obs.slice_id is not None:
                url_slice = generate_slice_uri(obs.dataset_id, obs.slice_id)
-	       graph.add((url_slice, qb.term("observation"), base_obs.term(obs.id)))
+	       graph.add((url_slice, qb.term("observation"), obs_uri))
 
-            graph.add((base_obs.term(obs.id), RDFS.label,
+            graph.add((obs_uri, RDFS.label,
                        Literal("Observation of " + str(region) +
                                " within the period of " + str(obs.ref_time.value) +
                                " for indicator " + str(obs.indicator_id), lang='en')))
-            graph.add((base_obs.term(obs.id),
+            graph.add((obs_uri,
                        sdmx_concept.term("obsStatus"),
                        sdmx_code.term(obs.value.obs_status)))
         return graph
@@ -619,7 +620,7 @@ class ReceiverRDFService(object):
         graph.add((upload_url, lb.term("timestamp"), Literal(timestamp, datatype=XSD.date)))
         graph.add((upload_url, lb.term("ip"), Literal(ip, datatype=XSD.string)))
         for obs in observations:
-            graph.add((upload_url, lb.term("observation"), base.term(obs.id)))
+            graph.add((upload_url, lb.term("observation"), generate_observation_uri(obs)))
         graph.add((upload_url, lb.term("dataSource"),
                    lb.term(dsource.dsource_id)))
 

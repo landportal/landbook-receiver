@@ -20,7 +20,7 @@ dcat = Namespace("http://www.w3.org/ns/dcat#")
 base_url = "http://data.landportal.info/"
 base = Namespace(base_url)
 base_time = Namespace(base_url + "time/")
-base_obs = Namespace(base_url + "observation/")
+#base_obs = Namespace(base_url + "observation/")
 base_ind = Namespace(base_url + "indicator/")
 #base_slice = Namespace(base_url + "slice/")
 base_dsource = Namespace(base_url + "datasource/")
@@ -49,7 +49,7 @@ def bind_namespaces(graph):
 		"time": time,
 		"sdmx-code": sdmx_code, 
 		"": base, 
-		"base-obs": base_obs,
+#		"base-obs": base_obs,
 		"base-ind": base_ind, 
 #		"base-slice": base_slice,
 		"base-data-source": base_dsource, 
@@ -68,3 +68,11 @@ def generate_slice_namespace (dataset_id):
 
 def generate_slice_uri (dataset_id, slice_id):
     return generate_slice_namespace(dataset_id).term(slice_id)
+
+def generate_observation_namespace (dataset_id):
+    return Namespace(base_dataset + dataset_id + "/observation/")
+
+def generate_observation_uri (observation):
+    dataset_id = observation.dataset_id
+    observation_id = observation.id
+    return generate_observation_namespace(dataset_id).term(observation_id)
