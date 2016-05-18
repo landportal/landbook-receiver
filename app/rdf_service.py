@@ -511,7 +511,7 @@ class ReceiverRDFService(object):
         graph.add((country_generated_url, lb.term("iso3"), Literal(country_iso3, datatype=XSD.string)))
         graph.add((country_generated_url, lb.term("iso2"), Literal(country_iso2, datatype=XSD.string)))
         graph.add((country_generated_url, lb.term("faoURI"), URIRef(country_fao_uri)))
-        graph.add((country_generated_url, lb.term("is_part_of"), base.term(region)))
+        graph.add((country_generated_url, lb.term("is_part_of"), base_geo.term(region)))
         if fao_semantic_uri is not None:
             graph.add((country_generated_url, lb.term("faoReference"), URIRef(fao_semantic_uri)))
         return graph
