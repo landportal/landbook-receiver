@@ -19,6 +19,7 @@ dcat = Namespace("http://www.w3.org/ns/dcat#")
 
 base_url = "http://data.landportal.info/"
 base = Namespace(base_url)
+base_geo = Namespace(base_url + "geo/")
 base_time = Namespace(base_url + "time/")
 #base_obs = Namespace(base_url + "observation/")
 base_ind = Namespace(base_url + "indicator/")

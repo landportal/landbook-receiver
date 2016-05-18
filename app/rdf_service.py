@@ -298,7 +298,7 @@ class ReceiverRDFService(object):
             graph.add((obs_uri, cex.term("ref-time"),
                        base_time.term(obs.ref_time.value)))
             graph.add((obs_uri, cex.term("ref-area"),
-                       base.term(region)))
+                       base_geo.term(region)))
             graph.add((obs_uri, cex.term("ref-indicator"),
                        base_ind.term(obs.indicator_id)))
             if not obs.value.obs_status == "obsStatus-M":
@@ -502,7 +502,7 @@ class ReceiverRDFService(object):
         region = country.is_part_of_id
         fao_semantic_uri = self.fao_resolver.get_URI_from_iso3(country_iso3)
 
-        country_generated_url = base.term(country_iso3)
+        country_generated_url = base_geo.term(country_iso3)
         graph.add((country_generated_url, RDF.type, cex.term("Area")))
         graph.add((country_generated_url, RDF.type, lb.term("Country")))
         graph.add((country_generated_url, RDFS.label, Literal(country_name_en, lang="en")))
@@ -529,7 +529,7 @@ class ReceiverRDFService(object):
 	    	region_id_set.add(country.is_part_of_id)
 
 	for region_id in region_id_set:
-            region_URI = base.term(region_id)
+            region_URI = base_geo.term(region_id)
             graph.add((region_URI, RDF.type,
                        cex.term("Area")))
             graph.add((region_URI, RDF.type,
