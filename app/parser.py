@@ -216,12 +216,14 @@ class Parser(object):
                 return self._observations_slices[obs_id]
             except KeyError:
                 return None
-
         observation = model.Observation()
         observation.id = obs.get('id')
         observation.indicator_id = obs.find('indicator-ref').get('indicator')
         observation.ref_time = self._parse_time(obs.find('time'))
         observation.issued = self._parse_issued(obs.find('issued'))
+	observation.note = None
+	if (obs.find('note') is not None):
+	   observation.note = obs.find('note').text
         observation.value = self._parse_obs_value(obs.find('obs-status'), obs.find('value'))
         observation.computation = self._parse_computation(obs.find('computation'))
         observation.indicator_group_id = obs.get('group')

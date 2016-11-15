@@ -313,6 +313,8 @@ class ReceiverRDFService(object):
 
             graph.add((obs_uri, cex.term("computation"),
                        cex.term(str(obs.computation.uri))))
+            if (obs.note is not None):
+               graph.add((obs_uri, RDFS.comment, Literal(obs.note, datatype=XSD.string)))
             graph.add((obs_uri, dct.term("issued"),
                        Literal(obs.issued.timestamp.strftime("%Y-%m-%d"),
                                datatype=XSD.date)))
