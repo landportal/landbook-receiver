@@ -1,7 +1,5 @@
 Land Portal Receiver
 ====================
-
-
 Parser web service exporting enriched RDF and SQL from XML input.
 
 Dependencies
@@ -10,4 +8,7 @@ Apart from the dependencies listed in *requirements.txt* the Receiver needs to u
     
     git clone https://github.com/landportal/landbook-model model
 
+License
+-------
+This software project is under MIT license (see LICENSE)
 
