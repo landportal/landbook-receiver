@@ -293,6 +293,7 @@ class ReceiverRDFService(object):
         for obs in self.parser.get_observations():
             region = self._get_area_code(obs)
             obs_uri = generate_observation_uri(obs)
+            value = obs.value.value
             graph.add((obs_uri, RDF.type,
                        qb.term("Observation")))
             graph.add((obs_uri, cex.term("ref-time"),
@@ -302,12 +303,14 @@ class ReceiverRDFService(object):
             graph.add((obs_uri, cex.term("ref-indicator"),
                        base_ind.term(obs.indicator_id)))
             if not obs.value.obs_status == "obsStatus-M":
-                if float(obs.value.value) % 1 != 0:
-                    graph.add((obs_uri, cex.term("value"),
-                              Literal(obs.value.value, datatype=XSD.double)))
-                else:
-                    graph.add((obs_uri, cex.term("value"),
-                              Literal(int(float(obs.value.value)), datatype=XSD.integer)))
+		if (self.isfloat(value) or self.isint(value)): # float or integer
+                   if float(value) % 1 != 0:
+                      graph.add((obs_uri, cex.term("value"), Literal(value, datatype=XSD.double)))
+                   else:
+                      graph.add((obs_uri, cex.term("value"), Literal(int(float(value)), datatype=XSD.integer)))
+                else: # string
+                    graph.add((obs_uri, cex.term("value"), Literal(value, datatype=XSD.string)))
+
             graph.add((obs_uri, cex.term("computation"),
                        cex.term(str(obs.computation.uri))))
             graph.add((obs_uri, dct.term("issued"),
@@ -332,6 +335,23 @@ class ReceiverRDFService(object):
     @staticmethod
     def _get_literal_from_translations(element, attribute, lang_code):
 	return getattr(next((x for x in element.translations if x.lang_code == lang_code), None), attribute)
+
+    @staticmethod
+    def isfloat(value):
+       try:
+          float(value)
+          return True
+       except ValueError:
+          return False
+
+    @staticmethod
+    def isint(value):
+       try:
+          int(value)
+          return True
+       except ValueError:
+          return False
+
 
     def _add_indicators_triples(self, graph):
         print "Adding indicators..."
