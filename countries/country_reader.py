@@ -6,7 +6,7 @@ from model import models
 class CountryReader(object):
     #ROW INDEX
     FIRST_ROW = 1
-    LAST_ROW = 248
+    LAST_ROW = 247
 
     #COLUMN INDEX (starts in 0)
     #FIELDS ORDERED BY PRIORITY
