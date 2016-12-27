@@ -11,25 +11,25 @@ class CountryReader(object):
     #COLUMN INDEX (starts in 0)
     #FIELDS ORDERED BY PRIORITY
     #ISO-3
-    ISO3_ADMIN = 3
-    ISO3_FAO = 4
+    ISO3_ADMIN = 0
+    ISO3_FAO = 12
     #ISO-2
-    ISO2_ADMIN = 27
+    ISO2_ADMIN = 10
     #NAME-EN
-    NAME_EN_FAO_S = 6
-    NAME_EN_FAO = 5
-    NAME_EN_ADMIN = 2
-    NAME_EN_ADMIN_LONG = 11
+    NAME_EN_FAO = 1
+    NAME_EN_FAO_S = 2
+    NAME_EN_ADMIN = 7
+    NAME_EN_ADMIN_LONG = 8
     #NAME-ES
-    NAME_ES_FAO_S = 8
-    NAME_ES_FAO = 7
+    NAME_ES_FAO = 3
+    NAME_ES_FAO_S = 4
     #NAME-FR
-    NAME_FR_FAO_S = 10
-    NAME_FR_FAO = 9
+    NAME_FR_FAO = 5
+    NAME_FR_FAO_S = 6
     #UN_CODE
-    UN_CODE = 30
+    UN_CODE = 11
     #REGIONS
-    REGION_EN = 38
+    REGION_EN = 13
 
 
     def get_countries(self, file_path):
