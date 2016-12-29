@@ -13,8 +13,6 @@ class CountryReader(object):
     #ISO-3
     ISO3_ADMIN = 0
 
-    #ISO-2
-    ISO2_ADMIN = 7
     #NAME-EN
     NAME_EN_FAO = 1
     NAME_EN_FAO_S = 2
@@ -25,8 +23,13 @@ class CountryReader(object):
     #NAME-FR
     NAME_FR_FAO = 5
     NAME_FR_FAO_S = 6
+
+    #ISO-2
+    ISO2_ADMIN = 7
+
     #UN_CODE
     UN_CODE = 8
+
     #REGIONS
     REGION_EN = 10
 
