@@ -12,14 +12,13 @@ class CountryReader(object):
     #FIELDS ORDERED BY PRIORITY
     #ISO-3
     ISO3_ADMIN = 0
-    ISO3_FAO = 12
+
     #ISO-2
-    ISO2_ADMIN = 10
+    ISO2_ADMIN = 7
     #NAME-EN
     NAME_EN_FAO = 1
     NAME_EN_FAO_S = 2
-    NAME_EN_ADMIN = 7
-    NAME_EN_ADMIN_LONG = 8
+
     #NAME-ES
     NAME_ES_FAO = 3
     NAME_ES_FAO_S = 4
@@ -27,9 +26,9 @@ class CountryReader(object):
     NAME_FR_FAO = 5
     NAME_FR_FAO_S = 6
     #UN_CODE
-    UN_CODE = 11
+    UN_CODE = 8
     #REGIONS
-    REGION_EN = 13
+    REGION_EN = 10
 
 
     def get_countries(self, file_path):
@@ -82,12 +81,9 @@ class CountryReader(object):
 
     def _parse_iso3(self, country_data):
         iso3_admin = country_data[self.ISO3_ADMIN].value
-        iso3_fao = country_data[self.ISO3_FAO].value
 
         if not self._is_blank_value(iso3_admin):
             return iso3_admin
-        elif not self._is_blank_value(iso3_fao):
-            return iso3_fao
         else:
             return None
 
@@ -96,17 +92,11 @@ class CountryReader(object):
         """
         name_en_fao_s = country_data[self.NAME_EN_FAO_S].value
         name_en_fao = country_data[self.NAME_EN_FAO].value
-        name_en_admin = country_data[self.NAME_EN_ADMIN].value
-        name_en_admin_long = country_data[self.NAME_EN_ADMIN_LONG].value
 
         if not self._is_blank_value(name_en_fao_s):
             return name_en_fao_s
-        elif not self._is_blank_value(name_en_fao):
-            return name_en_fao
-        elif not self._is_blank_value(name_en_admin):
-            return name_en_admin
         else:
-            return name_en_admin_long
+            return name_en_fao
 
     def _parse_name_es(self, country_data):
         """Return spanish country name. It may be an empty string
