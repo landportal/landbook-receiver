@@ -21,7 +21,7 @@ itsdangerous==0.24
 pyparsing==2.0.2
 pytz==2014.2
 rdflib==4.1.2
-requests==2.6.0
+requests==2.20.0
 sh==1.09
 simplejson==3.4.1
 six==1.6.1
